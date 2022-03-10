@@ -1,11 +1,7 @@
-# from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse
 
 from . import util
-
-# class SearchForm(forms.Form):
-#     search = forms.CharField()
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -32,14 +28,19 @@ def search(request):
             # the user should instead be taken to a search results page that displays a list 
             # of all encyclopedia entries that have the query as a substring. 
             # For example, if the search query were ytho, then Python should appear in the search results.
-            return render(request, "encyclopedia/search.html", {
-                "debug": request.POST,
-                "results": query
-            })
+            entries = util.list_entries()
 
+            matches = []
+
+            for result in entries:
+                if str.casefold(query) in str.casefold(result):
+                    matches.append(result)
+
+            return render(request, "encyclopedia/search.html", {
+                "matches": matches,
+                "debug": query
+            })
 
     # if a GET (or any other method) we'll redirect to home page
     else:
         return HttpResponseRedirect(reverse("index"))
-
-    

@@ -7,16 +7,18 @@ Encyclopedia: Search Results
 {% block body %}
 <h1>Search Results</h1>
 <ul>
-    {% if not results %}
+    {% if not matches %}
     <div>The search did not return any matches.</div>
     {% else %}
+    {% for match in matches %}
     <li>
-        {{results}}
+        <a href="{{ match }}">{{ match }}</a>
     </li>
+    {% endfor %}
     {% endif %}
 </ul>
 
 <h1>Debug Info</h1>
-{{debug}}
+{{ debug }}
 
 {% endblock %}
