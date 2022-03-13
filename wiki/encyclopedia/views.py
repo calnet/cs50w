@@ -1,7 +1,13 @@
+from django import forms
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse
 
 from . import util
+
+class NewPageForm(forms.Form):
+    title = forms.CharField(label="Page Title")
+    content = forms.CharField(widget=forms.Textarea)
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -37,10 +43,50 @@ def search(request):
                     matches.append(result)
 
             return render(request, "encyclopedia/search.html", {
-                "matches": matches,
-                "debug": query
+                "matches": matches
             })
 
     # if a GET (or any other method) we'll redirect to home page
     else:
         return HttpResponseRedirect(reverse("index"))
+
+def create_new_page(request):
+
+    # Check if method is POST
+    if request.method == "POST":
+
+        # Take in the data the user submitted and save it as form
+        form = NewPageForm(request.POST)
+
+        # Check if form data is valid (server-side)
+        if form.is_valid():
+
+            # Isolate the title from the 'cleaned' version of form data
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+
+            if util.get_entry(title):
+                error_msg = "This entry already exists, please change the title and try again."
+
+                return render(request, "encyclopedia/create_new_page.html", {
+                    "form": NewPageForm(request.POST),
+                    "error": error_msg
+                })
+            else:
+                util.save_entry(title, content)
+
+                return HttpResponseRedirect(title)
+
+            return render(request, "encyclopedia/create_new_page.html", {
+                    "form": NewPageForm(request.POST)
+                })
+
+        else:
+            # If the form is invalid, re-render the page with existing information.
+            return render(request, "encyclopedia/create_new_page.html", {
+                "form": NewPageForm(request.POST)
+            })
+
+    return render(request, "encyclopedia/create_new_page.html", {
+        "form": NewPageForm()
+    })

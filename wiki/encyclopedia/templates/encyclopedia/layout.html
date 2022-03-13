@@ -24,7 +24,7 @@
                     <a href="{% url 'index' %}">Home</a>
                 </div>
                 <div>
-                    Create New Page
+                    <a href="{% url 'create_new_page' %}">Create New Page</a>
                 </div>
                 <div>
                     Random Page
@@ -34,6 +34,17 @@
             </div>
             <div class="main col-lg-10 col-md-9">
                 {% block body %}
+                {% endblock %}
+
+                {% block debug %}
+                {% if debug %}
+
+                <h1>Debug Info</h1>
+
+                {{ debug }}
+
+                {% endif %}
+
                 {% endblock %}
             </div>
         </div>
