@@ -5,12 +5,17 @@ Encyclopedia: {{ title }}
 {% endblock %}
 
 {% block body %}
-<h1>{{ title }}</h1>
+<!-- <h1>{{ title }}</h1> -->
 
 {% if not entry %}
 <div>The requested page was not found.</div>
 {% else %}
-{{ entry }}
+{{ entry | safe}}
+
+<div>
+    <a href="edit_entry?title={{title}}">Edit Entry</a>
+</div>
+
 {%endif%}
 
 {% endblock %}
