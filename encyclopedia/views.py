@@ -1,12 +1,9 @@
-import random
-
+from random import choice
 from markdown2 import Markdown
-
 from django import forms
-
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, reverse
-
+from django.shortcuts import render
+from django.urls import reverse
 from . import util
 
 class EntryForm(forms.Form):
