@@ -19,13 +19,15 @@ def index(request):
     })
 
 def entry(request, title):
-    content = util.get_entry(title)
+    orig_content = util.get_entry(title)
     markdowner = Markdown()
-    content = markdowner.convert(content)
+    html_content = markdowner.convert(orig_content)
 
     return render(request, "encyclopedia/entry.html", {
         "title": title,
-        "entry": content
+        "entry": html_content,
+        "debug": orig_content
+
     })
 
 def search(request):
@@ -83,7 +85,7 @@ def create_new_page(request):
                     "error": error_msg
                 })
             else:
-                util.save_entry(title, content)
+                util.save_entry(title, bytes(content, 'utf8'))
 
                 return HttpResponseRedirect(title)
 
