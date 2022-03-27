@@ -149,5 +149,5 @@ def random_page(request):
     if not entries:
         return render(request, "encyclopedia/index.html")
     else:
-        title = random.choice(entries)
+        title = choice(entries)
         return HttpResponseRedirect(title)
