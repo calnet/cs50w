@@ -22,9 +22,7 @@ def entry(request, title):
 
     return render(request, "encyclopedia/entry.html", {
         "title": title,
-        "entry": html_content,
-        "debug": orig_content
-
+        "entry": html_content
     })
 
 def search(request):
