@@ -1,0 +1,50 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+    <h2>Listing Detail</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <ul class="nav">
+            <li class="nav-item">
+                {% if not watching %}
+                {% comment %} {{ request.session.name }} {% endcomment %}
+                    <a class="nav-link" href="{% url 'view_listing' item.id 1 %}">Add to Watchlist</a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'view_listing' item.id 1 %}">Remove from Watchlist</a>
+                {% endif %}
+            </li>
+        </ul>
+    {% endif %}
+
+    {% if error %}
+        <div class="card bg-warning font-weight-bold">
+            <div class="card-body row">
+                <div class="col-12 align-self-center text-center">
+                    <div>{{ error }}</div>
+    {% else %}
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-3 text-center">
+                    {% if item.image %}
+                        <img class="card-img" style="width: 150px; height: 150px;" id="item.image" src="{% static '/auctions/media/' %}{{ item.image }}"/>
+                    {% else %}
+                        <img class="card-img" style="width: 150px; height: 150px;" id="item.image" src="https://via.placeholder.com/150"/>
+                    {% endif %}
+                </div>
+                <div class="col-9">
+                    <h4 class="card-title font-weight-bold" id="item.title">{{ item.title }}</h4>
+                    <div class="card-text pb-2 font-weight-bold" id="item.start_price">Price: £{{ item.start_price }}</div>
+                    <div class="card-text pb-3" id="item.description">{% lorem 1 p random %}</div>
+                    {% comment %} <div class="card-text pb-3" id="item.description">{{ item.description }}</div> {% endcomment %}
+                    <div class="card-text pb-2 font-weight-bold" id="item.primary_category">Category: {{ item.primary_category }}</div>
+                    <div class="card-text small text-black-50" id="item.date_created">Created: {{ item.date_created }}</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock body %}

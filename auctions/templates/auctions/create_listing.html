@@ -1,0 +1,64 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    <h2>Create Listing</h2>
+    {% if message %}<div>{{ message }}</div>{% endif %}
+    <form action="{% url 'create_listing' %} " method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="create_listing_title" class="col-sm-2 col-form-label">Listing Title</label>
+            <div class"col-10">
+                <input autofocus
+                       class="form-control"
+                       type="text"
+                       name="create_listing_title"
+                       placeholder="Enter title"
+                       required/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="create_listing_description" class="col-sm-2 col-form-label">Listing Description</label>
+            <div class"col-10">
+                <input class="form-control"
+                       type="text"
+                       name="create_listing_description"
+                       placeholder="Listing description"
+                       required/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="create_listing_start_bid" class="col-sm-2 col-form-label">Starting Price</label>
+            <div class"col-10">
+                <input class="form-control"
+                       type="number"
+                       name="create_listing_start_price"
+                       value="0"
+                       placeholder="Starting Bid"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="create_listing_primary_category" class="col-sm-2 col-form-label">Primary Category</label>
+            <div class"col-10">
+                <input class="form-control"
+                       type="text"
+                       name="create_listing_primary_category"
+                       placeholder="Category"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="create_listing_image" class="col-sm-2 col-form-label">Upload Image</label>
+            <div class"col-10">
+                <input class="form-control-file"
+                       type="file"
+                       name="create_listing_image"
+                       placeholder="Select Image to Upload"/>
+            </div>
+        </div>
+        <input type="hidden"
+               name="create_listing_username"
+               value="{{ user.username }}"/>
+        <input type="hidden"
+               name="create_listing_date_created"
+               value="{{ date_created }}"/>
+        <input class="btn btn-primary" type="submit" value="Create Listing" />
+    </form>
+{% endblock %}
