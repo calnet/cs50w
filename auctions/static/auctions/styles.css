@@ -1,3 +1,7 @@
 body {
     padding: 10px;
 }
+
+#highest_bid_amount {
+    font-size: 2em;
+}

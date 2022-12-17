@@ -1,50 +1,171 @@
 {% extends "auctions/layout.html" %}
 {% load static %}
 {% block body %}
-    <h2>Listing Detail</h2>
+
+    {% if not item.active %}
+        <div class="card">
+            <div class="card-body bg-info row">
+                <div class="col-12 align-self-center text-center">
+                    <h2>Auction Ended</h2>
+                </div>
+            </div>
+            {% if highest_bid.user_id == user.id %}
+                <div class="card-body bg-success row">
+                    <div class="col-12 align-self-center text-center">
+                        <h2>You are the winning bidder</h2>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    {% endif %}
+    
+    <h2 class="card-title" id="item.title">Listing: {{ item.title }}</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
-
-    {% if user.is_authenticated %}
-        <ul class="nav">
-            <li class="nav-item">
-                {% if not watching %}
-                {% comment %} {{ request.session.name }} {% endcomment %}
-                    <a class="nav-link" href="{% url 'view_listing' item.id 1 %}">Add to Watchlist</a>
-                {% else %}
-                    <a class="nav-link" href="{% url 'view_listing' item.id 1 %}">Remove from Watchlist</a>
-                {% endif %}
-            </li>
-        </ul>
-    {% endif %}
-
-    {% if error %}
-        <div class="card bg-warning font-weight-bold">
-            <div class="card-body row">
-                <div class="col-12 align-self-center text-center">
-                    <div>{{ error }}</div>
-    {% else %}
         <div class="card">
-            <div class="card-body row">
-                <div class="col-3 text-center">
-                    {% if item.image %}
-                        <img class="card-img" style="width: 150px; height: 150px;" id="item.image" src="{% static '/auctions/media/' %}{{ item.image }}"/>
-                    {% else %}
-                        <img class="card-img" style="width: 150px; height: 150px;" id="item.image" src="https://via.placeholder.com/150"/>
-                    {% endif %}
-                </div>
-                <div class="col-9">
-                    <h4 class="card-title font-weight-bold" id="item.title">{{ item.title }}</h4>
-                    <div class="card-text pb-2 font-weight-bold" id="item.start_price">Price: £{{ item.start_price }}</div>
-                    <div class="card-text pb-3" id="item.description">{% lorem 1 p random %}</div>
-                    {% comment %} <div class="card-text pb-3" id="item.description">{{ item.description }}</div> {% endcomment %}
-                    <div class="card-text pb-2 font-weight-bold" id="item.primary_category">Category: {{ item.primary_category }}</div>
-                    <div class="card-text small text-black-50" id="item.date_created">Created: {{ item.date_created }}</div>
+            <div class="card bg-warning font-weight-bold">
+                <div class="card-body row">
+                    <div class="col-12 align-self-center text-center">
+                        <div>{{ message }}</div>
+                    </div>
                 </div>
             </div>
         </div>
     {% endif %}
 
+    {% if user.is_authenticated and item.active%}
+        <ul class="nav mb-3">
+            <li class="nav-item pr-2">
+                {# Revise this solution for href value #}
+                {% if not watching %}
+                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listing' item.id 1 %}">Add to Watchlist</a>
+                {% else %}
+                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listing' item.id 1 %}">Remove from Watchlist</a>
+                {% endif %}
+            </li>
+            {% if user.id == item.user_id %}
+                {% if item.active %}
+                    <li class="nav-item pr-2">
+                        <form action="{% url 'end_listing' item.id 0 %}" method="post">
+                            {% csrf_token %}
+                            <input class="form-control" type="hidden" name="listing_id" value="{{ item.id }}">
+                            <input class="form-control" type="hidden" name="highest_bid_amount" value="{{ highest_bid.amount }}">
+                            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
+                            <input class="nav-link btn btn-primary btn-sm" type="submit" value="End Auction Listing">
+                        </form>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    {% endif %}
+
+    {% if error %}
+        <div class="card">
+            <div class="card bg-warning font-weight-bold">
+                <div class="card-body row">
+                    <div class="col-12 align-self-center text-center">
+                        <div>{{ error }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-md-12 text-center">
+                {% if item.image %}
+                    <img class="card-img img-fluid w-auto" id="item.image" src="{% static '/auctions/media/' %}{{ item.image }}"/>
+                {% else %}
+                    <img class="card-img" style="width: 150px; height: 150px;" id="item.image" src="https://via.placeholder.com/150"/>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card-body row pb-0">
+            <div class="col-md-12">
+                <div class="card-text pb-2" id="item.description">{% lorem 1 p random %}</div>
+                {% comment %} <div class="card-text pb-2" id="item.description">{{ item.description }}</div> {% endcomment %}
+                <div class="card-text pb-2 font-weight-bold" id="item.primary_category">
+                    <i class="fa-solid fa-tags"></i>
+                     Category: {{ item.primary_category }}
+                </div>
+                <div class="card-text small text-hide pb-2" id="item.date_created">Created: {{ item.date_created }}</div>
+                <div class="card-text font-weight-bold" id="highest_bid_amount">£{{ highest_bid.amount|stringformat:"1.2f" }}</div>
+            </div>
+        </div>
+
+        {% if user.is_authenticated and item.active %}
+            <div class="card-body row">
+                
+                <div class="col-md-12">
+                    {% if bid_count %}
+                        <div class="card-text small pb-2" id="bid_count">{{ bid_count }} bid(s) so far.<br>
+                            {% if highest_bid.user_id == user.id %}
+                                Your are the current highest bidder.
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="card-text pb-2" id="bid_count">No bids so far.</div>
+                    {% endif %}
+
+                    <form action="{% url 'view_listing' item.id 0 %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input class="form-control" type="number" step="0.01" name="amount" placeholder="Amount of Bid">
+                            <input class="form-control" type="hidden" name="watching" value="{{ watching }}">
+                            <input class="form-control" type="hidden" name="listing_id" value="{{ item.id }}">
+                            <input class="form-control" type="hidden" name="highest_bid_amount" value="{{ highest_bid.amount }}">
+                            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Bid">
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card-body row">
+                <div class="col-md-12">
+                    <h4 class="card-text">Details</h4>
+                    <ul class="">
+                        <li class="" id="auction_user.username"">Listed by: {{ auction_user.username }}</li>
+                        <li class="" id="item.primary_category"">Category: {{ item.primary_category }}</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-body row">
+                <div class="col-md-12">
+                    <h4 class="card-title">Add Comment</h4>
+                    <form action="{% url 'add_comment' item.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" name="listingCommentTextarea" rows="2"></textarea>
+                            <input class="form-control" type="hidden" name="listing_id" value="{{ item.id }}">
+                            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">Comments</h5>
+                {% for comment in comments %}
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <p class="card-text" id="comment.comment"" disabled>{{ comment.comment }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted" id="comment.comment_date"">Posted on: {{ comment.comment_date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div>No Comments.</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
 {% endblock body %}

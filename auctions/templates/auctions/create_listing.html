@@ -1,7 +1,17 @@
 {% extends "auctions/layout.html" %}
 {% block body %}
     <h2>Create Listing</h2>
-    {% if message %}<div>{{ message }}</div>{% endif %}
+    {% if message %}
+        <div class="card">
+            <div class="card bg-warning font-weight-bold">
+                <div class="card-body row">
+                    <div class="col-12 align-self-center text-center">
+                        <div>{{ message }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <form action="{% url 'create_listing' %} " method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group row">

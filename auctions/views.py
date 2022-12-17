@@ -1,187 +1,317 @@
-from email import message
-from django.utils import timezone, datastructures
-from django.utils.datastructures import MultiValueDictKeyError
+from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
-from django.urls import NoReverseMatch, reverse
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
 from django.core import exceptions
-from numpy import integer
 
 from .models import User, Listing, Bid, Comment, Watchlist, WatchlistManager
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+	return render(request, "auctions/index.html")
 
 
 def login_view(request):
-    if request.method == "POST":
+	if request.method == "POST":
 
-        # Attempt to sign user in
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+		# Attempt to sign user in
+		username = request.POST["username"]
+		password = request.POST["password"]
+		user = authenticate(request, username=username, password=password)
 
-        # Check if authentication successful
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse("index"))
-        else:
-            return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password."
-            })
-    else:
-        return render(request, "auctions/login.html")
+		# Check if authentication successful
+		if user is not None:
+			login(request, user)
+			return HttpResponseRedirect(reverse("index"))
+		else:
+			return render(request, "auctions/login.html", {
+				"message": "Invalid username and/or password."
+			})
+	else:
+		return render(request, "auctions/login.html")
 
 
 def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect(reverse("index"))
+	logout(request)
+	return HttpResponseRedirect(reverse("index"))
 
 
 def register(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
+	if request.method == "POST":
+		username = request.POST["username"]
+		email = request.POST["email"]
 
-        # Ensure password matches confirmation
-        password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
-        if password != confirmation:
-            return render(request, "auctions/register.html", {
-                "message": "Passwords must match."
-            })
+		# Ensure password matches confirmation
+		password = request.POST["password"]
+		confirmation = request.POST["confirmation"]
+		if password != confirmation:
+			return render(request, "auctions/register.html", {
+				"message": "Passwords must match."
+			})
 
-        # Attempt to create new user
-        try:
-            user = User.objects.create_user(username, email, password)
-            user.save()
-        except IntegrityError:
-            return render(request, "auctions/register.html", {
-                "message": "Username already taken."
-            })
-        login(request, user)
-        return HttpResponseRedirect(reverse("index"))
-    else:
-        return render(request, "auctions/register.html")
+		# Attempt to create new user
+		try:
+			user = User.objects.create_user(username, email, password)
+			user.save()
+		except IntegrityError:
+			return render(request, "auctions/register.html", {
+				"message": "Username already taken."
+			})
+		login(request, user)
+		return HttpResponseRedirect(reverse("index"))
+	else:
+		return render(request, "auctions/register.html")
 
 
 def create_listing(request):
-    user = get_user(request)
+	user = get_user(request)
 
-    date_created = timezone.now()
+	date_created = timezone.now()
 
-    if request.method == "POST":
-        title = request.POST["create_listing_title"]
-        description = request.POST["create_listing_description"]
-        start_price = request.POST["create_listing_start_price"]
-        primary_category = request.POST["create_listing_primary_category"]
+	if request.method == "POST":
+		title = request.POST["create_listing_title"]
+		description = request.POST["create_listing_description"]
+		start_price = request.POST["create_listing_start_price"]
+		primary_category = request.POST["create_listing_primary_category"]
 
-        if len(request.FILES) > 0:
-            image = request.FILES["create_listing_image"]
-        else:
-            image = ""
+		if len(request.FILES) > 0:
+			image = request.FILES["create_listing_image"]
+		else:
+			image = ""
 
-        try:
-            listing = Listing.objects.create_listing(
-                title, description, start_price, primary_category, image, date_created, user.id)
-            listing.save()
-        except IntegrityError:
-            return render(request, "auctions/create_listing.html", {
-                "message": "There was a problem."
-            })
+		active = True
 
-    # Check if authentication successful
-    if user.is_authenticated:
-        return render(request, "auctions/create_listing.html")
-    else:
-        return render(request, "auctions/login.html", {
-        })
+		try:
+			listing = Listing.objects.create_listing(
+				title, description, start_price, primary_category, image, date_created, user.id, active)
+			listing.save()
+		except IntegrityError:
+			return render(request, "auctions/create_listing.html", {
+				"message": "There was a problem."
+			})
+
+	# Check if authentication successful
+	if user.is_authenticated:
+		return render(request, "auctions/create_listing.html")
+	else:
+		return render(request, "auctions/login.html", {
+		})
 
 
 def active_listing(request):
-    user = get_user(request)
-    listings = Listing.objects.filter(
-        user_id=user.id).order_by('-date_created')
+	queryset = Listing.objects.all().filter(active=True).order_by('-date_created')
+	
+	for listing in queryset:
+		bid_count = Bid.objects.filter(listing_id=listing.id).count()
+		
+		if bid_count > 0:
+			highest_bid = Bid.objects.filter(listing_id=listing.id).order_by('-amount')[0]
+			listing.start_price = highest_bid.amount
 
-    return render(request, "auctions/index.html", {
-        "listings": listings
-    })
+	return render(request, "auctions/index.html", {
+		"listings": queryset
+	})
 
 
-def view_listing(request, listing_id, toggle):
-    toggle = int(toggle)
-    listing_id = int(listing_id)
+def closed_listings(request):
+	queryset = Listing.objects.all().filter(active=False).order_by('-date_created')
+	
+	for listing in queryset:
+		bid_count = Bid.objects.filter(listing_id=listing.id).count()
+		
+		if bid_count > 0:
+			highest_bid = Bid.objects.filter(listing_id=listing.id).order_by('-amount')[0]
+			listing.start_price = highest_bid.amount
 
-    try:
-        # Get item listing from the database
-        listing = Listing.objects.get(id=listing_id)
-    except exceptions.ObjectDoesNotExist:
-        # The item listing ID does not exist in the database
-        return render(request, "auctions/listing.html", {
-            "error": "The item listing requested, does not exist."
-        })
-    except ValueError:
-        # The item listing ID is invalid
-        return render(request, "auctions/listing.html", {
-            "error": "You have provided an invalid item id. Only numeric ID's are valid!"
-        })
+	return render(request, "auctions/index.html", {
+		"listings": queryset
+	})
 
-    # Check if there is an authenticated user session
-    if User.is_authenticated:
-        # Get user object
-        user = get_user(request)
 
-        # Determine the current item watchlist status for the authenticated user
-        try:
-            # Check if item is on the watchlist for the authenticated
-            q = Watchlist.objects.all().filter(user_id=user.id).get(listing_id=listing_id)
+def view_listing(request, listing_id, toggle=0):
+	error = False
+	toggle = int(toggle)
+	listing_id = int(listing_id)
 
-            # Item is on the watchlist for the authenticated user
-            watching = True
+	# Attempt to Get item listing from the database
+	listing = get_object_or_404(Listing, id=listing_id)
 
-        except exceptions.ObjectDoesNotExist:
-            # Item is not on the watchlist for the authenticated user
-            watching = False
+	# Get user object for listing
+	auction_user = get_object_or_404(User, id=listing.user_id)
+	
+	# Get user object for current user
+	user = get_user(request)
 
-        # Authenticated user has clicked on a link to toggle watchlist status
-        if toggle:
+	bid_count = Bid.objects.filter(listing_id=listing_id).count()
+	
+	if bid_count > 0:
+		highest_bid = Bid.objects.filter(listing_id=listing_id).order_by('-amount')[0]
+	else:
+		highest_bid = Bid()
+		highest_bid.amount = listing.start_price
 
-            if watching:
-                try:
-                    # Attempt to remove item from the watchlist for the authenticated user
-                    q = q.remove_watchlist(user.id,listing_id)
-                    watching = False
+	# Check if there is an authenticated user session
+	if user.is_authenticated:
+		# Determine the current item watchlist status for the authenticated user
+		try:
+			# Item is on the watchlist for the authenticated user
+			obj = Watchlist.objects.all().filter(user_id=user.id).get(listing_id=listing_id)
+			watching = True
+		# Item is not on the watchlist for the authenticated user
+		except exceptions.ObjectDoesNotExist:
+			watching = False
 
-                except IntegrityError:
-                    return render(request, "auctions/listing.html", {
-                        "item": listing,
-                        "error": "There was a problem removing item listing from the watchlist.",
-                        "watching": watching
-                    })
-            else:
-                try:
-                    # Attempt to add item to the watchlist for the authenticated user
-                    q = Watchlist.objects.add_watchlist(user.id,listing_id)
-                    q.save()
-                    watching = True
+		# Retrieve comments for the current listing
+		comments = Comment.objects.all().filter(listing_id=listing_id).order_by('-comment_date')
 
-                except:
-                    return render(request, "auctions/listing.html", {
-                        "item": listing,
-                        "error": "There was a problem adding item listing to the watchlist.",
-                        "watching": watching
-                    })
+		# Authenticated user has clicked on a link to toggle watchlist status
+		if toggle:
+			if watching:
+				# Attempt to remove item from the watchlist for the authenticated user
+				try:
+					# obj = Watchlist.objects.remove_watchlist(user.id,listing_id)
+					Watchlist.delete(obj)
+					# obj = obj.remove_watchlist(user.id,listing_id)
+					watching = False
 
-        return render(request, "auctions/listing.html", {
-            "item": listing,
-            "error": False,
-            "watching": watching
-        })
+					return redirect('view_listing', listing_id=listing_id)
+				except IntegrityError:
+					return render(request, "auctions/listing.html", {
+						"item": listing,
+						"auction_user": auction_user,
+						"bid_count": bid_count,
+						"highest_bid": highest_bid,
+						"watching": watching,
+						"error": "There was a problem removing item listing from the watchlist."
+					})
+			else:
+				# Attempt to add item to the watchlist for the authenticated user
+				try:
+					obj = Watchlist.objects.add_watchlist(user.id,listing_id)
+					obj.save()
+					watching = True
 
-    return render(request, "auctions/listing.html", {
-        "item": listing,
-        "error": False
-    })
+					return redirect('view_listing', listing_id=listing_id)
+				except:
+					error = "There was a problem adding item listing to the watchlist."
+
+					return render(request, "auctions/listing.html", {
+						"item": listing,
+						"auction_user": auction_user,
+						"bid_count": bid_count,
+						"highest_bid": highest_bid,
+						"watching": watching,
+						"error": error
+					})
+
+		# Check if the user submitted a bid
+		if request.method == "POST":
+			watching = request.POST["watching"]
+			highest_bid_amount = float(request.POST["highest_bid_amount"])
+			amount = float(request.POST["amount"])
+			user_id = int(request.POST["user_id"])
+			listing_id = int(request.POST["listing_id"])
+			bid_date = timezone.now()
+
+			# Check if bid is greater than the current auction amount
+			if highest_bid_amount < amount:
+				try:
+					bid = Bid.objects.create_bid(user_id, listing_id, amount, bid_date)
+					bid.save()
+					bid_count = bid_count + 1
+				except IntegrityError:
+					error = "There was a problem placing your bid!"
+
+					return render(request, "auctions/listing.html", {
+						"item": listing,
+						"auction_user": auction_user,
+						"bid_count": bid_count,
+						"highest_bid": highest_bid,
+						"watching": watching,
+						"error": error
+					})
+			else:
+				error = "Your bid is too low, please enter a higher amount."
+		
+		if bid_count > 0:
+			highest_bid = Bid.objects.filter(listing_id=listing_id).order_by('-amount')[0]
+		else:
+			highest_bid = Bid()
+			highest_bid.amount = listing.start_price
+		
+		return render(request, "auctions/listing.html", {
+			"item": listing,
+			"auction_user": auction_user,
+			"bid_count": bid_count,
+			"highest_bid": highest_bid,
+			"watching": watching,
+			"comments": comments,
+			"error": error
+		})
+
+	return render(request, "auctions/listing.html", {
+		"item": listing,
+		"highest_bid": highest_bid,
+		"auction_user": auction_user,
+		"error": error
+	})
+
+
+def end_listing(request, listing_id, toggle):
+	user = get_user(request)
+	
+	# Check if authenticated user matches listing creator
+	if user.is_authenticated:
+		listing = get_object_or_404(Listing, id=listing_id)
+
+		if request.method == "POST":
+			listing_id = request.POST["listing_id"]
+			winning_bid = request.POST["highest_bid_amount"]
+			winning_user = request.POST["user_id"]
+
+			obj = get_object_or_404(Listing, id=listing_id)
+
+			obj.active = False
+			obj.save()
+
+			return render(request, "auctions/listing.html", {
+			"item": obj
+		})
+
+	else:
+		return render(request, "auctions/login.html", {
+	})
+
+def add_comment(request, listing_id):
+	user = get_user(request)
+
+	listing = get_object_or_404(Listing, id=listing_id)
+
+	date_created = timezone.now()
+
+	# Check if authenticated user matches listing creator
+	if user.is_authenticated:
+
+		if request.method == "POST":
+			listing_id = request.POST["listing_id"]
+			comment_text = request.POST["listingCommentTextarea"]
+			comment_user = request.POST["user_id"]
+
+			try:
+				comment = Comment.objects.add_comment(comment_user, listing_id, date_created, comment_text)
+				comment.save()
+			except IntegrityError:
+				return render(request, "auctions/listing.html", {
+					"message": "There was a problem adding your comment."
+			})
+
+	else:
+		return render(request, "auctions/login.html", {
+	})
+	
+	return redirect('view_listing', listing_id=listing_id)
+	# return render(request, "auctions/listing.html", {
+	# 	"item": listing
+	# })

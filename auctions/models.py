@@ -1,23 +1,21 @@
-from django.contrib.auth.models import AbstractUser
+from typing_extensions import Required
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.forms import IntegerField, ModelForm
 from numpy import integer
 
-
 class User(AbstractUser):
     pass
 
-
 class ListingManager(models.Manager):
     def create_listing(self, title, description, start_price, primary_category,
-                       image, date_created, user_id):
+                       image, date_created, user_id, active):
 
         listing = self.create(title=title, description=description, start_price=start_price,
                               primary_category=primary_category, image=image,
-                              date_created=date_created, user_id=user_id)
+                              date_created=date_created, user_id=user_id, active=active)
 
         return listing
-
 
 class Listing(models.Model):
     user_id = models.IntegerField()
@@ -27,6 +25,7 @@ class Listing(models.Model):
     start_price = models.IntegerField(blank=False, null=False, default=0)
     primary_category = models.CharField(blank=True, null=True, max_length=64)
     image = models.ImageField(blank=True, null=True)
+    active = models.BooleanField(default=True)
 
     # reserve_price = models.IntegerField()
     # listing_duration = models.IntegerField()
@@ -35,49 +34,45 @@ class Listing(models.Model):
 
     objects = ListingManager()
 
+class BidManager(models.Manager):
+    def create_bid(self, user_id, listing_id, amount, bid_date):
+        bid = self.create(user_id=user_id, listing_id=listing_id, amount=amount, bid_date=bid_date)
 
+        return bid
+        
 class Bid(models.Model):
     user_id = models.IntegerField()
-    amount = models.IntegerField()
+    listing_id = models.IntegerField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     bid_date = models.DateTimeField()
 
+    objects = BidManager()
+
+class CommentManager(models.Manager):
+    def add_comment(self, user_id, listing_id, comment_date, comment):
+
+        comment = self.create(user_id=user_id, listing_id=listing_id, 
+                              comment_date=comment_date, comment=comment)
+
+        return comment
 
 class Comment(models.Model):
     user_id = models.IntegerField()
     listing_id = models.IntegerField()
     comment_date = models.DateTimeField()
-    comment = models.CharField(max_length=200)
+    comment = models.CharField(max_length=500)
+
+    objects = CommentManager()
 
 
 class WatchlistManager(models.Manager):
     def add_watchlist(self, user_id, listing_id):
-
         watchlist = self.create(user_id=user_id, listing_id=listing_id)
 
         return watchlist
-
 
 class Watchlist(models.Model):
     user_id = models.IntegerField()
     listing_id = models.IntegerField()
 
-    def remove_watchlist(self, user_id, listing_id):
-
-        watchlist = self.delete()
-
-        return watchlist
-
-    # origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
-    # destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
-
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="id")
-    # listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="id")
-
     objects = WatchlistManager()
-
-
-class ListingForm(ModelForm):
-    class Meta:
-        model: Listing
-        fields: ['user_id', 'date_created', 'title', 'description',
-                 'start_price', 'primary_category', 'image']

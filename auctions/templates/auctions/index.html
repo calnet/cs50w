@@ -2,34 +2,40 @@
 {% load static %}
 {% block body %}
     <h2>Active Listings</h2>
+    
     {% for listing in listings %}
         {% comment %} {% for k in listing %}                <div>Key: {{k}}</div>{% endfor %} {% endcomment %}
         {% comment %} <div id="debug">Listing: {{listing}}</div> {% endcomment %}
         <div class="card">
-            <div class="card-body row">
-                <div class="col-3 align-self-center text-center">
+            <div class="row no-gutters">
+                <div class="col-sm-3 align-self-center text-center">
                     {% if listing.image %}
-                        <img class="card-img"
-                             style="width: 150px;
-                                    height: 150px;"
-                             id="listing.image"
-                             src="{% static '/auctions/media/' %}{{ listing.image }}"/>
+                        <a href="{% url 'view_listing' listing.id %}">
+                            <img class="card-img"
+                                style="width: 150px; height: 150px;"
+                                id="listing.image"
+                                src="{% static '/auctions/media/' %}{{ listing.image }}"/>
+                        </a>
                     {% else %}
-                        <img class="card-img"
-                             style="width: 150px;
-                                    height: 150px;"
-                             id="listing.image"
-                             src="https://via.placeholder.com/150"/>
+                        <a href="{% url 'view_listing' listing.id %}">
+                            <img class="card-img"
+                                style="width: 150px;
+                                        height: 150px;"
+                                id="listing.image"
+                                src="https://via.placeholder.com/150"/>
+                        </a>
                     {% endif %}
                 </div>
-                <div class="col-9">
-                    <h4 class="card-title font-weight-bold" id="listing.title">
-                        <a class="" href="{% url 'view_listing' listing.id 0 %}">{{ listing.title }}</a>
-                    </h4>
-                    <div class="card-text pb-2 font-weight-bold" id="listing.start_price">Price: £{{ listing.start_price }}</div>
-                    <div class="card-text pb-3" id="listing.description">{{ listing.description }}</div>
-                    <div class="card-text pb-2" id="listing.primary_category">Category: {{ listing.primary_category }}</div>
-                    <div class="card-text text-muted" id="listing.date_created">Created: {{ listing.date_created }}</div>
+                <div class="col-sm-9">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold" id="listing.title">
+                            <a class="" href="{% url 'view_listing' listing.id %}">{{ listing.title }}</a>
+                        </h4>
+                        <div class="card-text pb-2 font-weight-bold" id="listing.start_price">Price: £{{ listing.start_price|stringformat:"1.2f" }}</div>
+                        <div class="card-text pb-3" id="listing.description">{{ listing.description }}</div>
+                        <div class="card-text pb-2" id="listing.primary_category">Category: {{ listing.primary_category }}</div>
+                        <div class="card-text small text-black-50" id="listing.date_created">Created: {{ listing.date_created }}</div>
+                    </div>
                 </div>
             </div>
         </div>

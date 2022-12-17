@@ -5,7 +5,15 @@
     <h2>Login</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
+        <div class="card">
+            <div class="card bg-warning font-weight-bold">
+                <div class="card-body row">
+                    <div class="col-12 align-self-center text-center">
+                        <div>{{ message }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
     <form action="{% url 'login' %}" method="post">
