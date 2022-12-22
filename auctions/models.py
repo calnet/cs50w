@@ -18,7 +18,7 @@ class ListingManager(models.Manager):
         return listing
 
 class Listing(models.Model):
-    user_id = models.IntegerField()
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
     date_created = models.DateTimeField()
     title = models.CharField(blank=False, null=False, max_length=64)
     description = models.CharField(blank=False, null=False, max_length=200)
@@ -34,6 +34,9 @@ class Listing(models.Model):
 
     objects = ListingManager()
 
+    def __str__(self):
+        return f"{self.title} / {self.user.id} - {self.user.username} / £{self.start_price}"
+
 class BidManager(models.Manager):
     def create_bid(self, user_id, listing_id, amount, bid_date):
         bid = self.create(user_id=user_id, listing_id=listing_id, amount=amount, bid_date=bid_date)
@@ -41,12 +44,15 @@ class BidManager(models.Manager):
         return bid
         
 class Bid(models.Model):
-    user_id = models.IntegerField()
-    listing_id = models.IntegerField()
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    listing = models.ForeignKey('Listing', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     bid_date = models.DateTimeField()
 
     objects = BidManager()
+
+    def __str__(self):
+        return f"{self.user} / {self.listing.id} - {self.listing.title} / £{self.amount}"
 
 class CommentManager(models.Manager):
     def add_comment(self, user_id, listing_id, comment_date, comment):
@@ -57,12 +63,16 @@ class CommentManager(models.Manager):
         return comment
 
 class Comment(models.Model):
-    user_id = models.IntegerField()
-    listing_id = models.IntegerField()
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    listing = models.ForeignKey('Listing', on_delete=models.CASCADE)
     comment_date = models.DateTimeField()
     comment = models.CharField(max_length=500)
 
     objects = CommentManager()
+
+    def __str__(self):
+        return f"{self.user} / {self.listing.title} / {self.comment}"
+    
 
 
 class WatchlistManager(models.Manager):
@@ -76,3 +86,6 @@ class Watchlist(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
 
     objects = WatchlistManager()
+
+    def __str__(self):
+        return f"{self.user} / {self.listing.id} - {self.listing.title}"
