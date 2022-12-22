@@ -72,7 +72,7 @@ class WatchlistManager(models.Manager):
         return watchlist
 
 class Watchlist(models.Model):
-    user_id = models.IntegerField()
-    listing_id = models.IntegerField()
+    listing = models.ForeignKey('Listing', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
 
     objects = WatchlistManager()

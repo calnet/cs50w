@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.core import exceptions
 
-from .models import User, Listing, Bid, Comment, Watchlist, WatchlistManager
+from .models import User, Listing, Bid, Comment, Watchlist
 
 
 def index(request):
@@ -126,6 +126,24 @@ def closed_listings(request):
 			listing.start_price = highest_bid.amount
 
 	return render(request, "auctions/index.html", {
+		"listings": queryset
+	})
+
+def watched_listings(request):
+	# Get user object for current user
+	user = get_user(request)
+	
+	listings = Listing.objects.all().filter(active=True).order_by('-date_created')
+	watchlist = Watchlist.objects.all()
+
+	
+	
+	queryset = Watchlist.objects.select_related('listing').filter(user_id=user.id).order_by('listing_id')
+	# queryset = Watchlist.objects.select_related('listing')
+	
+	msg = str(queryset.query)
+	
+	return render(request, "auctions/watchlist.html", {
 		"listings": queryset
 	})
 
@@ -264,7 +282,6 @@ def end_listing(request, listing_id, toggle):
 	
 	# Check if authenticated user matches listing creator
 	if user.is_authenticated:
-		listing = get_object_or_404(Listing, id=listing_id)
 
 		if request.method == "POST":
 			listing_id = request.POST["listing_id"]
@@ -275,6 +292,13 @@ def end_listing(request, listing_id, toggle):
 
 			obj.active = False
 			obj.save()
+			
+			try:
+				watching = Watchlist.objects.get(listing=listing_id)
+				watching.delete()
+			except Watchlist.DoesNotExist:
+				exit
+				
 
 			return render(request, "auctions/listing.html", {
 			"item": obj

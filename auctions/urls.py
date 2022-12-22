@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
 urlpatterns = [
+    path('__debug__/', include('debug_toolbar.urls')),
     # path("", views.index, name="index"),
     path("", views.active_listing, name="index"),
     path("login", views.login_view, name="login"),
@@ -13,5 +14,6 @@ urlpatterns = [
     path("view_listing/<int:listing_id>", views.view_listing, name="view_listing"),
     path("view_listing/<int:listing_id>/<toggle>", views.view_listing, name="view_listing"),
     path("closed_listings", views.closed_listings, name="closed_listings"),
+    path("watched_listings", views.watched_listings, name="watched_listings"),
     path("end_listing/<int:listing_id>/<toggle>", views.end_listing, name="end_listing")
 ]

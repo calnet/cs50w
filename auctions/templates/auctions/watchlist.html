@@ -1,0 +1,48 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+    <h2>Watched Listings</h2>
+    
+    {% for item in listings %}
+        {% comment %} {% for k in item.listing %}
+            <div>Key: {{k}}</div>
+        {% endfor %} {% endcomment %}
+        {% comment %} <div id="debug">Listing: {{item.listing}}</div> {% endcomment %}
+
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-sm-3 align-self-center text-center">
+                    {% if item.listing.image %}
+                        <a href="{% url 'view_listing' item.listing.id %}">
+                            <img class="card-img"
+                                style="width: 150px; height: 150px;"
+                                id="item.listing.image"
+                                src="{% static '/auctions/media/' %}{{ item.listing.image }}"/>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'view_listing' item.listing.id %}">
+                            <img class="card-img"
+                                style="width: 150px;
+                                        height: 150px;"
+                                id="listing.image"
+                                src="https://via.placeholder.com/150"/>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-9">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold" id="item.listing.title">
+                            <a class="" href="{% url 'view_listing' item.listing.id %}">{{ item.listing.title }}</a>
+                        </h4>
+                        <div class="card-text pb-2 font-weight-bold" id="item.listing.start_price">Price: £{{ item.listing.start_price|stringformat:"1.2f" }}</div>
+                        <div class="card-text pb-3" id="item.listing.description">{{ item.listing.description }}</div>
+                        <div class="card-text pb-2" id="item.listing.primary_category">Category: {{ item.listing.primary_category }}</div>
+                        <div class="card-text small text-black-50" id="item.listing.date_created">Created: {{ item.listing.date_created }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div>No Active Listings.</div>
+    {% endfor %}
+{% endblock body %}

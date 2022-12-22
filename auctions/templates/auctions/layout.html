@@ -10,6 +10,18 @@
         <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
     </head>
     <body>
+        {% if message %}
+            <div class="card">
+                <div class="card bg-warning font-weight-bold">
+                    <div class="card-body row">
+                        <div class="col-12 align-self-center text-center">
+                            <div>{{ message }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
         <h1>Auctions</h1>
         <div>
             {% if user.is_authenticated %}
@@ -19,24 +31,27 @@
             {% endif %}
         </div>
         <ul class="nav">
-            <li class="nav-item pr-2">
+            <li class="nav-item pb-2 pr-2">
                 <a class="nav-link btn btn-primary btn-sm" href="{% url 'index' %}">Active Listings</a>
             </li>
-            <li class="nav-item pr-2">
+            <li class="nav-item pb-2 pr-2">
                 <a class="nav-link btn btn-primary btn-sm" href="{% url 'closed_listings' %}">Completed Listings</a>
             </li>
-            <li class="nav-item pr-2">
+            <li class="nav-item pb-2 pr-2">
                 <a class="nav-link btn btn-primary btn-sm" href="{% url 'create_listing' %}">Create Listing</a>
             </li>
             {% if user.is_authenticated %}
-                <li class="nav-item pr-2">
+                <li class="nav-item pb-2 pr-2">
+                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'watched_listings' %}">Watchlist</a>
+                </li>
+                <li class="nav-item pb-2 pr-2">
                     <a class="nav-link btn btn-primary btn-sm" href="{% url 'logout' %}">Log Out</a>
                 </li>
             {% else %}
-                <li class="nav-item pr-2">
+                <li class="nav-item pb-2 pr-2">
                     <a class="nav-link btn btn-primary btn-sm" href="{% url 'login' %}">Log In</a>
                 </li>
-                <li class="nav-item pr-2">
+                <li class="nav-item pb-2 pr-2">
                     <a class="nav-link btn btn-primary btn-sm" href="{% url 'register' %}">Register</a>
                 </li>
             {% endif %}
