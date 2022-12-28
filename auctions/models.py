@@ -35,7 +35,7 @@ class Listing(models.Model):
     objects = ListingManager()
 
     def __str__(self):
-        return f"{self.title} / {self.user.id} - {self.user.username} / £{self.start_price}"
+        return f"{self.title} / £{self.start_price}"
 
 class BidManager(models.Manager):
     def create_bid(self, user_id, listing_id, amount, bid_date):
