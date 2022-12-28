@@ -170,6 +170,9 @@ def view_listing(request, listing_id, toggle=0):
 		highest_bid = Bid()
 		highest_bid.amount = listing.start_price
 
+	# Retrieve comments for the current listing
+	comments = Comment.objects.all().filter(listing_id=listing_id).order_by('-comment_date')
+	
 	# Check if there is an authenticated user session
 	if user.is_authenticated:
 		# Determine the current item watchlist status for the authenticated user
@@ -181,8 +184,6 @@ def view_listing(request, listing_id, toggle=0):
 		except exceptions.ObjectDoesNotExist:
 			watching = False
 
-		# Retrieve comments for the current listing
-		comments = Comment.objects.all().filter(listing_id=listing_id).order_by('-comment_date')
 
 		# Authenticated user has clicked on a link to toggle watchlist status
 		if toggle:
@@ -273,6 +274,7 @@ def view_listing(request, listing_id, toggle=0):
 		"item": listing,
 		"highest_bid": highest_bid,
 		"auction_user": auction_user,
+		"comments": comments,
 		"error": error
 	})
 
