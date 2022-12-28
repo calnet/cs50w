@@ -4,15 +4,15 @@
 
     {% if not item.active %}
         <div class="card">
-            <div class="card-body bg-info row">
+            <div class="card-body bg-info row py-1">
                 <div class="col-12 align-self-center text-center">
-                    <h2>Auction Ended</h2>
+                    <h3>Auction Ended</h3>
                 </div>
             </div>
             {% if highest_bid.user_id == user.id %}
-                <div class="card-body bg-success row">
+                <div class="card-body bg-success row py-1">
                     <div class="col-12 align-self-center text-center">
-                        <h2>You are the winning bidder</h2>
+                        <h3>You are the winning bidder</h3>
                     </div>
                 </div>
             {% endif %}
@@ -20,7 +20,9 @@
         </div>
     {% endif %}
     
-    <h2 class="card-title" id="item.title">Listing: {{ item.title }}</h2>
+    <div class="card-body row">
+        <h2 class="card-title" id="item.title">Listing: {{ item.title }}</h2>
+    </div>
 
     {% if message %}
         <div class="card">
@@ -151,27 +153,29 @@
                 </div>
             </div>
 
-            <div class="card-body row pb-0">
-                <div class="col-md-12">
-                    <h4 class="card-title">Comments</h4>
+        {% endif %}
+
+        <div class="card-body row pb-0">
+            <div class="col-md-12">
+                <h4 class="card-title">Comments</h4>
+            </div>
+        </div>
+        
+        {% for comment in comments %}
+            <div class="card-body row py-2">
+                <div class="col-md-12 border">
+                    <p class="card-text pt-2 px-4" id="comment.comment"" disabled>{{ comment.comment }}</p>
+                    <div class="card-footer pt-0">
+                        <small class="text-muted" id="comment.comment_date"">Posted on: {{ comment.comment_date }}</small>
+                    </div>
                 </div>
             </div>
-            {% for comment in comments %}
-                <div class="card-body row py-2">
-                    <div class="col-md-12 border">
-                        <p class="card-text px-4" id="comment.comment"" disabled>{{ comment.comment }}</p>
-                        <div class="card-footer pt-0">
-                            <small class="text-muted" id="comment.comment_date"">Posted on: {{ comment.comment_date }}</small>
-                        </div>
-                    </div>
+        {% empty %}
+            <div class="card-body row py-2">
+                <div class="col-md-12">
+                    <p class="card-text border px-4" id="comment.comment"" disabled>No Comments</p>
                 </div>
-            {% empty %}
-                <div class="card-body row py-2">
-                    <div class="col-md-12">
-                        <p class="card-text border px-4" id="comment.comment"" disabled>No Comments</p>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+            </div>
+        {% endfor %}
     </div>
 {% endblock body %}
