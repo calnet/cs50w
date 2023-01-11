@@ -1,28 +1,27 @@
 {% extends "auctions/layout.html" %}
 {% load static %}
 {% block body %}
+{% include "auctions/navbar_top_view_listing.html" %}
 
-    {% if not item.active %}
+    {% if not listing.active %}
         <div class="card">
             <div class="card-body bg-info row py-1">
                 <div class="col-12 align-self-center text-center">
                     <h3>Auction Ended</h3>
                 </div>
             </div>
-            {% if highest_bid.user_id == user.id %}
+
+            {% if user.is_authenticated and listing.winning_user == user.id %}
                 <div class="card-body bg-success row py-1">
                     <div class="col-12 align-self-center text-center">
                         <h3>You are the winning bidder</h3>
                     </div>
                 </div>
             {% endif %}
-
         </div>
     {% endif %}
     
-    <div class="card-body row">
-        <h2 class="card-title" id="item.title">Listing: {{ item.title }}</h2>
-    </div>
+    <h2 class="text-center mb-4" id="listing.title">Listing: {{ listing.title }}</h2>
 
     {% if message %}
         <div class="card">
@@ -34,32 +33,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
-
-    {% if user.is_authenticated and item.active%}
-        <ul class="nav mb-3">
-            <li class="nav-item pr-2">
-                {# Revise this solution for href value #}
-                {% if not watching %}
-                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listing' item.id 1 %}">Add to Watchlist</a>
-                {% else %}
-                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listing' item.id 1 %}">Remove from Watchlist</a>
-                {% endif %}
-            </li>
-            {% if user.id == item.user_id %}
-                {% if item.active %}
-                    <li class="nav-item pr-2">
-                        <form action="{% url 'end_listing' item.id 0 %}" method="post">
-                            {% csrf_token %}
-                            <input class="form-control" type="hidden" name="listing_id" value="{{ item.id }}">
-                            <input class="form-control" type="hidden" name="highest_bid_amount" value="{{ highest_bid.amount }}">
-                            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
-                            <input class="nav-link btn btn-primary btn-sm" type="submit" value="End Auction Listing">
-                        </form>
-                    </li>
-                {% endif %}
-            {% endif %}
-        </ul>
     {% endif %}
 
     {% if error %}
@@ -77,49 +50,50 @@
     <div class="card">
         <div class="card-body row">
             <div class="col-md-12 text-center">
-                {% if item.image %}
-                    <img class="card-img img-fluid w-auto" id="item.image" src="{% static '/auctions/media/' %}{{ item.image }}"/>
+                {% if listing.image %}
+                    <img class="card-img img-fluid w-auto" id="listing.image" src="{% static '/auctions/media/' %}{{ listing.image }}"/>
                 {% else %}
-                    <img class="card-img" style="width: 150px; height: 150px;" id="item.image" src="https://via.placeholder.com/150"/>
+                    <img class="card-img" style="width: 150px; height: 150px;" id="listing.image" src="https://via.placeholder.com/150"/>
                 {% endif %}
             </div>
         </div>
 
         <div class="card-body row pb-0">
             <div class="col-md-12">
-                <div class="card-text pb-2" id="item.description">{% lorem 1 p random %}</div>
-                {% comment %} <div class="card-text pb-2" id="item.description">{{ item.description }}</div> {% endcomment %}
-                <div class="card-text pb-2 font-weight-bold" id="item.primary_category">
+                <div class="card-text pb-2" id="listing.description">{{ listing.description }}</div>
+                <div class="card-text pb-2" id="listing.description">{% lorem 1 p random %}</div>
+                <div class="card-text pb-2 font-weight-bold" id="category.title">
                     <i class="fa-solid fa-tags"></i>
-                     Category: {{ item.primary_category }}
+                        Category: 
+                        {% for category in listing.categories.all %}
+                            <a class="" href="{% url 'view_categories' category.id %}">{{ category.title }}</a> 
+                        {% endfor %}
                 </div>
-                <div class="card-text small text-hide pb-2" id="item.date_created">Created: {{ item.date_created }}</div>
-                <div class="card-text font-weight-bold" id="highest_bid_amount">£{{ highest_bid.amount|stringformat:"1.2f" }}</div>
+                <div class="card-text small text-hide pb-2" id="listing.date_created">Created: {{ listing.date_created }}</div>
+                <div class="card-text font-weight-bold" id="listing.current_price">£{{ listing.current_price|stringformat:"1.2f" }}</div>
             </div>
         </div>
 
         {% if user.is_authenticated %}
-            {% if item.active %}
+            {% if listing.active %}
                 <div class="card-body row">
                     
                     <div class="col-md-12">
-                        {% if bid_count %}
-                            <div class="card-text small pb-2" id="bid_count">{{ bid_count }} bid(s) so far.<br>
-                                {% if highest_bid.user_id == user.id %}
+                        {% if listing.bid_count %}
+                            <div class="card-text small pb-2" id="listing.bid_count">{{ listing.bid_count }} bid(s) so far.<br>
+                                {% if listing.winning_user == user.id %}
                                     Your are the current highest bidder.
                                 {% endif %}
                             </div>
                         {% else %}
-                            <div class="card-text pb-2" id="bid_count">No bids so far.</div>
+                            <div class="card-text pb-2" id="listing.bid_count">No bids so far.</div>
                         {% endif %}
 
-                        <form action="{% url 'view_listing' item.id 0 %}" method="post">
+                        <form action="{% url 'place_bid' %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <input class="form-control" type="number" step="0.01" name="amount" placeholder="Amount of Bid">
-                                <input class="form-control" type="hidden" name="watching" value="{{ watching }}">
-                                <input class="form-control" type="hidden" name="listing_id" value="{{ item.id }}">
-                                <input class="form-control" type="hidden" name="highest_bid_amount" value="{{ highest_bid.amount }}">
+                                <input class="form-control" type="number" step="0.01" name="bid_amount" placeholder="Amount of Bid">
+                                <input class="form-control" type="hidden" name="listing_id" value="{{ listing.id }}">
                                 <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
                             </div>
                             <input class="btn btn-primary" type="submit" value="Bid">
@@ -131,8 +105,12 @@
                     <div class="col-md-12">
                         <h4 class="card-text">Details</h4>
                         <ul class="">
-                            <li class="" id="auction_user.username"">Listed by: {{ auction_user.username }}</li>
-                            <li class="" id="item.primary_category"">Category: {{ item.primary_category }}</li>
+                            <li class="" id="listing.user.username"">Listed by: {{ listing.user.username }}</li>
+                            {% for category in listing.categories.all %}
+                                <li class="" id="category.title"">
+                                    Category: <a class="" href="{% url 'view_categories' category.id %}">{{ category.title }}</a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -141,11 +119,11 @@
             <div class="card-body row">
                 <div class="col-md-12">
                     <h4 class="card-title">Add Comment</h4>
-                    <form action="{% url 'add_comment' item.id %}" method="post">
+                    <form action="{% url 'add_comment' listing.id %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <textarea class="form-control" name="listingCommentTextarea" rows="2"></textarea>
-                            <input class="form-control" type="hidden" name="listing_id" value="{{ item.id }}">
+                            <textarea class="form-control" name="comment_text" rows="2"></textarea>
+                            <input class="form-control" type="hidden" name="listing_id" value="{{ listing.id }}">
                             <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
                         </div>
                         <input class="btn btn-primary" type="submit" value="Submit">
@@ -161,10 +139,10 @@
             </div>
         </div>
         
-        {% for comment in comments %}
+        {% for comment in listing.comments %}
             <div class="card-body row py-2">
                 <div class="col-md-12 border">
-                    <p class="card-text pt-2 px-4" id="comment.comment"" disabled>{{ comment.comment }}</p>
+                    <p class="card-text pt-2 px-4" id="comment.text"" disabled>{{ comment.text }}</p>
                     <div class="card-footer pt-0">
                         <small class="text-muted" id="comment.comment_date"">Posted on: {{ comment.comment_date }}</small>
                     </div>

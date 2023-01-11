@@ -1,0 +1,32 @@
+{% block navbar_top_primary %}
+    <ul id="navbar_top_primary" class="nav">
+        <li class="nav-item pb-2 pr-2">
+            <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listings' %}">Active Listings</a>
+        </li>
+        <li class="nav-item pb-2 pr-2">
+            <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listings' 0 %}">Completed Listings</a>
+        </li>
+        <li class="nav-item pb-2 pr-2">
+            <a class="nav-link btn btn-primary btn-sm" href="{% url 'create_listing' %}">Create Listing</a>
+        </li>
+        <li class="nav-item pb-2 pr-2">
+            <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_categories' %}">Categories</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'watched_listings' %}">Watchlist</a>
+            </li>
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'logout' %}">Log Out</a>
+            </li>
+        {% else %}
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'register' %}">Register</a>
+            </li>
+        {% endif %}
+    </ul>
+    <hr>
+{% endblock navbar_top_primary %}

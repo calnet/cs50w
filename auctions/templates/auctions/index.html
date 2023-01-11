@@ -1,14 +1,35 @@
 {% extends "auctions/layout.html" %}
 {% load static %}
 {% block body %}
-    <h2>Active Listings</h2>
+    {% if active > 0 %}
+        {% include "auctions/navbar_top_active_listings.html" %}
+    {% else %}
+        {% include "auctions/navbar_top_completed_listings.html" %}
+    {% endif %}
+
+    {% if status == 1 %}
+        <h2 class="text-center mb-4">Active Listings</h2>
+    {% elif status == 0 %}
+        <h2 class="text-center mb-4">Ended Listings</h2>
+    {% elif status == 2 %}
+        <h2 class="text-center mb-4">Winning - Active Listings</h2>
+    {% elif status == 3 %}
+        <h2 class="text-center mb-4">Outbid - Active Listings</h2>
+    {% elif status == 4 %}
+        <h2 class="text-center mb-4">Won - Ended Listings</h2>
+    {% elif status == 5 %}
+        <h2 class="text-center mb-4">Outbid - Ended Listings</h2>
+    {% endif %}
     
     {% for listing in listings %}
-        {% comment %} {% for k in listing %}                <div>Key: {{k}}</div>{% endfor %} {% endcomment %}
-        {% comment %} <div id="debug">Listing: {{listing}}</div> {% endcomment %}
         <div class="card">
-            <div class="row no-gutters">
-                <div class="col-sm-3 align-self-center text-center">
+            {% if user.is_authenticated and listing.winning_user == user.id %}
+                <div class="row no-gutters bg-success">
+            {% else %}
+                <div class="row no-gutters">
+            {% endif %}
+                    <div class="col-sm-3 align-self-center text-center">
+                    
                     {% if listing.image %}
                         <a href="{% url 'view_listing' listing.id %}">
                             <img class="card-img"
@@ -25,16 +46,39 @@
                                 src="https://via.placeholder.com/150"/>
                         </a>
                     {% endif %}
+
                 </div>
                 <div class="col-sm-9">
                     <div class="card-body">
                         <h4 class="card-title font-weight-bold" id="listing.title">
                             <a class="" href="{% url 'view_listing' listing.id %}">{{ listing.title }}</a>
                         </h4>
-                        <div class="card-text pb-2 font-weight-bold" id="listing.start_price">Price: £{{ listing.start_price|stringformat:"1.2f" }}</div>
+                        <div class="card-text pb-2 font-weight-bold" id="listing.current_price">Price: £{{ listing.current_price|stringformat:"1.2f" }}</div>
                         <div class="card-text pb-3" id="listing.description">{{ listing.description }}</div>
-                        <div class="card-text pb-2" id="listing.primary_category">Category: {{ listing.primary_category }}</div>
-                        <div class="card-text small text-black-50" id="listing.date_created">Created: {{ listing.date_created }}</div>
+                        <div class="card-text pb-2" id="listing.categories">
+                            Categories: 
+                            <span class="font-weight-bold">
+                                {% for category in listing.categories.all %}
+                                    <a class="" href="{% url 'view_categories' category.id %}">{{ category.title }}</a>  
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <div class="card-text pb-2 small text-black-50" id="listing.date_created">Created: {{ listing.date_created }}</div>
+                        
+                        {% if listing.bid_count > 1 %}
+                            <div class="card-text small text-black-50" id="listing.bid_count">
+                                There are 
+                                <span class="font-weight-bold">{{ listing.bid_count }}</span>
+                                bids.
+                            </div>
+                        {% elif listing.bid_count == 1 %}
+                            <div class="card-text small text-black-50" id="listing.bid_count">
+                                There is
+                                <span class="font-weight-bold">{{ listing.bid_count }}</span>
+                                bid.
+                            </div>
+                        {% endif %}
+                        
                     </div>
                 </div>
             </div>

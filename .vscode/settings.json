@@ -12,7 +12,7 @@
 		"strings": "on",
 		"other": "on"
 	},
-	"editor.renderWhitespace": "none",
+	"editor.renderWhitespace": "all",
 	"editor.selectionHighlight": true,
 	"editor.suggestOnTriggerCharacters": true,
 	"javascript.suggest.enabled": true,
@@ -28,5 +28,6 @@
 			"strings": true,
 			"editor.defaultFormatter": "monosans.djlint"
 		}
-	}
+	},
+	"python.analysis.typeCheckingMode": "basic"
 }
