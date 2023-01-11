@@ -1,0 +1,43 @@
+{% block navbar_top_view_listing %}
+    {% if user.is_authenticated %}
+        <ul id="navbar_top_view_listing" class="nav">
+        {% comment %} <ul id="navbar_top_view_listing" class="nav"> {% endcomment %}
+            <li class="nav-item pb-2 pr-2">
+                {# Revise this solution for href value #}
+                {% if not listing.watched %}
+                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listing' listing.id 1 %}">Add to Watchlist</a>
+                {% else %}
+                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listing' listing.id 1 %}">Remove from Watchlist</a>
+                {% endif %}
+            </li>
+    
+            {% if user.id == listing.user_id or user.is_superuser %}
+                {% if listing.active %}
+                    <li class="nav-item pr-2">
+                        <form action="{% url 'end_listing' listing.id 0 %}" method="post">
+                            {% csrf_token %}
+                            <input class="form-control" type="hidden" name="listing_id" value="{{ listing.id }}">
+                            <input class="form-control" type="hidden" name="listing_current_price" value="{{ listing.current_price }}">
+                            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
+                            <input class="nav-link btn btn-primary btn-sm" type="submit" value="End Auction Listing">
+                        </form>
+                    </li>
+                {% endif %}
+            
+                {% if not listing.active %}
+                    <li class="nav-item pr-2">
+                        <form action="{% url 'resume_listing' listing.id 0 %}" method="post">
+                            {% csrf_token %}
+                            <input class="form-control" type="hidden" name="listing_id" value="{{ listing.id }}">
+                            <input class="form-control" type="hidden" name="listing_current_price" value="{{ listing.current_price }}">
+                            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
+                            <input class="nav-link btn btn-primary btn-sm" type="submit" value="Resume Auction Listing">
+                        </form>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        <hr>
+    {% endif %}
+
+{% endblock navbar_top_view_listing %}

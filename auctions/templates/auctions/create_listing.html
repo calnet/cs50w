@@ -1,6 +1,6 @@
 {% extends "auctions/layout.html" %}
 {% block body %}
-    <h2>Create Listing</h2>
+    <h2 class="text-center mb-4">Create Listing</h2>
     {% if message %}
         <div class="card">
             <div class="card bg-warning font-weight-bold">
@@ -31,8 +31,7 @@
                 <input class="form-control"
                        type="text"
                        name="create_listing_description"
-                       placeholder="Listing description"
-                       required/>
+                       placeholder="Listing description"/>
             </div>
         </div>
         <div class="form-group row">
@@ -40,18 +39,29 @@
             <div class"col-10">
                 <input class="form-control"
                        type="number"
+                       step="0.01"
                        name="create_listing_start_price"
                        value="0"
                        placeholder="Starting Bid"/>
             </div>
         </div>
         <div class="form-group row">
-            <label for="create_listing_primary_category" class="col-sm-2 col-form-label">Primary Category</label>
+            <label for="create_listing_categories" class="col-sm-2 col-form-label">Categories</label>
             <div class"col-10">
-                <input class="form-control"
+                {% comment %} <input class="form-control"
                        type="text"
                        name="create_listing_primary_category"
-                       placeholder="Category"/>
+                       placeholder="Category"/> {% endcomment %}
+
+                <select class="custom-select" name="create_listing_categories" multiple>
+                    <option disabled>Select categories</option>
+                    <option value="Test Category 1">One</option>
+                    <option value="Test Category 2">Two</option>
+                    <option value="Test Category 3">Three</option>
+                    <option value="Test Category 4">4</option>
+                    <option value="Test Category 5">5</option>
+                    <option value="Test Category 6">6</option>
+                </select>
             </div>
         </div>
         <div class="form-group row">
@@ -60,6 +70,7 @@
                 <input class="form-control-file"
                        type="file"
                        name="create_listing_image"
+                       id="create_listing_image"
                        placeholder="Select Image to Upload"/>
             </div>
         </div>

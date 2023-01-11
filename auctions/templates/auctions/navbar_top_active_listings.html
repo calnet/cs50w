@@ -1,0 +1,19 @@
+{% block navbar_top_active_listings %}
+    {% if user.is_authenticated %}
+        <ul id="navbar_top_active_listings" class="nav">
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listings' %}">All Active Listings</a>
+            </li>
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listings' 2 %}">Winning Listings</a>
+            </li>
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'view_listings' 3 %}">Outbid Listings</a>
+            </li>
+            <li class="nav-item pb-2 pr-2">
+                <a class="nav-link btn btn-primary btn-sm" href="{% url 'watched_listings' %}">Watchlist</a>
+            </li>
+        </ul>
+        <hr>
+    {% endif %}
+{% endblock navbar_top_active_listings %}

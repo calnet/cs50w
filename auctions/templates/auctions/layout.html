@@ -3,7 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}Auctions{% endblock %}</title>
+        <title>
+            {% block title %}
+                Auctions
+            {% endblock title%}
+        </title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> {% endcomment %}
         <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
@@ -25,39 +29,20 @@
         <h1>Auctions</h1>
         <div>
             {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
+                Signed in as 
+                <strong>
+                    {% if user.is_superuser %}
+                        Superuser - 
+                    {% endif %}
+                    {{ user.username }}
+                </strong>
             {% else %}
                 Not signed in.
             {% endif %}
         </div>
-        <ul class="nav">
-            <li class="nav-item pb-2 pr-2">
-                <a class="nav-link btn btn-primary btn-sm" href="{% url 'index' %}">Active Listings</a>
-            </li>
-            <li class="nav-item pb-2 pr-2">
-                <a class="nav-link btn btn-primary btn-sm" href="{% url 'closed_listings' %}">Completed Listings</a>
-            </li>
-            <li class="nav-item pb-2 pr-2">
-                <a class="nav-link btn btn-primary btn-sm" href="{% url 'create_listing' %}">Create Listing</a>
-            </li>
-            {% if user.is_authenticated %}
-                <li class="nav-item pb-2 pr-2">
-                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'watched_listings' %}">Watchlist</a>
-                </li>
-                <li class="nav-item pb-2 pr-2">
-                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item pb-2 pr-2">
-                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item pb-2 pr-2">
-                    <a class="nav-link btn btn-primary btn-sm" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-        </ul>
-        <hr>
+        
+        {% include "auctions/navbar_top_primary.html" %}
         {% block body %}
-        {% endblock %}
+        {% endblock body %}
     </body>
 </html>

@@ -1,0 +1,47 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+{% include "auctions/navbar_top_categories.html" %}
+    {% if count_categories > 1 %}
+        <h2 class="text-center mb-4">Categories</h2>
+        {% for category in categories %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {% with listings_count=category.listings.all|length %}
+                                    <h4 class="card-title font-weight-bold" id="categories.title">
+                                        <a class="" href="{% url 'view_categories' category.id %}">{{category.title}}</a>
+                                    </h4>
+                                    <span class="badge badge-primary badge-pill">{{ listings_count }}</span>
+                                {% endwith %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div>No Active Listings.</div>
+        {% endfor %}
+    {% else %}
+        <h2 class="text-center mb-4">Listings for {{categories.title}}</h2>
+        {% for listing in listings %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <h4 class="card-title font-weight-bold" id="listing.title">
+                                    <a class="" href="{% url 'view_listing' listing.id %}">{{listing.title}}</a>
+                                </h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div>No Active Listings.</div>
+        {% endfor %}
+    {% endif %}
+{% endblock body %}
