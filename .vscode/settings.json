@@ -1,0 +1,33 @@
+{
+	"breadcrumbs.enabled": true,
+	"editor.colorDecorators": true,
+	"editor.folding": true,
+	"editor.foldingHighlight": true,
+	"editor.hover.enabled": true,
+	"editor.lightbulb.enabled": true,
+	"editor.occurrencesHighlight": true,
+	"editor.parameterHints.enabled": true,
+	"editor.quickSuggestions": {
+		"comments": "on",
+		"strings": "on",
+		"other": "on"
+	},
+	"editor.renderWhitespace": "all",
+	"editor.selectionHighlight": true,
+	"editor.suggestOnTriggerCharacters": true,
+	"javascript.suggest.enabled": true,
+	"javascript.validate.enable": true,
+	"terminal.integrated.tabs.showActiveTerminal": "always",
+	"workbench.colorTheme": "Tomorrow Night Blue",
+	"workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
+	"workbench.statusBar.visible": true,
+	"[django-html]": {
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": true,
+			"strings": true,
+			"editor.defaultFormatter": "monosans.djlint"
+		}
+	},
+	"python.analysis.typeCheckingMode": "basic"
+}
