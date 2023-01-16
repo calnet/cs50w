@@ -21,7 +21,7 @@ function compose_email() {
 	document.querySelector('#compose-subject').value = '';
 	document.querySelector('#compose-body').value = '';
 
-	// Listen for 
+	// Listen for form submit action
 	document.querySelector('#compose-submit').addEventListener("click", function (event) {
 		event.preventDefault();
 		send_mail();
@@ -130,8 +130,7 @@ function send_mail() {
 		.then(result => {
 			// Print result
 			console.log([recipients, subject, body, result]);
+			// Redirect to Users Sent Mailbox
+			load_mailbox('sent');
 		});
-
-	// Redirect to Users Sent Mailbox
-	load_mailbox('sent');
 }
