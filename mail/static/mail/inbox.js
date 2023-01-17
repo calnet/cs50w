@@ -39,6 +39,68 @@ function load_mailbox(mailbox) {
 
 	// Retrieve the list of emails for the loaded mailbox
 	get_mail(mailbox);
+
+}
+
+function display_emails (mailbox, emails) {
+	// CHANGE this to better solution
+	display_email_headers (mailbox, emails);
+	
+	const container = document.querySelector('#container');
+
+	emails.forEach(email => {
+		// Create a list item add the email record to it
+		let item = document.createElement('div');
+		// item.setAttribute('id', 'data_');
+		item.setAttribute('class', 'row data-');
+		
+		for (const key in email) {
+			if (key === (mailbox === 'sent' ? 'recipients' : 'sender') || key === 'subject' || key === 'timestamp') {
+				if (Object.hasOwnProperty.call(email, key)) {
+					item.appendChild(document.createElement('div'));
+					item.lastChild.setAttribute('class', 'col border data-' + key);
+					item.lastChild.innerHTML = email[key];
+					container.append(item);
+				}
+			}
+		}
+	});
+}
+
+function display_email_headers (mailbox, emails) {
+	// Print emails
+	const emails_view = document.querySelector('#emails-view');
+	
+	// Construct layout structure to display emails
+	const container = document.createElement('div');
+	container.setAttribute('id', 'container');
+	container.setAttribute('class', 'container border rounded text-start');
+	emails_view.appendChild(container);
+	
+	const headings = document.createElement('div');
+	headings.setAttribute('id', 'header');
+	headings.setAttribute('class', 'row');
+	headings.setAttribute('style', 'border-bottom:medium solid;');
+	container.appendChild(headings);
+	
+	// Get the field labels
+	let labels = [];
+
+	if (emails.length > 0) {
+		labels = Object.keys(emails[0]);
+	}
+	
+	// Get header row for table
+	labels.forEach(label => {
+		if (label === (mailbox === 'sent' ? 'recipients' : 'sender') || label === 'subject' || label === 'timestamp') {
+			let element = document.createElement('div');
+			element.setAttribute('id', 'header_' + label);
+			element.setAttribute('class', 'col border');
+			label = label.charAt(0).toUpperCase() + label.slice(1);
+			element.innerHTML = label;
+			headings.append(element);
+		}
+	});
 }
 
 function get_mail(mailbox) {
@@ -47,67 +109,7 @@ function get_mail(mailbox) {
 	fetch(url)
 		.then(response => response.json())
 		.then(emails => {
-			// Print emails
-			
-			const emails_view = document.querySelector('#emails-view');
-			
-			// Construct layout structure to display emails
-			const container = document.createElement('div');
-			container.setAttribute('id', 'container');
-			container.setAttribute('class', 'container border rounded text-start');
-			emails_view.appendChild(container);
-			
-			const headings = document.createElement('div');
-			headings.setAttribute('id', 'header');
-			headings.setAttribute('class', 'row');
-			headings.setAttribute('style', 'border-bottom:medium solid;');
-			// headings.setAttribute('border-bottom-width', '2px');
-			container.appendChild(headings);
-
-			let labels = [];
-
-			if (emails.length > 0) {
-				labels = Object.keys(emails[0]);
-			}
-			else
-			{
-				labels = [];
-			}
-			
-			// Get header row for table
-			labels.forEach(label => {
-				if (label === (mailbox === 'sent' ? 'recipients' : 'sender') || label === 'subject' || label === 'timestamp') {
-					const header = document.querySelector('#header');
-					// const header = document.querySelector('th');
-					let element = document.createElement('div');
-					element.setAttribute('id', 'header_' + label);
-					element.setAttribute('class', 'col border');
-					label = label.charAt(0).toUpperCase() + label.slice(1);
-					element.innerHTML = label;
-					header.append(element);
-				}
-			});
-
-			const parent = document.querySelector('#container');
-
-			emails.forEach(email => {
-				// Create a list item for the new mail and add the email to it
-				let item = document.createElement('div');
-				// item.setAttribute('id', 'data_');
-				item.setAttribute('class', 'row data-');
-				
-				for (const key in email) {
-					// console.log(email);
-					if (key === (mailbox === 'sent' ? 'recipients' : 'sender') || key === 'subject' || key === 'timestamp') {
-						if (Object.hasOwnProperty.call(email, key)) {
-							item.appendChild(document.createElement('div'));
-							item.lastChild.setAttribute('class', 'col border data-' + key);
-							item.lastChild.innerHTML = email[key];
-							parent.append(item);
-						}
-					}
-				}
-			});
+			display_emails(mailbox, emails);
 		});
 }
 
