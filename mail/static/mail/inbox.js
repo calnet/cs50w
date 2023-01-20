@@ -43,64 +43,131 @@ function load_mailbox(mailbox) {
 }
 
 function display_emails (mailbox, emails) {
-	// CHANGE this to better solution
 	display_email_headers (mailbox, emails);
 	
 	const container = document.querySelector('#container');
 
 	emails.forEach(email => {
 		// Create a list item add the email record to it
-		let item = document.createElement('div');
-		// item.setAttribute('id', 'data_');
-		item.setAttribute('class', 'row data-');
+		let row = document.createElement('div');
+		// row.id = 'data_';
+
+		// Apply CSS Classes
+		row.classList.add('row');
+		row.classList.add('data-');
 		
-		for (const key in email) {
-			if (key === (mailbox === 'sent' ? 'recipients' : 'sender') || key === 'subject' || key === 'timestamp') {
-				if (Object.hasOwnProperty.call(email, key)) {
-					item.appendChild(document.createElement('div'));
-					item.lastChild.setAttribute('class', 'col border data-' + key);
-					item.lastChild.innerHTML = email[key];
-					container.append(item);
+		for (const column in email) {
+			if (column === (mailbox === 'sent' ? 'recipients' : 'sender') || column === 'subject' || column === 'timestamp') {
+				if (Object.hasOwnProperty.call(email, column)) {
+					row.appendChild(document.createElement('div'));
+
+					// Apply CSS Classes
+					row.lastChild.classList.add('col');
+					row.lastChild.classList.add('data-' + column);
+					row.lastChild.classList.add('border');
+					row.lastChild.classList.add('p-1');
+					row.lastChild.classList.add('ps-3');
+					
+					// Apply CSS Class if email is read
+					if (email.read) {
+						row.lastChild.classList.add("bg-secondary");
+						row.lastChild.classList.add("bg-opacity-25");
+						row.lastChild.classList.add("border-dark-subtle");
+					}
+
+					row.lastChild.innerHTML = email[column];
+					container.append(row);
 				}
 			}
 		}
 	});
+	
+	// Fix borders for last row in email list
+	for (let i = 0; i < container.lastChild.childElementCount; i++) {
+		const element = container.lastChild.children[i];
+		// 1st Column
+		if (i === 0) {
+			element.classList.add('border-bottom-left-radius-4');
+		}
+		// Last Column
+		else if (i === container.lastChild.childElementCount - 1) {
+			element.classList.add('border-bottom-right-radius-4');
+		}
+	};
 }
 
 function display_email_headers (mailbox, emails) {
 	// Print emails
 	const emails_view = document.querySelector('#emails-view');
 	
-	// Construct layout structure to display emails
+	// Construct container layout to display emails
 	const container = document.createElement('div');
-	container.setAttribute('id', 'container');
-	container.setAttribute('class', 'container border rounded text-start');
+	container.id = 'container';
+
+	container.classList.add('container');
+	container.classList.add('border');
+	container.classList.add('border-dark');
+	container.classList.add('rounded-4');
+	container.classList.add('text-start');
+
 	emails_view.appendChild(container);
 	
 	const headings = document.createElement('div');
-	headings.setAttribute('id', 'header');
-	headings.setAttribute('class', 'row');
-	headings.setAttribute('style', 'border-bottom:medium solid;');
+	headings.id = 'header';
+
+	headings.classList.add('row');
+	headings.classList.add('border-bottom');
+	headings.classList.add('border-dark');
+
 	container.appendChild(headings);
 	
 	// Get the field labels
-	let labels = [];
+	let column_names = [];
 
 	if (emails.length > 0) {
-		labels = Object.keys(emails[0]);
+		column_names = Object.keys(emails[0]);
 	}
 	
 	// Get header row for table
-	labels.forEach(label => {
-		if (label === (mailbox === 'sent' ? 'recipients' : 'sender') || label === 'subject' || label === 'timestamp') {
-			let element = document.createElement('div');
-			element.setAttribute('id', 'header_' + label);
-			element.setAttribute('class', 'col border');
-			label = label.charAt(0).toUpperCase() + label.slice(1);
-			element.innerHTML = label;
+	column_names.forEach(column_name => {
+		if (column_name === (mailbox === 'sent' ? 'recipients' : 'sender') || column_name === 'subject' || column_name === 'timestamp') {
+			const element = document.createElement('div');
+			element.id = 'header_' + column_name;
+			
+			element.classList.add('p-2');
+			
+			column_name = column_name.charAt(0).toUpperCase() + column_name.slice(1);
+			element.innerHTML = column_name;
+			
 			headings.append(element);
 		}
 	});
+
+	// Apply CSS Classes
+	for (let i = 0; i < headings.childElementCount; i++) {
+		const element = headings.children[i];
+
+		element.classList.add('col');
+		element.classList.add('fw-semibold');
+		element.classList.add('fs-5');
+		element.classList.add('text-center');
+		element.classList.add("bg-secondary");
+		element.classList.add("bg-opacity-50");
+		
+		// Fix borders for header row
+		// 1st Column
+		if (i === 0) {
+			element.classList.add('border-top-left-radius-4');
+		}
+		// Last Column
+		else if (i === headings.childElementCount - 1) {
+			element.classList.add('border-top-right-radius-4');
+		} else {
+			element.classList.add('border-start');
+			element.classList.add('border-end');
+			element.classList.add("border-dark");
+		}
+	}
 }
 
 function get_mail(mailbox) {
