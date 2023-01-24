@@ -269,7 +269,7 @@ function display_mailbox_emails(emails, mailbox) {
 		});
 	});
 
-	// Fix borders for last row in email list
+	// Fix border radius for last row in email list
 	if (mailbox_emails.childElementCount > 0) {
 		for (let i = 0; i < mailbox_emails.lastChild.childElementCount; i++) {
 			const element = mailbox_emails.lastChild.children[i];
@@ -345,7 +345,7 @@ function display_mailbox_headings(emails, mailbox) {
 		element.classList.add("bg-secondary");
 		element.classList.add("bg-opacity-50");
 
-		// Fix borders for header row
+		// Fix border radius for header row
 		// 1st Column
 		if (i === 0) {
 			element.classList.add('border-top-left-radius-4');
@@ -376,16 +376,6 @@ async function get_mailbox_emails(mailbox) {
 		console.log('Display ' + mailbox + ' emails failed - Response: ' + response.status + ' received');
 	}
 }
-
-// function get_email(id, mailbox) {
-// 	const url = '/emails/' + id;
-
-// 	fetch(url)
-// 		.then(response => response.json())
-// 		.then(email => {
-// 			load_email(email, mailbox);
-// 		});
-// }
 
 async function get_email(id, mailbox) {
 	const url = '/emails/' + id;
@@ -450,10 +440,8 @@ async function mark_email_read(id) {
 
 	if (response.status = 204) {
 		console.log('Mark email id: '+ id +' read was successful - Response: ' + response.status + ' received');
-		// return response;
 	} else {
 		console.log('Mark email id: '+ id +' read failed - Response: ' + response.status + ' received');
-		// return response;
 	}
 }
 
@@ -462,10 +450,8 @@ async function mark_email_unread(id) {
 
 	if (response.status = 204) {
 		console.log('Mark email id: '+ id +' unread was successful - Response: ' + response.status + ' received');
-		// return response;
 	} else {
 		console.log('Mark email id: '+ id +' unread failed - Response: ' + response.status + ' received');
-		// return response;
 	}
 }
 
