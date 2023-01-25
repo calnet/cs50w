@@ -47,10 +47,12 @@ function compose_email(data) {
 	}
 
 	// Listen for form submit action
-	document.querySelector('#compose-submit').addEventListener("click", function (event) {
-		event.preventDefault();
-		send_mail();
-	});
+	document.querySelector('#compose-submit').addEventListener("click", send_mail_handler);
+}
+
+function send_mail_handler(event){
+	event.preventDefault();
+	send_mail();
 }
 
 function load_mailbox(mailbox) {
@@ -155,34 +157,42 @@ function display_email_headings(email, mailbox) {
 	element = document.querySelector('#email_header_timestamp');
 	element.lastChild.innerHTML = email.timestamp;
 
+	// Add button for replying to mail
 	element = create_element('button', 'reply', 'Reply', ['btn', 'btn-sm', 'btn-outline-primary']);
-	element.addEventListener('click', () => {
-		const data = {
-			'id': email.id,
-			'sender': email.sender,
-			'subject': email.subject,
-			'timestamp': email.timestamp,
-			'body': email.body
-		};
-
-		compose_email(data);
-	});
+	element.addEventListener('click', reply_email_handler(email));
 
 	email_headers.append(element);
 
-	if (mailbox === 'inbox') {
-		element = create_element('button', 'archive', 'Archive', ['btn', 'btn-sm', 'btn-outline-primary']);
-		element.addEventListener('click', () => {
-			archive_email(email.id);
-		});
-	} else if (mailbox === 'archive') {
-		element = create_element('button', 'archive', 'Move to Inbox', ['btn', 'btn-sm', 'btn-outline-primary']);
-		element.addEventListener('click', () => {
-			unarchive_email(email.id);
-		});
+	// Add button for dealing with archived mail
+	if (mailbox !== 'sent') {
+		element = create_element('button', 'archive', '', ['btn', 'btn-sm', 'btn-outline-primary']);
+		element.addEventListener('click', archive_email_handler(email));
 	}
-
+	
+	if (mailbox === 'inbox') {
+		element.innerHTML = 'Archive';
+	} else if (mailbox === 'archive') {
+		element.innerHTML = 'Move to Inbox';
+	}
+	
 	email_headers.append(element);
+}
+
+function archive_email_handler(data) {
+	return function(event) {
+		if (data.archived) {
+			unarchive_email(data.id);
+		} else {
+			archive_email(data.id);
+		}
+	}
+  }
+
+function reply_email_handler(data) {
+	return function(event) {
+		console.log(data);
+		compose_email(data);
+	}
 }
 
 /**
@@ -393,28 +403,37 @@ async function get_email(id, mailbox) {
 	}
 }
 
-function send_mail() {
+async function send_mail() {
 	// Get submitted email data from form
-	let recipients = document.querySelector('#compose-recipients').value.toLowerCase();
-	let subject = document.querySelector('#compose-subject').value;
-	let body = document.querySelector('#compose-body').value;
+	const data = {
+		recipients: document.querySelector('#compose-recipients').value.toLowerCase(),
+		subject: document.querySelector('#compose-subject').value,
+		body: document.querySelector('#compose-body').value
+	}
+
+	// Send mail route
+	const url = '/emails';
+
+	// Build the request object
+	const request = {
+		method: 'POST',
+		body: JSON.stringify(data)
+	};
 
 	// Send the mail
-	fetch('/emails', {
-		method: 'POST',
-		body: JSON.stringify({
-			recipients: recipients,
-			subject: subject,
-			body: body
-		})
-	})
-		.then(response => response.json())
-		.then(result => {
-			// Print result
-			console.log([recipients, subject, body, result]);
-			// Redirect to Users Sent Mailbox
-			load_mailbox('sent');
-		});
+	const response = await fetch(url, request);
+
+	if (response.status = 201) {
+		// Receive the result
+		const result = await response.json();
+		// Print result to console
+		console.log([data.recipients, data.subject, data.body, result]);
+		// Redirect to Users Sent Mailbox
+		load_mailbox('sent');
+	} else {
+		console.log(response.error);
+		console.log('There was a problem sending the email! Status Code: ' + response.status + ' returned.');
+	}
 }
 
 async function update_email(id, field, value) {
