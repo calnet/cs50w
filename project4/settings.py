@@ -81,7 +81,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'mail.User'
+AUTH_USER_MODEL = 'network.User'
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 # Password validation
