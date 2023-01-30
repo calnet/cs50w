@@ -1,6 +1,11 @@
 {
 	"breadcrumbs.enabled": true,
+	"djlint.useVenv": true,
+	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+	// "editor.codeLens": false,
 	"editor.colorDecorators": true,
+	"editor.definitionLinkOpensInPeek": true,
+	"editor.detectIndentation": true,
 	"editor.folding": true,
 	"editor.foldingHighlight": true,
 	"editor.hover.enabled": true,
@@ -17,6 +22,7 @@
 	"editor.suggestOnTriggerCharacters": true,
 	"javascript.suggest.enabled": true,
 	"javascript.validate.enable": true,
+	"python.analysis.typeCheckingMode": "basic",
 	"terminal.integrated.tabs.showActiveTerminal": "always",
 	"workbench.colorTheme": "Tomorrow Night Blue",
 	"workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
@@ -26,8 +32,7 @@
 			"other": true,
 			"comments": true,
 			"strings": true,
-			"editor.defaultFormatter": "monosans.djlint"
-		}
-	},
-	"python.analysis.typeCheckingMode": "basic"
+		},
+		"editor.defaultFormatter": "monosans.djlint"
+	}
 }
