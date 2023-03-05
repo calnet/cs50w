@@ -1,5 +1,41 @@
 {% extends "network/layout.html" %}
-
+{% load static %}
 {% block body %}
-    TODO
-{% endblock %}
+    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+    <script src="{% static 'network/index.js' %}"></script>
+    {% comment %} {% endif %} {% endcomment %}
+    <h1 id="page-view-title" class="card-header m-2 text-center">All Posts</h1>
+    <div id="compose-view" class="card mx-5 mb-4">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold">New Post</h5>
+            <form id="compose-form"
+                  method="post"
+                  {% if not user.is_authenticated %} action="{% url 'login' %}" {% endif %}>
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                    <textarea class="form-control my-1"
+                              id="compose-body"
+                              placeholder="Body"
+                              rows="2"></textarea>
+                    <input type="submit"
+                           id="compose-submit"
+                           value="Post"
+                           class="btn btn-primary"/>
+                </form>
+            {% else %}
+                <textarea class="form-control my-1"
+                          id="compose-body"
+                          placeholder="Body"
+                          disabled
+                          rows="2"></textarea>
+                <input type="button"
+                       id="compose-submit"
+                       value="Please Login to create Post"
+                       class="btn btn-primary"/>
+            {% endif %}
+        </div>
+    </div>
+    <div id="profile-view"></div>
+    <div id="posts-view"></div>
+    <div id="post-view"></div>
+{% endblock body %}

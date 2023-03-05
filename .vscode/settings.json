@@ -1,12 +1,8 @@
 {
 	"breadcrumbs.enabled": true,
-	"djlint.useVenv": true,
 	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-	// "editor.codeLens": false,
+	"editor.codeLens": false,
 	"editor.colorDecorators": true,
-	"editor.definitionLinkOpensInPeek": true,
-	"editor.detectIndentation": true,
-	"editor.folding": true,
 	"editor.foldingHighlight": true,
 	"editor.hover.enabled": true,
 	"editor.lightbulb.enabled": true,
@@ -17,12 +13,27 @@
 		"strings": "on",
 		"other": "on"
 	},
-	"editor.renderWhitespace": "all",
+	"editor.renderWhitespace": "none",
 	"editor.selectionHighlight": true,
 	"editor.suggestOnTriggerCharacters": true,
+	"editor.tabSize": 4,
+	"editor.useTabStops": false,
+	"html.format.preserveNewLines": true,
 	"javascript.suggest.enabled": true,
 	"javascript.validate.enable": true,
 	"python.analysis.typeCheckingMode": "basic",
+	"python.testing.pytestArgs": [
+		"network"
+	],
+	"python.testing.unittestArgs": [
+		"-v",
+		"-s",
+		"./network",
+		"-p",
+		"*test.py"
+	],
+	"python.testing.unittestEnabled": true,
+	"python.testing.pytestEnabled": false,
 	"terminal.integrated.tabs.showActiveTerminal": "always",
 	"workbench.colorTheme": "Tomorrow Night Blue",
 	"workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
@@ -33,6 +44,6 @@
 			"comments": true,
 			"strings": true,
 		},
-		"editor.defaultFormatter": "monosans.djlint"
-	}
+		// "editor.defaultFormatter": "monosans.djlint"
+	},
 }
