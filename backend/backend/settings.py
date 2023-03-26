@@ -60,9 +60,7 @@ ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / "templates",
-        ],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -140,5 +138,9 @@ CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
 
+LOGIN_URL = "/users/login/"
+
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+PASSWORD_RESET_TIMEOUT = 300
