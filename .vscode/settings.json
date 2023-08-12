@@ -41,7 +41,6 @@
             "comments": true,
             "other": true,
             "strings": true
-        },
-        "editor.defaultFormatter": "monosans.djlint"
+        }
     }
 }
