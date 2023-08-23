@@ -4,6 +4,7 @@ import NavItem from '../NavItem';
 import type { NavItemProps } from '../NavItem';
 
 export type NavSectionProps = {
+    key?: string;
     title: string;
     items: NavItemProps[];
 };
@@ -20,6 +21,7 @@ function NavSection(props: NavSectionProps) {
             {props.items.map((item) => {
                 return (
                     <NavItem
+                        key={item.title}
                         title={item.title}
                         href={item.href}
                         icon={item.icon}

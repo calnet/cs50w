@@ -123,6 +123,7 @@ function Sidebar(props: SidebarProps) {
                         {props.navSections.map((section) => {
                             return (
                                 <NavSection
+                                    key={section.title}
                                     title={section.title}
                                     items={section.items}
                                 />

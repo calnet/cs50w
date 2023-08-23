@@ -1,6 +1,7 @@
 import { Box, Button, ListItemIcon, SvgIcon } from '@mui/material';
 
 export type NavItemProps = {
+    key?: string;
     title: string;
     href: string;
     icon: string;
