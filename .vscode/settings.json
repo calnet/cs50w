@@ -1,6 +1,10 @@
 {
     "breadcrumbs.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true,
+        "source.addMissingImports": true
+    },
     "editor.codeLens": false,
     "editor.colorDecorators": true,
     "editor.foldingHighlight": true,
@@ -14,7 +18,7 @@
         "strings": "on",
         "other": "on"
     },
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "none",
     "editor.selectionHighlight": true,
     "editor.suggestOnTriggerCharacters": true,
     "editor.tabSize": 4,
@@ -22,7 +26,7 @@
     "html.format.preserveNewLines": true,
     "javascript.suggest.enabled": true,
     "javascript.validate.enable": true,
-    "prettier.printWidth": 90,
+    "prettier.printWidth": 105,
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
     "python.analysis.typeCheckingMode": "basic",
