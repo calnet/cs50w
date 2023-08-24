@@ -1,0 +1,7 @@
+.simplebar-content {
+    height: 100%;
+}
+
+.simplebar-scrollbar:before {
+    background: var(--nav-scrollbar-color);
+}

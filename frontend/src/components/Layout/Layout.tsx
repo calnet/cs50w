@@ -1,3 +1,5 @@
+import { createContext, useState } from 'react';
+
 import Main from '../Main/Main';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
@@ -5,7 +7,16 @@ import Statusbar from './Statusbar/Statusbar';
 
 import { NavSectionProps } from './Sidebar/NavSection/NavSection';
 
+// Create the context
+export const SidebarContext = createContext({
+    mobileOpen: false,
+    setMobileOpen: () => {},
+});
+
 export default function Layout() {
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const value = { mobileOpen, setMobileOpen };
+
     const navSections: NavSectionProps[] = [
         {
             title: 'Section 1',
@@ -73,10 +84,12 @@ export default function Layout() {
 
     return (
         <>
-            <Header />
-            <Sidebar navSections={navSections} />
-            <Main />
-            <Statusbar />
+            <SidebarContext.Provider value={value}>
+                <Header />
+                <Sidebar navSections={navSections} />
+                <Main />
+                <Statusbar />
+            </SidebarContext.Provider>
         </>
     );
 }

@@ -1,4 +1,6 @@
-import { NotificationsNone, Search } from '@mui/icons-material';
+import { useContext } from 'react';
+import { SidebarContext } from '../../Layout';
+
 import {
     Avatar,
     Badge,
@@ -9,7 +11,15 @@ import {
     SvgIcon,
 } from '@mui/material';
 
+import { Menu, NotificationsNone, Search } from '@mui/icons-material';
+
 function Navbar() {
+    const { mobileOpen, setMobileOpen } = useContext(SidebarContext);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
     return (
         <Stack
             alignItems={'center'}
@@ -22,6 +32,15 @@ function Navbar() {
             }}
         >
             <Stack alignItems={'center'} direction={'row'} spacing={2}>
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    sx={{ mr: 2, display: { lg: 'none' } }}
+                >
+                    <Menu />
+                </IconButton>
                 <IconButton aria-label="Search">
                     <Search />
                 </IconButton>

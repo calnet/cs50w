@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
-import NavItem from '../NavItem';
+import NavItem from '../NavItem/NavItem';
 
-import type { NavItemProps } from '../NavItem';
+import type { NavItemProps } from '../NavItem/NavItem';
 
 export type NavSectionProps = {
     key?: string;
