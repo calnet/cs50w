@@ -1,17 +1,19 @@
 import { Box, Button, ListItemIcon, SvgIcon } from '@mui/material';
 
+NavItem.defaultProps = { active: false };
+
 export type NavItemProps = {
     key?: string;
     title: string;
     href: string;
-    icon: string;
-    activeIcon: string;
-    active: boolean;
+    icon?: string;
+    activeIcon?: string;
+    active?: boolean;
 };
 
 function NavItem(props: NavItemProps) {
     return (
-        <li>
+        <li key={props.key}>
             <Button
                 href={props.href}
                 sx={{

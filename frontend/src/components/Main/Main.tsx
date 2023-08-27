@@ -1,13 +1,13 @@
 import { Box, Container, Stack } from '@mui/material';
 
-export default function Main() {
+function Main() {
     return (
         <Box
             sx={{
                 display: 'flex',
                 flex: '1 1 auto',
                 maxWidth: '100%',
-                pl: { lg: '280px' },
+                pl: { md: '280px' },
             }}
         >
             <Box
@@ -25,7 +25,7 @@ export default function Main() {
                         py: 8,
                     }}
                 >
-                    <Container maxWidth="xl">
+                    <Container maxWidth={false}>
                         <Stack sx={{ mb: 3 }}>
                             This is the main content area
                         </Stack>
@@ -35,3 +35,5 @@ export default function Main() {
         </Box>
     );
 }
+
+export default Main;

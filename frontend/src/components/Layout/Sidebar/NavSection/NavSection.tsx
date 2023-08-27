@@ -5,13 +5,14 @@ import type { NavItemProps } from '../NavItem/NavItem';
 
 export type NavSectionProps = {
     key?: string;
-    title: string;
+    title?: string;
     items: NavItemProps[];
 };
 
 function NavSection(props: NavSectionProps) {
     return (
         <Stack
+            key={props.key}
             component={'ul'}
             spacing={0.5}
             sx={{ m: 0, p: 0, listStyle: 'none' }}
@@ -21,7 +22,7 @@ function NavSection(props: NavSectionProps) {
             {props.items.map((item) => {
                 return (
                     <NavItem
-                        key={item.title}
+                        key={item.key}
                         title={item.title}
                         href={item.href}
                         icon={item.icon}

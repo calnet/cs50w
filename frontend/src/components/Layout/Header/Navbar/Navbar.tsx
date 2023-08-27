@@ -16,7 +16,7 @@ import { Menu, NotificationsNone, Search } from '@mui/icons-material';
 function Navbar() {
     const { mobileOpen, setMobileOpen } = useContext(SidebarContext);
 
-    const handleDrawerToggle = () => {
+    const handleSidebarToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
@@ -36,8 +36,8 @@ function Navbar() {
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
-                    onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { lg: 'none' } }}
+                    onClick={handleSidebarToggle}
+                    sx={{ mr: 2, display: { md: 'none' } }}
                 >
                     <Menu />
                 </IconButton>

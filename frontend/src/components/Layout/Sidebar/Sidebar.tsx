@@ -6,7 +6,6 @@ import 'simplebar-react/dist/simplebar.min.css';
 
 import './Sidebar.css';
 
-import type { NavSectionProps } from './NavSection/NavSection';
 import NavSection from './NavSection/NavSection';
 
 import {
@@ -21,18 +20,23 @@ import {
 
 import { KeyboardArrowDownOutlined } from '@mui/icons-material';
 
-type SidebarProps = {
-    navSections: NavSectionProps[];
-};
+// type SidebarProps = {
+//     navSections: NavSectionProps[];
+// };
 
-function Sidebar(props: SidebarProps) {
-    const { mobileOpen } = useContext(SidebarContext);
+function Sidebar() {
+    const theme = useTheme();
+    const { mobileOpen, setMobileOpen, navSections } =
+        useContext(SidebarContext);
+
+    const handleSidebarToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
 
     const drawerWidth = 280;
+    const drawerAnchor = 'left';
 
-    const theme = useTheme();
     const isMediumScreen = useMediaQuery(theme.breakpoints.up('md'));
-    const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
 
     const drawer = (
         <SimpleBar style={{ height: '100%' }}>
@@ -87,10 +91,10 @@ function Sidebar(props: SidebarProps) {
                     >
                         <Box flexGrow={1}>
                             <Typography variant="h6" color={'inherit'}>
-                                Devias
+                                Capstone
                             </Typography>
                             <Typography variant="body2" color={'neutral.400'}>
-                                Production
+                                Accountancy
                             </Typography>
                         </Box>
                         <IconButton arai-name="KeyboardArrowDown">
@@ -103,7 +107,7 @@ function Sidebar(props: SidebarProps) {
                     spacing={2}
                     sx={{ flexGrow: 1, px: 2 }}
                 >
-                    {props.navSections.map((section) => {
+                    {navSections.map((section) => {
                         return (
                             <NavSection
                                 key={section.title}
@@ -120,18 +124,22 @@ function Sidebar(props: SidebarProps) {
 
     return (
         <Drawer
-            anchor="left"
+            anchor={drawerAnchor}
             open={mobileOpen}
-            // variant={isMediumScreen ? 'permanent' : 'temporary'}
-            variant={isLargeScreen ? 'permanent' : 'temporary'}
+            onClose={handleSidebarToggle}
+            variant={isMediumScreen ? 'permanent' : 'temporary'}
+            ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+            }}
             sx={{
                 // display: isLargeScreen ? 'block' : 'none',
 
-                [`& .MuiDrawer-paper`]: {
+                ['& .MuiDrawer-paper']: {
                     backgroundColor: 'var(--nav-bg)',
                     borderRightColor: 'var(--nav-border-color)',
                     borderRightStyle: 'solid',
                     borderRightWidth: 1,
+                    boxSizing: 'border-box',
                     color: 'var(--nav-color)',
                     width: drawerWidth,
                     '--nav-bg': '#1C2536',

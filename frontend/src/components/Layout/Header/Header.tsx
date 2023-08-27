@@ -10,8 +10,8 @@ function Header() {
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 position: 'sticky',
                 top: 0,
-                left: { lg: 280 },
-                width: { lg: `calc(100% - 280px)` },
+                left: { md: 280 },
+                width: { md: `calc(100% - 280px)` },
                 zIndex: 1100,
             }}
         >
