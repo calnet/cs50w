@@ -36,8 +36,7 @@
     "python.testing.pytestEnabled": false,
     "terminal.integrated.tabs.showActiveTerminal": "always",
     "terminal.integrated.tabStopWidth": 4,
-    "workbench.colorTheme": "Tomorrow Night Blue",
-    "workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
+    "workbench.colorTheme": "Shades of Purple (Super Dark)",
     "workbench.statusBar.visible": true,
     "[django-html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
