@@ -3,7 +3,7 @@ import { Box, Button, ListItemIcon, SvgIcon } from '@mui/material';
 NavItem.defaultProps = { active: false };
 
 export type NavItemProps = {
-    key?: string;
+    key: string | number;
     title: string;
     href: string;
     icon?: string;
@@ -13,7 +13,7 @@ export type NavItemProps = {
 
 function NavItem(props: NavItemProps) {
     return (
-        <li key={props.key}>
+        <li>
             <Button
                 href={props.href}
                 sx={{

@@ -4,7 +4,7 @@ import NavItem from '../NavItem/NavItem';
 import type { NavItemProps } from '../NavItem/NavItem';
 
 export type NavSectionProps = {
-    key?: string;
+    key: string | number;
     title?: string;
     items: NavItemProps[];
 };
@@ -12,7 +12,6 @@ export type NavSectionProps = {
 function NavSection(props: NavSectionProps) {
     return (
         <Stack
-            key={props.key}
             component={'ul'}
             spacing={0.5}
             sx={{ m: 0, p: 0, listStyle: 'none' }}

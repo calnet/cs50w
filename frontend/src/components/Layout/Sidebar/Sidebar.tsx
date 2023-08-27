@@ -110,7 +110,7 @@ function Sidebar() {
                     {navSections.map((section) => {
                         return (
                             <NavSection
-                                key={section.title}
+                                key={section.key}
                                 title={section.title}
                                 items={section.items}
                             />
