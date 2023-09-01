@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SidebarContext } from '../Layout';
+import { SidebarContext } from '..';
 
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
@@ -8,15 +8,7 @@ import './Sidebar.css';
 
 import NavSection from './NavSection/NavSection';
 
-import {
-    Box,
-    Drawer,
-    IconButton,
-    Stack,
-    Typography,
-    useMediaQuery,
-    useTheme,
-} from '@mui/material';
+import { Box, Drawer, IconButton, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 import { KeyboardArrowDownOutlined } from '@mui/icons-material';
 
@@ -26,8 +18,7 @@ import { KeyboardArrowDownOutlined } from '@mui/icons-material';
 
 function Sidebar() {
     const theme = useTheme();
-    const { mobileOpen, setMobileOpen, navSections } =
-        useContext(SidebarContext);
+    const { mobileOpen, setMobileOpen, navSections } = useContext(SidebarContext);
 
     const handleSidebarToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -45,12 +36,7 @@ function Sidebar() {
                     height: '100%',
                 }}
             >
-                <Stack
-                    alignItems={'center'}
-                    direction={'row'}
-                    spacing={2}
-                    sx={{ p: 3 }}
-                >
+                <Stack alignItems={'center'} direction={'row'} spacing={2} sx={{ p: 3 }}>
                     <Box
                         component={'a'}
                         href="/"
@@ -65,13 +51,7 @@ function Sidebar() {
                             width: 40,
                         }}
                     >
-                        <svg
-                            fill="none"
-                            height="100%"
-                            viewBox="0 0 24 24"
-                            width="100%"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg fill="none" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 fill="#6366F1"
                                 opacity="0.16"
@@ -83,12 +63,7 @@ function Sidebar() {
                             ></path>
                         </svg>
                     </Box>
-                    <Stack
-                        alignItems={'center'}
-                        direction={'row'}
-                        spacing={2}
-                        sx={{ flexGrow: 1 }}
-                    >
+                    <Stack alignItems={'center'} direction={'row'} spacing={2} sx={{ flexGrow: 1 }}>
                         <Box flexGrow={1}>
                             <Typography variant="h6" color={'inherit'}>
                                 Capstone
@@ -102,19 +77,9 @@ function Sidebar() {
                         </IconButton>
                     </Stack>
                 </Stack>
-                <Stack
-                    component={'nav'}
-                    spacing={2}
-                    sx={{ flexGrow: 1, px: 2 }}
-                >
+                <Stack component={'nav'} spacing={2} sx={{ flexGrow: 1, px: 2 }}>
                     {navSections.map((section) => {
-                        return (
-                            <NavSection
-                                key={section.key}
-                                title={section.title}
-                                items={section.items}
-                            />
-                        );
+                        return <NavSection key={section.key} title={section.title} items={section.items} />;
                     })}
                 </Stack>
                 <Box sx={{ p: 3 }}>...</Box>

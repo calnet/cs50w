@@ -1,15 +1,7 @@
 import { useContext } from 'react';
-import { SidebarContext } from '../../Layout';
+import { SidebarContext } from '../..';
 
-import {
-    Avatar,
-    Badge,
-    Box,
-    Button,
-    IconButton,
-    Stack,
-    SvgIcon,
-} from '@mui/material';
+import { Avatar, Badge, Box, Button, IconButton, Stack, SvgIcon } from '@mui/material';
 
 import { Menu, NotificationsNone, Search } from '@mui/icons-material';
 
@@ -68,12 +60,7 @@ function Navbar() {
 
                 <IconButton arai-name="Contacts">
                     <SvgIcon>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
                             <path
                                 fill="#fff"
                                 fillOpacity={0.01}
@@ -91,10 +78,7 @@ function Navbar() {
                 </IconButton>
 
                 <Button>
-                    <Avatar
-                        src="/assets/avatars/avatar-anika-visser.png"
-                        sx={{ height: 32, width: 32 }}
-                    />
+                    <Avatar src="/assets/avatars/avatar-anika-visser.png" sx={{ height: 32, width: 32 }} />
                 </Button>
             </Stack>
         </Stack>

@@ -1,4 +1,5 @@
 import { Box, Container, Stack } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
 function Main() {
     return (
@@ -27,7 +28,7 @@ function Main() {
                 >
                     <Container maxWidth={false}>
                         <Stack sx={{ mb: 3 }}>
-                            This is the main content area
+                            <Outlet />
                         </Stack>
                     </Container>
                 </Box>
