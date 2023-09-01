@@ -26,9 +26,7 @@ function NavItem(props: NavItemProps) {
                     py: '6px',
                     textAlign: 'left',
                     width: '100%',
-                    backgroundColor: props.active
-                        ? 'var(--nav-item-active-bg)'
-                        : '',
+                    backgroundColor: props.active ? 'var(--nav-item-active-bg)' : '',
                     '&:hover': {
                         backgroundColor: 'var(--nav-item-hover-bg)',
                     },
@@ -37,9 +35,7 @@ function NavItem(props: NavItemProps) {
                 <ListItemIcon
                     sx={{
                         alignItems: 'center',
-                        color: props.active
-                            ? 'var(--nav-item-icon-active-color)'
-                            : 'var(--nav-item-icon-color)',
+                        color: props.active ? 'var(--nav-item-icon-active-color)' : 'var(--nav-item-icon-color)',
                         display: 'inline-flex',
                         justifyContent: 'center',
                         mr: 2,
@@ -65,9 +61,7 @@ function NavItem(props: NavItemProps) {
                 <Box
                     component={'span'}
                     sx={{
-                        color: props.active
-                            ? 'var(--nav-item-active-color)'
-                            : 'var(--nav-item-color)',
+                        color: props.active ? 'var(--nav-item-active-color)' : 'var(--nav-item-color)',
                         flexGrow: 1,
                         fontFamily: 'fontFamily',
                         fontSize: 14,

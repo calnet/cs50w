@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SidebarContext } from '..';
+import { SidebarContext } from '../../../contexts/SidebarContext';
 
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';

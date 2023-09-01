@@ -11,11 +11,7 @@ export type NavSectionProps = {
 
 function NavSection(props: NavSectionProps) {
     return (
-        <Stack
-            component={'ul'}
-            spacing={0.5}
-            sx={{ m: 0, p: 0, listStyle: 'none' }}
-        >
+        <Stack component={'ul'} spacing={0.5} sx={{ m: 0, p: 0, listStyle: 'none' }}>
             {props.title}
 
             {props.items.map((item) => {

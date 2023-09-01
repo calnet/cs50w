@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SidebarContext } from '../..';
+import { SidebarContext } from '../../../../contexts/SidebarContext';
 
 import { Avatar, Badge, Box, Button, IconButton, Stack, SvgIcon } from '@mui/material';
 
