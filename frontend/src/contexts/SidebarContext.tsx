@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { NavSectionProps } from '../layout/MainLayout/NavSection/NavSection';
+import { NavSectionProps } from '../layout/MainLayout/Sidebar/NavSection/NavSection';
 
 type SidebarContextType = {
     mobileOpen: boolean;
@@ -11,5 +11,5 @@ type SidebarContextType = {
 export const SidebarContext = createContext<SidebarContextType>({
     mobileOpen: false,
     setMobileOpen: () => {},
-    navSections: []
+    navSections: [],
 });

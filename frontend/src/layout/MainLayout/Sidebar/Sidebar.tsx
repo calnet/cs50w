@@ -1,16 +1,14 @@
+import { KeyboardArrowDownOutlined } from '@mui/icons-material';
+import { Box, Drawer, IconButton, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useContext } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { SidebarContext } from '../../../contexts/SidebarContext';
 
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-
 import './Sidebar.css';
 
 import NavSection from './NavSection/NavSection';
-
-import { Box, Drawer, IconButton, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
-
-import { KeyboardArrowDownOutlined } from '@mui/icons-material';
 
 // type SidebarProps = {
 //     navSections: NavSectionProps[];
@@ -38,8 +36,8 @@ function Sidebar() {
             >
                 <Stack alignItems={'center'} direction={'row'} spacing={2} sx={{ p: 3 }}>
                     <Box
-                        component={'a'}
-                        href="/"
+                        component={RouterLink}
+                        to={'/'}
                         sx={{
                             borderColor: 'var(--nav-logo-border)',
                             borderRadius: 1,

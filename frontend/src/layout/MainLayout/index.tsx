@@ -1,16 +1,13 @@
 import { useState } from 'react';
-
+// context imports
+import { SidebarContext } from '../../contexts/SidebarContext';
+// prop types imports
+import { NavSectionProps } from './Sidebar/NavSection/NavSection';
 // layout imports
 import Header from './Header/Header';
 import Main from './Main/Main';
 import Sidebar from './Sidebar/Sidebar';
 import Statusbar from './Statusbar/Statusbar';
-
-// context imports
-import { SidebarContext } from '../../contexts/SidebarContext';
-
-// prop types imports
-import { NavSectionProps } from './Sidebar/NavSection/NavSection';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -47,9 +44,9 @@ function MainLayout() {
                     active: false,
                 },
                 {
-                    key: '/bank/reconcilliation',
+                    key: '/bank/reconciliation',
                     title: 'Reconcilliation',
-                    href: '/bank/reconcilliation',
+                    href: '/bank/reconciliation',
                 },
             ],
         },

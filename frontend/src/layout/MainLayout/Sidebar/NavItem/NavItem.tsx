@@ -1,4 +1,5 @@
 import { Box, Button, ListItemIcon, SvgIcon } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 NavItem.defaultProps = { active: false };
 
@@ -15,7 +16,8 @@ function NavItem(props: NavItemProps) {
     return (
         <li>
             <Button
-                href={props.href}
+                component={RouterLink}
+                to={props.href}
                 sx={{
                     alignItems: 'center',
                     borderRadius: 1,
