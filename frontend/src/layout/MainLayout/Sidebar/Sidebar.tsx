@@ -95,8 +95,6 @@ function Sidebar() {
                 keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-                // display: isLargeScreen ? 'block' : 'none',
-
                 ['& .MuiDrawer-paper']: {
                     backgroundColor: 'var(--nav-bg)',
                     borderRightColor: 'var(--nav-border-color)',
