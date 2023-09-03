@@ -1,7 +1,5 @@
 import { Box, Button, ListItemIcon, SvgIcon } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-
-NavItem.defaultProps = { active: false };
+import { NavLink } from 'react-router-dom';
 
 export type NavItemProps = {
     key: string | number;
@@ -9,14 +7,15 @@ export type NavItemProps = {
     href: string;
     icon?: string;
     activeIcon?: string;
-    active?: boolean;
 };
+
+// ==============================|| NAV ITEM LAYOUT ||============================== //
 
 function NavItem(props: NavItemProps) {
     return (
         <li>
             <Button
-                component={RouterLink}
+                component={NavLink}
                 to={props.href}
                 sx={{
                     alignItems: 'center',
@@ -63,6 +62,7 @@ function NavItem(props: NavItemProps) {
                 <Box
                     component={'span'}
                     sx={{
+                        // color: props.active ? 'var(--nav-item-active-color)' : 'var(--nav-item-color)',
                         color: props.active ? 'var(--nav-item-active-color)' : 'var(--nav-item-color)',
                         flexGrow: 1,
                         fontFamily: 'fontFamily',
