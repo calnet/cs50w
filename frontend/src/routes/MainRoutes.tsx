@@ -6,7 +6,7 @@ import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
 
 // dashboard routing
-const Dashboard = Loadable(lazy(() => import('../views/dashboard/Default')));
+const Dashboard = Loadable(lazy(() => import('../views/dashboard')));
 
 // banking page routing
 const BankingAccountList = Loadable(lazy(() => import('../views/banking/BankingAccountList')));

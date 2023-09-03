@@ -24,7 +24,6 @@ function MainLayout() {
                     href: '/dashboard',
                     icon: '/assets/icons/ic_outline_store.svg',
                     activeIcon: '/assets/icons/ic_solid_store.svg',
-                    active: true,
                 },
             ],
         },
@@ -41,7 +40,6 @@ function MainLayout() {
                     key: '/bank/statements',
                     title: 'Statements',
                     href: '/bank/statements',
-                    active: false,
                 },
                 {
                     key: '/bank/reconciliation',

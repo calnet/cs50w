@@ -5,6 +5,8 @@ import { Avatar, Badge, Box, Button, IconButton, Stack, SvgIcon } from '@mui/mat
 
 import { Menu, NotificationsNone, Search } from '@mui/icons-material';
 
+// ==============================|| NAVBAR LAYOUT ||============================== //
+
 function Navbar() {
     const { mobileOpen, setMobileOpen } = useContext(SidebarContext);
 

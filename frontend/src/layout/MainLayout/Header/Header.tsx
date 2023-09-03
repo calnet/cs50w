@@ -1,6 +1,8 @@
 import { Box } from '@mui/material';
 import Navbar from './Navbar/Navbar';
 
+// ==============================|| HEADER LAYOUT ||============================== //
+
 function Header() {
     return (
         <Box
