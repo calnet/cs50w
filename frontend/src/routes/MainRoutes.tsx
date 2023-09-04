@@ -14,10 +14,12 @@ const BankingReconciliation = Loadable(lazy(() => import('../views/banking/Banki
 const BankingStatements = Loadable(lazy(() => import('../views/banking/BankingStatements')));
 
 // customer page routing
+const Customers = Loadable(lazy(() => import('../views/customers/Customers')));
 const CustomerInvoices = Loadable(lazy(() => import('../views/customers/CustomerInvoices')));
 const CustomerSalesOrders = Loadable(lazy(() => import('../views/customers/CustomerSalesOrders')));
 
 // supplier page routing
+const Suppliers = Loadable(lazy(() => import('../views/suppliers/Suppliers')));
 const SupplierInvoices = Loadable(lazy(() => import('../views/suppliers/SupplierInvoices')));
 const SupplierPurchaseOrders = Loadable(lazy(() => import('../views/suppliers/SupplierPurchaseOrders')));
 
@@ -43,6 +45,10 @@ const MainRoutes: RouteObject = {
             path: 'customers',
             children: [
                 {
+                    path: 'customer_list',
+                    element: <Customers />,
+                },
+                {
                     path: 'invoices',
                     element: <CustomerInvoices />,
                 },
@@ -56,6 +62,10 @@ const MainRoutes: RouteObject = {
             path: 'suppliers',
             children: [
                 {
+                    path: 'supplier_list',
+                    element: <Suppliers />,
+                },
+                {
                     path: 'invoices',
                     element: <SupplierInvoices />,
                 },
@@ -66,7 +76,7 @@ const MainRoutes: RouteObject = {
             ],
         },
         {
-            path: 'bank',
+            path: 'banking',
             children: [
                 {
                     path: 'account_list',

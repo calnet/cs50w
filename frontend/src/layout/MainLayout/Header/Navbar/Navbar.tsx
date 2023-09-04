@@ -8,10 +8,10 @@ import { Menu, NotificationsNone, Search } from '@mui/icons-material';
 // ==============================|| NAVBAR LAYOUT ||============================== //
 
 function Navbar() {
-    const { mobileOpen, setMobileOpen } = useContext(SidebarContext);
+    const { drawerOpen, setDrawerOpen } = useContext(SidebarContext);
 
     const handleSidebarToggle = () => {
-        setMobileOpen(!mobileOpen);
+        setDrawerOpen(!drawerOpen);
     };
 
     return (

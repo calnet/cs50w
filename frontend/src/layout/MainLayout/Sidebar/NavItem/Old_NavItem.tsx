@@ -1,7 +1,7 @@
 import { Box, Button, ListItemIcon, SvgIcon } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
-export type NavItemProps = {
+export type Old_NavItemProps = {
     key: string | number;
     title: string;
     href: string;
@@ -11,7 +11,7 @@ export type NavItemProps = {
 
 // ==============================|| NAV ITEM LAYOUT ||============================== //
 
-function NavItem(props: NavItemProps) {
+function Old_NavItem(props: Old_NavItemProps) {
     return (
         <li>
             <Button
@@ -62,7 +62,6 @@ function NavItem(props: NavItemProps) {
                 <Box
                     component={'span'}
                     sx={{
-                        // color: props.active ? 'var(--nav-item-active-color)' : 'var(--nav-item-color)',
                         color: props.active ? 'var(--nav-item-active-color)' : 'var(--nav-item-color)',
                         flexGrow: 1,
                         fontFamily: 'fontFamily',
@@ -79,4 +78,4 @@ function NavItem(props: NavItemProps) {
     );
 }
 
-export default NavItem;
+export default Old_NavItem;

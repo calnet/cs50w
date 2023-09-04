@@ -1,15 +1,14 @@
 import { createContext } from 'react';
-import { NavSectionProps } from '../layout/MainLayout/Sidebar/NavSection/NavSection';
 
 type SidebarContextType = {
-    mobileOpen: boolean;
-    setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    navSections: NavSectionProps[];
+    drawerOpen: boolean;
+    setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    // old_NavSections: Old_NavSectionProps[];
 };
 
 // Create the SidebarContext
 export const SidebarContext = createContext<SidebarContextType>({
-    mobileOpen: false,
-    setMobileOpen: () => {},
-    navSections: [],
+    drawerOpen: false,
+    setDrawerOpen: () => {},
+    // old_NavSections: [],
 });

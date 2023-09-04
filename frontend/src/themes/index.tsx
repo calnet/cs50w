@@ -1,6 +1,6 @@
-import { ThemeOptions, createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
-const themeOptions: ThemeOptions = {
+const themeOptions = {
     breakpoints: {
         keys: ['xs', 'sm', 'md', 'lg', 'xl'],
         values: {
@@ -491,13 +491,6 @@ const themeOptions: ThemeOptions = {
             light: '#EBEEFE',
             dark: '#4338CA',
             contrastText: '#FFFFFF',
-            lightest: '#F5F7FF',
-            darkest: '#312E81',
-            alpha4: 'rgba(99, 102, 241, 0.04)',
-            alpha8: 'rgba(99, 102, 241, 0.08)',
-            alpha12: 'rgba(99, 102, 241, 0.12)',
-            alpha30: 'rgba(99, 102, 241, 0.3)',
-            alpha50: 'rgba(99, 102, 241, 0.5)',
         },
         secondary: {
             main: '#9c27b0',
@@ -510,52 +503,24 @@ const themeOptions: ThemeOptions = {
             light: '#FEE4E2',
             dark: '#B42318',
             contrastText: '#FFFFFF',
-            lightest: '#FEF3F2',
-            darkest: '#7A271A',
-            alpha4: 'rgba(240, 68, 56, 0.04)',
-            alpha8: 'rgba(240, 68, 56, 0.08)',
-            alpha12: 'rgba(240, 68, 56, 0.12)',
-            alpha30: 'rgba(240, 68, 56, 0.3)',
-            alpha50: 'rgba(240, 68, 56, 0.5)',
         },
         warning: {
             main: '#F79009',
             light: '#FEF0C7',
             dark: '#B54708',
             contrastText: '#FFFFFF',
-            lightest: '#FFFAEB',
-            darkest: '#7A2E0E',
-            alpha4: 'rgba(247, 144, 9, 0.04)',
-            alpha8: 'rgba(247, 144, 9, 0.08)',
-            alpha12: 'rgba(247, 144, 9, 0.12)',
-            alpha30: 'rgba(247, 144, 9, 0.3)',
-            alpha50: 'rgba(247, 144, 9, 0.5)',
         },
         info: {
             main: '#06AED4',
             light: '#CFF9FE',
             dark: '#0E7090',
             contrastText: '#FFFFFF',
-            lightest: '#ECFDFF',
-            darkest: '#164C63',
-            alpha4: 'rgba(6, 174, 212, 0.04)',
-            alpha8: 'rgba(6, 174, 212, 0.08)',
-            alpha12: 'rgba(6, 174, 212, 0.12)',
-            alpha30: 'rgba(6, 174, 212, 0.3)',
-            alpha50: 'rgba(6, 174, 212, 0.5)',
         },
         success: {
             main: '#10B981',
             light: '#3FC79A',
             dark: '#0B815A',
             contrastText: '#FFFFFF',
-            lightest: '#F0FDF9',
-            darkest: '#134E48',
-            alpha4: 'rgba(16, 185, 129, 0.04)',
-            alpha8: 'rgba(16, 185, 129, 0.08)',
-            alpha12: 'rgba(16, 185, 129, 0.12)',
-            alpha30: 'rgba(16, 185, 129, 0.3)',
-            alpha50: 'rgba(16, 185, 129, 0.5)',
         },
         grey: {
             '50': '#fafafa',
@@ -597,18 +562,6 @@ const themeOptions: ThemeOptions = {
             focus: 'rgba(17, 25, 39, 0.16)',
             focusOpacity: 0.12,
             activatedOpacity: 0.12,
-        },
-        neutral: {
-            '50': '#F8F9FA',
-            '100': '#F3F4F6',
-            '200': '#E5E7EB',
-            '300': '#D2D6DB',
-            '400': '#9DA4AE',
-            '500': '#6C737F',
-            '600': '#4D5761',
-            '700': '#2F3746',
-            '800': '#1C2536',
-            '900': '#111927',
         },
     },
     shape: {
@@ -759,19 +712,13 @@ const themeOptions: ThemeOptions = {
                 fontSize: '1.0417rem',
             },
         },
+
         htmlFontSize: 16,
         fontSize: 14,
         fontWeightLight: 300,
         fontWeightRegular: 400,
         fontWeightMedium: 500,
         fontWeightBold: 700,
-        inherit: {
-            fontFamily: 'inherit',
-            fontWeight: 'inherit',
-            fontSize: 'inherit',
-            lineHeight: 'inherit',
-            letterSpacing: 'inherit',
-        },
     },
     // unstable_sxConfig: {
     //     border: {
@@ -998,4 +945,120 @@ const themeOptions: ThemeOptions = {
     },
 };
 
-export const theme = createTheme(themeOptions);
+export const theme = createTheme(
+    {},
+    {
+        themeOptions,
+        palette: {
+            primary: {
+                lightest: '#F5F7FF',
+                darkest: '#312E81',
+                alpha4: 'rgba(99, 102, 241, 0.04)',
+                alpha8: 'rgba(99, 102, 241, 0.08)',
+                alpha12: 'rgba(99, 102, 241, 0.12)',
+                alpha30: 'rgba(99, 102, 241, 0.3)',
+                alpha50: 'rgba(99, 102, 241, 0.5)',
+            },
+            error: {
+                lightest: '#FEF3F2',
+                darkest: '#7A271A',
+                alpha4: 'rgba(240, 68, 56, 0.04)',
+                alpha8: 'rgba(240, 68, 56, 0.08)',
+                alpha12: 'rgba(240, 68, 56, 0.12)',
+                alpha30: 'rgba(240, 68, 56, 0.3)',
+                alpha50: 'rgba(240, 68, 56, 0.5)',
+            },
+            warning: {
+                lightest: '#FFFAEB',
+                darkest: '#7A2E0E',
+                alpha4: 'rgba(247, 144, 9, 0.04)',
+                alpha8: 'rgba(247, 144, 9, 0.08)',
+                alpha12: 'rgba(247, 144, 9, 0.12)',
+                alpha30: 'rgba(247, 144, 9, 0.3)',
+                alpha50: 'rgba(247, 144, 9, 0.5)',
+            },
+            info: {
+                lightest: '#ECFDFF',
+                darkest: '#164C63',
+                alpha4: 'rgba(6, 174, 212, 0.04)',
+                alpha8: 'rgba(6, 174, 212, 0.08)',
+                alpha12: 'rgba(6, 174, 212, 0.12)',
+                alpha30: 'rgba(6, 174, 212, 0.3)',
+                alpha50: 'rgba(6, 174, 212, 0.5)',
+            },
+            success: {
+                lightest: '#F0FDF9',
+                darkest: '#134E48',
+                alpha4: 'rgba(16, 185, 129, 0.04)',
+                alpha8: 'rgba(16, 185, 129, 0.08)',
+                alpha12: 'rgba(16, 185, 129, 0.12)',
+                alpha30: 'rgba(16, 185, 129, 0.3)',
+                alpha50: 'rgba(16, 185, 129, 0.5)',
+            },
+            neutral: {
+                '50': '#F8F9FA',
+                '100': '#F3F4F6',
+                '200': '#E5E7EB',
+                '300': '#D2D6DB',
+                '400': '#9DA4AE',
+                '500': '#6C737F',
+                '600': '#4D5761',
+                '700': '#2F3746',
+                '800': '#1C2536',
+                '900': '#111927',
+            },
+        },
+        typography: {
+            mainContent: {
+                backgroundColor: themeOptions.palette.background.default,
+                width: '100%',
+                minHeight: 'calc(100vh - 88px)',
+                flexGrow: 1,
+                padding: '20px',
+                marginTop: '88px',
+                marginRight: '20px',
+                // borderRadius: `${theme?.customization?.borderRadius}px`,
+            },
+            menuCaption: {
+                fontSize: '0.875rem',
+                fontWeight: 500,
+                // color: theme.heading,
+                padding: '6px',
+                textTransform: 'capitalize',
+                marginTop: '10px',
+            },
+            subMenuCaption: {
+                fontSize: '0.6875rem',
+                fontWeight: 500,
+                color: themeOptions.palette.text.secondary,
+                textTransform: 'capitalize',
+            },
+            commonAvatar: {
+                cursor: 'pointer',
+                borderRadius: '8px',
+            },
+            smallAvatar: {
+                width: '22px',
+                height: '22px',
+                fontSize: '1rem',
+            },
+            mediumAvatar: {
+                width: '34px',
+                height: '34px',
+                fontSize: '1.2rem',
+            },
+            largeAvatar: {
+                width: '44px',
+                height: '44px',
+                fontSize: '1.5rem',
+            },
+            inherit: {
+                fontFamily: 'inherit',
+                fontWeight: 'inherit',
+                fontSize: 'inherit',
+                lineHeight: 'inherit',
+                letterSpacing: 'inherit',
+            },
+        },
+    }
+);

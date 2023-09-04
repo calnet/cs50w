@@ -1,27 +1,25 @@
 import { Stack } from '@mui/material';
-import NavItem from '../NavItem/NavItem';
+import Old_NavItem, { Old_NavItemProps } from '../NavItem/old_NavItem';
 
-import type { NavItemProps } from '../NavItem/NavItem';
-
-export type NavSectionProps = {
+export type Old_NavSectionProps = {
     key: string | number;
     title?: string;
-    items: NavItemProps[];
+    items: Old_NavItemProps[];
 };
 
 // ==============================|| NAV SECTION LAYOUT ||============================== //
 
-function NavSection(props: NavSectionProps) {
+function Old_NavSection(props: Old_NavSectionProps) {
     return (
         <Stack component={'ul'} spacing={0.5} sx={{ m: 0, p: 0, listStyle: 'none' }}>
             {props.title}
 
             {/* using props, map through nav items array */}
             {props.items.map((item) => {
-                return <NavItem key={item.key} title={item.title} href={item.href} icon={item.icon} activeIcon={item.activeIcon} />;
+                return <Old_NavItem key={item.key} title={item.title} href={item.href} icon={item.icon} activeIcon={item.activeIcon} />;
             })}
         </Stack>
     );
 }
 
-export default NavSection;
+export default Old_NavSection;

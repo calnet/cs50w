@@ -1,4 +1,4 @@
-import { Box, Drawer, Stack, useMediaQuery, useTheme } from '@mui/material';
+import { Drawer, Stack, useMediaQuery, useTheme } from '@mui/material';
 import { useContext } from 'react';
 import { SidebarContext } from '../../../contexts/SidebarContext';
 
@@ -7,16 +7,16 @@ import 'simplebar-react/dist/simplebar.min.css';
 import './Sidebar.css';
 
 import LogoSection from '../LogoSection';
-import NavSection from './NavSection/NavSection';
+import MenuList from './MenuList';
 
 // ==============================|| SIDEBAR LAYOUT ||============================== //
 
 function Sidebar() {
     const theme = useTheme();
-    const { mobileOpen, setMobileOpen, navSections } = useContext(SidebarContext);
+    const { drawerOpen, setDrawerOpen } = useContext(SidebarContext);
 
     const handleSidebarToggle = () => {
-        setMobileOpen(!mobileOpen);
+        setDrawerOpen(!drawerOpen);
     };
 
     const drawerWidth = 280;
@@ -32,13 +32,17 @@ function Sidebar() {
                 }}
             >
                 <LogoSection />
-                <Stack component={'nav'} spacing={2} sx={{ flexGrow: 1, px: 2 }}>
-                    {/* using context, map through navSections array */}
-                    {navSections.map((section) => {
-                        return <NavSection key={section.key} title={section.title} items={section.items} />;
+
+                <MenuList />
+
+                {/* <Stack component={'nav'} spacing={2} sx={{ flexGrow: 1, px: 2 }}>
+                    // using context, map through navSections array //
+                    {old_NavSections.map((section) => {
+                        return <Old_NavSection key={section.key} title={section.title} items={section.items} />;
                     })}
-                </Stack>
-                <Box sx={{ p: 3 }}>...</Box>
+                </Stack> */}
+
+                {/* <Box sx={{ p: 3 }}>...</Box> */}
             </Stack>
         </SimpleBar>
     );
@@ -46,7 +50,7 @@ function Sidebar() {
     return (
         <Drawer
             anchor={drawerAnchor}
-            open={mobileOpen}
+            open={drawerOpen}
             onClose={handleSidebarToggle}
             variant={isMediumScreen ? 'permanent' : 'temporary'}
             ModalProps={{
