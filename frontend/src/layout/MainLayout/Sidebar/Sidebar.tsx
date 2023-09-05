@@ -49,6 +49,7 @@ function Sidebar() {
 
     return (
         <Drawer
+            id={'sidebar'}
             anchor={drawerAnchor}
             open={drawerOpen}
             onClose={handleSidebarToggle}
