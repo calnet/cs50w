@@ -5,3 +5,8 @@
 .simplebar-scrollbar:before {
     background: var(--nav-scrollbar-color);
 }
+
+#sidebar active {
+    background: var(--nav-item-active-bg);
+    color: var(--nav-item-active-color);
+}
