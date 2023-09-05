@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 // third party
@@ -17,7 +17,8 @@ import config from './config';
 const container = document.getElementById('root');
 const root = createRoot(container!); // createRoot(container!) if you use TypeScript
 root.render(
-    <StrictMode>
+    <>
+        {/* <StrictMode> */}
         <BrowserRouter basename={config.basename}>
             <App />
         </BrowserRouter>
@@ -112,7 +113,8 @@ root.render(
                 }
             `}
         />
-    </StrictMode>
+        {/* </StrictMode> */}
+    </>
 );
 
 // If you want your app to work offline and load faster, you can change
