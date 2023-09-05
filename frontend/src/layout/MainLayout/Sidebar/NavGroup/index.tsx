@@ -1,15 +1,14 @@
 // material-ui
-
 import { Divider, List, Typography, useTheme } from '@mui/material';
 
-import { MenuItem } from '../../../../menu-items';
-import NavItem from '../NavItem';
-
+// prop types
 type NavGroupProps = {
     item: MenuItem;
 };
 
 // project imports
+import { MenuItem } from '../../../../menu-items';
+import NavItem from '../NavItem';
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
@@ -37,10 +36,10 @@ const NavGroup = ({ item }: NavGroupProps) => {
             <List
                 subheader={
                     item.title && (
-                        <Typography variant="caption" sx={{ ...theme.typography.caption }} display="block" gutterBottom>
+                        <Typography sx={{ ...theme.typography.menuGroup }} display="block" gutterBottom>
                             {item.title}
                             {item.caption && (
-                                <Typography variant="caption" sx={{ ...theme.typography.caption }} display="block" gutterBottom>
+                                <Typography variant="caption" sx={{ ...theme.typography.menuCaption }} display="block" gutterBottom>
                                     {item.caption}
                                 </Typography>
                             )}
