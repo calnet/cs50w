@@ -40,15 +40,6 @@ function Sidebar() {
                 <LogoSection />
 
                 <MenuList />
-
-                {/* <Stack component={'nav'} spacing={2} sx={{ flexGrow: 1, px: 2 }}>
-                    // using context, map through navSections array //
-                    {old_NavSections.map((section) => {
-                        return <Old_NavSection key={section.key} title={section.title} items={section.items} />;
-                    })}
-                </Stack> */}
-
-                {/* <Box sx={{ p: 3 }}>...</Box> */}
             </Stack>
         </SimpleBar>
     );
