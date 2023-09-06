@@ -1,7 +1,8 @@
 import { useState } from 'react';
+
 // context imports
 import { SidebarContext } from '../../contexts/SidebarContext';
-// prop types imports
+
 // layout imports
 import Header from './Header/Header';
 import Main from './Main/Main';
