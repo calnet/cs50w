@@ -55,7 +55,18 @@ const NavItem = ({ item, level }: NavItemProps) => {
             {...listItemProps}
             disabled={item.disabled}
             sx={{
-                // borderRadius: `${customization.borderRadius}px`,
+                ':hover': { backgroundColor: 'var(--nav-item-hover-bg)' },
+                '&.active': {
+                    color: 'var(--nav-item-active-color)',
+                    backgroundColor: 'var(--nav-item-active-bg)',
+                    '&.active .MuiTypography-root ': {
+                        typography: 'h6',
+                    },
+                    '&.active .MuiListItemIcon-root ': {
+                        color: 'var(--nav-item-icon-active-color)',
+                    },
+                },
+                borderRadius: `${theme.shape.borderRadius}px`,
                 mb: 0.5,
                 alignItems: 'flex-start',
                 backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
@@ -67,7 +78,6 @@ const NavItem = ({ item, level }: NavItemProps) => {
             <ListItemText
                 primary={
                     <Typography variant="body1" color="inherit">
-                        {/* change to h5 if isActive */}
                         {item.title}
                     </Typography>
                 }

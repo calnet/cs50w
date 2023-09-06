@@ -70,7 +70,7 @@ function Sidebar() {
                     borderRightStyle: 'solid',
                     borderRightWidth: 1,
                     boxSizing: 'border-box',
-                    color: 'var(--nav-color)',
+                    color: 'var(--nav-item-color)',
                     width: drawerWidth,
                     /* define colour variables */
                     '--nav-bg': '#1C2536',
