@@ -585,7 +585,7 @@ const args = [
                 secondary: '#6C737F',
                 disabled: 'rgba(17, 25, 39, 0.38)',
             },
-            divider: '#F2F4F7',
+            divider: theme.palette.grey[800],
             background: {
                 paper: '#fff',
                 default: '#fff',
@@ -610,7 +610,7 @@ const args = [
                 '--nav-color': '#fff',
                 '--nav-border-color': 'transparent',
                 '--nav-logo-border': '#2F3746',
-                '--nav-section-title-color': '#9DA4AE',
+                '--nav-group-title-color': '#9DA4AE',
                 '--nav-item-bg': 'transparent',
                 '--nav-item-color': '#9DA4AE',
                 '--nav-item-hover-bg': 'rgba(255, 255, 255, 0.04)',
@@ -802,11 +802,9 @@ const args = [
                 textTransform: 'capitalize',
             },
             menuGroup: {
-                mx: 'auto',
-                fontSize: '0.875rem',
-                fontWeight: '700',
+                fontWeight: '500',
+                color: 'var(--nav-color)',
                 padding: 1,
-                marginTop: 0,
             },
             commonAvatar: {
                 cursor: 'pointer',
