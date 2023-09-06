@@ -32,13 +32,8 @@ function Sidebar() {
 
     const drawer = (
         <SimpleBar style={{ height: '100%' }}>
-            <Stack
-                sx={{
-                    height: '100%',
-                }}
-            >
+            <Stack>
                 <LogoSection />
-
                 <MenuList />
             </Stack>
         </SimpleBar>
@@ -68,7 +63,7 @@ function Sidebar() {
                     '--nav-color': '#fff',
                     '--nav-border-color': 'transparent',
                     '--nav-logo-border': '#2F3746',
-                    '--nav-section-title-color': '#9DA4AE',
+                    '--nav-group-title-color': '#9DA4AE',
                     '--nav-item-bg': 'transparent',
                     '--nav-item-color': '#9DA4AE',
                     '--nav-item-hover-bg': 'rgba(255, 255, 255, 0.04)',

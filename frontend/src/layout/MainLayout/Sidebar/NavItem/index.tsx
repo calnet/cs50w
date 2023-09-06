@@ -31,7 +31,7 @@ const NavItem = ({ item, level }: NavItemProps) => {
         <Icon stroke={1.5} size="1.3rem" />
     ) : (
         <FiberManualRecord
-            sx={{ width: 6, height: 6 }} /* if isActive make width & height 8 // i.e. larger value */
+            sx={{ width: 8, height: 8 }} /* if isActive make width & height 8 // i.e. larger value */
             fontSize={level > 0 ? 'inherit' : 'medium'}
         />
     );
@@ -55,26 +55,26 @@ const NavItem = ({ item, level }: NavItemProps) => {
             {...listItemProps}
             disabled={item.disabled}
             sx={{
-                ':hover': { backgroundColor: 'var(--nav-item-hover-bg)' },
                 '&.active': {
                     color: 'var(--nav-item-active-color)',
                     backgroundColor: 'var(--nav-item-active-bg)',
-                    '&.active .MuiTypography-root ': {
-                        typography: 'h6',
-                    },
-                    '&.active .MuiListItemIcon-root ': {
-                        color: 'var(--nav-item-icon-active-color)',
-                    },
                 },
+                '&.active .MuiTypography-root ': {
+                    fontWeight: 600,
+                },
+                '&.active .MuiListItemIcon-root ': {
+                    color: 'var(--nav-item-icon-active-color)',
+                },
+                ':hover': { backgroundColor: 'var(--nav-item-hover-bg)' },
                 borderRadius: `${theme.shape.borderRadius}px`,
                 mb: 0.5,
                 alignItems: 'flex-start',
                 backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
-                py: level > 1 ? 1 : 1.25,
+                py: level > 1 ? 1 : 0.5,
                 pl: `${level * 24}px`,
             }}
         >
-            <ListItemIcon sx={{ my: 'auto', minWidth: !item.icon ? 18 : 36 }}>{itemIcon}</ListItemIcon>
+            <ListItemIcon sx={{ my: 'auto', minWidth: !item.icon ? 16 : 36 }}>{itemIcon}</ListItemIcon>
             <ListItemText
                 primary={
                     <Typography variant="body1" color="inherit">
