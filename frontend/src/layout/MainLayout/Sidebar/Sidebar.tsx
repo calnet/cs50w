@@ -1,11 +1,17 @@
-import { Drawer, Stack, useMediaQuery, useTheme } from '@mui/material';
 import { useContext } from 'react';
+
+// material-ui
+import { Drawer, Stack, useMediaQuery, useTheme } from '@mui/material';
+
+// context import
 import { SidebarContext } from '../../../contexts/SidebarContext';
 
-import SimpleBar from 'simplebar-react';
+// style imports
 import 'simplebar-react/dist/simplebar.min.css';
 import './Sidebar.css';
 
+// project imports
+import SimpleBar from 'simplebar-react';
 import LogoSection from '../LogoSection';
 import MenuList from './MenuList';
 

@@ -1,6 +1,6 @@
 // assets
 import { ChecklistRtl, FormatListBulleted, Wallet } from '@mui/icons-material';
-import { MenuItem } from '.';
+import { MenuItemType } from '.';
 
 // constant
 const icons = { ChecklistRtl, FormatListBulleted, Wallet };

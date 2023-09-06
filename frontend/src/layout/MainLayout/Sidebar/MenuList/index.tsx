@@ -1,11 +1,11 @@
 // material-ui
+import { Typography } from '@mui/material';
 
 // project imports
-import { Typography } from '@mui/material';
 import menuItems from '../../../../menu-items';
 import NavGroup from '../NavGroup';
 
-// ==============================|| SIDEBAR MENU LIST ||============================== //
+// ==============================|| SIDEBAR MENU LIST LAYOUT ||============================== //
 
 const MenuList = () => {
     const navItems = menuItems.items.map((item) => {

@@ -1,6 +1,6 @@
 // assets
 import { Dashboard } from '@mui/icons-material';
-import { MenuItem } from '.';
+import { MenuItemType } from '.';
 
 // constant
 const icons = { Dashboard };

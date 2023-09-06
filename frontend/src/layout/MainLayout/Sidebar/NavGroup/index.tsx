@@ -1,16 +1,18 @@
+import PropTypes from 'prop-types';
+
 // material-ui
 import { Divider, List, Typography, useTheme } from '@mui/material';
 
-// prop types
-type NavGroupProps = {
-    item: MenuItem;
-};
-
 // project imports
-import { MenuItem } from '../../../../menu-items';
+import { MenuItemType } from '../../../../menu-items';
 import NavItem from '../NavItem';
 
-// ==============================|| SIDEBAR MENU LIST ||============================== //
+// prop types
+type NavGroupProps = {
+    item: MenuItemType;
+};
+
+// ==============================|| NAV GROUP LAYOUT ||============================== //
 
 const NavGroup = ({ item }: NavGroupProps) => {
     const theme = useTheme();
@@ -54,6 +56,10 @@ const NavGroup = ({ item }: NavGroupProps) => {
             <Divider sx={{ mt: 0.25, mb: 1.25 }} />
         </>
     );
+};
+
+NavGroup.propTypes = {
+    item: PropTypes.object,
 };
 
 export default NavGroup;

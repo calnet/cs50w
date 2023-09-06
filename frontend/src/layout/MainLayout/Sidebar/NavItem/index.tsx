@@ -1,16 +1,27 @@
-import PropTypes from 'prop-types';
-
-import { FiberManualRecord } from '@mui/icons-material';
-import { ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import { forwardRef } from 'react';
-import { Link } from 'react-router-dom';
-import { MenuItem } from '../../../../menu-items';
 
+// routing imports
+import { NavLink } from 'react-router-dom';
+
+// material-ui
+import { FiberManualRecord } from '@mui/icons-material';
+import { ListItemButton, ListItemIcon, ListItemText, SvgIconTypeMap, Typography } from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { useTheme } from '@mui/material/styles';
+
+// type imports
+import PropTypes from 'prop-types';
+import { MenuItemType } from '../../../../menu-items';
+
+// project imports
+
+// prop types
 type NavItemProps = {
-    item: MenuItem;
+    item: MenuItemType;
     level: number;
 };
+
+// ==============================|| NAV ITEM LAYOUT ||============================== //
 
 const NavItem = ({ item, level }: NavItemProps) => {
     const theme = useTheme();

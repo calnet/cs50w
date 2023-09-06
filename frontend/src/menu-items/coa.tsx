@@ -1,6 +1,6 @@
 // assets
 import { TableChart } from '@mui/icons-material';
-import { MenuItem } from '.';
+import { MenuItemType } from '.';
 
 // constant
 const icons = { TableChart };

@@ -1,16 +1,19 @@
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
-import banking from './banking';
-import coa from './coa';
-import customers from './customers';
-import dashboard from './dashboard';
-import suppliers from './suppliers';
 
-export type MenuItems = {
-    items: MenuItem[];
-};
+import { Path } from 'react-router-dom';
 
-export type MenuItem = {
+import bankingMenu from './banking';
+import coaMenu from './coa';
+import customersMenu from './customers';
+import dashboardMenu from './dashboard';
+import suppliersMenu from './suppliers';
+
+export interface MenuItems {
+    items: MenuItemType[];
+}
+
+export type MenuItemType = {
     id: string;
     title?: string;
     caption?: string;

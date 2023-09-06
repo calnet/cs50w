@@ -1,6 +1,6 @@
 // assets
 import { People, Receipt, Wallet } from '@mui/icons-material';
-import { MenuItem } from '.';
+import { MenuItemType } from '.';
 
 // constant
 const icons = { People, Receipt, Wallet };
