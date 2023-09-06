@@ -765,13 +765,13 @@ const args = [
             },
             /* define custom nav colour variables */
             nav: {
-                navBg: '#1C2536',
+                '--nav-bg': '#1C2536',
                 '--nav-color': '#fff',
                 '--nav-border-color': 'transparent',
                 '--nav-logo-border': '#2F3746',
                 '--nav-section-title-color': '#9DA4AE',
                 '--nav-item-bg': 'transparent',
-                ['--nav-item-color']: '#9DA4AE',
+                '--nav-item-color': '#9DA4AE',
                 '--nav-item-hover-bg': 'rgba(255, 255, 255, 0.04)',
                 '--nav-item-active-bg': 'rgba(255, 255, 255, 0.04)',
                 '--nav-item-active-color': '#fff',
