@@ -7,7 +7,7 @@ const icons = { Dashboard };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
-const dashboard: MenuItem = {
+const dashboardMenu: MenuItemType = {
     id: 'dashboard',
     type: 'group',
     children: [
@@ -22,4 +22,4 @@ const dashboard: MenuItem = {
     ],
 };
 
-export default dashboard;
+export default dashboardMenu;

@@ -7,7 +7,7 @@ const icons = { People, Receipt, Wallet };
 
 // ==============================|| CUSTOMERS MENU ITEMS ||============================== //
 
-const customers: MenuItem = {
+const customersMenu: MenuItemType = {
     id: 'customers',
     title: 'Customers',
     type: 'group',
@@ -39,4 +39,4 @@ const customers: MenuItem = {
     ],
 };
 
-export default customers;
+export default customersMenu;

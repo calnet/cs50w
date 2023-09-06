@@ -7,7 +7,7 @@ const icons = { ChecklistRtl, FormatListBulleted, Wallet };
 
 // ==============================|| BANKING MENU ITEMS ||============================== //
 
-const banking: MenuItem = {
+const bankingMenu: MenuItemType = {
     id: 'banking',
     title: 'Banking',
     type: 'group',
@@ -39,4 +39,4 @@ const banking: MenuItem = {
     ],
 };
 
-export default banking;
+export default bankingMenu;

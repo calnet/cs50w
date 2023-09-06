@@ -7,7 +7,7 @@ const icons = { ChecklistRtl, People, Receipt, Wallet };
 
 // ==============================|| SUPPLIERS MENU ITEMS ||============================== //
 
-const suppliers: MenuItem = {
+const suppliersMenu: MenuItemType = {
     id: 'suppliers',
     title: 'Suppliers',
     type: 'group',
@@ -39,4 +39,4 @@ const suppliers: MenuItem = {
     ],
 };
 
-export default suppliers;
+export default suppliersMenu;

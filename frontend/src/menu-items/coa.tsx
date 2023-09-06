@@ -7,7 +7,7 @@ const icons = { TableChart };
 
 // ==============================|| CHART OF ACCOUNT MENU ITEMS ||============================== //
 
-const coa: MenuItem = {
+const coaMenu: MenuItemType = {
     id: 'coa',
     title: 'Chart of Accounts',
     type: 'group',
@@ -23,4 +23,4 @@ const coa: MenuItem = {
     ],
 };
 
-export default coa;
+export default coaMenu;

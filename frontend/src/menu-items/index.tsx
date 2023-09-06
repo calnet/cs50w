@@ -30,7 +30,7 @@ export type MenuItemType = {
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems: MenuItems = {
-    items: [dashboard, banking, coa, customers, suppliers],
+    items: [dashboardMenu, bankingMenu, coaMenu, customersMenu, suppliersMenu],
 };
 
 export default menuItems;
