@@ -633,60 +633,52 @@ const args = [
                 fontSize: '1rem',
                 fontWeight: 400,
                 lineHeight: 1.5,
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+                fontFamily: 'inherit',
             },
             body2: {
                 fontSize: '0.875rem',
                 fontWeight: 400,
                 lineHeight: 1.57,
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+                fontFamily: 'inherit',
             },
             button: {
-                fontWeight: 600,
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
                 fontSize: '0.875rem',
+                fontWeight: 600,
                 lineHeight: 1.75,
+                fontFamily: 'inherit',
                 textTransform: 'uppercase',
             },
             caption: {
                 fontSize: '0.75rem',
                 fontWeight: 400,
                 lineHeight: 1.66,
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+                fontFamily: 'inherit',
             },
             subtitle1: {
                 fontSize: '1rem',
                 fontWeight: 500,
                 lineHeight: 1.57,
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+                fontFamily: 'inherit',
             },
             subtitle2: {
                 fontSize: '0.875rem',
                 fontWeight: 500,
                 lineHeight: 1.57,
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+                fontFamily: 'inherit',
             },
             overline: {
                 fontSize: '0.75rem',
                 fontWeight: 600,
-                letterSpacing: '0.5px',
                 lineHeight: 2.5,
+                fontFamily: 'inherit',
+                letterSpacing: '0.5px',
                 textTransform: 'uppercase',
-                fontFamily:
-                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
             },
             h1: {
-                // fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontFamily: 'inherit',
                 fontWeight: 700,
                 fontSize: '2.25rem',
                 lineHeight: 1.2,
+                fontFamily: 'inherit',
                 '@media (min-width:600px)': {
                     fontSize: '2.9167rem',
                 },
@@ -698,11 +690,10 @@ const args = [
                 },
             },
             h2: {
-                // fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontFamily: 'inherit',
-                fontWeight: 700,
                 fontSize: '2rem',
+                fontWeight: 700,
                 lineHeight: 1.2,
+                fontFamily: 'inherit',
                 '@media (min-width:600px)': {
                     fontSize: '2.5rem',
                 },
@@ -714,11 +705,10 @@ const args = [
                 },
             },
             h3: {
-                // fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontFamily: 'inherit',
-                fontWeight: 700,
                 fontSize: '1.625rem',
+                fontWeight: 700,
                 lineHeight: 1.2,
+                fontFamily: 'inherit',
                 '@media (min-width:600px)': {
                     fontSize: '1.875rem',
                 },
@@ -730,11 +720,10 @@ const args = [
                 },
             },
             h4: {
-                // fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontFamily: 'inherit',
-                fontWeight: 700,
                 fontSize: '1.5rem',
+                fontWeight: 700,
                 lineHeight: 1.2,
+                fontFamily: 'inherit',
                 '@media (min-width:600px)': {
                     fontSize: '1.6667rem',
                 },
@@ -746,11 +735,10 @@ const args = [
                 },
             },
             h5: {
-                // fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontFamily: 'inherit',
-                fontWeight: 700,
                 fontSize: '1.25rem',
+                fontWeight: 700,
                 lineHeight: 1.2,
+                fontFamily: 'inherit',
                 '@media (min-width:600px)': {
                     fontSize: '1.4583rem',
                 },
@@ -762,11 +750,10 @@ const args = [
                 },
             },
             h6: {
-                // fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontFamily: 'inherit',
-                fontWeight: 700,
                 fontSize: '1.0625rem',
+                fontWeight: 700,
                 lineHeight: 1.2,
+                fontFamily: 'inherit',
                 '@media (min-width:600px)': {
                     fontSize: '1.0417rem',
                 },
@@ -785,7 +772,7 @@ const args = [
                 padding: '20px',
                 marginTop: '88px',
                 marginRight: '20px',
-                borderRadius: `${theme?.shape?.borderRadius}px`,
+                borderRadius: `${theme.shape.borderRadius}px`,
             },
             menuCaption: {
                 fontSize: '0.875rem',
@@ -811,25 +798,25 @@ const args = [
                 borderRadius: '8px',
             },
             smallAvatar: {
-                width: '22px',
-                height: '22px',
+                width: '24px',
+                height: '24px',
                 fontSize: '1rem',
             },
             mediumAvatar: {
-                width: '34px',
-                height: '34px',
+                width: '32px',
+                height: '32px',
                 fontSize: '1.2rem',
             },
             largeAvatar: {
-                width: '44px',
-                height: '44px',
+                width: '40px',
+                height: '40px',
                 fontSize: '1.5rem',
             },
             inherit: {
-                fontFamily: 'inherit',
                 fontWeight: 'inherit',
                 fontSize: 'inherit',
                 lineHeight: 'inherit',
+                fontFamily: 'inherit',
                 letterSpacing: 'inherit',
             },
 
