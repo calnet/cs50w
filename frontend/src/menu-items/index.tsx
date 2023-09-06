@@ -18,9 +18,9 @@ export type MenuItemType = {
     title?: string;
     caption?: string;
     type: 'group' | 'item' | 'collapse';
-    children?: MenuItem[];
-    url?: string;
-    icon?: OverridableComponent<SvgIconTypeMap>;
+    children?: MenuItemType[];
+    url?: string | Partial<Path>;
+    icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
     breadcrumbs?: boolean;
     external?: boolean;
     target?: string;

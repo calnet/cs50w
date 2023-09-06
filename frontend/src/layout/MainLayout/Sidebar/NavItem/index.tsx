@@ -26,8 +26,8 @@ type NavItemProps = {
 const NavItem = ({ item, level }: NavItemProps) => {
     const theme = useTheme();
 
-    const Icon = item.icon;
-    const itemIcon = item.icon ? (
+    const Icon: OverridableComponent<SvgIconTypeMap> | JSX.Element | undefined = item.icon;
+    const itemIcon = item?.icon ? (
         <Icon stroke={1.5} size="1.3rem" />
     ) : (
         <FiberManualRecord
@@ -41,8 +41,11 @@ const NavItem = ({ item, level }: NavItemProps) => {
     }
 
     let listItemProps = {
-        component: forwardRef((props, ref) => <Link ref={ref} {...props} to={item.url} target={itemTarget} />),
+        component: forwardRef((props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
+            <NavLink ref={ref} {...props} to={item.url} target={itemTarget} />
+        )),
     };
+
     if (item?.external) {
         listItemProps = { component: 'a', href: item.url, target: itemTarget };
     }
