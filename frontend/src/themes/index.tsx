@@ -431,8 +431,8 @@ const args = [
                             lineHeight: 1,
                             letterSpacing: 0.5,
                             textTransform: 'uppercase',
-                            backgroundColor: '#F8F9FA',
-                            color: '#2F3746',
+                            backgroundColor: 'inherit',
+                            color: 'inherit',
                         },
                         '& .MuiTableCell-paddingCheckbox': {
                             paddingTop: 4,
