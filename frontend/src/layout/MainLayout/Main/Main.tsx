@@ -13,16 +13,16 @@ function Main() {
         >
             <Box
                 sx={{
-                    display: 'flex',
-                    flex: '1 1 auto',
-                    maxWidth: '100%',
+                    display: 'inherit',
+                    flex: 'inherit',
+                    maxWidth: 'inherit',
                     flexDirection: 'column',
                 }}
             >
                 <Box
                     component={'main'}
                     sx={{
-                        flexGrow: 1,
+                        flexGrow: 'inherit',
                         py: 8,
                     }}
                 >
