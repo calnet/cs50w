@@ -8,6 +8,7 @@ import coaMenu from './coa';
 import customersMenu from './customers';
 import dashboardMenu from './dashboard';
 import suppliersMenu from './suppliers';
+import utilitiesMenu from './utilities';
 
 export interface MenuItems {
     items: MenuItemType[];
@@ -30,7 +31,7 @@ export type MenuItemType = {
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems: MenuItems = {
-    items: [dashboardMenu, bankingMenu, coaMenu, customersMenu, suppliersMenu],
+    items: [dashboardMenu, utilitiesMenu, bankingMenu, coaMenu, customersMenu, suppliersMenu],
 };
 
 export default menuItems;

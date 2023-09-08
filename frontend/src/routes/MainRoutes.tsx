@@ -8,6 +8,12 @@ import Loadable from '../ui-component/Loadable';
 // dashboard routing
 const Dashboard = Loadable(lazy(() => import('../views/dashboard')));
 
+//utilities routing
+const Utilities = Loadable(lazy(() => import('../views/utilities')));
+const BasicTable = Loadable(lazy(() => import('../views/utilities/BasicTable')));
+const DataTable = Loadable(lazy(() => import('../views/utilities/DataTable')));
+const DenseTable = Loadable(lazy(() => import('../views/utilities/DenseTable')));
+
 // banking page routing
 const BankingAccountList = Loadable(lazy(() => import('../views/banking/BankingAccountList')));
 const BankingReconciliation = Loadable(lazy(() => import('../views/banking/BankingReconciliation')));
@@ -38,6 +44,27 @@ const MainRoutes: RouteObject = {
                 {
                     path: '',
                     element: <Dashboard />,
+                },
+            ],
+        },
+        {
+            path: 'utilities',
+            children: [
+                {
+                    path: '',
+                    element: <Utilities />,
+                },
+                {
+                    path: '/utilities/basic-table',
+                    element: <BasicTable />,
+                },
+                {
+                    path: '/utilities/data-table',
+                    element: <DataTable />,
+                },
+                {
+                    path: '/utilities/dense-table',
+                    element: <DenseTable />,
                 },
             ],
         },
