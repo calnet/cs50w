@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import { theme } from '../../themes';
 
 const LoremText = () => (
     <Typography>
@@ -12,7 +13,9 @@ const LoremText = () => (
 function Dashboard() {
     return (
         <>
-            <Box sx={{ p: 1, typography: 'h3', color: 'green' }}>This is the dashboard page</Box>
+            <Box typography={'h1'} py={2} textAlign={'center'} color={theme.palette.primary.dark}>
+                This is the dashboard page
+            </Box>
             <LoremText />
         </>
     );
