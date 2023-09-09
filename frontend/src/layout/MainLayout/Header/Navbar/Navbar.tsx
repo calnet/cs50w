@@ -15,16 +15,7 @@ function Navbar() {
     };
 
     return (
-        <Stack
-            alignItems={'center'}
-            direction={'row'}
-            justifyContent={'space-between'}
-            spacing={2}
-            sx={{
-                minHeight: 64,
-                px: 2,
-            }}
-        >
+        <Stack alignItems={'center'} direction={'row'} justifyContent={'space-between'} minHeight={64} px={2} spacing={2}>
             <Stack alignItems={'center'} direction={'row'} spacing={2}>
                 <IconButton
                     color="inherit"
