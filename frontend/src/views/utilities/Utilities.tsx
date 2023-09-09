@@ -18,17 +18,23 @@ function Utilities() {
                     <Typography variant="h3" py={4} color={theme.palette.secondary.dark} textTransform={'uppercase'}>
                         Basic Table
                     </Typography>
-                    <BasicTable />
+                    <Box sx={{ border: 1 }}>
+                        <BasicTable />
+                    </Box>
 
                     <Typography variant="h3" py={4} color={theme.palette.secondary.dark} textTransform={'uppercase'}>
                         Data Table
                     </Typography>
-                    <DataTable />
+                    <Box sx={{ border: 1 }}>
+                        <DataTable />
+                    </Box>
 
                     <Typography variant="h3" py={4} color={theme.palette.secondary.dark} textTransform={'uppercase'}>
                         Dense Table
                     </Typography>
-                    <DenseTable />
+                    <Box sx={{ border: 1 }}>
+                        <DenseTable />
+                    </Box>
                 </Box>
             </Stack>
         </>

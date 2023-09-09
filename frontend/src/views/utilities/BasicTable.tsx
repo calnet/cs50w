@@ -23,7 +23,7 @@ function BasicTable() {
     ];
     return (
         <>
-            <TableContainer component={Paper} sx={{ border: 1 }}>
+            <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead sx={{ bgcolor: theme.palette.grey[400] }}>
                         <TableRow>
