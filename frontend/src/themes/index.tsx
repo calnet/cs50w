@@ -16,32 +16,32 @@ const args = [
                     },
                 },
             },
-            MuiButton: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: '12px',
-                        textTransform: 'none',
-                    },
-                    sizeSmall: {
-                        padding: '6px 16px',
-                    },
-                    sizeMedium: {
-                        padding: '8px 20px',
-                    },
-                    sizeLarge: {
-                        padding: '11px 24px',
-                    },
-                    textSizeSmall: {
-                        padding: '7px 12px',
-                    },
-                    textSizeMedium: {
-                        padding: '9px 16px',
-                    },
-                    textSizeLarge: {
-                        padding: '12px 16px',
-                    },
-                },
-            },
+            // MuiButton: {
+            //     styleOverrides: {
+            //         root: {
+            //             borderRadius: '12px',
+            //             textTransform: 'none',
+            //         },
+            //         sizeSmall: {
+            //             padding: '6px 16px',
+            //         },
+            //         sizeMedium: {
+            //             padding: '8px 20px',
+            //         },
+            //         sizeLarge: {
+            //             padding: '11px 24px',
+            //         },
+            //         textSizeSmall: {
+            //             padding: '7px 12px',
+            //         },
+            //         textSizeMedium: {
+            //             padding: '9px 16px',
+            //         },
+            //         textSizeLarge: {
+            //             padding: '12px 16px',
+            //         },
+            //     },
+            // },
             MuiCard: {
                 styleOverrides: {
                     root: {
@@ -141,13 +141,13 @@ const args = [
                     },
                 },
             },
-            MuiIconButton: {
-                styleOverrides: {
-                    sizeSmall: {
-                        padding: 4,
-                    },
-                },
-            },
+            // MuiIconButton: {
+            //     styleOverrides: {
+            //         sizeSmall: {
+            //             padding: 4,
+            //         },
+            //     },
+            // },
             MuiInputBase: {
                 styleOverrides: {
                     input: {
@@ -330,18 +330,31 @@ const args = [
                     },
                 },
             },
+            // MuiTableCell: {
+            //     styleOverrides: {
+            //         root: {
+            //             '& .MuiTableCell-sizeSmall': {
+            //                 // lineHeight: 1.5,
+            //                 paddingX: 2,
+            //                 paddingY: 5,
+            //                 // borderBottom: '1px solid rgba(224, 224, 224, 1)',
+            //             },
+            //         },
+            //     },
+            // },
             MuiTableCell: {
                 styleOverrides: {
-                    root: {
-                        padding: '15px 16px',
-                        borderBottomColor: '#F2F4F7',
-                    },
+                    root: {},
+                    sizeSmall: {},
+                    sizeMedium: {},
                 },
             },
+
             MuiTableHead: {
                 styleOverrides: {
                     root: {
                         borderBottom: 'none',
+
                         '& .MuiTableCell-root': {
                             borderBottom: 'none',
                             fontSize: 12,
@@ -352,6 +365,7 @@ const args = [
                             backgroundColor: 'inherit',
                             color: 'inherit',
                         },
+
                         '& .MuiTableCell-paddingCheckbox': {
                             paddingTop: 4,
                             paddingBottom: 4,
