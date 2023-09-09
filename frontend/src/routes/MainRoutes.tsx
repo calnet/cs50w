@@ -13,6 +13,8 @@ const Utilities = Loadable(lazy(() => import('../views/utilities')));
 const BasicTable = Loadable(lazy(() => import('../views/utilities/BasicTable')));
 const DataTable = Loadable(lazy(() => import('../views/utilities/DataTable')));
 const DenseTable = Loadable(lazy(() => import('../views/utilities/DenseTable')));
+const EnhancedTable = Loadable(lazy(() => import('../views/utilities/EnhancedTable')));
+const StickyHeadTable = Loadable(lazy(() => import('../views/utilities/StickyHeadTable')));
 
 // banking page routing
 const BankingAccountList = Loadable(lazy(() => import('../views/banking/BankingAccountList')));
@@ -65,6 +67,14 @@ const MainRoutes: RouteObject = {
                 {
                     path: '/utilities/dense-table',
                     element: <DenseTable />,
+                },
+                {
+                    path: '/utilities/enhanced-table',
+                    element: <EnhancedTable />,
+                },
+                {
+                    path: '/utilities/sticky-head-table',
+                    element: <StickyHeadTable />,
                 },
             ],
         },

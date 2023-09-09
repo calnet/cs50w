@@ -3,6 +3,8 @@ import { theme } from '../../themes';
 import BasicTable from './BasicTable';
 import DataTable from './DataTable';
 import DenseTable from './DenseTable';
+import EnhancedTable from './EnhancedTable';
+import StickyHeadTable from './StickyHeadTable';
 
 function Utilities() {
     return (
@@ -34,6 +36,20 @@ function Utilities() {
                     </Typography>
                     <Box sx={{ border: 1 }}>
                         <DenseTable />
+                    </Box>
+
+                    <Typography variant="h3" py={4} color={theme.palette.secondary.dark} textTransform={'uppercase'}>
+                        Enhanced Table
+                    </Typography>
+                    <Box sx={{ border: 1 }}>
+                        <EnhancedTable />
+                    </Box>
+
+                    <Typography variant="h3" py={4} color={theme.palette.secondary.dark} textTransform={'uppercase'}>
+                        Sticky Head Table Table
+                    </Typography>
+                    <Box sx={{ border: 1 }}>
+                        <StickyHeadTable />
                     </Box>
                 </Box>
             </Stack>
