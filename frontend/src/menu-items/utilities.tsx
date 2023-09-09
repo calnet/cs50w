@@ -44,6 +44,22 @@ const utilitiesMenu: MenuItemType = {
             icon: icons.Dashboard,
             breadcrumbs: true,
         },
+        {
+            id: 'enhancedTable',
+            title: 'Enhanced Table',
+            type: 'item',
+            url: '/utilities/enhanced-table',
+            icon: icons.Dashboard,
+            breadcrumbs: true,
+        },
+        {
+            id: 'stickyHeadTable',
+            title: 'Sticky Head Table',
+            type: 'item',
+            url: '/utilities/sticky-head-table',
+            icon: icons.Dashboard,
+            breadcrumbs: true,
+        },
         // ],
     ],
 };
