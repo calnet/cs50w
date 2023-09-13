@@ -1,5 +1,4 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { theme } from '../../themes';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material';
 
 type createDataProps = {
     name: string;
@@ -10,6 +9,8 @@ type createDataProps = {
 };
 
 function BasicTable() {
+    const theme = useTheme();
+
     function createData({ name, calories, fat, carbs, protein }: createDataProps) {
         return { name, calories, fat, carbs, protein };
     }

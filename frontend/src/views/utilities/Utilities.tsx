@@ -1,5 +1,4 @@
-import { Box, Stack, Typography } from '@mui/material';
-import { theme } from '../../themes';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 import BasicTable from './BasicTable';
 import DataTable from './DataTable';
 import DenseTable from './DenseTable';
@@ -7,6 +6,8 @@ import EnhancedTable from './EnhancedTable';
 import StickyHeadTable from './StickyHeadTable';
 
 function Utilities() {
+    const theme = useTheme();
+
     return (
         <>
             <Stack textAlign={'center'} px={3} pb={2} border={1}>

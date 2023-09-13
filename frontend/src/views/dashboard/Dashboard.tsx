@@ -1,5 +1,4 @@
-import { Box, Typography } from '@mui/material';
-import { theme } from '../../themes';
+import { Box, Typography, useTheme } from '@mui/material';
 
 const LoremText = () => (
     <Typography>
@@ -11,6 +10,7 @@ const LoremText = () => (
 );
 
 function Dashboard() {
+    const theme = useTheme();
     return (
         <>
             <Box typography={'h1'} py={2} textAlign={'center'} color={theme.palette.primary.dark}>

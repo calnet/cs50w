@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 
 import Typography from '@mui/material/Typography';
-import { alpha } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import { visuallyHidden } from '@mui/utils';
 import * as React from 'react';
 
@@ -193,6 +193,7 @@ interface EnhancedTableToolbarProps {
 }
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
+    const theme = useTheme();
     const { numSelected } = props;
 
     return (
@@ -201,7 +202,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
                 pl: { sm: 2 },
                 pr: { xs: 1, sm: 1 },
                 ...(numSelected > 0 && {
-                    bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+                    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
                 }),
             }}
         >
