@@ -5,9 +5,8 @@ import { NavLink } from 'react-router-dom';
 
 // material-ui
 import { FiberManualRecord } from '@mui/icons-material';
-import { ListItemButton, ListItemIcon, ListItemText, SvgIconTypeMap, Typography } from '@mui/material';
+import { ListItemButton, ListItemIcon, ListItemText, SvgIconTypeMap, Typography, useTheme } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { useTheme } from '@mui/material/styles';
 
 // type imports
 import PropTypes from 'prop-types';
@@ -56,16 +55,16 @@ const NavItem = ({ item, level }: NavItemProps) => {
             disabled={item.disabled}
             sx={{
                 '&.active': {
-                    color: 'var(--nav-item-active-color)',
-                    backgroundColor: 'var(--nav-item-active-bg)',
+                    color: theme.palette.nav.item?.activeColor,
+                    backgroundColor: theme.palette.nav.item?.activeBackground,
                 },
                 '&.active .MuiTypography-root ': {
                     fontWeight: 600,
                 },
                 '&.active .MuiListItemIcon-root ': {
-                    color: 'var(--nav-item-icon-active-color)',
+                    color: theme.palette.nav.item?.icon?.activeColor,
                 },
-                ':hover': { backgroundColor: 'var(--nav-item-hover-bg)' },
+                ':hover': { backgroundColor: theme.palette.nav.item?.hoverBackground },
                 borderRadius: `${theme.shape.borderRadius}px`,
                 mb: 0.5,
                 alignItems: 'flex-start',

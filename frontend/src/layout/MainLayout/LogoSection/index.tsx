@@ -1,17 +1,19 @@
 import { KeyboardArrowDownOutlined } from '@mui/icons-material';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Stack, Typography, useTheme } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 // ==============================|| LOGO SECTION LAYOUT ||============================== //
 
 function LogoSection() {
+    const theme = useTheme();
+
     return (
         <Stack alignItems={'center'} direction={'row'} spacing={2} sx={{ p: 3 }}>
             <Box
                 component={RouterLink}
                 to={'/'}
                 sx={{
-                    borderColor: 'var(--nav-logo-border)',
+                    borderColor: theme.palette.nav.logoBorder,
                     borderRadius: 1,
                     borderStyle: 'solid',
                     borderWidth: 1,

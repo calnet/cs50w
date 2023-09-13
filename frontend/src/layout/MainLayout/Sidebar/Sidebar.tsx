@@ -51,30 +51,13 @@ function Sidebar() {
             }}
             sx={{
                 ['& .MuiDrawer-paper']: {
-                    backgroundColor: 'var(--nav-bg)',
-                    borderRightColor: 'var(--nav-border-color)',
+                    backgroundColor: theme.palette.nav?.background,
+                    borderRightColor: theme.palette.nav?.borderColor,
                     borderRightStyle: 'solid',
                     borderRightWidth: 1,
                     boxSizing: 'border-box',
-                    color: 'var(--nav-item-color)',
+                    color: theme.palette.nav?.item?.color,
                     width: drawerWidth,
-                    /* define colour variables */
-                    '--nav-bg': '#1C2536',
-                    '--nav-color': '#fff',
-                    '--nav-border-color': 'transparent',
-                    '--nav-logo-border': '#2F3746',
-                    '--nav-group-title-color': '#9DA4AE',
-                    '--nav-item-bg': 'transparent',
-                    '--nav-item-color': '#9DA4AE',
-                    '--nav-item-hover-bg': 'rgba(255, 255, 255, 0.04)',
-                    '--nav-item-active-bg': 'rgba(255, 255, 255, 0.04)',
-                    '--nav-item-active-color': '#fff',
-                    '--nav-item-disabled-color': '#6C737F',
-                    '--nav-item-icon-color': '#9DA4AE',
-                    '--nav-item-icon-active-color': '#6366F1',
-                    '--nav-item-icon-disabled-color': '#6C737F',
-                    '--nav-item-chevron-color': '#4D5761',
-                    '--nav-scrollbar-color': '#9DA4AE',
                 },
             }}
         >

@@ -1,845 +1,719 @@
-import { createTheme } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
+import { ThemeOptions, createTheme } from '@mui/material/styles';
+import { deepmerge } from '@mui/utils';
 
-export let theme = createTheme();
-
-const args = [
-    {
-        components: {
-            MuiAvatar: {
-                styleOverrides: {
-                    root: {
-                        fontSize: 14,
-                        fontWeight: 600,
-                        letterSpacing: 0,
-                        backgroundColor: '#E5E7EB',
-                        color: '#000',
+const options: ThemeOptions = {
+    components: {
+        MuiAvatar: {
+            styleOverrides: {
+                root: {
+                    fontSize: 14,
+                    fontWeight: 600,
+                    letterSpacing: 0,
+                    backgroundColor: '#E5E7EB',
+                    color: '#000',
+                },
+            },
+        },
+        // MuiButton: {
+        //     styleOverrides: {
+        //         root: {
+        //             borderRadius: '12px',
+        //             textTransform: 'none',
+        //         },
+        //         sizeSmall: {
+        //             padding: '6px 16px',
+        //         },
+        //         sizeMedium: {
+        //             padding: '8px 20px',
+        //         },
+        //         sizeLarge: {
+        //             padding: '11px 24px',
+        //         },
+        //         textSizeSmall: {
+        //             padding: '7px 12px',
+        //         },
+        //         textSizeMedium: {
+        //             padding: '9px 16px',
+        //         },
+        //         textSizeLarge: {
+        //             padding: '12px 16px',
+        //         },
+        //     },
+        // },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 20,
+                    '&.MuiPaper-elevation1': {
+                        boxShadow: '0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03)',
                     },
                 },
             },
-            // MuiButton: {
-            //     styleOverrides: {
-            //         root: {
-            //             borderRadius: '12px',
-            //             textTransform: 'none',
-            //         },
-            //         sizeSmall: {
-            //             padding: '6px 16px',
-            //         },
-            //         sizeMedium: {
-            //             padding: '8px 20px',
-            //         },
-            //         sizeLarge: {
-            //             padding: '11px 24px',
-            //         },
-            //         textSizeSmall: {
-            //             padding: '7px 12px',
-            //         },
-            //         textSizeMedium: {
-            //             padding: '9px 16px',
-            //         },
-            //         textSizeLarge: {
-            //             padding: '12px 16px',
-            //         },
-            //     },
-            // },
-            MuiCard: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: 20,
-                        '&.MuiPaper-elevation1': {
-                            boxShadow: '0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03)',
-                        },
+        },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    padding: '32px 24px',
+                    '&:last-child': {
+                        paddingBottom: '32px',
                     },
                 },
             },
-            MuiCardContent: {
-                styleOverrides: {
-                    root: {
-                        padding: '32px 24px',
-                        '&:last-child': {
-                            paddingBottom: '32px',
-                        },
-                    },
+        },
+        MuiCardHeader: {
+            defaultProps: {
+                titleTypographyProps: {
+                    variant: 'h6',
+                },
+                subheaderTypographyProps: {
+                    variant: 'body2',
                 },
             },
-            MuiCardHeader: {
-                defaultProps: {
-                    titleTypographyProps: {
-                        variant: 'h6',
-                    },
-                    subheaderTypographyProps: {
-                        variant: 'body2',
-                    },
-                },
-                styleOverrides: {
-                    root: {
-                        padding: '32px 24px 16px',
-                    },
+            styleOverrides: {
+                root: {
+                    padding: '32px 24px 16px',
                 },
             },
-            // MuiCheckbox: {},
-            MuiChip: {
-                styleOverrides: {
-                    root: {
-                        fontWeight: 500,
-                        borderColor: '#E5E7EB',
-                    },
-                    icon: {
-                        color: '#6C737F',
-                    },
+        },
+        // MuiCheckbox: {},
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    fontWeight: 500,
+                    borderColor: '#E5E7EB',
+                },
+                icon: {
+                    color: '#6C737F',
                 },
             },
-            MuiCssBaseline: {
-                styleOverrides: {
-                    '*': {
-                        boxSizing: 'border-box',
-                    },
-                    html: {
-                        MozOsxFontSmoothing: 'grayscale',
-                        WebkitFontSmoothing: 'antialiased',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minHeight: '100%',
-                        width: '100%',
-                    },
-                    body: {
-                        display: 'flex',
-                        flex: '1 1 auto',
-                        flexDirection: 'column',
-                        minHeight: '100%',
-                        width: '100%',
-                    },
-                    '#root, #__next': {
-                        display: 'flex',
-                        flex: '1 1 auto',
-                        flexDirection: 'column',
-                        height: '100%',
-                        width: '100%',
-                    },
-                    '#nprogress': {
-                        pointerEvents: 'none',
-                    },
-                    '#nprogress .bar': {
-                        height: 3,
-                        left: 0,
-                        position: 'fixed',
-                        top: 0,
-                        width: '100%',
-                        zIndex: 2000,
-                        backgroundColor: '#6366F1',
-                    },
-                    '.slick-dots li button': {
-                        '&:before': {
-                            fontSize: 10,
-                            color: '#6366F1',
-                        },
-                    },
-                    '.slick-dots li.slick-active button': {
-                        '&:before': {
-                            color: '#6366F1',
-                        },
-                    },
+        },
+        MuiCssBaseline: {
+            styleOverrides: {
+                '*': {
+                    boxSizing: 'border-box',
+                },
+                html: {
+                    MozOsxFontSmoothing: 'grayscale',
+                    WebkitFontSmoothing: 'antialiased',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: '100%',
+                    width: '100%',
+                },
+                body: {
+                    display: 'flex',
+                    flex: '1 1 auto',
+                    flexDirection: 'column',
+                    minHeight: '100%',
+                    width: '100%',
+                },
+                '#root': {
+                    display: 'flex',
+                    flex: '1 1 auto',
+                    flexDirection: 'column',
+                    height: '100%',
+                    width: '100%',
                 },
             },
-            // MuiIconButton: {
-            //     styleOverrides: {
-            //         sizeSmall: {
-            //             padding: 4,
-            //         },
-            //     },
-            // },
-            MuiInputBase: {
-                styleOverrides: {
-                    input: {
-                        '&::placeholder': {
-                            opacity: 1,
-                            color: '#6C737F',
-                        },
-                    },
-                },
-            },
-            MuiInput: {
-                styleOverrides: {
-                    input: {
-                        fontSize: 14,
-                        fontWeight: 500,
-                        lineHeight: '24px',
-                    },
-                },
-            },
-            MuiFilledInput: {
-                styleOverrides: {
-                    root: {
-                        backgroundColor: 'transparent',
-                        borderRadius: 8,
-                        borderStyle: 'solid',
-                        borderWidth: 1,
-                        overflow: 'hidden',
-                        transition: 'border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-                        '&:before': {
-                            display: 'none',
-                        },
-                        '&:after': {
-                            display: 'none',
-                        },
-                        borderColor: '#E5E7EB',
-                        '&:hover': {
-                            backgroundColor: 'rgba(17, 25, 39, 0.04)',
-                        },
-                        '&.Mui-disabled': {
-                            backgroundColor: 'transparent',
-                        },
-                        '&.Mui-focused': {
-                            backgroundColor: 'transparent',
-                            borderColor: '#6366F1',
-                            boxShadow: '#6366F1 0 0 0 2px',
-                        },
-                        '&.Mui-error': {
-                            borderColor: '#F04438',
-                            boxShadow: '#F04438 0 0 0 2px',
-                        },
-                    },
-                    input: {
-                        fontSize: 14,
-                        fontWeight: 500,
-                        lineHeight: '24px',
-                    },
-                },
-            },
-            MuiOutlinedInput: {
-                styleOverrides: {
-                    input: {
-                        fontSize: 14,
-                        fontWeight: 500,
-                        lineHeight: '24px',
-                    },
-                    notchedOutline: {
-                        transition: 'border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-                        borderColor: '#E5E7EB',
-                    },
-                    root: {
-                        '&:hover': {
-                            backgroundColor: 'rgba(17, 25, 39, 0.04)',
-                            '& .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#E5E7EB',
-                            },
-                        },
-                        '&.Mui-focused': {
-                            backgroundColor: 'transparent',
-                            '& .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#6366F1',
-                                borderWidth: '3px',
-                            },
-                        },
-                        '&.Mui-error': {
-                            '& .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#F04438',
-                                borderWidth: '3px',
-                            },
-                        },
-                    },
-                },
-            },
-            MuiFormLabel: {
-                styleOverrides: {
-                    root: {
-                        fontSize: 14,
-                        fontWeight: 500,
-                        '&.MuiInputLabel-filled': {
-                            transform: 'translate(12px, 18px) scale(1)',
-                        },
-                        '&.MuiInputLabel-shrink': {
-                            '&.MuiInputLabel-standard': {
-                                transform: 'translate(0, -1.5px) scale(0.85)',
-                            },
-                            '&.MuiInputLabel-filled': {
-                                transform: 'translate(12px, 6px) scale(0.85)',
-                            },
-                            '&.MuiInputLabel-outlined': {
-                                transform: 'translate(14px, -9px) scale(0.85)',
-                            },
-                        },
-                    },
-                },
-            },
-            MuiLinearProgress: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: 3,
-                        overflow: 'hidden',
-                    },
-                },
-            },
-            MuiLink: {
-                defaultProps: {
-                    underline: 'hover',
-                },
-            },
-            MuiListItemIcon: {
-                styleOverrides: {
-                    root: {
-                        marginRight: '16px',
-                        minWidth: 'unset',
-                    },
-                },
-            },
-            MuiPaper: {
-                styleOverrides: {
-                    root: {
-                        backgroundImage: 'none',
-                    },
-                },
-            },
-            MuiPopover: {
-                defaultProps: {
-                    elevation: 16,
-                },
-            },
-            MuiRadio: {
-                defaultProps: {
-                    color: 'primary',
-                },
-            },
-            MuiSwitch: {
-                defaultProps: {
-                    color: 'primary',
-                },
-                styleOverrides: {
-                    switchBase: {
-                        color: '#6C737F',
-                    },
-                    track: {
-                        backgroundColor: '#9DA4AE',
+        },
+        // MuiIconButton: {
+        //     styleOverrides: {
+        //         sizeSmall: {
+        //             padding: 4,
+        //         },
+        //     },
+        // },
+        MuiInputBase: {
+            styleOverrides: {
+                input: {
+                    '&::placeholder': {
                         opacity: 1,
+                        color: '#6C737F',
                     },
                 },
             },
-            MuiTab: {
-                styleOverrides: {
-                    root: {
-                        fontSize: 14,
-                        fontWeight: 500,
-                        lineHeight: 1.71,
-                        minWidth: 'auto',
-                        paddingLeft: 0,
-                        paddingRight: 0,
-                        textTransform: 'none',
-                        '& + &': {
-                            marginLeft: 24,
+        },
+        MuiInput: {
+            styleOverrides: {
+                input: {
+                    fontSize: 14,
+                    fontWeight: 500,
+                    lineHeight: '24px',
+                },
+            },
+        },
+        MuiFilledInput: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'transparent',
+                    borderRadius: 8,
+                    borderStyle: 'solid',
+                    borderWidth: 1,
+                    overflow: 'hidden',
+                    transition: 'border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                    '&:before': {
+                        display: 'none',
+                    },
+                    '&:after': {
+                        display: 'none',
+                    },
+                    borderColor: '#E5E7EB',
+                    '&:hover': {
+                        backgroundColor: 'rgba(17, 25, 39, 0.04)',
+                    },
+                    '&.Mui-disabled': {
+                        backgroundColor: 'transparent',
+                    },
+                    '&.Mui-focused': {
+                        backgroundColor: 'transparent',
+                        borderColor: '#6366F1',
+                        boxShadow: '#6366F1 0 0 0 2px',
+                    },
+                    '&.Mui-error': {
+                        borderColor: '#F04438',
+                        boxShadow: '#F04438 0 0 0 2px',
+                    },
+                },
+                input: {
+                    fontSize: 14,
+                    fontWeight: 500,
+                    lineHeight: '24px',
+                },
+            },
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                input: {
+                    fontSize: 14,
+                    fontWeight: 500,
+                    lineHeight: '24px',
+                },
+                notchedOutline: {
+                    transition: 'border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+                    borderColor: '#E5E7EB',
+                },
+                root: {
+                    '&:hover': {
+                        backgroundColor: 'rgba(17, 25, 39, 0.04)',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#E5E7EB',
+                        },
+                    },
+                    '&.Mui-focused': {
+                        backgroundColor: 'transparent',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#6366F1',
+                            borderWidth: '3px',
+                        },
+                    },
+                    '&.Mui-error': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#F04438',
+                            borderWidth: '3px',
                         },
                     },
                 },
             },
-            // MuiTableCell: {
-            //     styleOverrides: {
-            //         root: {
-            //             '& .MuiTableCell-sizeSmall': {
-            //                 // lineHeight: 1.5,
-            //                 paddingX: 2,
-            //                 paddingY: 5,
-            //                 // borderBottom: '1px solid rgba(224, 224, 224, 1)',
-            //             },
-            //         },
-            //     },
-            // },
-            MuiTableCell: {
-                styleOverrides: {
-                    root: {},
-                    sizeSmall: {},
-                    sizeMedium: {},
+        },
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    fontSize: 14,
+                    fontWeight: 500,
+                    '&.MuiInputLabel-filled': {
+                        transform: 'translate(12px, 18px) scale(1)',
+                    },
+                    '&.MuiInputLabel-shrink': {
+                        '&.MuiInputLabel-standard': {
+                            transform: 'translate(0, -1.5px) scale(0.85)',
+                        },
+                        '&.MuiInputLabel-filled': {
+                            transform: 'translate(12px, 6px) scale(0.85)',
+                        },
+                        '&.MuiInputLabel-outlined': {
+                            transform: 'translate(14px, -9px) scale(0.85)',
+                        },
+                    },
                 },
             },
+        },
+        MuiLinearProgress: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 3,
+                    overflow: 'hidden',
+                },
+            },
+        },
+        MuiLink: {
+            defaultProps: {
+                underline: 'hover',
+            },
+        },
+        MuiListItemIcon: {
+            styleOverrides: {
+                root: {
+                    marginRight: '16px',
+                    minWidth: 'unset',
+                },
+            },
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    backgroundImage: 'none',
+                },
+            },
+        },
+        MuiPopover: {
+            defaultProps: {
+                elevation: 16,
+            },
+        },
+        MuiRadio: {
+            defaultProps: {
+                color: 'primary',
+            },
+        },
+        MuiSwitch: {
+            defaultProps: {
+                color: 'primary',
+            },
+            styleOverrides: {
+                switchBase: {
+                    color: '#6C737F',
+                },
+                track: {
+                    backgroundColor: '#9DA4AE',
+                    opacity: 1,
+                },
+            },
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    fontSize: 14,
+                    fontWeight: 500,
+                    lineHeight: 1.71,
+                    minWidth: 'auto',
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                    textTransform: 'none',
+                    '& + &': {
+                        marginLeft: 24,
+                    },
+                },
+            },
+        },
+        // MuiTableCell: {
+        //     styleOverrides: {
+        //         root: {
+        //             '& .MuiTableCell-sizeSmall': {
+        //                 // lineHeight: 1.5,
+        //                 paddingX: 2,
+        //                 paddingY: 5,
+        //                 // borderBottom: '1px solid rgba(224, 224, 224, 1)',
+        //             },
+        //         },
+        //     },
+        // },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {},
+                sizeSmall: {},
+                sizeMedium: {},
+            },
+        },
+        MuiTableHead: {
+            styleOverrides: {
+                root: {
+                    borderBottom: 'none',
 
-            MuiTableHead: {
-                styleOverrides: {
-                    root: {
+                    '& .MuiTableCell-root': {
                         borderBottom: 'none',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        lineHeight: 1,
+                        letterSpacing: 0.5,
+                        textTransform: 'uppercase',
+                        backgroundColor: 'inherit',
+                        color: 'inherit',
+                    },
 
-                        '& .MuiTableCell-root': {
-                            borderBottom: 'none',
-                            fontSize: 12,
-                            fontWeight: 600,
-                            lineHeight: 1,
-                            letterSpacing: 0.5,
-                            textTransform: 'uppercase',
-                            backgroundColor: 'inherit',
-                            color: 'inherit',
-                        },
+                    '& .MuiTableCell-paddingCheckbox': {
+                        paddingTop: 4,
+                        paddingBottom: 4,
+                    },
+                },
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                variant: 'filled',
+            },
+        },
+        MuiBackdrop: {
+            styleOverrides: {
+                root: {
+                    '&:not(.MuiBackdrop-invisible)': {
+                        backgroundColor: 'rgba(17, 25, 39, 0.75)',
+                    },
+                },
+            },
+        },
+        // MuiTimelineConnector: {
+        //     styleOverrides: {
+        //         root: {
+        //             backgroundColor: '#F2F4F7',
+        //         },
+        //     },
+        // },
+        MuiTooltip: {
+            styleOverrides: {
+                tooltip: {
+                    backdropFilter: 'blur(6px)',
+                    background: 'rgba(17, 25, 39, 0.8)',
+                },
+            },
+        },
+    },
 
-                        '& .MuiTableCell-paddingCheckbox': {
-                            paddingTop: 4,
-                            paddingBottom: 4,
-                        },
-                    },
+    palette: {
+        mode: 'light',
+        common: {
+            black: '#000',
+            white: '#fff',
+        },
+        primary: {
+            main: '#6366F1',
+            light: '#EBEEFE',
+            dark: '#4338CA',
+            contrastText: '#FFFFFF',
+            lightest: '#F5F7FF',
+            darkest: '#312E81',
+            alpha4: 'rgba(99, 102, 241, 0.04)',
+            alpha8: 'rgba(99, 102, 241, 0.08)',
+            alpha12: 'rgba(99, 102, 241, 0.12)',
+            alpha30: 'rgba(99, 102, 241, 0.3)',
+            alpha50: 'rgba(99, 102, 241, 0.5)',
+        },
+        secondary: {
+            main: '#9c27b0',
+            light: '#ba68c8',
+            dark: '#7b1fa2',
+            contrastText: '#fff',
+        },
+        error: {
+            main: '#F04438',
+            light: '#FEE4E2',
+            dark: '#B42318',
+            contrastText: '#FFFFFF',
+            lightest: '#FEF3F2',
+            darkest: '#7A271A',
+            alpha4: 'rgba(240, 68, 56, 0.04)',
+            alpha8: 'rgba(240, 68, 56, 0.08)',
+            alpha12: 'rgba(240, 68, 56, 0.12)',
+            alpha30: 'rgba(240, 68, 56, 0.3)',
+            alpha50: 'rgba(240, 68, 56, 0.5)',
+        },
+        warning: {
+            main: '#F79009',
+            light: '#FEF0C7',
+            dark: '#B54708',
+            contrastText: '#FFFFFF',
+            lightest: '#FFFAEB',
+            darkest: '#7A2E0E',
+            alpha4: 'rgba(247, 144, 9, 0.04)',
+            alpha8: 'rgba(247, 144, 9, 0.08)',
+            alpha12: 'rgba(247, 144, 9, 0.12)',
+            alpha30: 'rgba(247, 144, 9, 0.3)',
+            alpha50: 'rgba(247, 144, 9, 0.5)',
+        },
+        info: {
+            main: '#06AED4',
+            light: '#CFF9FE',
+            dark: '#0E7090',
+            contrastText: '#FFFFFF',
+            lightest: '#ECFDFF',
+            darkest: '#164C63',
+            alpha4: 'rgba(6, 174, 212, 0.04)',
+            alpha8: 'rgba(6, 174, 212, 0.08)',
+            alpha12: 'rgba(6, 174, 212, 0.12)',
+            alpha30: 'rgba(6, 174, 212, 0.3)',
+            alpha50: 'rgba(6, 174, 212, 0.5)',
+        },
+        success: {
+            main: '#10B981',
+            light: '#3FC79A',
+            dark: '#0B815A',
+            contrastText: '#FFFFFF',
+            lightest: '#F0FDF9',
+            darkest: '#134E48',
+            alpha4: 'rgba(16, 185, 129, 0.04)',
+            alpha8: 'rgba(16, 185, 129, 0.08)',
+            alpha12: 'rgba(16, 185, 129, 0.12)',
+            alpha30: 'rgba(16, 185, 129, 0.3)',
+            alpha50: 'rgba(16, 185, 129, 0.5)',
+        },
+        neutral: {
+            '50': '#F8F9FA',
+            '100': '#F3F4F6',
+            '200': '#E5E7EB',
+            '300': '#D2D6DB',
+            '400': '#9DA4AE',
+            '500': '#6C737F',
+            '600': '#4D5761',
+            '700': '#2F3746',
+            '800': '#1C2536',
+            '900': '#111927',
+        },
+        text: {
+            primary: '#111927',
+            secondary: '#6C737F',
+            disabled: 'rgba(17, 25, 39, 0.38)',
+        },
+        divider: grey[800],
+        background: {
+            paper: '#fff',
+            default: '#fff',
+        },
+        action: {
+            active: '#6C737F',
+            // hover: 'rgba(17, 25, 39, 0.04)',
+            hoverOpacity: 0.04,
+            selected: 'rgba(17, 25, 39, 0.12)',
+            selectedOpacity: 0.08,
+            disabled: 'rgba(17, 25, 39, 0.38)',
+            disabledBackground: 'rgba(17, 25, 39, 0.12)',
+            // disabledOpacity: 0.38,
+            focus: 'rgba(17, 25, 39, 0.16)',
+            // focusOpacity: 0.12,
+            activatedOpacity: 0.12,
+        },
+        /* define custom nav colour variables */
+        nav: {
+            background: '#1C2536',
+            color: '#fff',
+            borderColor: 'transparent',
+            logoBorder: '#2F3746',
+            groupTitleColor: '#9DA4AE',
+            item: {
+                background: 'transparent',
+                color: '#9DA4AE',
+                hoverBackground: 'rgba(255, 255, 255, 0.04)',
+                activeBackground: 'rgba(255, 255, 255, 0.04)',
+                activeColor: '#fff',
+                disabledColor: '#6C737F',
+                icon: {
+                    color: '#9DA4AE',
+                    activeColor: '#6366F1',
+                    disabledColor: '#6C737F',
                 },
+                chevronColor: '#4D5761',
             },
-            MuiTextField: {
-                defaultProps: {
-                    variant: 'filled',
-                },
-            },
-            MuiBackdrop: {
-                styleOverrides: {
-                    root: {
-                        '&:not(.MuiBackdrop-invisible)': {
-                            backgroundColor: 'rgba(17, 25, 39, 0.75)',
-                        },
-                    },
-                },
-            },
-            MuiTimelineConnector: {
-                styleOverrides: {
-                    root: {
-                        backgroundColor: '#F2F4F7',
-                    },
-                },
-            },
-            MuiTooltip: {
-                styleOverrides: {
-                    tooltip: {
-                        backdropFilter: 'blur(6px)',
-                        background: 'rgba(17, 25, 39, 0.8)',
-                    },
-                },
-            },
+            scrollbarColor: '#9DA4AE',
         },
     },
-    {
-        palette: {
-            mode: 'light',
-            common: {
-                black: '#000',
-                white: '#fff',
-            },
-            primary: {
-                main: '#6366F1',
-                light: '#EBEEFE',
-                dark: '#4338CA',
-                contrastText: '#FFFFFF',
-                lightest: '#F5F7FF',
-                darkest: '#312E81',
-                alpha4: 'rgba(99, 102, 241, 0.04)',
-                alpha8: 'rgba(99, 102, 241, 0.08)',
-                alpha12: 'rgba(99, 102, 241, 0.12)',
-                alpha30: 'rgba(99, 102, 241, 0.3)',
-                alpha50: 'rgba(99, 102, 241, 0.5)',
-            },
-            secondary: {
-                main: '#9c27b0',
-                light: '#ba68c8',
-                dark: '#7b1fa2',
-                contrastText: '#fff',
-            },
-            error: {
-                main: '#F04438',
-                light: '#FEE4E2',
-                dark: '#B42318',
-                contrastText: '#FFFFFF',
-                lightest: '#FEF3F2',
-                darkest: '#7A271A',
-                alpha4: 'rgba(240, 68, 56, 0.04)',
-                alpha8: 'rgba(240, 68, 56, 0.08)',
-                alpha12: 'rgba(240, 68, 56, 0.12)',
-                alpha30: 'rgba(240, 68, 56, 0.3)',
-                alpha50: 'rgba(240, 68, 56, 0.5)',
-            },
-            warning: {
-                main: '#F79009',
-                light: '#FEF0C7',
-                dark: '#B54708',
-                contrastText: '#FFFFFF',
-                lightest: '#FFFAEB',
-                darkest: '#7A2E0E',
-                alpha4: 'rgba(247, 144, 9, 0.04)',
-                alpha8: 'rgba(247, 144, 9, 0.08)',
-                alpha12: 'rgba(247, 144, 9, 0.12)',
-                alpha30: 'rgba(247, 144, 9, 0.3)',
-                alpha50: 'rgba(247, 144, 9, 0.5)',
-            },
-            info: {
-                main: '#06AED4',
-                light: '#CFF9FE',
-                dark: '#0E7090',
-                contrastText: '#FFFFFF',
-                lightest: '#ECFDFF',
-                darkest: '#164C63',
-                alpha4: 'rgba(6, 174, 212, 0.04)',
-                alpha8: 'rgba(6, 174, 212, 0.08)',
-                alpha12: 'rgba(6, 174, 212, 0.12)',
-                alpha30: 'rgba(6, 174, 212, 0.3)',
-                alpha50: 'rgba(6, 174, 212, 0.5)',
-            },
-            success: {
-                main: '#10B981',
-                light: '#3FC79A',
-                dark: '#0B815A',
-                contrastText: '#FFFFFF',
-                lightest: '#F0FDF9',
-                darkest: '#134E48',
-                alpha4: 'rgba(16, 185, 129, 0.04)',
-                alpha8: 'rgba(16, 185, 129, 0.08)',
-                alpha12: 'rgba(16, 185, 129, 0.12)',
-                alpha30: 'rgba(16, 185, 129, 0.3)',
-                alpha50: 'rgba(16, 185, 129, 0.5)',
-            },
-            grey: {
-                '50': '#fafafa',
-                '100': '#f5f5f5',
-                '200': '#eeeeee',
-                '300': '#e0e0e0',
-                '400': '#bdbdbd',
-                '500': '#9e9e9e',
-                '600': '#757575',
-                '700': '#616161',
-                '800': '#424242',
-                '900': '#212121',
-                A100: '#f5f5f5',
-                A200: '#eeeeee',
-                A400: '#bdbdbd',
-                A700: '#616161',
-            },
-            neutral: {
-                '50': '#F8F9FA',
-                '100': '#F3F4F6',
-                '200': '#E5E7EB',
-                '300': '#D2D6DB',
-                '400': '#9DA4AE',
-                '500': '#6C737F',
-                '600': '#4D5761',
-                '700': '#2F3746',
-                '800': '#1C2536',
-                '900': '#111927',
-            },
-            contrastThreshold: 3,
-            tonalOffset: 0.2,
-            text: {
-                primary: '#111927',
-                secondary: '#6C737F',
-                disabled: 'rgba(17, 25, 39, 0.38)',
-            },
-            divider: theme.palette.grey[800],
-            background: {
-                paper: '#fff',
-                default: '#fff',
-            },
-            action: {
-                active: '#6C737F',
-                // hover: 'rgba(17, 25, 39, 0.04)',
-                hover: 'var(--nav-item-hover-bg)',
-                hoverOpacity: 0.04,
-                selected: 'rgba(17, 25, 39, 0.12)',
-                selectedOpacity: 0.08,
-                disabled: 'rgba(17, 25, 39, 0.38)',
-                disabledBackground: 'rgba(17, 25, 39, 0.12)',
-                disabledOpacity: 0.38,
-                focus: 'rgba(17, 25, 39, 0.16)',
-                focusOpacity: 0.12,
-                activatedOpacity: 0.12,
-            },
-            /* define custom nav colour variables */
-            nav: {
-                '--nav-bg': '#1C2536',
-                '--nav-color': '#fff',
-                '--nav-border-color': 'transparent',
-                '--nav-logo-border': '#2F3746',
-                '--nav-group-title-color': '#9DA4AE',
-                '--nav-item-bg': 'transparent',
-                '--nav-item-color': '#9DA4AE',
-                '--nav-item-hover-bg': 'rgba(255, 255, 255, 0.04)',
-                '--nav-item-active-bg': 'rgba(255, 255, 255, 0.04)',
-                '--nav-item-active-color': '#fff',
-                '--nav-item-disabled-color': '#6C737F',
-                '--nav-item-icon-color': '#9DA4AE',
-                '--nav-item-icon-active-color': '#6366F1',
-                '--nav-item-icon-disabled-color': '#6C737F',
-                '--nav-item-chevron-color': '#4D5761',
-                '--nav-scrollbar-color': '#9DA4AE',
-            },
-        },
-    },
-    {
-        typography: {
-            fontFamily:
-                '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-            body1: {
-                fontSize: '1rem',
-                fontWeight: 400,
-                lineHeight: 1.5,
-                fontFamily: 'inherit',
-            },
-            body2: {
-                fontSize: '0.875rem',
-                fontWeight: 400,
-                lineHeight: 1.57,
-                fontFamily: 'inherit',
-            },
-            button: {
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                lineHeight: 1.75,
-                fontFamily: 'inherit',
-                textTransform: 'uppercase',
-            },
-            caption: {
-                fontSize: '0.75rem',
-                fontWeight: 400,
-                lineHeight: 1.66,
-                fontFamily: 'inherit',
-            },
-            subtitle1: {
-                fontSize: '1rem',
-                fontWeight: 500,
-                lineHeight: 1.57,
-                fontFamily: 'inherit',
-            },
-            subtitle2: {
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                lineHeight: 1.57,
-                fontFamily: 'inherit',
-            },
-            overline: {
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                lineHeight: 2.5,
-                fontFamily: 'inherit',
-                letterSpacing: '0.5px',
-                textTransform: 'uppercase',
-            },
-            h1: {
-                fontWeight: 700,
-                fontSize: '2.25rem',
-                lineHeight: 1.2,
-                fontFamily: 'inherit',
-                '@media (min-width:600px)': {
-                    fontSize: '2.9167rem',
-                },
-                '@media (min-width:900px)': {
-                    fontSize: '3.125rem',
-                },
-                '@media (min-width:1200px)': {
-                    fontSize: '3.5417rem',
-                },
-            },
-            h2: {
-                fontSize: '2rem',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                fontFamily: 'inherit',
-                '@media (min-width:600px)': {
-                    fontSize: '2.5rem',
-                },
-                '@media (min-width:900px)': {
-                    fontSize: '2.7083rem',
-                },
-                '@media (min-width:1200px)': {
-                    fontSize: '2.9167rem',
-                },
-            },
-            h3: {
-                fontSize: '1.625rem',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                fontFamily: 'inherit',
-                '@media (min-width:600px)': {
-                    fontSize: '1.875rem',
-                },
-                '@media (min-width:900px)': {
-                    fontSize: '2.0833rem',
-                },
-                '@media (min-width:1200px)': {
-                    fontSize: '2.2917rem',
-                },
-            },
-            h4: {
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                fontFamily: 'inherit',
-                '@media (min-width:600px)': {
-                    fontSize: '1.6667rem',
-                },
-                '@media (min-width:900px)': {
-                    fontSize: '1.875rem',
-                },
-                '@media (min-width:1200px)': {
-                    fontSize: '2.0833rem',
-                },
-            },
-            h5: {
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                fontFamily: 'inherit',
-                '@media (min-width:600px)': {
-                    fontSize: '1.4583rem',
-                },
-                '@media (min-width:900px)': {
-                    fontSize: '1.4583rem',
-                },
-                '@media (min-width:1200px)': {
-                    fontSize: '1.4583rem',
-                },
-            },
-            h6: {
-                fontSize: '1.0625rem',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                fontFamily: 'inherit',
-                '@media (min-width:600px)': {
-                    fontSize: '1.0417rem',
-                },
-                '@media (min-width:900px)': {
-                    fontSize: '1.0417rem',
-                },
-                '@media (min-width:1200px)': {
-                    fontSize: '1.0417rem',
-                },
-            },
-            mainContent: {
-                backgroundColor: theme.palette.background.default,
-                width: '100%',
-                minHeight: 'calc(100vh - 88px)',
-                flexGrow: 1,
-                padding: '20px',
-                marginTop: '88px',
-                marginRight: '20px',
-                borderRadius: `${theme.shape.borderRadius}px`,
-            },
-            menuCaption: {
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: theme.palette.grey[600],
-                // padding: '6px',
-                textTransform: 'capitalize',
-                // marginTop: '10px',
-            },
-            subMenuCaption: {
-                fontSize: '0.6875rem',
-                fontWeight: 500,
-                color: theme.palette.text.secondary,
-                textTransform: 'capitalize',
-            },
-            menuGroup: {
-                fontWeight: '500',
-                color: 'var(--nav-color)',
-                padding: 1,
-            },
-            commonAvatar: {
-                cursor: 'pointer',
-                borderRadius: '8px',
-            },
-            smallAvatar: {
-                width: '24px',
-                height: '24px',
-                fontSize: '1rem',
-            },
-            mediumAvatar: {
-                width: '32px',
-                height: '32px',
-                fontSize: '1.2rem',
-            },
-            largeAvatar: {
-                width: '40px',
-                height: '40px',
-                fontSize: '1.5rem',
-            },
-            inherit: {
-                fontWeight: 'inherit',
-                fontSize: 'inherit',
-                lineHeight: 'inherit',
-                fontFamily: 'inherit',
-                letterSpacing: 'inherit',
-            },
 
-            htmlFontSize: 16,
-            fontSize: 14,
-            fontWeightLight: 300,
-            fontWeightRegular: 400,
-            fontWeightMedium: 500,
-            fontWeightBold: 700,
+    typography: {
+        fontFamily:
+            '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+        body1: {
+            fontSize: '1rem',
+            fontWeight: 400,
+            lineHeight: 1.5,
+            fontFamily: 'inherit',
         },
-    },
-    {
-        mixins: {
-            toolbar: {
-                minHeight: 56,
-                '@media (min-width:0px)': {
-                    '@media (orientation: landscape)': {
-                        minHeight: 48,
-                    },
-                },
-                '@media (min-width:600px)': {
-                    minHeight: 64,
-                },
+        body2: {
+            fontSize: '0.875rem',
+            fontWeight: 400,
+            lineHeight: 1.57,
+            fontFamily: 'inherit',
+        },
+        button: {
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            lineHeight: 1.75,
+            fontFamily: 'inherit',
+        },
+        caption: {
+            fontSize: '0.75rem',
+            fontWeight: 400,
+            lineHeight: 1.66,
+            fontFamily: 'inherit',
+        },
+        subtitle1: {
+            fontFamily: 'inherit',
+        },
+        subtitle2: {
+            fontFamily: 'inherit',
+        },
+        overline: {
+            fontFamily: 'inherit',
+        },
+        h1: {
+            fontWeight: 700,
+            fontSize: '2.25rem',
+            lineHeight: 1.2,
+            fontFamily: 'inherit',
+            '@media (min-width:600px)': {
+                fontSize: '2.9167rem',
+            },
+            '@media (min-width:900px)': {
+                fontSize: '3.125rem',
+            },
+            '@media (min-width:1200px)': {
+                fontSize: '3.5417rem',
             },
         },
-    },
-    {
-        shape: {
-            borderRadius: 8,
-        },
-    },
-    {
-        shadows: [
-            'none',
-            '0px 1px 2px rgba(0, 0, 0, 0.08)',
-            '0px 1px 5px rgba(0, 0, 0, 0.08)',
-            '0px 1px 8px rgba(0, 0, 0, 0.08)',
-            '0px 1px 10px rgba(0, 0, 0, 0.08)',
-            '0px 1px 14px rgba(0, 0, 0, 0.08)',
-            '0px 1px 18px rgba(0, 0, 0, 0.08)',
-            '0px 2px 16px rgba(0, 0, 0, 0.08)',
-            '0px 3px 14px rgba(0, 0, 0, 0.08)',
-            '0px 3px 16px rgba(0, 0, 0, 0.08)',
-            '0px 4px 18px rgba(0, 0, 0, 0.08)',
-            '0px 4px 20px rgba(0, 0, 0, 0.08)',
-            '0px 5px 22px rgba(0, 0, 0, 0.08)',
-            '0px 5px 24px rgba(0, 0, 0, 0.08)',
-            '0px 5px 26px rgba(0, 0, 0, 0.08)',
-            '0px 6px 28px rgba(0, 0, 0, 0.08)',
-            '0px 6px 30px rgba(0, 0, 0, 0.08)',
-            '0px 6px 32px rgba(0, 0, 0, 0.08)',
-            '0px 7px 34px rgba(0, 0, 0, 0.08)',
-            '0px 7px 36px rgba(0, 0, 0, 0.08)',
-            '0px 8px 38px rgba(0, 0, 0, 0.08)',
-            '0px 8px 40px rgba(0, 0, 0, 0.08)',
-            '0px 8px 42px rgba(0, 0, 0, 0.08)',
-            '0px 9px 44px rgba(0, 0, 0, 0.08)',
-            '0px 9px 46px rgba(0, 0, 0, 0.08)',
-        ],
-    },
-    {
-        transitions: {
-            easing: {
-                easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                easeOut: 'cubic-bezier(0.0, 0, 0.2, 1)',
-                easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
-                sharp: 'cubic-bezier(0.4, 0, 0.6, 1)',
+        h2: {
+            fontSize: '2rem',
+            fontWeight: 700,
+            lineHeight: 1.2,
+            fontFamily: 'inherit',
+            '@media (min-width:600px)': {
+                fontSize: '2.5rem',
             },
-            duration: {
-                shortest: 150,
-                shorter: 200,
-                short: 250,
-                standard: 300,
-                complex: 375,
-                enteringScreen: 225,
-                leavingScreen: 195,
+            '@media (min-width:900px)': {
+                fontSize: '2.7083rem',
+            },
+            '@media (min-width:1200px)': {
+                fontSize: '2.9167rem',
             },
         },
-    },
-    {
-        zIndex: {
-            mobileStepper: 1000,
-            fab: 1050,
-            speedDial: 1050,
-            appBar: 1100,
-            drawer: 1200,
-            modal: 1300,
-            snackbar: 1400,
-            tooltip: 1500,
+        h3: {
+            fontSize: '1.625rem',
+            fontWeight: 700,
+            lineHeight: 1.2,
+            fontFamily: 'inherit',
+            '@media (min-width:600px)': {
+                fontSize: '1.875rem',
+            },
+            '@media (min-width:900px)': {
+                fontSize: '2.0833rem',
+            },
+            '@media (min-width:1200px)': {
+                fontSize: '2.2917rem',
+            },
+        },
+        h4: {
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            lineHeight: 1.2,
+            fontFamily: 'inherit',
+            '@media (min-width:600px)': {
+                fontSize: '1.6667rem',
+            },
+            '@media (min-width:900px)': {
+                fontSize: '1.875rem',
+            },
+            '@media (min-width:1200px)': {
+                fontSize: '2.0833rem',
+            },
+        },
+        h5: {
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            lineHeight: 1.2,
+            fontFamily: 'inherit',
+            '@media (min-width:600px)': {
+                fontSize: '1.4583rem',
+            },
+            '@media (min-width:900px)': {
+                fontSize: '1.4583rem',
+            },
+            '@media (min-width:1200px)': {
+                fontSize: '1.4583rem',
+            },
+        },
+        h6: {
+            fontSize: '1.0625rem',
+            fontWeight: 700,
+            lineHeight: 1.2,
+            fontFamily: 'inherit',
+            '@media (min-width:600px)': {
+                fontSize: '1.0417rem',
+            },
+            '@media (min-width:900px)': {
+                fontSize: '1.0417rem',
+            },
+            '@media (min-width:1200px)': {
+                fontSize: '1.0417rem',
+            },
+        },
+        mainContent: {
+            // backgroundColor: theme.palette.background.default,
+            width: '100%',
+            minHeight: 'calc(100vh - 88px)',
+            flexGrow: 1,
+            padding: '20px',
+            marginTop: '88px',
+            marginRight: '20px',
+            // borderRadius: `${theme.shape.borderRadius}px`,
+        },
+        menuCaption: {
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            color: grey[600],
+            // padding: '6px',
+            textTransform: 'capitalize',
+            // marginTop: '10px',
+        },
+        subMenuCaption: {
+            fontSize: '0.6875rem',
+            fontWeight: 500,
+            // color: theme.palette.text.secondary,
+            textTransform: 'capitalize',
+        },
+        menuGroup: {
+            fontWeight: '500',
+            // color: 'var(--nav-color)',
+            padding: 1,
+        },
+        commonAvatar: {
+            cursor: 'pointer',
+            borderRadius: '8px',
+        },
+        smallAvatar: {
+            width: '24px',
+            height: '24px',
+            fontSize: '1rem',
+        },
+        mediumAvatar: {
+            width: '32px',
+            height: '32px',
+            fontSize: '1.2rem',
+        },
+        largeAvatar: {
+            width: '40px',
+            height: '40px',
+            fontSize: '1.5rem',
         },
     },
-];
+    shape: {
+        borderRadius: 8,
+    },
+};
 
-theme = createTheme(undefined, ...args);
+const dependantOptions: ThemeOptions = {
+    palette: {
+        action: {
+            hover: options.palette?.nav?.item?.hoverBackground,
+        },
+    },
+    typography: {
+        mainContent: {
+            backgroundColor: options.palette?.background?.default,
+            borderRadius: `${options.shape?.borderRadius}px`,
+        },
+        subMenuCaption: {
+            color: options.palette?.text?.secondary,
+        },
+        menuGroup: {
+            color: options.palette?.nav?.color,
+        },
+    },
+};
+
+export const theme = createTheme(deepmerge(options, dependantOptions));
