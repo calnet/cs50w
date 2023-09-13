@@ -4,7 +4,17 @@ const config = {
     // basename: '/free',
     basename: '/',
     defaultPath: '/',
-    fontFamily: `'Roboto', sans-serif`,
+    // fontFamily: [
+    //     'Inter',
+    //     '-apple-system',
+    //     'BlinkMacSystemFont',
+    //     'Segoe UI',
+    //     'Helvetica',
+    //     'Arial',
+    //     'sans-serif',
+    //     'Apple Color Emoji',
+    //     'Segoe UI Emoji',
+    // ].join(','),
     borderRadius: 12,
 };
 
