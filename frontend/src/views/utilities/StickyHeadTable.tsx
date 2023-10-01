@@ -91,7 +91,7 @@ export default function StickyHeadTable() {
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
-                        <TableRow>
+                        <TableRow sx={{ bgcolor: 'whitesmoke' }}>
                             {columns.map((column) => (
                                 <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
                                     {column.label}
