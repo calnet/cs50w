@@ -306,18 +306,6 @@ const options: ThemeOptions = {
                 },
             },
         },
-        // MuiTableCell: {
-        //     styleOverrides: {
-        //         root: {
-        //             '& .MuiTableCell-sizeSmall': {
-        //                 // lineHeight: 1.5,
-        //                 paddingX: 2,
-        //                 paddingY: 5,
-        //                 // borderBottom: '1px solid rgba(224, 224, 224, 1)',
-        //             },
-        //         },
-        //     },
-        // },
         MuiTableCell: {
             styleOverrides: {
                 root: {},
@@ -345,6 +333,13 @@ const options: ThemeOptions = {
                         paddingTop: 4,
                         paddingBottom: 4,
                     },
+                },
+            },
+        },
+        MuiTableRow: {
+            styleOverrides: {
+                head: {
+                    backgroundColor: 'inherit',
                 },
             },
         },
