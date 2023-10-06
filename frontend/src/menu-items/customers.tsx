@@ -13,10 +13,10 @@ const customersMenu: MenuItemType = {
     type: 'group',
     children: [
         {
-            id: 'customer_list',
+            id: 'customers_list',
             title: 'Customer List',
             type: 'item',
-            url: '/customers/customer_list',
+            url: '/customers/customers_list',
             icon: icons.People,
             breadcrumbs: true,
         },

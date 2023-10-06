@@ -82,7 +82,7 @@ const MainRoutes: RouteObject = {
             path: 'customers',
             children: [
                 {
-                    path: 'customer_list',
+                    path: 'customers_list',
                     element: <Customers />,
                 },
                 {
