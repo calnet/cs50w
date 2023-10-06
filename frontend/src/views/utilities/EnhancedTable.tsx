@@ -349,7 +349,7 @@ export default function EnhancedTable() {
                             {emptyRows > 0 && (
                                 <TableRow
                                     style={{
-                                        height: (dense ? 33 : 53) * emptyRows,
+                                        height: (dense ? 33 : 53) * emptyRows /* height of a row if there are empty rows on the page */,
                                     }}
                                 >
                                     <TableCell colSpan={6} />
