@@ -2,6 +2,8 @@ import { grey } from '@mui/material/colors';
 import { ThemeOptions, createTheme } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
 
+import type {} from '@mui/x-data-grid/themeAugmentation';
+
 const options: ThemeOptions = {
     components: {
         MuiAvatar: {
@@ -114,6 +116,20 @@ const options: ThemeOptions = {
                     flexDirection: 'column',
                     height: '100%',
                     width: '100%',
+                },
+            },
+        },
+        MuiDataGrid: {
+            styleOverrides: {
+                columnHeader: {
+                    backgroundColor: grey[400],
+                },
+                columnHeaderTitle: {
+                    fontWeight: 600,
+                    fontSize: '12px',
+                    lineHeight: 'inherit',
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
                 },
             },
         },
