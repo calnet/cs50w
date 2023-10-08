@@ -16,7 +16,7 @@ const suppliersMenu: MenuItemType = {
             id: 'supplier_list',
             title: 'Supplier List',
             type: 'item',
-            url: '/suppliers/supplier_list',
+            url: '/suppliers',
             icon: icons.People,
             breadcrumbs: true,
         },

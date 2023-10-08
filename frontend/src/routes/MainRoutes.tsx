@@ -17,7 +17,7 @@ const EnhancedTable = Loadable(lazy(() => import('../views/utilities/EnhancedTab
 const StickyHeadTable = Loadable(lazy(() => import('../views/utilities/StickyHeadTable')));
 
 // banking page routing
-const BankingAccountList = Loadable(lazy(() => import('../views/banking/BankingAccountList')));
+const Banking = Loadable(lazy(() => import('../views/banking/Banking')));
 const BankingReconciliation = Loadable(lazy(() => import('../views/banking/BankingReconciliation')));
 const BankingStatements = Loadable(lazy(() => import('../views/banking/BankingStatements')));
 
@@ -32,6 +32,10 @@ const SupplierInvoices = Loadable(lazy(() => import('../views/suppliers/Supplier
 const SupplierPurchaseOrders = Loadable(lazy(() => import('../views/suppliers/SupplierPurchaseOrders')));
 
 // chart of accounts page routing
+const CoaLayouts = Loadable(lazy(() => import('../views/coa/CoaLayouts')));
+const CoaCategories = Loadable(lazy(() => import('../views/coa/CoaCategories')));
+const NominalTypes = Loadable(lazy(() => import('../views/coa/NominalTypes')));
+const NominalCodes = Loadable(lazy(() => import('../views/coa/NominalCodes')));
 const CoaControlAccounts = Loadable(lazy(() => import('../views/coa/CoaControlAccounts')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -82,7 +86,7 @@ const MainRoutes: RouteObject = {
             path: 'customers',
             children: [
                 {
-                    path: 'customers_list',
+                    path: '',
                     element: <Customers />,
                 },
                 {
@@ -99,7 +103,7 @@ const MainRoutes: RouteObject = {
             path: 'suppliers',
             children: [
                 {
-                    path: 'supplier_list',
+                    path: '',
                     element: <Suppliers />,
                 },
                 {
@@ -116,8 +120,8 @@ const MainRoutes: RouteObject = {
             path: 'banking',
             children: [
                 {
-                    path: 'account_list',
-                    element: <BankingAccountList />,
+                    path: '',
+                    element: <Banking />,
                 },
                 {
                     path: 'statements',
@@ -132,6 +136,22 @@ const MainRoutes: RouteObject = {
         {
             path: 'coa',
             children: [
+                {
+                    path: 'coa_layouts',
+                    element: <CoaLayouts />,
+                },
+                {
+                    path: 'coa_categories',
+                    element: <CoaCategories />,
+                },
+                {
+                    path: 'nominal_types',
+                    element: <NominalTypes />,
+                },
+                {
+                    path: 'nominal_codes',
+                    element: <NominalCodes />,
+                },
                 {
                     path: 'control_accounts',
                     element: <CoaControlAccounts />,

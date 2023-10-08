@@ -13,13 +13,45 @@ const coaMenu: MenuItemType = {
     type: 'group',
     children: [
         {
-            id: 'control_accounts',
-            title: 'Control Accounts',
+            id: 'coa_layouts',
+            title: 'Chart of Accounts',
             type: 'item',
-            url: '/coa/control_accounts',
+            url: '/coa/coa_layouts',
             icon: icons.TableChart,
             breadcrumbs: false,
         },
+        {
+            id: 'coa_categories',
+            title: 'Categories',
+            type: 'item',
+            url: '/coa/coa_categories',
+            icon: icons.TableChart,
+            breadcrumbs: false,
+        },
+        {
+            id: 'nominal_types',
+            title: 'Account Types',
+            type: 'item',
+            url: '/coa/nominal_types',
+            icon: icons.TableChart,
+            breadcrumbs: false,
+        },
+        {
+            id: 'nominal_codes',
+            title: 'Nominal Codes',
+            type: 'item',
+            url: '/coa/nominal_codes',
+            icon: icons.TableChart,
+            breadcrumbs: false,
+        },
+        // {
+        //     id: 'control_accounts',
+        //     title: 'Control Accounts',
+        //     type: 'item',
+        //     url: '/coa/control_accounts',
+        //     icon: icons.TableChart,
+        //     breadcrumbs: false,
+        // },
     ],
 };
 

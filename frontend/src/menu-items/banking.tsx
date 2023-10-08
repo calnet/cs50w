@@ -16,7 +16,7 @@ const bankingMenu: MenuItemType = {
             id: 'account_list',
             title: 'Account List',
             type: 'item',
-            url: '/banking/account_list',
+            url: '/banking',
             icon: icons.Wallet,
             breadcrumbs: false,
         },

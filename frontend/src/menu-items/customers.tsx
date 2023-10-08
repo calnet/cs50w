@@ -16,7 +16,7 @@ const customersMenu: MenuItemType = {
             id: 'customers_list',
             title: 'Customer List',
             type: 'item',
-            url: '/customers/customers_list',
+            url: '/customers',
             icon: icons.People,
             breadcrumbs: true,
         },
