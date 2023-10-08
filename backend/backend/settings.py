@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
 
-    "users"
+    "users",
+    "banking",
+    "customers",
+    "ledgers",
+    "suppliers",
 ]
 
 MIDDLEWARE = [
@@ -135,8 +139,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.CustomUser"
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    "http://localhost:5173",  # Add the origin of your React app
+    "http://127.0.0.1:5173",  # Add the origin of your React app
 ]
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",  # Add the origin of your React app
+# ]
 
 LOGIN_URL = "/users/login/"
 
