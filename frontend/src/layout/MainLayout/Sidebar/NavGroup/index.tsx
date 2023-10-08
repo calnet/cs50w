@@ -20,8 +20,8 @@ const NavGroup = ({ item }: NavGroupProps) => {
     // menu list collapse & Items
     const items = item.children?.map((menu) => {
         switch (menu.type) {
-            case 'collapse':
-                return <NavCollapse key={menu.id} menu={menu} level={1} />;
+            // case 'collapse':
+            //     return <NavCollapse key={menu.id} menu={menu} level={1} />;
             case 'item':
                 return <NavItem key={menu.id} item={menu} level={1} />;
             default:
