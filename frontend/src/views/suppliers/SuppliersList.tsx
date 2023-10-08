@@ -18,7 +18,7 @@ type createDataProps = {
     updated_at: string;
 };
 
-function CustomersList() {
+function SuppliersList() {
     // const theme = useTheme();
 
     function createData({
@@ -51,7 +51,7 @@ function CustomersList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/customers/')
+            .get('http://localhost:8000/api/suppliers/')
             .then((response) => {
                 setData(response.data);
             })
@@ -128,7 +128,7 @@ function CustomersList() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Customers" />;
+    return <CapstoneDataGrid rows={rows} columns={columns} heading="Suppliers" />;
 }
 
-export default CustomersList;
+export default SuppliersList;

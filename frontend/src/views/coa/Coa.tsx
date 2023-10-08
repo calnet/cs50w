@@ -1,9 +1,9 @@
-import { Box } from '@mui/material';
+import CoaLayouts from './CoaLayouts';
 
 function Coa() {
     return (
         <>
-            <Box sx={{ p: 1, typography: 'h3', color: 'cadetblue' }}>This is the Chart of Accounts page</Box>
+            <CoaLayouts />
         </>
     );
 }

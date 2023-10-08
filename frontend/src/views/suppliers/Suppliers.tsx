@@ -1,11 +1,7 @@
-import { Box } from '@mui/material';
+import SuppliersList from './SuppliersList';
 
 function Suppliers() {
-    return (
-        <>
-            <Box sx={{ p: 1, typography: 'h3', color: 'cadetblue' }}>This is the Suppliers page</Box>
-        </>
-    );
+    return <SuppliersList />;
 }
 
 export default Suppliers;
