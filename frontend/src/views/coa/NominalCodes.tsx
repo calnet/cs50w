@@ -42,14 +42,14 @@ function NominalCodesList() {
     }, []);
 
     const columns: GridColDef[] = [
-        {
-            field: 'id',
-            headerName: 'ID',
-            headerAlign: 'left',
-            align: 'left',
-            type: 'number',
-            flex: 0.1,
-        },
+        // {
+        //     field: 'id',
+        //     headerName: 'ID',
+        //     headerAlign: 'left',
+        //     align: 'left',
+        //     type: 'number',
+        //     flex: 0.1,
+        // },
         {
             field: 'nominal_code',
             headerName: 'Nominal Code',
@@ -57,6 +57,9 @@ function NominalCodesList() {
             align: 'left',
             type: 'number',
             flex: 0.25,
+            valueFormatter: (params) => {
+                return String(params.value).padStart(4, '0');
+            },
         },
         {
             field: 'nominal_name',
@@ -72,18 +75,18 @@ function NominalCodesList() {
             type: 'number',
             flex: 0.5,
         },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'Created',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'updated_at',
-        //     headerName: 'Updated',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
+        {
+            field: 'created_at',
+            headerName: 'Created',
+            type: 'string',
+            flex: 0.25,
+        },
+        {
+            field: 'updated_at',
+            headerName: 'Updated',
+            type: 'string',
+            flex: 0.25,
+        },
     ];
 
     const rows: createDataProps[] = [];
