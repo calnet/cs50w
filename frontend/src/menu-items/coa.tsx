@@ -12,11 +12,19 @@ const coaMenu: MenuItemType = {
     title: 'Chart of Accounts',
     type: 'group',
     children: [
+        // {
+        //     id: 'layouts',
+        //     title: 'Layouts',
+        //     type: 'item',
+        //     url: '/coa/layouts',
+        //     icon: icons.TableChart,
+        //     breadcrumbs: false,
+        // },
         {
-            id: 'coa_layouts',
-            title: 'Chart of Accounts',
+            id: 'coa_layout',
+            title: 'Chart of Accounts Layout',
             type: 'item',
-            url: '/coa/coa_layouts',
+            url: '/coa/coa_layout',
             icon: icons.TableChart,
             breadcrumbs: false,
         },

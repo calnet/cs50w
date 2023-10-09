@@ -32,7 +32,8 @@ const SupplierInvoices = Loadable(lazy(() => import('../views/suppliers/Supplier
 const SupplierPurchaseOrders = Loadable(lazy(() => import('../views/suppliers/SupplierPurchaseOrders')));
 
 // chart of accounts page routing
-const CoaLayouts = Loadable(lazy(() => import('../views/coa/CoaLayouts')));
+const Layouts = Loadable(lazy(() => import('../views/coa/Layouts')));
+const CoaLayout = Loadable(lazy(() => import('../views/coa/CoaLayout')));
 const CoaCategories = Loadable(lazy(() => import('../views/coa/CoaCategories')));
 const NominalTypes = Loadable(lazy(() => import('../views/coa/NominalTypes')));
 const NominalCodes = Loadable(lazy(() => import('../views/coa/NominalCodes')));
@@ -137,8 +138,12 @@ const MainRoutes: RouteObject = {
             path: 'coa',
             children: [
                 {
-                    path: 'coa_layouts',
-                    element: <CoaLayouts />,
+                    path: 'layouts',
+                    element: <Layouts />,
+                },
+                {
+                    path: 'coa_layout',
+                    element: <CoaLayout />,
                 },
                 {
                     path: 'coa_categories',

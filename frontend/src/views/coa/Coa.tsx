@@ -1,9 +1,9 @@
-import CoaLayouts from './CoaLayouts';
+import Layouts from './Layouts';
 
 function Coa() {
     return (
         <>
-            <CoaLayouts />
+            <Layouts />
         </>
     );
 }

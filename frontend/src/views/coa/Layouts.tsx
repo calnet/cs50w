@@ -13,7 +13,7 @@ type createDataProps = {
     updated_at: string;
 };
 
-function CoaLayouts() {
+function Layouts() {
     // const theme = useTheme();
 
     function createData({ id, layout_name, description, created_at, updated_at }: createDataProps) {
@@ -30,7 +30,7 @@ function CoaLayouts() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/coa_layouts/')
+            .get('http://localhost:8000/api/layouts/')
             .then((response) => {
                 setData(response.data);
             })
@@ -88,7 +88,7 @@ function CoaLayouts() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Chart of Account Layouts" />;
+    return <CapstoneDataGrid rows={rows} columns={columns} heading="Layouts" />;
 }
 
-export default CoaLayouts;
+export default Layouts;
