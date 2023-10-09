@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
+        "target": "ES2022",
         "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
         "module": "ESNext",
+        "allowJs": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
         "skipLibCheck": true,
@@ -11,10 +12,10 @@
 
         /* Bundler mode */
         "moduleResolution": "bundler",
+        "noEmit": true,
         "allowImportingTsExtensions": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
         "jsx": "react-jsx",
         "esModuleInterop": true,
 
