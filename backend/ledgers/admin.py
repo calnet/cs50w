@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import CoaLayout, CoaCategory, NominalType, NominalCode
+from .models import Layout, CoaCategory, NominalType, NominalCode, CoaLayout
 
 # Register your models here.
+admin.site.register(Layout)
 admin.site.register(CoaLayout)
 admin.site.register(CoaCategory)
 admin.site.register(NominalType)
