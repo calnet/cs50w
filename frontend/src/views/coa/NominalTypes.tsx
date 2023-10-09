@@ -8,7 +8,7 @@ import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 type createDataProps = {
     id: number;
     type_name: string;
-    coa_category: number;
+    category_name: string;
     created_at: string;
     updated_at: string;
 };
@@ -16,11 +16,11 @@ type createDataProps = {
 function NominalTypesList() {
     // const theme = useTheme();
 
-    function createData({ id, type_name, coa_category, created_at, updated_at }: createDataProps) {
+    function createData({ id, type_name, category_name, created_at, updated_at }: createDataProps) {
         return {
             id,
             type_name,
-            coa_category,
+            category_name,
             created_at,
             updated_at,
         };
@@ -55,13 +55,21 @@ function NominalTypesList() {
             flex: 0.25,
         },
         {
-            field: 'coa_category',
-            headerName: 'Coa Category',
+            field: 'category_name',
+            headerName: 'Category Name',
             headerAlign: 'left',
             align: 'left',
-            type: 'number',
+            type: 'string',
             flex: 1,
         },
+        // {
+        //     field: 'coa_category',
+        //     headerName: 'Coa Category',
+        //     headerAlign: 'left',
+        //     align: 'left',
+        //     type: 'number',
+        //     flex: 1,
+        // },
         // {
         //     field: 'created_at',
         //     headerName: 'Created',
@@ -83,7 +91,7 @@ function NominalTypesList() {
             createData({
                 id: item.id,
                 type_name: item.type_name,
-                coa_category: item.coa_category,
+                category_name: item.category_name,
                 created_at: item.created_at,
                 updated_at: item.updated_at,
             })

@@ -7,9 +7,10 @@ import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 
 type createDataProps = {
     id: number;
+    layout_name: string;
     nominal_code: number;
     nominal_name: string;
-    nominal_type: number;
+    type_name: string;
     created_at: string;
     updated_at: string;
 };
@@ -17,12 +18,13 @@ type createDataProps = {
 function NominalCodesList() {
     // const theme = useTheme();
 
-    function createData({ id, nominal_code, nominal_name, nominal_type, created_at, updated_at }: createDataProps) {
+    function createData({ id, layout_name, nominal_code, nominal_name, type_name, created_at, updated_at }: createDataProps) {
         return {
             id,
+            layout_name,
             nominal_code,
             nominal_name,
-            nominal_type,
+            type_name,
             created_at,
             updated_at,
         };
@@ -42,6 +44,12 @@ function NominalCodesList() {
     }, []);
 
     const columns: GridColDef[] = [
+        // {
+        //     field: 'layout_name',
+        //     headerName: 'Layout Name',
+        //     type: 'string',
+        //     flex: 0.25,
+        // },
         // {
         //     field: 'id',
         //     headerName: 'ID',
@@ -68,25 +76,33 @@ function NominalCodesList() {
             flex: 0.5,
         },
         {
-            field: 'nominal_type',
+            field: 'type_name',
             headerName: 'Nominal Type',
             headerAlign: 'left',
             align: 'left',
-            type: 'number',
+            type: 'string',
             flex: 0.5,
         },
-        {
-            field: 'created_at',
-            headerName: 'Created',
-            type: 'string',
-            flex: 0.25,
-        },
-        {
-            field: 'updated_at',
-            headerName: 'Updated',
-            type: 'string',
-            flex: 0.25,
-        },
+        // {
+        //     field: 'nominal_type',
+        //     headerName: 'Nominal Type',
+        //     headerAlign: 'left',
+        //     align: 'left',
+        //     type: 'number',
+        //     flex: 0.5,
+        // },
+        // {
+        //     field: 'created_at',
+        //     headerName: 'Created',
+        //     type: 'string',
+        //     flex: 0.25,
+        // },
+        // {
+        //     field: 'updated_at',
+        //     headerName: 'Updated',
+        //     type: 'string',
+        //     flex: 0.25,
+        // },
     ];
 
     const rows: createDataProps[] = [];
@@ -95,9 +111,10 @@ function NominalCodesList() {
         rows.push(
             createData({
                 id: item.id,
+                layout_name: item.layout_name,
                 nominal_code: item.nominal_code,
                 nominal_name: item.nominal_name,
-                nominal_type: item.nominal_type,
+                type_name: item.type_name,
                 created_at: item.created_at,
                 updated_at: item.updated_at,
             })
