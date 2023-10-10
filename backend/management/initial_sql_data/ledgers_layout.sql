@@ -1,0 +1,1 @@
+INSERT INTO ledgers_layout (layout_name,description,created_at,updated_at) VALUES ('default','Default Chart of Account Layout',DATETIME(),DATETIME());
