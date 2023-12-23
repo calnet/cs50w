@@ -21,6 +21,14 @@ const customersMenu: MenuItemType = {
             breadcrumbs: true,
         },
         {
+            id: 'customer_new',
+            title: 'New Customer',
+            type: 'item',
+            url: '/customers/customer_new',
+            icon: icons.People,
+            breadcrumbs: true,
+        },
+        {
             id: 'invoices',
             title: 'Invoices',
             type: 'item',
