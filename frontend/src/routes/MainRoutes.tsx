@@ -9,12 +9,17 @@ import Loadable from '../ui-component/Loadable';
 const Dashboard = Loadable(lazy(() => import('../views/dashboard')));
 
 //utilities routing
-const Utilities = Loadable(lazy(() => import('../views/utilities')));
+const Utilities = Loadable(lazy(() => import('../views/utilities/Utilities')));
 const BasicTable = Loadable(lazy(() => import('../views/utilities/BasicTable')));
 const DataTable = Loadable(lazy(() => import('../views/utilities/DataTable')));
 const DenseTable = Loadable(lazy(() => import('../views/utilities/DenseTable')));
 const EnhancedTable = Loadable(lazy(() => import('../views/utilities/EnhancedTable')));
 const StickyHeadTable = Loadable(lazy(() => import('../views/utilities/StickyHeadTable')));
+
+// dialogs routing
+const Dialogs = Loadable(lazy(() => import('../views/utilities/dialogs/Dialogs')));
+const FormDialog = Loadable(lazy(() => import('../views/utilities/dialogs/FormDialog')));
+const DraggableDialog = Loadable(lazy(() => import('../views/utilities/dialogs/DraggableDialog')));
 
 // banking page routing
 const Banking = Loadable(lazy(() => import('../views/banking/Banking')));
@@ -23,6 +28,7 @@ const BankingStatements = Loadable(lazy(() => import('../views/banking/BankingSt
 
 // customer page routing
 const Customers = Loadable(lazy(() => import('../views/customers/Customers')));
+const CustomerDialog = Loadable(lazy(() => import('../views/customers/CustomerDialog')));
 const CustomerInvoices = Loadable(lazy(() => import('../views/customers/CustomerInvoices')));
 const CustomerSalesOrders = Loadable(lazy(() => import('../views/customers/CustomerSalesOrders')));
 
@@ -36,6 +42,7 @@ const Layouts = Loadable(lazy(() => import('../views/coa/Layouts')));
 const CoaLayout = Loadable(lazy(() => import('../views/coa/CoaLayout')));
 const CoaCategories = Loadable(lazy(() => import('../views/coa/CoaCategories')));
 const NominalTypes = Loadable(lazy(() => import('../views/coa/NominalTypes')));
+const NominalCodeGet = Loadable(lazy(() => import('../views/coa/NominalCode')));
 const NominalCodes = Loadable(lazy(() => import('../views/coa/NominalCodes')));
 const CoaControlAccounts = Loadable(lazy(() => import('../views/coa/CoaControlAccounts')));
 
@@ -84,11 +91,32 @@ const MainRoutes: RouteObject = {
             ],
         },
         {
+            path: 'utilities/dialogs',
+            children: [
+                {
+                    path: '',
+                    element: <Dialogs />,
+                },
+                {
+                    path: '/utilities/dialogs/form-dialog',
+                    element: <FormDialog />,
+                },
+                {
+                    path: '/utilities/dialogs/draggable-dialog',
+                    element: <DraggableDialog />,
+                },
+            ],
+        },
+        {
             path: 'customers',
             children: [
                 {
                     path: '',
                     element: <Customers />,
+                },
+                {
+                    path: 'customer_new',
+                    element: <CustomerDialog />,
                 },
                 {
                     path: 'invoices',
@@ -152,6 +180,10 @@ const MainRoutes: RouteObject = {
                 {
                     path: 'nominal_types',
                     element: <NominalTypes />,
+                },
+                {
+                    path: 'nominal_code/:nominal_code',
+                    element: <NominalCodeGet />,
                 },
                 {
                     path: 'nominal_codes',
