@@ -133,6 +133,18 @@ const options: ThemeOptions = {
                 },
             },
         },
+        MuiDialogTitle: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'uppercase',
+                    textAlign: 'center',
+                    '&.MuiTypography-root': {
+                        fontSize: 30,
+                    },
+                },
+            },
+        },
+
         // MuiIconButton: {
         //     styleOverrides: {
         //         sizeSmall: {
