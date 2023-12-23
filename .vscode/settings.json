@@ -2,8 +2,8 @@
     "breadcrumbs.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true,
-        "source.addMissingImports": true
+        "source.organizeImports": "explicit",
+        "source.addMissingImports": "explicit"
     },
     "editor.codeLens": false,
     "editor.colorDecorators": true,
@@ -11,7 +11,7 @@
     "editor.formatOnSave": true,
     "editor.hover.enabled": true,
     "editor.lightbulb.enabled": true,
-    "editor.occurrencesHighlight": true,
+    "editor.occurrencesHighlight": "singleFile",
     "editor.parameterHints.enabled": true,
     "editor.quickSuggestions": {
         "comments": "on",
