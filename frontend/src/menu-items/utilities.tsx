@@ -60,7 +60,6 @@ const utilitiesMenu: MenuItemType = {
             icon: icons.Dashboard,
             breadcrumbs: true,
         },
-        // ],
     ],
 };
 
