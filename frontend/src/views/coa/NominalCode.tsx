@@ -1,11 +1,11 @@
 import { GridColDef } from '@mui/x-data-grid';
+import axios from 'axios';
 
 import { useEffect, useState } from 'react';
-
-import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 
-type createDataProps = {
+export type NominalRecordProps = {
     id: number;
     layout_name: string;
     nominal_code: number;
@@ -15,7 +15,7 @@ type createDataProps = {
     updated_at: string;
 };
 
-function createData({ id, layout_name, nominal_code, nominal_name, type_name, created_at, updated_at }: createDataProps) {
+function nominalRecord({ id, layout_name, nominal_code, nominal_name, type_name, created_at, updated_at }: NominalRecordProps) {
     return {
         id,
         layout_name,
@@ -27,37 +27,28 @@ function createData({ id, layout_name, nominal_code, nominal_name, type_name, cr
     };
 }
 
-function NominalCodesList() {
+function NominalCodeGet() {
     // const theme = useTheme();
-
     const [data, setData] = useState([]);
+    // const [openDialog, setOpenDialog] = useState(false);
+
+    const { nominal_code } = useParams();
+
+    const url = 'http://localhost:8000/api/nominal_code/' + nominal_code;
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/nominal_codes/')
+            .get(url)
             .then((response) => {
                 setData(response.data);
+                console.log(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, []);
+    }, [url]);
 
     const columns: GridColDef[] = [
-        // {
-        //     field: 'layout_name',
-        //     headerName: 'Layout Name',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'id',
-        //     headerName: 'ID',
-        //     headerAlign: 'left',
-        //     align: 'left',
-        //     type: 'number',
-        //     flex: 0.1,
-        // },
         {
             field: 'nominal_code',
             headerName: 'Nominal Code',
@@ -83,33 +74,13 @@ function NominalCodesList() {
             type: 'string',
             flex: 0.5,
         },
-        // {
-        //     field: 'nominal_type',
-        //     headerName: 'Nominal Type',
-        //     headerAlign: 'left',
-        //     align: 'left',
-        //     type: 'number',
-        //     flex: 0.5,
-        // },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'Created',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'updated_at',
-        //     headerName: 'Updated',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
     ];
 
-    const rows: createDataProps[] = [];
+    const rows: NominalRecordProps[] = [];
 
-    data.map((item: createDataProps) =>
+    data.map((item: NominalRecordProps) =>
         rows.push(
-            createData({
+            nominalRecord({
                 id: item.id,
                 layout_name: item.layout_name,
                 nominal_code: item.nominal_code,
@@ -121,7 +92,14 @@ function NominalCodesList() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Nominal Codes" />;
+    // return NominalCodeDialog(rows, columns, 'Nominal Code Details');
+
+    return (
+        <>
+            {/* <NominalCodeDialog open={openDialog} handleClose={() => setOpenDialog(false)} selectedRow={data[0]} /> */}
+            <CapstoneDataGrid rows={rows} columns={columns} heading="Nominal Code Details" />;
+        </>
+    );
 }
 
-export default NominalCodesList;
+export default NominalCodeGet;
