@@ -1,6 +1,8 @@
 import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
+import { useState } from 'react';
+import NominalCodeDialog from '../views/coa/NominalCodeDialog';
 
 interface DataGridProps {
     // eslint-disable-next-line
@@ -10,7 +12,16 @@ interface DataGridProps {
 }
 
 function CapstoneDataGrid({ rows, columns, heading }: DataGridProps) {
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
+
     const height = rows.length > 0 ? 'auto' : 200;
+
+    const handleRowClick = (params: GridRowParams) => {
+        console.log(params.row);
+        setSelectedRow(params.row);
+        setOpenDialog(true);
+    };
 
     return (
         <>
@@ -25,8 +36,15 @@ function CapstoneDataGrid({ rows, columns, heading }: DataGridProps) {
                         },
                     }}
                     pageSizeOptions={[5, 10, 25]}
+                    onRowClick={(params: GridRowParams) => {
+                        if (heading == 'Nominal Codes' || heading == 'Nominal Code Details') {
+                            handleRowClick(params);
+                        }
+                    }}
+
                     // checkboxSelection
                 />
+                <NominalCodeDialog open={openDialog} handleClose={() => setOpenDialog(false)} selectedRow={selectedRow} />
             </Box>
         </>
     );
