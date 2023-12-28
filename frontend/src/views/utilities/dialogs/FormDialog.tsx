@@ -1,8 +1,12 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
-function FormDialog() {
-    const [open, setOpen] = useState(false);
+type FormDialogProps = {
+    initialOpen: boolean;
+};
+
+function FormDialog({ initialOpen }: FormDialogProps) {
+    const [open, setOpen] = useState(initialOpen);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -13,7 +17,7 @@ function FormDialog() {
     };
 
     return (
-        <Fragment>
+        <>
             <Button variant="outlined" onClick={handleClickOpen}>
                 Open form dialog
             </Button>
@@ -30,7 +34,7 @@ function FormDialog() {
                     <Button onClick={handleClose}>Subscribe</Button>
                 </DialogActions>
             </Dialog>
-        </Fragment>
+        </>
     );
 }
 

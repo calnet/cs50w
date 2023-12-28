@@ -2,6 +2,10 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 
+type DraggableDialogProps = {
+    initialOpen: boolean;
+};
+
 function PaperComponent(props: PaperProps) {
     const nodeRef = useRef(null);
 
@@ -12,8 +16,8 @@ function PaperComponent(props: PaperProps) {
     );
 }
 
-export default function DraggableDialog() {
-    const [open, setOpen] = useState(false);
+export default function DraggableDialog({ initialOpen }: DraggableDialogProps) {
+    const [open, setOpen] = useState(initialOpen);
 
     const handleClickOpen = () => {
         setOpen(true);

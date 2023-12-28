@@ -4,6 +4,8 @@ import FormDialog from './FormDialog';
 
 function Dialogs() {
     const theme = useTheme();
+    const initialDraggableOpen = false;
+    const initialFormOpen = false;
 
     return (
         <>
@@ -19,14 +21,14 @@ function Dialogs() {
                         Form Dialog
                     </Typography>
                     <Box sx={{ border: 1 }}>
-                        <FormDialog />
+                        <FormDialog initialOpen={initialFormOpen} />
                     </Box>
 
                     <Typography variant="h3" py={4} color={theme.palette.secondary.dark} textTransform={'uppercase'}>
                         Draggable Dialog
                     </Typography>
                     <Box sx={{ border: 1 }}>
-                        <DraggableDialog />
+                        <DraggableDialog initialOpen={initialDraggableOpen} />
                     </Box>
                 </Box>
             </Stack>
