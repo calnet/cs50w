@@ -1,25 +1,24 @@
 import { TextFieldProps } from '@mui/material';
 
 export const NominalCodeDialogFields: TextFieldProps[] = [
-    {
-        autoFocus: true,
-        margin: 'dense',
-        id: 'id',
-        label: 'ID',
-        type: 'number',
-        fullWidth: true,
-        variant: 'outlined',
-    },
-    {
-        autoFocus: false,
-        margin: 'dense',
-        id: 'layout_name',
-        label: 'Layout Name',
-        type: 'text',
-        fullWidth: true,
-        variant: 'outlined',
-    },
-
+    // {
+    //     autoFocus: true,
+    //     margin: 'dense',
+    //     id: 'id',
+    //     label: 'ID',
+    //     type: 'number',
+    //     fullWidth: true,
+    //     variant: 'outlined',
+    // },
+    // {
+    //     autoFocus: false,
+    //     margin: 'dense',
+    //     id: 'layout_name',
+    //     label: 'Layout Name',
+    //     type: 'text',
+    //     fullWidth: true,
+    //     variant: 'outlined',
+    // },
     {
         autoFocus: true,
         margin: 'dense',
@@ -43,7 +42,7 @@ export const NominalCodeDialogFields: TextFieldProps[] = [
         margin: 'dense',
         id: 'type_name',
         label: 'Nominal Type',
-        type: 'text',
+        type: 'text', // TODO: Change to dropdown and display list of nominal types
         fullWidth: true,
         variant: 'outlined',
     },
@@ -55,6 +54,7 @@ export const NominalCodeDialogFields: TextFieldProps[] = [
         type: 'text',
         fullWidth: true,
         variant: 'outlined',
+        // TODO: Format date
     },
     {
         autoFocus: false,
@@ -64,5 +64,6 @@ export const NominalCodeDialogFields: TextFieldProps[] = [
         type: 'text',
         fullWidth: true,
         variant: 'outlined',
+        // TODO: Format date
     },
 ];
