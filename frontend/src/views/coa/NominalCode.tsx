@@ -15,7 +15,7 @@ export type NominalRecordProps = {
     updated_at: string;
 };
 
-function nominalRecord({ id, layout_name, nominal_code, nominal_name, type_name, created_at, updated_at }: NominalRecordProps) {
+function CreateNominalRecord({ id, layout_name, nominal_code, nominal_name, type_name, created_at, updated_at }: NominalRecordProps) {
     return {
         id,
         layout_name,
@@ -80,7 +80,7 @@ function NominalCodeGet() {
 
     data.map((item: NominalRecordProps) =>
         rows.push(
-            nominalRecord({
+            CreateNominalRecord({
                 id: item.id,
                 layout_name: item.layout_name,
                 nominal_code: item.nominal_code,
