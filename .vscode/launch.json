@@ -1,54 +1,62 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Attach to Chrome",
-			"port": 9222,
-			"request": "attach",
-			"type": "chrome",
-			"url": "http://localhost:8000",
-			"webRoot": "${workspaceFolder}/network/static/network",
-			"showAsyncStacks": true,
-			"disableNetworkCache": true
-		},
-		{
-			"name": "Launch Chrome",
-			"request": "launch",
-			"type": "chrome",
-			"url": "http://localhost:8000",
-			"webRoot": "${workspaceFolder}/network/static/network",
-			"showAsyncStacks": true,
-			"disableNetworkCache": true
-		},
-		{
-			"name": "Python: Django",
-			"type": "python",
-			"request": "launch",
-			"program": "${workspaceFolder}\\backend\\manage.py",
-			"args": [
-				"runserver"
-			],
-			"django": true,
-			"showReturnValue": true,
-			"justMyCode": true,
-			"autoReload": {
-				"enable": true
-			}
-		},
-		{
-			"name": "Python: Debug - Django",
-			"type": "python",
-			"request": "launch",
-			"program": "${workspaceFolder}\\backend\\manage.py",
-			"args": [
-				"runserver"
-			],
-			"django": true,
-			"showReturnValue": true,
-			"justMyCode": false
-		}
-	]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "chrome",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}\\frontend\\src",
+            "showAsyncStacks": true,
+            "disableNetworkCache": true
+        },
+        {
+            "name": "Debug React",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/frontend/src",
+            "sourceMapPathOverrides": {
+                "webpack:///./frontend/src/*": "${webRoot}/*"
+            },
+            "runtimeArgs": ["--remote-debugging-port=9222"],
+            "sourceMaps": true
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}\\frontend\\src",
+            "showAsyncStacks": true,
+            "disableNetworkCache": true
+        },
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\backend\\manage.py",
+            "args": ["runserver"],
+            "django": true,
+            "showReturnValue": true,
+            "justMyCode": true,
+            "autoReload": {
+                "enable": true
+            }
+        },
+        {
+            "name": "Python: Debug - Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\backend\\manage.py",
+            "args": ["runserver"],
+            "django": true,
+            "showReturnValue": true,
+            "justMyCode": false
+        }
+    ]
 }
