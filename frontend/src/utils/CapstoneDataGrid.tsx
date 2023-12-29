@@ -2,6 +2,7 @@ import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 import { useState } from 'react';
+import CoaLayoutDialog from '../views/coa/CoaLayoutDialog';
 import NominalCodeDialog from '../views/coa/NominalCodeDialog';
 
 interface DataGridProps {
@@ -19,9 +20,17 @@ function CapstoneDataGrid({ rows, columns, heading }: DataGridProps) {
 
     const handleRowClick = (params: GridRowParams) => {
         console.log(params.row);
-        setSelectedRow(params.row);
         setOpenDialog(true);
     };
+
+    switch (heading) {
+        case 'Chart of Accounts Layout':
+            setOpenDialog;
+            break;
+
+        default:
+            break;
+    }
 
     return (
         <>
@@ -37,7 +46,8 @@ function CapstoneDataGrid({ rows, columns, heading }: DataGridProps) {
                     }}
                     pageSizeOptions={[5, 10, 25]}
                     onRowClick={(params: GridRowParams) => {
-                        if (heading == 'Nominal Codes' || heading == 'Nominal Code Details') {
+                        setSelectedRow(params.row);
+                        if (heading == 'Nominal Codes' || heading == 'Nominal Code Details' || heading == 'Chart of Accounts Layout') {
                             handleRowClick(params);
                         }
                     }}
@@ -45,6 +55,7 @@ function CapstoneDataGrid({ rows, columns, heading }: DataGridProps) {
                     // checkboxSelection
                 />
                 <NominalCodeDialog open={openDialog} handleClose={() => setOpenDialog(false)} selectedRow={selectedRow} />
+                <CoaLayoutDialog open={openDialog} handleClose={() => setOpenDialog(false)} selectedRow={selectedRow} />
             </Box>
         </>
     );
