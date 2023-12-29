@@ -11,7 +11,7 @@ interface NominalCodeDialogProps {
 function NominalCodeDialog({ open, handleClose, selectedRow }: NominalCodeDialogProps) {
     return NominalCodeFormDialog({
         formTitle: 'Nominal Code Details',
-        contentText: 'View Nominal Code Record',
+        // contentText: 'View Nominal Code Record',
         fields: NominalCodeDialogFields,
         open: open,
         handleClose: handleClose,
