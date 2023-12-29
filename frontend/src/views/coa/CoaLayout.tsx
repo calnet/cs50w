@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 
-type createDataProps = {
+export type CoaLayoutRecordProps = {
     id: number;
     layout_name: string;
     type_name: string;
@@ -18,7 +18,15 @@ type createDataProps = {
 function CoaLayoutList() {
     // const theme = useTheme();
 
-    function createData({ id, layout_name, type_name, nominal_code_min, nominal_code_max, created_at, updated_at }: createDataProps) {
+    function CoaLayoutRecord({
+        id,
+        layout_name,
+        type_name,
+        nominal_code_min,
+        nominal_code_max,
+        created_at,
+        updated_at,
+    }: CoaLayoutRecordProps) {
         return {
             id,
             layout_name,
@@ -102,11 +110,11 @@ function CoaLayoutList() {
         // },
     ];
 
-    const rows: createDataProps[] = [];
+    const rows: CoaLayoutRecordProps[] = [];
 
-    data.map((item: createDataProps) =>
+    data.map((item: CoaLayoutRecordProps) =>
         rows.push(
-            createData({
+            CoaLayoutRecord({
                 id: item.id,
                 layout_name: item.layout_name,
                 type_name: item.type_name,
