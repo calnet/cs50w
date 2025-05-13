@@ -25,7 +25,11 @@ SECRET_KEY = "django-insecure-birwm$l)_+a$ba7*y_nv%)@q@o@2irw=2^v^jnl39c+5&38yt+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "192.168.1.71"
+]
 
 
 # Application definition
@@ -49,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -56,7 +61,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -132,22 +136,16 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# SECURITY WARNING: This disables the CORS feature, don't run with CORS_ORIGIN_ALLOW_ALL turned on in production!
-
-# CORS_ORIGIN_ALLOW_ALL = True
-
 AUTH_USER_MODEL = "users.CustomUser"
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+# SECURITY WARNING: This disables the CORS feature, don't run with CORS_ALLOW_ALL_ORIGIN turned on in production!
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Add the origin of your React app
     "http://127.0.0.1:5173",  # Add the origin of your React app
+    "http://192.168.1.71:5173",  # Add the origin of your React app
 ]
-
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",  # Add the origin of your React app
-# ]
 
 LOGIN_URL = "/users/login/"
 
