@@ -14,7 +14,9 @@ function SuppliersList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
 
-    const url = 'http://localhost:8000/api/suppliers/';
+    const hostname = window.location.hostname;
+
+    const url = `http://${hostname}:8000/api/suppliers/`;
 
     useEffect(() => {
         axios

@@ -16,7 +16,9 @@ function NominalCodeGet() {
     const [data, setData] = useState([]);
     const { nominal_code } = useParams();
 
-    const url = 'http://localhost:8000/api/nominal_code/' + nominal_code;
+    const hostname = window.location.hostname
+
+    const url = `http://${hostname}:8000/api/nominal_code/' + nominal_code;
 
     useEffect(() => {
         axios

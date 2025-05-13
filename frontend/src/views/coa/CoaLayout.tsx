@@ -14,7 +14,9 @@ function CoaLayoutList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
 
-    const url = 'http://localhost:8000/api/coa_layout/';
+    const hostname = window.location.hostname;
+
+    const url = `http://${hostname}:8000/api/coa_layout/`;
 
     useEffect(() => {
         axios

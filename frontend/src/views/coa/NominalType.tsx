@@ -16,7 +16,9 @@ function NominalTypeGet() {
     const [data, setData] = useState([]);
     const { id } = useParams();
 
-    const url = 'http://localhost:8000/api/nominal_type/' + id;
+    const hostname = window.location.hostname
+
+    const url = `http://${hostname}:8000/api/nominal_type/' + id;
 
     useEffect(() => {
         axios
