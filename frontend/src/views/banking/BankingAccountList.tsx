@@ -13,6 +13,7 @@ function createRecord({ ...props }: BankingAccountType) {
 function BankingAccountList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
+    const [dataChanged, setDataChanged] = useState(false);
 
     const hostname = window.location.hostname;
 
@@ -28,7 +29,11 @@ function BankingAccountList() {
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, [url]);
+    }, [url, dataChanged]);
+
+    const handleDataChanged = () => {
+        setDataChanged(!dataChanged);
+    };
 
     const columns: GridColDef[] = [
         {
@@ -143,7 +148,16 @@ function BankingAccountList() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Banking" dialog="BankingAccountListDialog" url={url} />;
+    return (
+        <CapstoneDataGrid
+            rows={rows}
+            columns={columns}
+            heading="Banking"
+            dialog="BankingAccountListDialog"
+            url={url}
+            handleDataChanged={handleDataChanged}
+        />
+    );
 }
 
 export default BankingAccountList;

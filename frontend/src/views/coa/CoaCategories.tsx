@@ -13,6 +13,7 @@ function createRecord({ ...props }: CoaCategoryType) {
 function CoaCategoriesList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
+    const [dataChanged, setDataChanged] = useState(false);
 
     const hostname = window.location.hostname;
 
@@ -23,12 +24,15 @@ function CoaCategoriesList() {
             .get(url)
             .then((response) => {
                 setData(response.data);
-                console.log(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, [url]);
+    }, [url, dataChanged]);
+
+    const handleDataChanged = () => {
+        setDataChanged(!dataChanged);
+    };
 
     const columns: GridColDef[] = [
         {
@@ -72,7 +76,16 @@ function CoaCategoriesList() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Coa Categories" dialog="CoaCategoryDialog" />;
+    return (
+        <CapstoneDataGrid
+            rows={rows}
+            columns={columns}
+            heading="Coa Categories"
+            dialog="CoaCategoryDialog"
+            url={url}
+            handleDataChanged={handleDataChanged}
+        />
+    );
 }
 
 export default CoaCategoriesList;

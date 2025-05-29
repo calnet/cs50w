@@ -13,6 +13,7 @@ function createRecord({ ...props }: LayoutType) {
 function Layouts() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
+    const [dataChanged, setDataChanged] = useState(false);
 
     const hostname = window.location.hostname;
 
@@ -23,12 +24,15 @@ function Layouts() {
             .get(url)
             .then((response) => {
                 setData(response.data);
-                console.log(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, [url]);
+    }, [url, dataChanged]);
+
+    const handleDataChanged = () => {
+        setDataChanged(!dataChanged);
+    };
 
     const columns: GridColDef[] = [
         {
@@ -79,7 +83,16 @@ function Layouts() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Layouts" dialog="LayoutDialog" url={url} />;
+    return (
+        <CapstoneDataGrid
+            rows={rows}
+            columns={columns}
+            heading="Layouts"
+            dialog="LayoutDialog"
+            url={url}
+            handleDataChanged={handleDataChanged}
+        />
+    );
 }
 
 export default Layouts;

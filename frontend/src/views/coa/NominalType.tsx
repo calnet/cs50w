@@ -25,12 +25,15 @@ function NominalTypeGet() {
             .get(url)
             .then((response) => {
                 setData(response.data);
-                console.log(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, [url]);
+    }, [url, dataChanged]);
+
+    const handleDataChanged = () => {
+        setDataChanged(!dataChanged);
+    };
 
     const columns: GridColDef[] = [
         {
@@ -91,7 +94,16 @@ function NominalTypeGet() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Nominal Type Details" dialog="NominalTypeDialog" url={url} />;
+    return (
+        <CapstoneDataGrid
+            rows={rows}
+            columns={columns}
+            heading="Nominal Type Details"
+            dialog="NominalTypeDialog"
+            url={url}
+            handleDataChanged={handleDataChanged}
+        />
+    );
 }
 
 export default NominalTypeGet;

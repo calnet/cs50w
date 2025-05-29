@@ -13,6 +13,7 @@ function createRecord({ ...props }: SupplierType) {
 function SuppliersList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
+    const [dataChanged, setDataChanged] = useState(false);
 
     const hostname = window.location.hostname;
 
@@ -23,12 +24,15 @@ function SuppliersList() {
             .get(url)
             .then((response) => {
                 setData(response.data);
-                console.log(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, [url]);
+    }, [url, dataChanged]);
+
+    const handleDataChanged = () => {
+        setDataChanged(!dataChanged);
+    };
 
     const columns: GridColDef[] = [
         {
@@ -112,7 +116,16 @@ function SuppliersList() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Suppliers" dialog="SupplierDialog" url={url} />;
+    return (
+        <CapstoneDataGrid
+            rows={rows}
+            columns={columns}
+            heading="Suppliers"
+            dialog="SupplierDialog"
+            url={url}
+            handleDataChanged={handleDataChanged}
+        />
+    );
 }
 
 export default SuppliersList;
