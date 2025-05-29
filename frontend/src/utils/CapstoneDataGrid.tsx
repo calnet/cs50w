@@ -1,7 +1,7 @@
 import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useState } from 'react';
 import { CapstoneDataGridType } from '../types/ViewComponentType';
 import Loadable from '../ui-component/Loadable';
 
@@ -13,7 +13,7 @@ const NominalTypeDialog = Loadable(lazy(() => import('../views/coa/NominalTypeDi
 const CustomerDialog = Loadable(lazy(() => import('../views/customers/CustomerDialog')));
 const SupplierDialog = Loadable(lazy(() => import('../views/suppliers/SupplierDialog')));
 
-function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '' }: CapstoneDataGridType) {
+function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handleDataChanged }: CapstoneDataGridType) {
     const [dialogState, setDialogState] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
@@ -64,7 +64,13 @@ function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '' }: Cap
                     // checkboxSelection
                 />
                 {DialogComponent && (
-                    <DialogComponent dialogState={dialogState} handleClose={() => setDialogState(false)} selectedRow={selectedRow} />
+                    <DialogComponent
+                        dialogState={dialogState}
+                        handleClose={() => setDialogState(false)}
+                        selectedRow={selectedRow}
+                        handleDataChanged={handleDataChanged}
+                        url={url}
+                    />
                 )}
             </Box>
         </>

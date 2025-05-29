@@ -3,7 +3,7 @@ import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import CustomerDialogFields from './CustomerDialogFields';
 
 function CustomerDialog({ ...props }: ViewComponentDialogType) {
-    const { dialogState, handleClose, selectedRow } = props;
+    const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
 
     return CapstoneFormDialog({
         formTitle: 'Customer Details',
@@ -12,6 +12,8 @@ function CustomerDialog({ ...props }: ViewComponentDialogType) {
         dialogState: dialogState,
         handleClose: handleClose,
         selectedRow: selectedRow,
+        url: url,
+        handleDataChanged: handleDataChanged,
     });
 }
 

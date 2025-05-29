@@ -13,6 +13,7 @@ function createRecord({ ...props }: CustomerType) {
 function CustomersList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
+    const [dataChanged, setDataChanged] = useState(false);
 
     const hostname = window.location.hostname;
 
@@ -23,12 +24,16 @@ function CustomersList() {
             .get(url)
             .then((response) => {
                 setData(response.data);
-                console.log(response.data[0]);
+                // console.log(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    }, [url]);
+    }, [url, dataChanged]);
+
+    const handleDataChanged = () => {
+        setDataChanged(!dataChanged);
+    };
 
     const columns: GridColDef[] = [
         {
@@ -112,7 +117,16 @@ function CustomersList() {
         )
     );
 
-    return <CapstoneDataGrid rows={rows} columns={columns} heading="Customers" dialog="CustomerDialog" url={url} />;
+    return (
+        <CapstoneDataGrid
+            rows={rows}
+            columns={columns}
+            heading="Customers"
+            dialog="CustomerDialog"
+            url={url}
+            handleDataChanged={handleDataChanged}
+        />
+    );
 }
 
 export default CustomersList;

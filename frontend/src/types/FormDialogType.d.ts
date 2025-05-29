@@ -8,4 +8,6 @@ export interface FormDialogType {
     selectedRow: any;
     // TODO: Fix the type of selectedRow
     // selectedRow: ViewComponentType | any;
+    url: string;
+    handleDataChanged: () => void;
 }

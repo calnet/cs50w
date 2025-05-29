@@ -22,6 +22,7 @@ export type CapstoneDataGridType = {
     heading: string;
     dialog: string;
     url: string;
+    handleDataChanged: () => void;
 };
 
 export type CoaCategoryType = {

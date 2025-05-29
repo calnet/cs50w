@@ -1,12 +1,13 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormDialogType } from '../types/FormDialogType';
 import PaperComponent from './PaperComponent';
 
 function CapstoneFormDialog({ ...props }: FormDialogType) {
-    const { formTitle, contentText, fields, dialogState, handleClose, selectedRow } = props;
+    const { formTitle, contentText, fields, dialogState, handleClose, handleDataChanged, selectedRow, url } = props;
     const [localDialogState, setLocalDialogState] = useState(false);
-    const [localSelectedRow, setLocalSelectedRow] = useState(null);
+    const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown> | null>(null);
 
     // Update local state when props change
     useEffect(() => {
@@ -17,6 +18,34 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
     const handleCloseDialog = () => {
         setLocalDialogState(false);
         handleClose();
+    };
+
+    // Function to handle saving the form data
+
+    const handleSaveDialog = () => {
+        // Implement save functionality here
+        if (!localSelectedRow) {
+            console.error('No data to save');
+            return;
+        }
+        if (!url) {
+            console.error('No URL provided for saving data');
+            return;
+        }
+
+        axios
+            .put(url, localSelectedRow)
+            .then((response) => {
+                console.log('Record saved successfully: ', localSelectedRow, response.data);
+                // Optionally, you can close the dialog after saving
+                handleCloseDialog();
+                handleDataChanged();
+            })
+            .catch((error) => {
+                console.error('Error saving record:', error);
+                // Handle error appropriately, e.g., show a notification
+                alert('Error saving record: ' + error.message);
+            });
     };
 
     return (
@@ -44,13 +73,20 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                             fullWidth={field.fullWidth}
                             variant={field.variant}
                             value={field.id && localSelectedRow ? localSelectedRow[field.id] : ''}
+                            onChange={(e) => {
+                                const updatedRow = {
+                                    ...(localSelectedRow ?? {}),
+                                    [field.id]: e.target.value,
+                                };
+                                setLocalSelectedRow(updatedRow);
+                            }}
                         />
                     );
                 })}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCloseDialog}>Cancel</Button>
-                <Button onClick={handleCloseDialog}>Save</Button>
+                <Button onClick={handleSaveDialog}>Save</Button>
             </DialogActions>
         </Dialog>
     );
