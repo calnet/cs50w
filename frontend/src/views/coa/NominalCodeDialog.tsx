@@ -3,7 +3,7 @@ import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import { NominalCodeDialogFields } from './NominalCodeDialogFields';
 
 function NominalCodeDialog({ ...props }: ViewComponentDialogType) {
-    const { dialogState, handleClose, selectedRow } = props;
+    const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
 
     return CapstoneFormDialog({
         formTitle: 'Nominal Code Details',
@@ -12,6 +12,8 @@ function NominalCodeDialog({ ...props }: ViewComponentDialogType) {
         dialogState: dialogState,
         handleClose: handleClose,
         selectedRow: selectedRow,
+        url: url,
+        handleDataChanged: handleDataChanged,
     });
 }
 

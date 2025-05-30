@@ -3,7 +3,7 @@ import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import BankingAccountListDialogFields from './BankingAccountListDialogFields';
 
 function BankingAccountListDialog({ ...props }: ViewComponentDialogType) {
-    const { dialogState, handleClose, selectedRow } = props;
+    const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
 
     return CapstoneFormDialog({
         formTitle: 'Bank Account Details',
@@ -12,6 +12,8 @@ function BankingAccountListDialog({ ...props }: ViewComponentDialogType) {
         dialogState: dialogState,
         handleClose: handleClose,
         selectedRow: selectedRow,
+        url: url,
+        handleDataChanged: handleDataChanged,
     });
 }
 

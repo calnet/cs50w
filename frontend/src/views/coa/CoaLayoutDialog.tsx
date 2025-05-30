@@ -3,7 +3,7 @@ import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import { CoaLayoutDialogFields } from './CoaLayoutDialogFields';
 
 function CoaLayoutDialog({ ...props }: ViewComponentDialogType) {
-    const { dialogState, handleClose, selectedRow } = props;
+    const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
 
     return CapstoneFormDialog({
         formTitle: 'Coa Layout Details',
@@ -12,6 +12,8 @@ function CoaLayoutDialog({ ...props }: ViewComponentDialogType) {
         dialogState: dialogState,
         handleClose: handleClose,
         selectedRow: selectedRow,
+        url: url,
+        handleDataChanged: handleDataChanged,
     });
 }
 

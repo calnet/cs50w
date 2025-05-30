@@ -3,7 +3,7 @@ import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import SupplierDialogFields from './SupplierDialogFields';
 
 function SupplierDialog({ ...props }: ViewComponentDialogType) {
-    const { dialogState, handleClose, selectedRow } = props;
+    const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
 
     return CapstoneFormDialog({
         formTitle: 'Supplier Details',
@@ -12,6 +12,8 @@ function SupplierDialog({ ...props }: ViewComponentDialogType) {
         dialogState: dialogState,
         handleClose: handleClose,
         selectedRow: selectedRow,
+        url: url,
+        handleDataChanged: handleDataChanged,
     });
 }
 
