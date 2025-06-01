@@ -34,7 +34,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
         }
 
         axios
-            .put(url, localSelectedRow)
+            .post(url, localSelectedRow)
             .then((response) => {
                 console.log('Record saved successfully: ', localSelectedRow, response.data);
                 // Optionally, you can close the dialog after saving
