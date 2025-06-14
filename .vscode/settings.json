@@ -1,5 +1,6 @@
 {
     "breadcrumbs.enabled": true,
+    "cSpell.words": ["simplebar"],
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",
@@ -38,7 +39,7 @@
     "terminal.integrated.tabStopWidth": 4,
     "workbench.colorTheme": "Shades of Purple (Super Dark)",
     "workbench.statusBar.visible": true,
-    "workspaceExplorer.workspaceStorageDirectory": "D:/Users/calnet/Workspace",
+    "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage",
     "[django-html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.quickSuggestions": {
