@@ -48,9 +48,15 @@ def coa_categories(request):
 
 
 @api_view(['GET', 'POST'])
-def nominal_types(request):
+def nominal_types(request, id=None):
     if request.method == 'GET':
-        data = NominalType.objects.all()
+        if id:
+            data = NominalType.objects.filter(id=id)
+        else:
+            data = NominalType.objects.all()
+        if not data:
+            return Response({"Records": "Not found."}, status=status.HTTP_404_NOT_FOUND)
+
         serializer = NominalTypesSerializer(data,
                                             context={'request': request},
                                             many=True)

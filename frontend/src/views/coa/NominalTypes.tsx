@@ -1,6 +1,7 @@
 import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { NominalTypeProps } from '../../types/ViewComponentType';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 
@@ -14,10 +15,12 @@ function NominalTypesList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
     const [dataChanged, setDataChanged] = useState(false);
+    const { id } = useParams();
 
     const hostname = window.location.hostname;
 
-    const url = `http://${hostname}:8000/api/nominal_types/`;
+    // If id is present, fetch a specific nominal type; otherwise, fetch all nominal types
+    const url = id ? `http://${hostname}:8000/api/nominal_types/${id}` : `http://${hostname}:8000/api/nominal_types/`;
 
     useEffect(() => {
         axios

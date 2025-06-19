@@ -37,9 +37,10 @@ urlpatterns = [
     re_path("^api/layouts/$", ledgers.layouts),
     re_path("^api/coa_layout/$", ledgers.coa_layout),
     re_path("^api/coa_categories/$", ledgers.coa_categories),
-    re_path("^api/nominal_types/$", ledgers.nominal_types),
+    # re_path("^api/nominal_types/$", ledgers.nominal_types),
     re_path("^api/nominal_codes/$", ledgers.nominal_codes),
 
     path("api/nominal_code/<int:nominal_code>", ledgers.nominal_code),
-    path("api/nominal_type/<int:id>", ledgers.nominal_type),
+    path("api/nominal_types/<int:id>", ledgers.nominal_types),
+    path("api/nominal_types/", ledgers.nominal_types),
 ]
