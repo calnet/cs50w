@@ -75,18 +75,6 @@ def nominal_types(request, id=None):
 
 
 @api_view(['GET', 'POST'])
-def nominal_type(request, id):
-    if request.method == 'GET':
-        data = NominalType.objects.filter(
-            id=id
-        )
-        serializer = NominalTypesSerializer(data,
-                                            context={'request': request},
-                                            many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(['GET', 'POST'])
 def nominal_codes(request):
     if request.method == 'GET':
         data = NominalCode.objects.all()
