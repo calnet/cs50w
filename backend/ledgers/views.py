@@ -75,18 +75,31 @@ def nominal_types(request, id=None):
 
 
 @api_view(['GET', 'POST'])
-def nominal_codes(request):
+def nominal_codes(request, nominal_code=None):
     if request.method == 'GET':
-        data = NominalCode.objects.all()
+        if nominal_code:
+            data = NominalCode.objects.filter(nominal_code=nominal_code)
+        else:
+            data = NominalCode.objects.all()
+
+        if not data:
+            return Response({"Records": "Not found."}, status=status.HTTP_404_NOT_FOUND)
+
         serializer = NominalCodesSerializer(data,
                                             context={'request': request},
                                             many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'POST':
-        data = NominalCode.objects.update_or_create(
-            id=request.data['id'], defaults=request.data)
+        if nominal_code:
+            data = NominalCode.objects.update_or_create(
+                nominal_code=nominal_code, defaults=request.data)
+        else:
+            data = NominalCode.objects.update_or_create(
+                id=request.data['id'], defaults=request.data)
+
         serializer = NominalCodesSerializer(data=request.data)
+
         if serializer.is_valid():
             if data[1] is True:
                 serializer.save()
@@ -95,27 +108,60 @@ def nominal_codes(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'POST'])
-def nominal_code(request, nominal_code):
-    if request.method == 'GET':
-        data = NominalCode.objects.filter(
-            nominal_code=nominal_code
-        )
-        serializer = NominalCodesSerializer(data,
-                                            context={'request': request},
-                                            many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+# @api_view(['GET', 'POST'])
+# def nominal_codes(request):
+#     if request.method == 'GET':
 
-    elif request.method == 'POST':
-        data = NominalCode.objects.update_or_create(
-            id=request.data['nominal_code'], defaults=request.data)
-        serializer = NominalCodesSerializer(data=request.data)
-        if serializer.is_valid():
-            if data[1] is True:
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         data = NominalCode.objects.all()
+
+#         serializer = NominalCodesSerializer(data,
+#                                             context={'request': request},
+#                                             many=True)
+
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     elif request.method == 'POST':
+#         data = NominalCode.objects.update_or_create(
+#             id=request.data['id'], defaults=request.data)
+
+#         serializer = NominalCodesSerializer(data=request.data)
+
+#         if serializer.is_valid():
+#             if data[1] is True:
+#                 serializer.save()
+#                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# @api_view(['GET', 'POST'])
+# def nominal_code(request, nominal_code):
+#     if request.method == 'GET':
+
+#         data = NominalCode.objects.filter(
+#             nominal_code=nominal_code
+#         )
+
+#         serializer = NominalCodesSerializer(data,
+#                                             context={'request': request},
+#                                             many=True)
+
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     elif request.method == 'POST':
+#         data = NominalCode.objects.update_or_create(
+#             id=request.data['nominal_code'], defaults=request.data)
+
+#         serializer = NominalCodesSerializer(data=request.data)
+
+#         if serializer.is_valid():
+#             if data[1] is True:
+#                 serializer.save()
+#                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])

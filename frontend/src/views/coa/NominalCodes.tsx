@@ -1,6 +1,7 @@
 import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { NominalCodeType } from '../../types/ViewComponentType';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 
@@ -14,10 +15,12 @@ function NominalCodesList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
     const [dataChanged, setDataChanged] = useState(false);
+    const { nominal_code } = useParams();
 
     const hostname = window.location.hostname;
 
-    const url = `http://${hostname}:8000/api/nominal_codes/`;
+    // If nominal_code is present, fetch a specific nominal code; otherwise, fetch all nominal codes
+    const url = nominal_code ? `http://${hostname}:8000/api/nominal_codes/${nominal_code}` : `http://${hostname}:8000/api/nominal_codes/`;
 
     useEffect(() => {
         axios
