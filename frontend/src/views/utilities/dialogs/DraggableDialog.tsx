@@ -16,7 +16,7 @@ function PaperComponent(props: PaperProps) {
     );
 }
 
-export default function DraggableDialog({ initialOpen }: DraggableDialogProps) {
+export default function DraggableDialog({ initialOpen = false }: DraggableDialogProps) {
     const [open, setOpen] = useState(initialOpen);
 
     const handleClickOpen = () => {

@@ -5,7 +5,7 @@ type FormDialogProps = {
     initialOpen: boolean;
 };
 
-function FormDialog({ initialOpen }: FormDialogProps) {
+function FormDialog({ initialOpen = false }: FormDialogProps) {
     const [open, setOpen] = useState(initialOpen);
 
     const handleClickOpen = () => {
