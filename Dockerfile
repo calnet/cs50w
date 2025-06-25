@@ -6,7 +6,7 @@ COPY ./requirements.txt /requirements.txt
 COPY ./backend /backend
 WORKDIR /backend
 
-RUN python -m venv env_docker /py && \
+RUN python -m venv env /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /requirements.txt
 
