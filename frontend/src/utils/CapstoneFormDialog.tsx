@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FormDialogType } from '../types/FormDialogType';
 import type { FormField } from '../types/FormField';
 import PaperComponent from './PaperComponent';
-import { getFieldError, validateAllFieldsWithRow } from './validationUtils';
+import { getFieldError, validateAllFields } from './validationUtils';
 
 function CapstoneFormDialog({ ...props }: FormDialogType) {
     const { formTitle, contentText, fields, dialogState, handleClose, handleDataChanged, selectedRow, url } = props;
@@ -12,21 +12,9 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
     const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown> | null>(null);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-    // Validate all fields and return errors object
-    const validateAllFields = () => {
-        const errors: Record<string, string> = {};
-        if (!fields) return errors;
-        (fields as FormField[]).forEach((field) => {
-            const value = localSelectedRow && localSelectedRow[field.id] ? String(localSelectedRow[field.id]) : '';
-            const error = getFieldError(field, value);
-            if (error) errors[field.id] = error;
-        });
-        return errors;
-    };
-
     // Function to handle saving the form data
     const handleSaveDialog = () => {
-        const errors = validateAllFields();
+        const errors = validateAllFields(fields, localSelectedRow || {});
         setFieldErrors(errors);
         if (Object.values(errors).some(Boolean)) {
             // Prevent save if any errors
@@ -157,7 +145,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                                         const updated = { ...prev };
                                         updated[field.id] = '';
                                         // Immediately revalidate with the updated row
-                                        setFieldErrors(validateAllFieldsWithRow(fields, updated));
+                                        setFieldErrors(validateAllFields(fields, updated));
                                         return updated;
                                     });
                                 }

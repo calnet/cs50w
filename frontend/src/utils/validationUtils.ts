@@ -1,8 +1,12 @@
 import { FormField } from "../types/FormField";
 
 const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
 /**
  * Returns a validation error message for a given field and value, or an empty string if valid.
+ * @param field - The form field definition
+ * @param value - The value to validate
+ * @returns Error message or empty string
  */
 export function getFieldError(field: FormField, value: string): string {
     if (field.required && value.trim() === '') {
@@ -30,11 +34,18 @@ export function getFieldError(field: FormField, value: string): string {
 
 /**
  * Validates all fields in a form row and returns an object of errors keyed by field id.
+ * This function replaces both validateAllFields and validateAllFieldsWithRow for DRYness.
+ * @param fields - Array of form field definitions
+ * @param row - The data object to validate (defaults to empty object)
+ * @returns Object of errors keyed by field id
  */
-export function validateAllFieldsWithRow(fields: FormField[], row: Record<string, unknown>): Record<string, string> {
+export function validateAllFields(
+    fields: FormField[],
+    row: Record<string, unknown> = {}
+): Record<string, string> {
     const errors: Record<string, string> = {};
     fields.forEach((field) => {
-        const value = row?.[field.id] ? String(row[field.id]) : '';
+        const value = row && row[field.id] ? String(row[field.id]) : '';
         const error = getFieldError(field, value);
         if (error) errors[field.id] = error;
     });
