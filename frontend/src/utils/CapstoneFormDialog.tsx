@@ -41,6 +41,38 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
             });
     };
 
+    // Handle field value change
+    const handleFieldChange = (field: FormField, newValue: string) => {
+        // Prevent special characters in number fields (allow only digits)
+        if (field.type === 'number') {
+            newValue = newValue.replace(/[^\d]/g, '');
+        }
+        const error = getFieldError(field, newValue);
+        setFieldErrors((prev) => ({
+            ...prev,
+            [field.id]: error,
+        }));
+        const updatedRow = {
+            ...(localSelectedRow ?? {}),
+            [field.id]: newValue,
+        };
+        setLocalSelectedRow(updatedRow);
+    };
+
+    // Handle field blur
+    const handleFieldBlur = (field: FormField) => {
+        if (fieldErrors[field.id]) {
+            setLocalSelectedRow((prev) => {
+                if (!prev) return prev;
+                const updated = { ...prev };
+                updated[field.id] = '';
+                // Immediately revalidate with the updated row
+                setFieldErrors(validateAllFields(fields, updated));
+                return updated;
+            });
+        }
+    };
+
     useEffect(() => {
         setLocalDialogState(dialogState);
         setLocalSelectedRow(selectedRow);
@@ -113,23 +145,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                             helperText={fieldErrors[field.id] || ''}
                             aria-describedby={helperId}
                             FormHelperTextProps={{ id: helperId }}
-                            onChange={(e) => {
-                                let newValue = e.target.value;
-                                // Prevent special characters in number fields (allow only digits)
-                                if (field.type === 'number') {
-                                    newValue = newValue.replace(/[^\d]/g, '');
-                                }
-                                const error = getFieldError(field, newValue);
-                                setFieldErrors((prev) => ({
-                                    ...prev,
-                                    [field.id]: error,
-                                }));
-                                const updatedRow = {
-                                    ...(localSelectedRow ?? {}),
-                                    [field.id]: newValue,
-                                };
-                                setLocalSelectedRow(updatedRow);
-                            }}
+                            onChange={(e) => handleFieldChange(field, e.target.value)}
                             onPaste={(e) => {
                                 if (field.type === 'number') {
                                     const paste = e.clipboardData.getData('text');
@@ -138,18 +154,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                                     }
                                 }
                             }}
-                            onBlur={() => {
-                                if (fieldErrors[field.id]) {
-                                    setLocalSelectedRow((prev) => {
-                                        if (!prev) return prev;
-                                        const updated = { ...prev };
-                                        updated[field.id] = '';
-                                        // Immediately revalidate with the updated row
-                                        setFieldErrors(validateAllFields(fields, updated));
-                                        return updated;
-                                    });
-                                }
-                            }}
+                            onBlur={() => handleFieldBlur(field)}
                         />
                     );
                 })}
