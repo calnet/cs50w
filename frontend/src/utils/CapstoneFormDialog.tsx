@@ -21,9 +21,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
     };
 
     // Function to handle saving the form data
-
     const handleSaveDialog = () => {
-        // Implement save functionality here
         if (!localSelectedRow) {
             console.error('No data to save');
             return;
@@ -33,18 +31,17 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
             return;
         }
 
+        // Call API to save the data
         axios
             .post(url, localSelectedRow)
             .then((response) => {
-                console.log('Record saved successfully: ', localSelectedRow, response.data);
-                // Optionally, you can close the dialog after saving
+                console.log('Record saved successfully: ', response.data);
                 handleCloseDialog();
                 handleDataChanged();
             })
             .catch((error) => {
-                console.error('Error saving record:', error);
-                // Handle error appropriately, e.g., show a notification
-                alert('Error saving record: ' + error.message);
+                console.error('Error saving record:', error.response?.data.errors || error.message);
+                // alert('Error saving record: ' + error.response?.data?.errors || error.message);
             });
     };
 
