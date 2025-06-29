@@ -20,7 +20,7 @@ function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handl
     const height = rows.length > 0 ? 'auto' : 200;
 
     const handleRowClick = (params: GridRowParams) => {
-        console.log(params.row);
+        console.log('Clicked on row: ', params.row);
         setDialogState(true);
     };
 
