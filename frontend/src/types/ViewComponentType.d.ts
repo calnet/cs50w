@@ -34,8 +34,10 @@ export type CoaCategoryType = {
 
 export type CoaLayoutType = {
     id: number;
+    layout: number;
+    nominal_type: number;
     layout_name: string;
-    type_name: string;
+    nominal_type_name: string;
     nominal_code_min: number;
     nominal_code_max: number;
     created_at: string;

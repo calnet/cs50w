@@ -35,22 +35,40 @@ function CoaLayoutList() {
     };
 
     const columns: GridColDef[] = [
-        // {
-        //     field: 'layout_name',
-        //     headerName: 'Layout Name',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'id',
-        //     headerName: 'ID',
-        //     headerAlign: 'left',
-        //     align: 'left',
-        //     type: 'number',
-        //     flex: 0.1,
-        // },
         {
-            field: 'type_name',
+            field: 'id',
+            headerName: 'ID',
+            headerAlign: 'left',
+            align: 'left',
+            type: 'number',
+            flex: 0.1,
+        },
+        {
+            field: 'layout',
+            headerName: 'Layout',
+            headerAlign: 'left',
+            align: 'left',
+            type: 'string',
+            flex: 0.25,
+        },
+        {
+            field: 'layout_name',
+            headerName: 'Layout Name',
+            headerAlign: 'left',
+            align: 'left',
+            type: 'string',
+            flex: 0.25,
+        },
+        {
+            field: 'nominal_type',
+            headerName: 'Nominal Type ID',
+            headerAlign: 'left',
+            align: 'left',
+            type: 'number',
+            flex: 0.15,
+        },
+        {
+            field: 'nominal_type_name',
             headerName: 'Nominal Type',
             headerAlign: 'left',
             align: 'left',
@@ -99,8 +117,10 @@ function CoaLayoutList() {
         rows.push(
             createRecord({
                 id: item.id,
+                layout: item.layout,
+                nominal_type: item.nominal_type,
                 layout_name: item.layout_name,
-                type_name: item.type_name,
+                nominal_type_name: item.nominal_type_name,
                 nominal_code_min: item.nominal_code_min,
                 nominal_code_max: item.nominal_code_max,
                 created_at: item.created_at,
