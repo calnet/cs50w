@@ -168,7 +168,9 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCloseDialog}>Cancel</Button>
-                <Button onClick={handleSaveDialog}>Save</Button>
+                <Button onClick={handleSaveDialog} disabled={Object.values(fieldErrors).some(Boolean)}>
+                    Save
+                </Button>
             </DialogActions>
         </Dialog>
     );
