@@ -108,78 +108,55 @@ def nominal_codes(request, nominal_code=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['GET', 'POST'])
-# def nominal_codes(request):
-#     if request.method == 'GET':
-
-#         data = NominalCode.objects.all()
-
-#         serializer = NominalCodesSerializer(data,
-#                                             context={'request': request},
-#                                             many=True)
-
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-
-#     elif request.method == 'POST':
-#         data = NominalCode.objects.update_or_create(
-#             id=request.data['id'], defaults=request.data)
-
-#         serializer = NominalCodesSerializer(data=request.data)
-
-#         if serializer.is_valid():
-#             if data[1] is True:
-#                 serializer.save()
-#                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# @api_view(['GET', 'POST'])
-# def nominal_code(request, nominal_code):
-#     if request.method == 'GET':
-
-#         data = NominalCode.objects.filter(
-#             nominal_code=nominal_code
-#         )
-
-#         serializer = NominalCodesSerializer(data,
-#                                             context={'request': request},
-#                                             many=True)
-
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-
-#     elif request.method == 'POST':
-#         data = NominalCode.objects.update_or_create(
-#             id=request.data['nominal_code'], defaults=request.data)
-
-#         serializer = NominalCodesSerializer(data=request.data)
-
-#         if serializer.is_valid():
-#             if data[1] is True:
-#                 serializer.save()
-#                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['GET', 'POST'])
 def coa_layout(request):
     if request.method == 'GET':
-        data = CoaLayout.objects.all()
-        serializer = CoaLayoutSerializer(data,
-                                         context={'request': request},
-                                         many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        """
+        Retrieve a list of all CoaLayout objects, including layout and nominal type information.
+        """
+        try:
+            # Fetch all CoaLayout objects from the database
+            coa_layouts = CoaLayout.objects.all()
+
+            # Serialize the CoaLayout data
+            serializer = CoaLayoutSerializer(coa_layouts, many=True)
+
+            # Return the serialized data as a Response
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except CoaLayout.DoesNotExist:
+            return Response({'error': 'CoaLayouts not found'}, status=status.HTTP_404_NOT_FOUND)
 
     elif request.method == 'POST':
-        data = CoaLayout.objects.update_or_create(
-            id=request.data['id'], defaults=request.data)
         serializer = CoaLayoutSerializer(data=request.data)
         if serializer.is_valid():
-            if data[1] is True:
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            coa_layout, created = CoaLayout.objects.update_or_create(
+                id=request.data.get('id'),
+                defaults={
+                    'layout_id': request.data.get('layout'),
+                    'nominal_type_id': request.data.get('nominal_type'),
+                    'nominal_code_min': request.data.get('nominal_code_min'),
+                    'nominal_code_max': request.data.get('nominal_code_max'),
+                }
+            )
+
+            # Re-serialize to return the saved object
+            response_serializer = CoaLayoutSerializer(coa_layout)
+            if created:
+                return Response({
+                    "status": "success",
+                    "message": "CoaLayout created successfully.",
+                    "data": response_serializer.data
+                }, status=status.HTTP_201_CREATED)
+            else:
+                return Response({
+                    "status": "success",
+                    "message": "CoaLayout updated successfully.",
+                    "data": response_serializer.data
+                }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                "status": "error",
+                "message": "There were errors in your request.",
+                "errors": serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)

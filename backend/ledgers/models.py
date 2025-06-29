@@ -67,11 +67,20 @@ class NominalCode(models.Model):
 
 
 class CoaLayout(models.Model):
+    # Add ForeignKey to link CoaLayout to Layout model
     layout = models.ForeignKey(
-        Layout, on_delete=models.CASCADE, related_name='coa_layout_layout'
+        'Layout',  # The name of the model you want to link
+        # Cascade delete (delete CoaLayout if Layout is deleted)
+        on_delete=models.CASCADE,
+        related_name='coa_layouts',  # Name to access related CoaLayouts from Layout
     )
+
+    # Add ForeignKey to link CoaLayout to NominalType model
     nominal_type = models.ForeignKey(
-        NominalType, on_delete=models.CASCADE, related_name='coa_layout_nominal_type'
+        'NominalType',  # The name of the model you want to link
+        # Cascade delete (delete CoaLayout if NominalType is deleted)
+        on_delete=models.CASCADE,
+        related_name='coa_layouts',  # Name to access related CoaLayouts from NominalType
     )
 
     nominal_code_min = models.DecimalField(
@@ -84,8 +93,9 @@ class CoaLayout(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        # return str(self.nominal_type)
-        return f"{self.nominal_type} ({self.nominal_code_min} - {self.nominal_code_max})"
+        # Return a string representation of the CoaLayout instance
+        # This will include the nominal type and the range of nominal codes
+        return f"{self.nominal_type.type_name} ({self.nominal_code_min} - {self.nominal_code_max})"
 
     class Meta:
         verbose_name_plural = "Coa Layouts"

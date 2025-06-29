@@ -5,7 +5,8 @@ from .models import CoaCategory, Layout, NominalCode, NominalType, CoaLayout
 class LayoutsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Layout
-        fields = '__all__'
+        fields = ['id', 'layout_name', 'description',
+                  'created_at', 'updated_at']
 
 
 class CoaCategoriesSerializer(serializers.ModelSerializer):
@@ -48,20 +49,35 @@ class NominalCodesSerializer(serializers.ModelSerializer):
 
 
 class CoaLayoutSerializer(serializers.ModelSerializer):
-    # Create a custom field for layout_name
-    layout_name = serializers.SerializerMethodField()
-
-    # Create a custom field for type_name
-    type_name = serializers.SerializerMethodField()
+    layout_name = serializers.CharField(
+        source='layout.layout_name', read_only=True)
+    nominal_type_name = serializers.CharField(
+        source='nominal_type.type_name', read_only=True)
 
     class Meta:
         model = CoaLayout
-        fields = '__all__'
+        # Specify the fields to be serialized
+        # Ensure to include the ForeignKey fields for proper serialization
+        # 'layout_id' and 'nominal_type_id' are ForeignKey fields
+        # 'layout_name' and 'nominal_type_name' are custom fields
+        # that retrieve the names from the related models
+        fields = [
+            'id', 'layout', 'layout_name', 'nominal_type',
+            'nominal_type_name', 'nominal_code_min', 'nominal_code_max',
+            'created_at', 'updated_at'
+        ]
 
-    def get_layout_name(self, obj):
-        # Retrieve the layout_name from the related CoaLayout
-        return obj.layout.layout_name
+    def validate(self, data):
+        """
+        Custom validation for the CoaLayout model.
+        """
+        nominal_code_min = data.get('nominal_code_min')
+        nominal_code_max = data.get('nominal_code_max')
 
-    def get_type_name(self, obj):
-        # Retrieve the type_name from the related NominalType
-        return obj.nominal_type.type_name
+        if nominal_code_min and nominal_code_max and nominal_code_min >= nominal_code_max:
+            raise serializers.ValidationError(
+                {"nominal_code_min": [
+                    "The minimum nominal code must be less than the maximum nominal code."]}
+            )
+
+        return data
