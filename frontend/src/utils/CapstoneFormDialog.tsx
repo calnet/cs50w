@@ -1,6 +1,6 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormDialogType } from '../types/FormDialogType';
 import type { FormField } from '../types/FormField';
 import PaperComponent from './PaperComponent';
@@ -59,6 +59,14 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
         setFieldErrors({}); // Reset errors when dialog opens
     }, [dialogState, selectedRow]);
 
+    // Focus error summary for accessibility when errors appear
+    const errorSummaryRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (Object.values(fieldErrors).some(Boolean) && errorSummaryRef.current) {
+            errorSummaryRef.current.focus();
+        }
+    }, [fieldErrors]);
+
     const handleCloseDialog = () => {
         setLocalDialogState(false);
         handleClose();
@@ -76,8 +84,23 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>{contentText}</DialogContentText>
+                {Object.values(fieldErrors).some(Boolean) && (
+                    <Alert severity="error" sx={{ mb: 2 }} aria-live="assertive" tabIndex={-1} ref={errorSummaryRef} role="alert">
+                        {Object.entries(fieldErrors)
+                            .filter(([, err]) => Boolean(err))
+                            .map(([fieldId, err], idx) => {
+                                const field = fields.find((f) => f.id === fieldId);
+                                return (
+                                    <div key={idx}>
+                                        <strong>{field ? field.label : fieldId}:</strong> {err}
+                                    </div>
+                                );
+                            })}
+                    </Alert>
+                )}
                 {fields.map((field: FormField) => {
                     const value = field.id && localSelectedRow ? localSelectedRow[field.id] : '';
+                    const helperId = `${field.id}-helper-text`;
                     return (
                         <TextField
                             key={field.id}
@@ -100,6 +123,8 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                             value={value}
                             error={Boolean(fieldErrors[field.id])}
                             helperText={fieldErrors[field.id] || ''}
+                            aria-describedby={helperId}
+                            FormHelperTextProps={{ id: helperId }}
                             onChange={(e) => {
                                 let newValue = e.target.value;
                                 // Prevent special characters in number fields (allow only digits)
