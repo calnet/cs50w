@@ -6,10 +6,18 @@ import type { FormField } from '../types/FormField';
 import PaperComponent from './PaperComponent';
 import { getFieldError, validateAllFields } from './validationUtils';
 
-function CapstoneFormDialog({ ...props }: FormDialogType) {
-    const { formTitle, contentText, fields, dialogState, handleClose, handleDataChanged, selectedRow, url } = props;
+function CapstoneFormDialog({
+    formTitle,
+    contentText,
+    fields,
+    dialogState,
+    handleClose,
+    handleDataChanged,
+    selectedRow,
+    url,
+}: FormDialogType) {
     const [localDialogState, setLocalDialogState] = useState(false);
-    const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown> | null>(null);
+    const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown>>({});
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
     // Function to handle saving the form data
@@ -119,7 +127,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                     </Alert>
                 )}
                 {fields.map((field: FormField) => {
-                    const value = field.id && localSelectedRow ? localSelectedRow[field.id] : '';
+                    const value = localSelectedRow?.[field.id] ?? '';
                     const helperId = `${field.id}-helper-text`;
                     return (
                         <TextField
