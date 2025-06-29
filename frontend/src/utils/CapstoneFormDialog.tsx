@@ -1,44 +1,16 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
-import type { TextFieldProps } from '@mui/material/TextField';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FormDialogType } from '../types/FormDialogType';
+import type { FormField } from '../types/FormField';
 import PaperComponent from './PaperComponent';
-
-// Define a type for form fields
-interface FormField {
-    id: string;
-    label: string;
-    type: string;
-    required?: boolean;
-    disabled?: boolean;
-    autoFocus?: boolean;
-    margin?: TextFieldProps['margin'];
-    fullWidth?: boolean;
-    variant?: TextFieldProps['variant'];
-    sx?: object;
-}
+import { getFieldError, validateAllFieldsWithRow } from './validationUtils';
 
 function CapstoneFormDialog({ ...props }: FormDialogType) {
     const { formTitle, contentText, fields, dialogState, handleClose, handleDataChanged, selectedRow, url } = props;
     const [localDialogState, setLocalDialogState] = useState(false);
     const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown> | null>(null);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-
-    // Centralized error handler for validation
-    const getFieldError = (field: FormField, value: string): string => {
-        let error = '';
-        if (field.required && value.trim() === '') {
-            error = 'This field is required';
-        } else if (field.type === 'number') {
-            if (value && isNaN(Number(value))) {
-                error = 'Please enter a valid number';
-            } else if (value && Number(value) < 0) {
-                error = 'Number cannot be negative';
-            }
-        }
-        return error;
-    };
 
     // Validate all fields and return errors object
     const validateAllFields = () => {
@@ -90,18 +62,6 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
     const handleCloseDialog = () => {
         setLocalDialogState(false);
         handleClose();
-    };
-
-    // Add this helper function after validateAllFields
-    const validateAllFieldsWithRow = (row: Record<string, unknown>) => {
-        const errors: Record<string, string> = {};
-        if (!fields) return errors;
-        (fields as FormField[]).forEach((field) => {
-            const value = row && row[field.id] ? String(row[field.id]) : '';
-            const error = getFieldError(field, value);
-            if (error) errors[field.id] = error;
-        });
-        return errors;
     };
 
     return (
@@ -160,7 +120,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                             onPaste={(e) => {
                                 if (field.type === 'number') {
                                     const paste = e.clipboardData.getData('text');
-                                    if (/[^\d]/.test(paste)) {
+                                    if (paste.match(/[^\d]/)) {
                                         e.preventDefault();
                                     }
                                 }
@@ -172,7 +132,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                                         const updated = { ...prev };
                                         updated[field.id] = '';
                                         // Immediately revalidate with the updated row
-                                        setFieldErrors(validateAllFieldsWithRow(updated));
+                                        setFieldErrors(validateAllFieldsWithRow(fields, updated));
                                         return updated;
                                     });
                                 }
