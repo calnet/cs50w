@@ -8,11 +8,13 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
     const { formTitle, contentText, fields, dialogState, handleClose, handleDataChanged, selectedRow, url } = props;
     const [localDialogState, setLocalDialogState] = useState(false);
     const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown> | null>(null);
+    const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
     // Update local state when props change
     useEffect(() => {
         setLocalDialogState(dialogState);
         setLocalSelectedRow(selectedRow);
+        setFieldErrors({}); // Reset errors when dialog opens
     }, [dialogState, selectedRow]);
 
     const handleCloseDialog = () => {
@@ -58,7 +60,6 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
             <DialogContent>
                 <DialogContentText>{contentText}</DialogContentText>
                 {fields.map((field) => {
-                    // TODO: return the correct field type
                     return (
                         <TextField
                             key={field.id}
@@ -70,14 +71,52 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                             type={field.type}
                             fullWidth={field.fullWidth}
                             variant={field.variant}
-                            sx={field.sx}
+                            sx={{
+                                ...field.sx,
+                                '& .MuiFormHelperText-root': {
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'visible',
+                                    textOverflow: 'ellipsis',
+                                },
+                            }}
                             value={field.id && localSelectedRow ? localSelectedRow[field.id] : ''}
+                            error={Boolean(fieldErrors[field.id])}
+                            helperText={fieldErrors[field.id] || ''}
                             onChange={(e) => {
+                                const value = e.target.value;
+                                let error = '';
+
+                                // Example validations
+                                if (field.required && value.trim() === '') {
+                                    error = 'This field is required';
+                                } else if (field.type === 'number') {
+                                    if (value && isNaN(Number(value))) {
+                                        error = 'Please enter a valid number';
+                                    } else if (value && Number(value) < 0) {
+                                        error = 'Number cannot be negative';
+                                    }
+                                }
+
+                                setFieldErrors((prev) => ({
+                                    ...prev,
+                                    [field.id]: error,
+                                }));
+
                                 const updatedRow = {
                                     ...(localSelectedRow ?? {}),
-                                    [field.id]: e.target.value,
+                                    [field.id]: value,
                                 };
                                 setLocalSelectedRow(updatedRow);
+                            }}
+                            onBlur={() => {
+                                if (fieldErrors[field.id]) {
+                                    setLocalSelectedRow((prev) => {
+                                        if (!prev) return prev;
+                                        const updated = { ...prev };
+                                        updated[field.id] = '';
+                                        return updated;
+                                    });
+                                }
                             }}
                         />
                     );
