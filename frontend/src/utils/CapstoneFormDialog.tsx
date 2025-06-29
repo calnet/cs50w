@@ -62,6 +62,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                     return (
                         <TextField
                             key={field.id}
+                            disabled={field.disabled}
                             autoFocus={field.autoFocus}
                             margin={field.margin}
                             id={field.id}
@@ -69,6 +70,7 @@ function CapstoneFormDialog({ ...props }: FormDialogType) {
                             type={field.type}
                             fullWidth={field.fullWidth}
                             variant={field.variant}
+                            sx={field.sx}
                             value={field.id && localSelectedRow ? localSelectedRow[field.id] : ''}
                             onChange={(e) => {
                                 const updatedRow = {
