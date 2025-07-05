@@ -1,6 +1,14 @@
 {
     "breadcrumbs.enabled": true,
     "cSpell.words": ["simplebar"],
+    "[django-html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.quickSuggestions": {
+            "comments": true,
+            "other": true,
+            "strings": true
+        }
+    },
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",
@@ -24,6 +32,14 @@
     "editor.suggestOnTriggerCharacters": true,
     "editor.tabSize": 4,
     "editor.useTabStops": false,
+    "extensions.closeExtensionDetailsOnViewChange": true,
+    "git.autofetch": "all",
+    "git.blame.editorDecoration.enabled": true,
+    "git.confirmSync": false,
+    "git.fetchOnPull": true,
+    "git.followTagsWhenSync": true,
+    "git.postCommitCommand": "sync",
+    "git.timeline.showUncommitted": true,
     "html.format.preserveNewLines": true,
     "javascript.suggest.enabled": true,
     "javascript.validate.enable": true,
@@ -35,17 +51,15 @@
     "python.testing.unittestArgs": ["-v", "-s", "./capstone", "-p", "*test.py"],
     "python.testing.unittestEnabled": true,
     "python.testing.pytestEnabled": false,
+    "scm.diffDecorationsGutterPattern": {
+        "added": true
+    },
     "terminal.integrated.tabs.showActiveTerminal": "always",
     "terminal.integrated.tabStopWidth": 4,
     "workbench.colorTheme": "Shades of Purple (Super Dark)",
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "workbench.editor.enablePreview": true,
+    "workbench.sideBar.location": "right",
     "workbench.statusBar.visible": true,
-    "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage",
-    "[django-html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.quickSuggestions": {
-            "comments": true,
-            "other": true,
-            "strings": true
-        }
-    }
+    "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage"
 }
