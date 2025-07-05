@@ -1,47 +1,53 @@
-import { TextFieldProps } from '@mui/material';
+import { FormFieldType } from '../../types/FormField';
 
-const CoaCategoryDialogFields: TextFieldProps[] = [
-    // {
-    //     autoFocus: false,
-    //     margin: 'dense',
-    //     id: 'id',
-    //     name: 'id',
-    //     label: 'ID',
-    //     type: 'number',
-    //     fullWidth: true,
-    //     variant: 'outlined',
-    // },
+const CoaCategoryDialogFields: FormFieldType[] = [
     {
         autoFocus: true,
+        disabled: true,
+        fullWidth: true,
+        id: 'id',
+        label: 'ID',
         margin: 'dense',
+        required: false,
+        sx: { flexBasis: '25%', maxWidth: '25%' },
+        type: 'number',
+        variant: 'outlined',
+    },
+    {
+        autoFocus: true,
+        disabled: false,
+        fullWidth: true,
         id: 'category_name',
-        name: 'category_name',
         label: 'COA Category',
+        margin: 'dense',
+        required: false,
+        sx: { flexBasis: '75%', maxWidth: '75%' },
         type: 'text',
-        fullWidth: true,
         variant: 'outlined',
     },
     {
         autoFocus: false,
-        margin: 'dense',
+        disabled: true,
+        fullWidth: true,
         id: 'created_at',
-        name: 'created_at',
         label: 'Created',
+        margin: 'dense',
+        required: false,
+        sx: { flexBasis: '50%', maxWidth: '50%' },
         type: 'text',
-        fullWidth: true,
         variant: 'outlined',
-        // TODO: Format date
     },
     {
         autoFocus: false,
-        margin: 'dense',
-        id: 'updated_at',
-        name: 'updated_at',
-        label: 'Updated',
-        type: 'text',
+        disabled: true,
         fullWidth: true,
+        id: 'updated_at',
+        label: 'Updated',
+        margin: 'dense',
+        required: false,
+        sx: { flexBasis: '50%', maxWidth: '50%' },
+        type: 'text',
         variant: 'outlined',
-        // TODO: Format date
     },
 ];
 

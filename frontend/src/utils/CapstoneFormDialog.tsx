@@ -2,7 +2,7 @@ import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText,
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { FormDialogType } from '../types/FormDialogType';
-import type { FormField } from '../types/FormField';
+import type { FormFieldType } from '../types/FormField';
 import PaperComponent from './PaperComponent';
 import { getFieldError, validateAllFields } from './validationUtils';
 
@@ -50,7 +50,7 @@ function CapstoneFormDialog({
     };
 
     // Handle field value change
-    const handleFieldChange = (field: FormField, newValue: string) => {
+    const handleFieldChange = (field: FormFieldType, newValue: string) => {
         // Prevent special characters in number fields (allow only digits)
         if (field.type === 'number') {
             newValue = newValue.replace(/[^\d]/g, '');
@@ -68,7 +68,7 @@ function CapstoneFormDialog({
     };
 
     // Handle field blur
-    const handleFieldBlur = (field: FormField) => {
+    const handleFieldBlur = (field: FormFieldType) => {
         if (fieldErrors[field.id]) {
             setLocalSelectedRow((prev) => {
                 if (!prev) return prev;
@@ -126,7 +126,7 @@ function CapstoneFormDialog({
                             })}
                     </Alert>
                 )}
-                {fields.map((field: FormField) => {
+                {fields.map((field: FormFieldType) => {
                     const value = localSelectedRow?.[field.id] ?? '';
                     const helperId = `${field.id}-helper-text`;
                     return (
