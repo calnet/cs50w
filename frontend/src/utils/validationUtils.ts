@@ -1,4 +1,4 @@
-import { FormField } from "../types/FormField";
+import { FormFieldType } from "../types/FormField";
 
 const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -8,7 +8,7 @@ const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
  * @param value - The value to validate
  * @returns Error message or empty string
  */
-export function getFieldError(field: FormField, value: string): string {
+export function getFieldError(field: FormFieldType, value: string): string {
     if (field.required && value.trim() === '') {
         return 'This field is required';
     }
@@ -40,7 +40,7 @@ export function getFieldError(field: FormField, value: string): string {
  * @returns Object of errors keyed by field id
  */
 export function validateAllFields(
-    fields: FormField[],
+    fields: FormFieldType[],
     row: Record<string, unknown> = {}
 ): Record<string, string> {
     const errors: Record<string, string> = {};
