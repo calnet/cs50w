@@ -2,6 +2,7 @@ import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { CoaCategoryType } from '../../types/ViewComponentType';
+import { formatTimestamp } from '../../utils/formatUtils';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 
 function createRecord({ ...props }: CoaCategoryType) {
@@ -49,18 +50,20 @@ function CoaCategoriesList() {
             type: 'string',
             flex: 1.25,
         },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'Created',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'updated_at',
-        //     headerName: 'Updated',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
+        {
+            field: 'created_at',
+            headerName: 'Created',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
+        {
+            field: 'updated_at',
+            headerName: 'Updated',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
     ];
 
     const rows: CoaCategoryType[] = [];

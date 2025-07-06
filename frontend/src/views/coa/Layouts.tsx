@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { LayoutType } from '../../types/ViewComponentType';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
+import { formatTimestamp } from '../../utils/formatUtils';
 
 function createRecord({ ...props }: LayoutType) {
     return {
@@ -55,18 +56,20 @@ function Layouts() {
             type: 'string',
             flex: 1,
         },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'Created',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'updated_at',
-        //     headerName: 'Updated',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
+        {
+            field: 'created_at',
+            headerName: 'Created',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
+        {
+            field: 'updated_at',
+            headerName: 'Updated',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
     ];
 
     const rows: LayoutType[] = [];

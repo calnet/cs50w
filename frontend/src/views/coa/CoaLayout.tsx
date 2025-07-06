@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { CoaLayoutType } from '../../types/ViewComponentType';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
+import { formatTimestamp } from '../../utils/formatUtils';
 
 function createRecord({ ...props }: CoaLayoutType) {
     return {
@@ -97,18 +98,20 @@ function CoaLayoutList() {
                 return String(params.value).padStart(4, '0');
             },
         },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'Created',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'updated_at',
-        //     headerName: 'Updated',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
+        {
+            field: 'created_at',
+            headerName: 'Created',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
+        {
+            field: 'updated_at',
+            headerName: 'Updated',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
     ];
 
     const rows: CoaLayoutType[] = [];

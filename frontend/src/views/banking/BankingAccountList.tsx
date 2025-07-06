@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { BankingAccountType } from '../../types/ViewComponentType';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
+import { formatTimestamp } from '../../utils/formatUtils';
 
 function createRecord({ ...props }: BankingAccountType) {
     return {
@@ -111,18 +112,21 @@ function BankingAccountList() {
             headerName: 'Opening Balance Date',
             type: 'string',
             flex: 1,
+            valueFormatter: (params) => formatTimestamp(params.value),
         },
         {
             field: 'created_at',
             headerName: 'Created At',
             type: 'string',
             flex: 1,
+            valueFormatter: (params) => formatTimestamp(params.value),
         },
         {
             field: 'updated_at',
             headerName: 'Updated At',
             type: 'string',
             flex: 1,
+            valueFormatter: (params) => formatTimestamp(params.value),
         },
     ];
 

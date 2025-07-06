@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { NominalTypeProps } from '../../types/ViewComponentType';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
+import { formatTimestamp } from '../../utils/formatUtils';
 
 function createRecord({ ...props }: NominalTypeProps) {
     return {
@@ -60,26 +61,20 @@ function NominalTypesList() {
             type: 'string',
             flex: 1,
         },
-        // {
-        //     field: 'coa_category',
-        //     headerName: 'Coa Category',
-        //     headerAlign: 'left',
-        //     align: 'left',
-        //     type: 'number',
-        //     flex: 1,
-        // },
-        // {
-        //     field: 'created_at',
-        //     headerName: 'Created',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
-        // {
-        //     field: 'updated_at',
-        //     headerName: 'Updated',
-        //     type: 'string',
-        //     flex: 0.25,
-        // },
+        {
+            field: 'created_at',
+            headerName: 'Created',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
+        {
+            field: 'updated_at',
+            headerName: 'Updated',
+            type: 'string',
+            flex: 0.25,
+            valueFormatter: (params) => formatTimestamp(params.value),
+        },
     ];
 
     const rows: NominalTypeProps[] = [];
