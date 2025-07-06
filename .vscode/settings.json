@@ -47,6 +47,7 @@
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
     "python.analysis.typeCheckingMode": "basic",
+    "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "python.testing.pytestArgs": ["backend"],
     "python.testing.unittestArgs": ["-v", "-s", "./capstone", "-p", "*test.py"],
     "python.testing.unittestEnabled": true,
