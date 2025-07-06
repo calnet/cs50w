@@ -1,27 +1,78 @@
-# React + TypeScript + Vite
+# Frontend – React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for my Capstone Accountancy Project, built with React, TypeScript, and Vite. It uses Material-UI (MUI) for UI components and Axios for API requests.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+-   Node.js (v18 or higher recommended)
+-   npm (v9 or higher)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+cd frontend
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Development
+
+To start the development server with hot module replacement:
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173` (or as specified in the terminal).
+
+### Build
+
+To build the app for production:
+
+```bash
+npm run build
+```
+
+### Linting
+
+To check code quality:
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+-   `src/` – Main source code
+    -   `App.tsx` – App entry point
+    -   `routes/` – Route definitions
+    -   `layout/` – Layout components (Header, Sidebar, etc.)
+    -   `views/` – Page components
+    -   `contexts/` – React context providers
+    -   `themes/` – MUI theme configuration
+    -   `utils/` – Utility functions
+    -   `types/` – TypeScript type definitions
+
+## Features
+
+-   React 18 with functional components
+-   TypeScript for type safety
+-   Vite for fast development
+-   Material-UI (MUI) for UI
+-   React Router for routing
+-   Axios for API requests
+-   Context API for state management
+-   Code splitting with React.lazy
+
+## Testing
+
+Add tests using Jest and React Testing Library (recommended).
+
+## Contributing
+
+Pull requests are welcome! Please lint and test your code before submitting.
+
+## License
+
+[MIT](LICENSE)
