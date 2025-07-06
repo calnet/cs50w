@@ -60,6 +60,7 @@
     "workbench.editor.editorActionsLocation": "titleBar",
     "workbench.editor.enablePreview": true,
     "workbench.sideBar.location": "right",
+    "workbench.secondarySideBar.defaultVisibility":"visible",
     "workbench.statusBar.visible": true,
-    "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage"
+    "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage",
 }
