@@ -3,20 +3,22 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.frontend
+        container_name: node-frontend
         ports:
             - 5173:5173
         develop:
             watch:
                 - action: sync
                   path: ./frontend/
-                  target: /frontend
+                  target: /app/frontend
                   ignore:
                       - node_modules
     backend:
         build:
             context: .
+        container_name: python-backend
         ports:
             - 8000:8000
             - 3000:3000
         volumes:
-            - ./backend:/backend
+            - ./backend:/app/backend

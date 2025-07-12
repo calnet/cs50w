@@ -2,14 +2,16 @@ FROM python:3.13.5-alpine3.22
 
 ENV PYTHONUNBUFFERED=1
 
-COPY ./requirements.txt /requirements.txt
-COPY ./backend /backend
-WORKDIR /backend
+COPY ./requirements.txt /app/requirements.txt
+COPY ./backend /app/backend
+COPY ./.vscode /app/.vscode
+COPY ./.git /app/.git
+WORKDIR /app/backend
 
-RUN python -m venv env /py && \
-    /py/bin/pip install --upgrade pip && \
-    /py/bin/pip install -r /requirements.txt
+RUN python -m venv env /app/py && \
+    /app/py/bin/pip install --upgrade pip && \
+    /app/py/bin/pip install -r /app/requirements.txt
 
-ENV PATH="/py/bin:$PATH"
+ENV PATH="/app/py/bin:$PATH"
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "-Xfrozen_modules=off", "manage.py", "runserver", "0.0.0.0:8000"]
