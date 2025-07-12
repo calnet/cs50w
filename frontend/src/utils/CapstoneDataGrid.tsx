@@ -1,9 +1,10 @@
 import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import { DataGrid, GridRowParams } from '@mui/x-data-grid';
-import { lazy, useState } from 'react';
+import { DataGrid, GridRowParams, GridValidRowModel } from '@mui/x-data-grid';
+import React, { lazy, Suspense, useCallback, useMemo, useState } from 'react';
 import { CapstoneDataGridType } from '../types/ViewComponentType';
 import Loadable from '../ui-component/Loadable';
+import { formatDialogFormRow } from './formatDialogFormRow';
 
 const BankingAccountListDialog = Loadable(lazy(() => import('../views/banking/BankingAccountListDialog')));
 const CoaCategoryDialog = Loadable(lazy(() => import('../views/coa/CoaCategoryDialog')));
@@ -15,16 +16,24 @@ const SupplierDialog = Loadable(lazy(() => import('../views/suppliers/SupplierDi
 
 function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handleDataChanged }: CapstoneDataGridType) {
     const [dialogState, setDialogState] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
+    const [dialogFormRow, setDialogFormRow] = useState<GridValidRowModel | null>(null);
 
     const height = rows.length > 0 ? 'auto' : 200;
 
-    const handleRowClick = (params: GridRowParams) => {
+    // Combined row click handler for clarity
+    const handleRowClick = useCallback((params: GridRowParams) => {
         console.log('Clicked on row: ', params.row);
+        setDialogFormRow(params.row);
         setDialogState(true);
-    };
+    }, []);
 
-    const componentMap = {
+    // Dialog close handler
+    const handleCloseDialog = useCallback(() => {
+        setDialogState(false);
+        setDialogFormRow(null);
+    }, []);
+
+    const componentMap = useMemo(() => ({
         BankingAccountListDialog: BankingAccountListDialog,
         CoaCategoryDialog: CoaCategoryDialog,
         CoaLayoutDialog: CoaLayoutDialog,
@@ -33,14 +42,30 @@ function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handl
         NominalCodeDialog: NominalCodeDialog,
         NominalTypeDialog: NominalTypeDialog,
         SupplierDialog: SupplierDialog,
-
         // Add more components as needed
-    };
+    }), []);
 
-    let DialogComponent = null;
+    const DialogComponent = componentMap[dialog as keyof typeof componentMap] || null;
 
-    if (dialog in componentMap) {
-        DialogComponent = componentMap[dialog as keyof typeof componentMap];
+    // Format selectedRow using the utility
+    // Only compute formatted row when dialog is open and a row is selected
+    const formattedDialogFormRow = useMemo(() => {
+        if (!dialogState || !dialogFormRow) return null;
+        return formatDialogFormRow(dialogFormRow, dialog);
+    }, [dialogFormRow, dialog, dialogState]);
+
+    // Optional: ErrorBoundary for dialog
+    class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+        constructor(props: { children: React.ReactNode }) {
+            super(props);
+            this.state = { hasError: false };
+        }
+        static getDerivedStateFromError() { return { hasError: true }; }
+        componentDidCatch(error: unknown, info: unknown) { console.error(error, info); }
+        render() {
+            if (this.state.hasError) return <div>Something went wrong in the dialog.</div>;
+            return this.props.children;
+        }
     }
 
     return (
@@ -48,6 +73,7 @@ function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handl
             <Box sx={{ p: 1, typography: 'h3', color: 'cadetblue' }}>{heading}</Box>
             <Box component={Paper} height={height} minWidth={650}>
                 <DataGrid
+                    aria-label={heading}
                     rows={rows}
                     columns={columns}
                     initialState={{
@@ -56,21 +82,20 @@ function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handl
                         },
                     }}
                     pageSizeOptions={[5, 10, 25]}
-                    onRowClick={(params: GridRowParams) => {
-                        setSelectedRow(params.row);
-                        handleRowClick(params);
-                    }}
-
-                    // checkboxSelection
+                    onRowClick={handleRowClick}
                 />
-                {DialogComponent && (
-                    <DialogComponent
-                        dialogState={dialogState}
-                        handleClose={() => setDialogState(false)}
-                        selectedRow={selectedRow}
-                        handleDataChanged={handleDataChanged}
-                        url={url}
-                    />
+                {DialogComponent && dialogState && formattedDialogFormRow && (
+                    <ErrorBoundary>
+                        <Suspense fallback={<div>Loading dialog...</div>}>
+                            <DialogComponent
+                                dialogState={dialogState}
+                                handleClose={handleCloseDialog}
+                                selectedRow={formattedDialogFormRow}
+                                handleDataChanged={handleDataChanged}
+                                url={url}
+                            />
+                        </Suspense>
+                    </ErrorBoundary>
                 )}
             </Box>
         </>

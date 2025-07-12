@@ -1,4 +1,5 @@
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import { GridValidRowModel } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { FormDialogType } from '../types/FormDialogType';
@@ -17,36 +18,49 @@ function CapstoneFormDialog({
     url,
 }: FormDialogType) {
     const [localDialogState, setLocalDialogState] = useState(false);
-    const [localSelectedRow, setLocalSelectedRow] = useState<Record<string, unknown>>({});
+    const [localSelectedRow, setLocalSelectedRow] = useState<GridValidRowModel | null>(selectedRow);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+    const [loading, setLoading] = useState(false);
+    const [saveError, setSaveError] = useState<string | null>(null);
 
     // Function to handle saving the form data
-    const handleSaveDialog = () => {
+    const handleSaveDialog = async () => {
         const errors = validateAllFields(fields, localSelectedRow || {});
         setFieldErrors(errors);
         if (Object.values(errors).some(Boolean)) {
             // Prevent save if any errors
+            setSaveError('Validation errors found');
+            // Log errors for debugging
             console.error('Validation errors:', errors);
             return;
         }
         if (!localSelectedRow) {
-            console.error('No data to save');
+            setSaveError('No data to save');
             return;
         }
         if (!url) {
-            console.error('No URL provided for saving data');
+            setSaveError('No URL provided for saving data');
             return;
         }
-        axios
-            .post(url, localSelectedRow)
-            .then((response) => {
-                console.log('Record saved successfully: ', response.data);
-                handleCloseDialog();
-                handleDataChanged();
-            })
-            .catch((error) => {
-                console.error('Error saving record:', error.response?.data.errors || error.message);
-            });
+        setLoading(true);
+        setSaveError(null);
+        try {
+            const response = await axios.post(url, localSelectedRow);
+            console.log('Record saved successfully: ', response.data);
+            handleCloseDialog();
+            handleDataChanged();
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                const err = error.response?.data?.errors || error.message || 'Unknown error';
+                setSaveError(err)
+            } else if (error instanceof Error) {
+                setSaveError(error.message);
+            } else {
+                setSaveError('Unknown error');
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     // Handle field value change
@@ -84,7 +98,8 @@ function CapstoneFormDialog({
     useEffect(() => {
         setLocalDialogState(dialogState);
         setLocalSelectedRow(selectedRow);
-        setFieldErrors({}); // Reset errors when dialog opens
+        setFieldErrors({});
+        setSaveError(null);
     }, [dialogState, selectedRow]);
 
     // Focus error summary for accessibility when errors appear
@@ -100,6 +115,47 @@ function CapstoneFormDialog({
         handleClose();
     };
 
+    const renderField = (field: FormFieldType) => {
+        const value = localSelectedRow?.[field.id] ?? '';
+        const helperId = `${field.id}-helper-text`;
+        return (
+            <TextField
+                key={field.id}
+                disabled={field.disabled}
+                autoFocus={field.autoFocus}
+                margin={field.margin}
+                id={field.id}
+                label={field.label}
+                type={field.type}
+                fullWidth={field.fullWidth}
+                variant={field.variant}
+                sx={{
+                    ...field.sx,
+                    '& .MuiFormHelperText-root': {
+                        whiteSpace: 'nowrap',
+                        overflow: 'visible',
+                        textOverflow: 'ellipsis',
+                    },
+                }}
+                value={value}
+                error={Boolean(fieldErrors[field.id])}
+                helperText={fieldErrors[field.id] || ''}
+                aria-describedby={helperId}
+                FormHelperTextProps={{ id: helperId }}
+                onChange={(e) => handleFieldChange(field, e.target.value)}
+                onPaste={(e) => {
+                    if (field.type === 'number') {
+                        const paste = e.clipboardData.getData('text');
+                        if (paste.match(/[^\d]/)) {
+                            e.preventDefault();
+                        }
+                    }
+                }}
+                onBlur={() => handleFieldBlur(field)}
+            />
+        );
+    };
+
     return (
         <Dialog
             open={localDialogState}
@@ -112,6 +168,27 @@ function CapstoneFormDialog({
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>{contentText}</DialogContentText>
+                {saveError && (
+                    <Alert severity="error" sx={{ mb: 2 }} aria-live="polite">
+                        {Array.isArray(saveError) ? (
+                            <div>
+                                {saveError.map((err, idx) => (
+                                    <div key={idx}>{String(err)}</div>
+                                ))}
+                            </div>
+                        ) : typeof saveError === 'object' ? (
+                            <div>
+                                {Object.entries(saveError).map(([key, value], idx) => (
+                                    <div key={idx}>
+                                        <strong>{key}:</strong> {String(value)}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            String(saveError)
+                        )}
+                    </Alert>
+                )}
                 {Object.values(fieldErrors).some(Boolean) && (
                     <Alert severity="error" sx={{ mb: 2 }} aria-live="assertive" tabIndex={-1} ref={errorSummaryRef} role="alert">
                         {Object.entries(fieldErrors)
@@ -126,51 +203,12 @@ function CapstoneFormDialog({
                             })}
                     </Alert>
                 )}
-                {fields.map((field: FormFieldType) => {
-                    const value = localSelectedRow?.[field.id] ?? '';
-                    const helperId = `${field.id}-helper-text`;
-                    return (
-                        <TextField
-                            key={field.id}
-                            disabled={field.disabled}
-                            autoFocus={field.autoFocus}
-                            margin={field.margin}
-                            id={field.id}
-                            label={field.label}
-                            type={field.type}
-                            fullWidth={field.fullWidth}
-                            variant={field.variant}
-                            sx={{
-                                ...field.sx,
-                                '& .MuiFormHelperText-root': {
-                                    whiteSpace: 'nowrap',
-                                    overflow: 'visible',
-                                    textOverflow: 'ellipsis',
-                                },
-                            }}
-                            value={value}
-                            error={Boolean(fieldErrors[field.id])}
-                            helperText={fieldErrors[field.id] || ''}
-                            aria-describedby={helperId}
-                            FormHelperTextProps={{ id: helperId }}
-                            onChange={(e) => handleFieldChange(field, e.target.value)}
-                            onPaste={(e) => {
-                                if (field.type === 'number') {
-                                    const paste = e.clipboardData.getData('text');
-                                    if (paste.match(/[^\d]/)) {
-                                        e.preventDefault();
-                                    }
-                                }
-                            }}
-                            onBlur={() => handleFieldBlur(field)}
-                        />
-                    );
-                })}
+                {fields.map(renderField)}
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCloseDialog}>Cancel</Button>
-                <Button onClick={handleSaveDialog} disabled={Object.values(fieldErrors).some(Boolean)}>
-                    Save
+                <Button onClick={handleCloseDialog} disabled={loading}>Cancel</Button>
+                <Button onClick={handleSaveDialog} disabled={Object.values(fieldErrors).some(Boolean) || loading}>
+                    {loading ? 'Saving...' : 'Save'}
                 </Button>
             </DialogActions>
         </Dialog>
