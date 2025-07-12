@@ -1,7 +1,9 @@
+import { GridValidRowModel } from '@mui/x-data-grid';
+
 export interface ViewComponentDialogType {
     dialogState: boolean;
     handleClose: () => void;
-    selectedRow: ViewComponentType | undefined | null;
+    selectedRow: GridValidRowModel | null;
     url: string;
     handleDataChanged: () => void;
 }
