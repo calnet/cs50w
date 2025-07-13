@@ -1,11 +1,15 @@
 services:
-    frontend:
+    alpine-dev:
         build:
             context: .
-            dockerfile: Dockerfile.frontend
-        container_name: node-frontend
-        ports:
-            - 5173:5173
+            dockerfile: Dockerfile
+        image: capstone:fullstack
+        container_name: capstone-fullstack
+        volumes:
+            - ./backend:/app/backend
+            - ./.vscode:/app/.vscode
+            - ./requirements.txt:/app/requirements.txt
+            - ~/.gitconfig:/home/appuser/.gitconfig:ro
         develop:
             watch:
                 - action: sync
@@ -13,12 +17,26 @@ services:
                   target: /app/frontend
                   ignore:
                       - node_modules
-    backend:
-        build:
-            context: .
-        container_name: python-backend
+                      - dist
+                      - build
+                - action: rebuild
+                  path: ./requirements.txt
+                - action: rebuild
+                  path: ./Dockerfile
         ports:
-            - 8000:8000
-            - 3000:3000
-        volumes:
-            - ./backend:/app/backend
+            - '5173:5173'
+            - '3000:3000'
+            - '8000:8000'
+        stdin_open: true
+        tty: true
+        working_dir: /app
+
+        command: /app/startup.sh
+        restart: unless-stopped
+
+        # healthcheck:
+        #     test: ['CMD', 'curl', '-f', 'http://localhost:8000/admin']
+        #     interval: 60s
+        #     timeout: 10s
+        #     retries: 3
+        #     start_period: 60s
