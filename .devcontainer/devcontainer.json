@@ -4,10 +4,6 @@
 	"service": "fullstack",
 	"workspaceFolder": "/app",
 	"shutdownAction": "stopCompose",
-	// Additional mounts for DevContainer
-	"mounts": [
-		"source=${localWorkspaceFolder}/frontend,target=/app/frontend,type=bind"
-	],
 	// Port forwarding with labels
 	"forwardPorts": [
 		3000,
@@ -15,17 +11,17 @@
 		8000
 	],
 	"portsAttributes": {
-		"3000": {
-			"label": "Frontend Dev Server",
-			"onAutoForward": "notify"
-		},
 		"5173": {
-			"label": "Vite Dev Server",
+			"label": "Vite React Dev Server",
 			"onAutoForward": "notify"
 		},
 		"8000": {
 			"label": "Django Backend",
 			"onAutoForward": "notify"
+		},
+		"3000": {
+			"label": "Alternative Frontend Port",
+			"onAutoForward": "silent"
 		}
 	},
 	// VS Code customizations
@@ -39,11 +35,13 @@
 				"ms-python.isort",
 				"batisteo.vscode-django",
 				"charliermarsh.ruff",
-				// JavaScript/Frontend
+				// JavaScript/Frontend/React
 				"ms-vscode.vscode-typescript-next",
 				"esbenp.prettier-vscode",
 				"bradlc.vscode-tailwindcss",
 				"formulahendry.auto-rename-tag",
+				"ms-vscode.vscode-react-native",
+				"dsznajder.es7-react-js-snippets",
 				// Git & Development
 				"eamodio.gitlens",
 				"ms-azuretools.vscode-docker",
@@ -66,10 +64,13 @@
 				"editor.codeActionsOnSave": {
 					"source.organizeImports": true
 				},
-				"editor.rulers": [
-					88,
-					120
-				],
+				// JavaScript/React settings
+				"typescript.preferences.importModuleSpecifier": "relative",
+				"javascript.preferences.importModuleSpecifier": "relative",
+				"emmet.includeLanguages": {
+					"javascript": "javascriptreact",
+					"typescript": "typescriptreact"
+				},
 				// File management
 				"files.exclude": {
 					"**/__pycache__": true,
@@ -88,5 +89,5 @@
 	"remoteUser": "appuser",
 	// Lifecycle commands
 	"postCreateCommand": "echo 'DevContainer ready for development!'",
-	"postStartCommand": "echo 'Access your app at: http://localhost:8000'"
+	"postStartCommand": "echo 'Starting servers automatically...' && /app/startup.sh &"
 }

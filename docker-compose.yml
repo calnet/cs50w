@@ -6,24 +6,13 @@ services:
         image: capstone:fullstack
         container_name: capstone-fullstack
         volumes:
+            - ./frontend:/app/frontend
             - ./backend:/app/backend
             - ./.vscode:/app/.vscode
             - ./requirements.txt:/app/requirements.txt
+            - ./backend/db.sqlite3:/app/backend/db.sqlite3
             - ~/.gitconfig:/home/appuser/.gitconfig:ro
-        develop:
-            watch:
-                - action: sync
-                  path: ./frontend/
-                  target: /app/frontend
-                  ignore:
-                      - node_modules
-                      - dist
-                      - build
         ports:
             - '5173:5173'
             - '3000:3000'
             - '8000:8000'
-        stdin_open: true
-        tty: true
-        working_dir: /app
-        command: /app/startup.sh
