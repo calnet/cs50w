@@ -1,5 +1,5 @@
 services:
-    alpine-dev:
+    fullstack:
         build:
             context: .
             dockerfile: Dockerfile
@@ -19,10 +19,6 @@ services:
                       - node_modules
                       - dist
                       - build
-                - action: rebuild
-                  path: ./requirements.txt
-                - action: rebuild
-                  path: ./Dockerfile
         ports:
             - '5173:5173'
             - '3000:3000'
@@ -30,13 +26,4 @@ services:
         stdin_open: true
         tty: true
         working_dir: /app
-
         command: /app/startup.sh
-        restart: unless-stopped
-
-        # healthcheck:
-        #     test: ['CMD', 'curl', '-f', 'http://localhost:8000/admin']
-        #     interval: 60s
-        #     timeout: 10s
-        #     retries: 3
-        #     start_period: 60s
