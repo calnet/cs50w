@@ -6,13 +6,14 @@ services:
         image: capstone
         container_name: capstone
         volumes:
-            - ./frontend:/app/frontend
+            # - ./frontend:/app/frontend
             - ./backend:/app/backend
             - ./.vscode:/app/.vscode
             - ./requirements.txt:/app/requirements.txt
+            # - ./.git:/app/.git
             - ./.devcontainer:/app/.devcontainer
-            - ./gitignore:/app/.gitignore
-            - ./startup.sh:/app/startup.sh
+            - ./.gitignore:/app/.gitignore
+            # - ./startup.sh:/app/startup.sh
         ports:
             - '5173:5173'
             - '3000:3000'
