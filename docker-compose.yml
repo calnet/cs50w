@@ -3,15 +3,16 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: capstone:fullstack
-        container_name: capstone-fullstack
+        image: capstone
+        container_name: capstone
         volumes:
             - ./frontend:/app/frontend
             - ./backend:/app/backend
             - ./.vscode:/app/.vscode
             - ./requirements.txt:/app/requirements.txt
-            - ./backend/db.sqlite3:/app/backend/db.sqlite3
-            - ~/.gitconfig:/home/appuser/.gitconfig:ro
+            - ./.devcontainer:/app/.devcontainer
+            - ./gitignore:/app/.gitignore
+            - ./startup.sh:/app/startup.sh
         ports:
             - '5173:5173'
             - '3000:3000'
