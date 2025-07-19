@@ -1,8 +1,9 @@
 {
     "breadcrumbs.enabled": true,
-    "cSpell.words": ["simplebar"],
+    "cSpell.words": [
+        "simplebar"
+    ],
     "[django-html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.quickSuggestions": {
             "comments": true,
             "other": true,
@@ -10,6 +11,7 @@
         }
     },
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",
         "source.addMissingImports": "explicit"
@@ -32,6 +34,11 @@
     "editor.suggestOnTriggerCharacters": true,
     "editor.tabSize": 4,
     "editor.useTabStops": false,
+    "emmet.includeLanguages": {
+        "django-html": "html",
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
     "extensions.closeExtensionDetailsOnViewChange": true,
     "git.autofetch": "all",
     "git.blame.editorDecoration.enabled": true,
@@ -47,10 +54,16 @@
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
     "python.analysis.typeCheckingMode": "basic",
-    "python-envs.defaultEnvManager": "ms-python.python:venv",
-    "python-envs.pythonProjects": [],
-    "python.testing.pytestArgs": ["backend"],
-    "python.testing.unittestArgs": ["-v", "-s", "./capstone", "-p", "*test.py"],
+    "python.testing.pytestArgs": [
+        "backend"
+    ],
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./capstone",
+        "-p",
+        "*test.py"
+    ],
     "python.testing.unittestEnabled": true,
     "python.testing.pytestEnabled": false,
     "scm.diffDecorationsGutterPattern": {
@@ -62,7 +75,7 @@
     "workbench.editor.editorActionsLocation": "titleBar",
     "workbench.editor.enablePreview": true,
     "workbench.sideBar.location": "right",
-    "workbench.secondarySideBar.defaultVisibility":"visible",
+    "workbench.secondarySideBar.defaultVisibility": "visible",
     "workbench.statusBar.visible": true,
     "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage",
 }
