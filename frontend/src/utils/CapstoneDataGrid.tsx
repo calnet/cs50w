@@ -1,10 +1,11 @@
 import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import { DataGrid, GridRowParams, GridValidRowModel } from '@mui/x-data-grid';
-import React, { lazy, Suspense, useCallback, useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
 import { CapstoneDataGridType } from '../types/ViewComponentType';
 import Loadable from '../ui-component/Loadable';
 import { formatDialogFormRow } from './formatDialogFormRow';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const BankingAccountListDialog = Loadable(lazy(() => import('../views/banking/BankingAccountListDialog')));
 const CoaCategoryDialog = Loadable(lazy(() => import('../views/coa/CoaCategoryDialog')));
@@ -53,20 +54,6 @@ function CapstoneDataGrid({ rows, columns, heading, dialog = '', url = '', handl
         if (!dialogState || !dialogFormRow) return null;
         return formatDialogFormRow(dialogFormRow, dialog);
     }, [dialogFormRow, dialog, dialogState]);
-
-    // Optional: ErrorBoundary for dialog
-    class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
-        constructor(props: { children: React.ReactNode }) {
-            super(props);
-            this.state = { hasError: false };
-        }
-        static getDerivedStateFromError() { return { hasError: true }; }
-        componentDidCatch(error: unknown, info: unknown) { console.error(error, info); }
-        render() {
-            if (this.state.hasError) return <div>Something went wrong in the dialog.</div>;
-            return this.props.children;
-        }
-    }
 
     return (
         <>
