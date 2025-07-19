@@ -1,6 +1,6 @@
 # Version control
 .git
-.gitignore
+# .gitignore
 .gitattributes
 .gitmodules
 
@@ -14,17 +14,18 @@ target/
 *.temp
 
 # IDE and editor files
-.vscode/
+# .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*~/
 .DS_Store
 Thumbs.db
 
 # Docker files (usually don't need to copy these)
-Dockerfile*
-.dockerignore
+# Dockerfile*
+# .dockerignore
 docker-compose*.yml
 docker-compose*.yaml
 

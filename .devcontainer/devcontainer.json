@@ -1,91 +1,58 @@
 {
-	"name": "Capstone",
-	"dockerComposeFile": "../docker-compose.yml",
-	"service": "fullstack",
-	"workspaceFolder": "/app",
-	"shutdownAction": "stopCompose",
-	// Port forwarding with labels
-	"forwardPorts": [
-		3000,
-		5173,
-		8000
-	],
-	"portsAttributes": {
-		"5173": {
-			"label": "Vite React Dev Server",
-			"onAutoForward": "notify"
-		},
-		"8000": {
-			"label": "Django Backend",
-			"onAutoForward": "notify"
-		},
-		"3000": {
-			"label": "Alternative Frontend Port",
-			"onAutoForward": "silent"
-		}
-	},
-	// VS Code customizations
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				// Python & Django
-				"ms-python.python",
-				"ms-python.black-formatter",
-				"ms-python.pylint",
-				"ms-python.isort",
-				"batisteo.vscode-django",
-				"charliermarsh.ruff",
-				// JavaScript/Frontend/React
-				"ms-vscode.vscode-typescript-next",
-				"esbenp.prettier-vscode",
-				"bradlc.vscode-tailwindcss",
-				"formulahendry.auto-rename-tag",
-				"ms-vscode.vscode-react-native",
-				"dsznajder.es7-react-js-snippets",
-				// Git & Development
-				"eamodio.gitlens",
-				"ms-azuretools.vscode-docker",
-				"ms-vscode.vscode-json",
-				"christian-kohler.path-intellisense",
-				"gruntfuggly.todo-tree",
-				// API & Database
-				"humao.rest-client",
-				"qwtel.sqlite-viewer"
-			],
-			"settings": {
-				// Python configuration
-				"python.defaultInterpreterPath": "/app/.venv/bin/python",
-				"python.terminal.activateEnvironment": false,
-				"python.formatting.provider": "black",
-				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
-				// Editor settings
-				"editor.formatOnSave": true,
-				"editor.codeActionsOnSave": {
-					"source.organizeImports": "always"
-				},
-				// JavaScript/React settings
-				"typescript.preferences.importModuleSpecifier": "relative",
-				"javascript.preferences.importModuleSpecifier": "relative",
-				"emmet.includeLanguages": {
-					"javascript": "javascriptreact",
-					"typescript": "typescriptreact"
-				},
-				// File management
-				"files.exclude": {
-					"**/__pycache__": true,
-					"**/node_modules": true,
-					"**/.git": false,
-					"**/dist": true,
-					"**/build": true
-				},
-				// Terminal
-				"terminal.integrated.defaultProfile.linux": "bash",
-				"terminal.integrated.cwd": "/app"
-			}
-		}
-	},
-	// Lifecycle commands
-	"postCreateCommand": "echo 'DevContainer ready for development!'",
-	"postStartCommand": "echo 'Starting servers automatically...' && /app/startup.sh &"
+    "name": "Python Dev Environment",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "forwardPorts": [
+        5173,
+        3000,
+        8000
+    ],
+    "workspaceFolder": "/app",
+    "remoteUser": "appuser",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/app,type=bind"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Python & Django & Ruff
+                "ms-python.python",
+                "batisteo.vscode-django",
+                "charliermarsh.ruff",
+                // JavaScript/Frontend/React
+                "ms-vscode.vscode-typescript-next",
+                "ms-python.mypy-type-checker",
+                "esbenp.prettier-vscode",
+                "bradlc.vscode-tailwindcss",
+                "formulahendry.auto-rename-tag",
+                "ms-vscode.vscode-react-native",
+                "dsznajder.es7-react-js-snippets",
+                // Git & Development
+                "eamodio.gitlens",
+                "ms-azuretools.vscode-containers",
+                "ms-vscode.vscode-json",
+                "christian-kohler.path-intellisense",
+                "gruntfuggly.todo-tree",
+                // API & Database
+                "humao.rest-client",
+                "qwtel.sqlite-viewer"
+            ],
+            "settings": {
+                "python.linting.enabled": true,
+                "python.linting.ruffEnabled": true,
+                "mypy-type-checker.args": [
+                    "--ignore-missing-imports"
+                ],
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll.ruff": "always"
+                    }
+                }
+            }
+        }
+    },
+    "postCreateCommand": "chmod +x ./setup.sh && ./setup.sh",
+    "postStartCommand": "chmod +x ./start-services.sh && ./start-services.sh"
 }
