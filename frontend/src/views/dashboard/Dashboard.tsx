@@ -197,11 +197,12 @@ const AccountingDashboard = () => {
                                         size="small"
                                         variant="outlined"
                                         sx={{ fontSize: '0.7rem' }}
+                                        onClick={() => navigate(`${module.url}/${subView.toLowerCase().replace(/\s+/g, '_')}`)}
                                     />
                                 ))}
-                                {module.subViews.length > 4 && (
+                                {module.subViews.length > 10 && (
                                     <Chip
-                                        label={`+${module.subViews.length - 4} more`}
+                                        label={`+${module.subViews.length - 0} more`}
                                         size="small"
                                         variant="outlined"
                                         sx={{ fontSize: '0.7rem' }}
