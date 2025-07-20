@@ -37,6 +37,7 @@ const dialogsMenu: MenuItemType = {
             breadcrumbs: true,
         },
     ],
+    hidden: true, // Set to true to hide this group
 };
 
 export default dialogsMenu;

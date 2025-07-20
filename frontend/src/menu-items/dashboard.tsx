@@ -20,6 +20,7 @@ const dashboardMenu: MenuItemType = {
             breadcrumbs: false,
         },
     ],
+    hidden: true, // Set to true to hide the dashboard menu item by default
 };
 
 export default dashboardMenu;
