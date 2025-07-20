@@ -15,8 +15,8 @@ fi
 
 # Install Python dependencies
 echo "🐍 Installing Python dependencies..."
-if [ -f "/app/requirements.txt" ]; then
-    pip install -r /app/requirements.txt
+if [ -f "requirements.txt" ]; then
+    pip install -r requirements.txt
     echo "✅ Python dependencies installed successfully"
 else
     echo "⚠️  No requirements.txt found, skipping pip install"

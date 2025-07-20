@@ -8,11 +8,7 @@
         3000,
         8000
     ],
-    "workspaceFolder": "/app",
     "remoteUser": "appuser",
-    "mounts": [
-        "source=${localWorkspaceFolder},target=/app,type=bind"
-    ],
     "customizations": {
         "vscode": {
             "extensions": [
@@ -30,13 +26,13 @@
                 "dsznajder.es7-react-js-snippets",
                 // Git & Development
                 "eamodio.gitlens",
-                "ms-azuretools.vscode-containers",
                 "ms-vscode.vscode-json",
                 "christian-kohler.path-intellisense",
                 "gruntfuggly.todo-tree",
                 // API & Database
                 "humao.rest-client",
-                "qwtel.sqlite-viewer"
+                "qwtel.sqlite-viewer",
+                "GitHub.copilot-chat"
             ],
             "settings": {
                 "python.linting.enabled": true,

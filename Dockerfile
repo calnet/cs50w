@@ -18,16 +18,13 @@ RUN addgroup -g 1001 appgroup && \
 # Add local bin to PATH for pip packages
 ENV PATH="/home/appuser/.local/bin:$PATH"
 
-# Set working directory
-WORKDIR /app
-
+# Upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
 
 # Grant sudo privileges to appuser
 RUN echo 'appuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Change ownership of the app directory to appuser
-RUN chown -R appuser:appgroup /app
-
 # Switch to non-root user
 USER appuser
+
+# Working directory will be mounted from host for live changes

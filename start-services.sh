@@ -14,7 +14,7 @@ cd frontend && npm run dev -- --host 0.0.0.0 &
 VITE_PID=$!
 
 # Go back to app root
-cd /app
+cd ../
 
 echo "✅ Services started!"
 echo "🌐 Frontend: http://localhost:5173"
