@@ -25,9 +25,9 @@ type NavItemProps = {
 const NavItem = ({ item, level }: NavItemProps) => {
     const theme = useTheme();
 
-    const Icon: OverridableComponent<SvgIconTypeMap> | JSX.Element | undefined = item.icon;
+    const Icon = item.icon as OverridableComponent<SvgIconTypeMap>;
     const itemIcon = item?.icon ? (
-        <Icon stroke={1.5} size="1.3rem" />
+        <Icon sx={{ fontSize: '1.3rem' }} />
     ) : (
         <FiberManualRecord
             sx={{ width: 8, height: 8 }} /* if isActive make width & height 8 // i.e. larger value */
@@ -39,9 +39,9 @@ const NavItem = ({ item, level }: NavItemProps) => {
         itemTarget = '_blank';
     }
 
-    let listItemProps = {
+    let listItemProps: any = {
         component: forwardRef((props, ref: React.ForwardedRef<HTMLAnchorElement>) => (
-            <NavLink ref={ref} {...props} to={item.url} target={itemTarget} />
+            <NavLink ref={ref} {...props} to={item.url || '/'} target={itemTarget} />
         )),
     };
 
