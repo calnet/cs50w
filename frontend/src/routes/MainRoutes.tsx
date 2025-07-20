@@ -52,6 +52,15 @@ const MainRoutes: RouteObject = {
     element: <MainLayout />,
     children: [
         {
+            path: '',
+            children: [
+                {
+                    path: '',
+                    element: <Dashboard />,
+                },
+            ],
+        },
+        {
             path: 'dashboard',
             children: [
                 {
@@ -114,7 +123,7 @@ const MainRoutes: RouteObject = {
                     element: <Customers />,
                 },
                 {
-                    path: 'customer_new',
+                    path: 'new',
                     element: <CustomerDialog />,
                 },
                 {
@@ -135,6 +144,10 @@ const MainRoutes: RouteObject = {
                     element: <Suppliers />,
                 },
                 {
+                    path: 'new',
+                    element: <Suppliers />,
+                },
+                {
                     path: 'invoices',
                     element: <SupplierInvoices />,
                 },
@@ -152,6 +165,10 @@ const MainRoutes: RouteObject = {
                     element: <Banking />,
                 },
                 {
+                    path: 'new',
+                    element: <Banking />,
+                },
+                {
                     path: 'statements',
                     element: <BankingStatements />,
                 },
@@ -164,6 +181,10 @@ const MainRoutes: RouteObject = {
         {
             path: 'coa',
             children: [
+                {
+                    path: '',
+                    element: <CoaLayout />,
+                },
                 {
                     path: 'layouts',
                     element: <Layouts />,
