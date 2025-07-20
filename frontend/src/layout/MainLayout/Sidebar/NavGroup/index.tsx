@@ -19,21 +19,26 @@ const NavGroup = ({ item }: NavGroupProps) => {
 
     // menu list collapse & Items
     const items = item.children?.map((menu) => {
-        switch (menu.type) {
-            // TODO: implement collapse menu
-            // case 'collapse':
-            //     return <NavCollapse key={menu.id} menu={menu} level={1} />;
-            case 'item':
-                return <NavItem key={menu.id} item={menu} level={1} />;
+        menu.hidden = menu.hidden || false; // Ensure hidden is defined
+        if (!menu.hidden) {
+            switch (menu.type) {
+                // TODO: implement collapse menu
+                // case 'collapse':
+                //     return <NavCollapse key={menu.id} menu={menu} level={1} />;
+                case 'item':
+                    return <NavItem key={menu.id} item={menu} level={1} />;
 
-            case 'group':
-                return <NavGroup key={menu.id} item={menu} />;
-            default:
-                return (
-                    <Typography key={menu.id} variant="h6" color="error" align="center">
-                        Menu Items Error
-                    </Typography>
-                );
+                case 'group':
+                    return <NavGroup key={menu.id} item={menu} />;
+                default:
+                    return (
+                        <Typography key={menu.id} variant="h6" color="error" align="center">
+                            Menu Items Error
+                        </Typography>
+                    );
+            }
+        } else {
+            return null; // Skip rendering if hidden
         }
     });
 

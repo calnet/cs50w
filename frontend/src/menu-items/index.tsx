@@ -27,6 +27,7 @@ export type MenuItemType = {
     external?: boolean;
     target?: string;
     disabled?: boolean;
+    hidden?: boolean;
 };
 
 // ==============================|| MENU ITEMS ||============================== //
