@@ -1,7 +1,14 @@
 import { useContext } from 'react';
 
 // material-ui
-import { Drawer, Stack, useMediaQuery, useTheme } from '@mui/material';
+import { 
+    Drawer, 
+    Stack, 
+    useMediaQuery, 
+    useTheme,
+    Box,
+    Fade
+} from '@mui/material';
 
 // context import
 import { SidebarContext } from '../../../contexts/SidebarContext';
@@ -31,12 +38,47 @@ function Sidebar() {
     const isMediumScreen = useMediaQuery(theme.breakpoints.up('md'));
 
     const drawer = (
-        <SimpleBar style={{ height: '100%' }}>
-            <Stack>
-                <LogoSection />
-                <MenuList />
-            </Stack>
-        </SimpleBar>
+        <Fade in timeout={300}>
+            <SimpleBar 
+                style={{ height: '100%' }}
+                autoHide={false}
+            >
+                <Stack sx={{ height: '100%' }}>
+                    <LogoSection />
+                    <Box sx={{ flexGrow: 1, overflow: 'hidden' }}>
+                        <MenuList />
+                    </Box>
+                    
+                    {/* Footer section */}
+                    <Box 
+                        sx={{ 
+                            p: 2, 
+                            borderTop: 1, 
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            textAlign: 'center'
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                fontSize: '0.75rem',
+                                color: 'rgba(255,255,255,0.6)',
+                                mb: 1
+                            }}
+                        >
+                            CS50 Capstone Project
+                        </Box>
+                        <Box
+                            sx={{
+                                fontSize: '0.7rem',
+                                color: 'rgba(255,255,255,0.4)',
+                            }}
+                        >
+                            v1.0.0
+                        </Box>
+                    </Box>
+                </Stack>
+            </SimpleBar>
+        </Fade>
     );
 
     return (
@@ -51,13 +93,15 @@ function Sidebar() {
             }}
             sx={{
                 ['& .MuiDrawer-paper']: {
-                    backgroundColor: theme.palette.nav?.background,
+                    background: `linear-gradient(180deg, ${theme.palette.nav?.background}, ${theme.palette.nav?.background}dd)`,
                     borderRightColor: theme.palette.nav?.borderColor,
                     borderRightStyle: 'solid',
                     borderRightWidth: 1,
                     boxSizing: 'border-box',
                     color: theme.palette.nav?.item?.color,
                     width: drawerWidth,
+                    boxShadow: isMediumScreen ? theme.shadows[8] : theme.shadows[16],
+                    transition: 'all 0.3s ease-in-out',
                 },
             }}
         >
