@@ -14,25 +14,31 @@
             "extensions": [
                 // Python & Django & Ruff
                 "ms-python.python",
-                "batisteo.vscode-django",
                 "charliermarsh.ruff",
+                "batisteo.vscode-django",
                 // JavaScript/Frontend/React
-                "ms-vscode.vscode-typescript-next",
+                "formulahendry.auto-rename-tag",
+                "dsznajder.es7-react-js-snippets",
                 "ms-python.mypy-type-checker",
                 "esbenp.prettier-vscode",
                 "bradlc.vscode-tailwindcss",
-                "formulahendry.auto-rename-tag",
                 "ms-vscode.vscode-react-native",
-                "dsznajder.es7-react-js-snippets",
+                "ms-vscode.vscode-typescript-next",
                 // Git & Development
                 "eamodio.gitlens",
-                "ms-vscode.vscode-json",
+                "mhutchie.git-graph",
                 "christian-kohler.path-intellisense",
                 "gruntfuggly.todo-tree",
+                "github.vscode-github-actions",
+                "ms-vscode.vscode-json",
+                "VisualStudioExptTeam.intellicode-api-usage-examples",
+                "VisualStudioExptTeam.vscodeintellicode",
                 // API & Database
+                "GitHub.copilot-chat",
                 "humao.rest-client",
                 "qwtel.sqlite-viewer",
-                "GitHub.copilot-chat"
+                // AI & Code Assistance
+                "Anthropic.claude-code"
             ],
             "settings": {
                 "python.linting.enabled": true,

@@ -7,7 +7,7 @@ echo "🚀 Starting development environment setup..."
 # Install Node.js dependencies
 echo "📦 Installing Node.js dependencies..."
 if [ -f "frontend/package.json" ]; then
-    cd frontend && npm ci && cd ..
+    cd frontend && rm -rf node_modules && npm ci && cd ..
     echo "✅ Node.js dependencies installed successfully"
 else
     echo "⚠️  No frontend/package.json found, skipping npm install"
