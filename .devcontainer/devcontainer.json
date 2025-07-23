@@ -49,6 +49,6 @@
             }
         }
     },
-    "postCreateCommand": "chmod +x ./setup.sh && ./setup.sh",
-    "postStartCommand": "chmod +x ./start-services.sh && ./start-services.sh"
+    "postCreateCommand": "bash setup.sh",
+    "postStartCommand": "bash start-services.sh"
 }

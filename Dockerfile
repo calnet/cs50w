@@ -24,6 +24,10 @@ RUN pip install --no-cache-dir --upgrade pip
 # Grant sudo privileges to appuser
 RUN echo 'appuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
+# Copy shell scripts and set permissions
+COPY setup.sh start-services.sh ./
+RUN chmod +x setup.sh start-services.sh
+
 # Switch to non-root user
 USER appuser
 
