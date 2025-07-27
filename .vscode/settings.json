@@ -1,5 +1,12 @@
 {
     "breadcrumbs.enabled": true,
+    "code-eol.colors.default.foreground": "#007000",
+    "code-eol.colors.error.foreground": "#700000",
+    "code-eol.decorateBeforeEol": false,
+    "code-eol.forceShowOnBoundary": true,
+    "code-eol.forceShowOnWordWrap": true,
+    "code-eol.highlightExtraWhitespace": true,
+    "code-eol.highlightNonDefault": true,
     "cSpell.words": [
         "simplebar"
     ],
@@ -29,7 +36,7 @@
         "strings": "on",
         "other": "on"
     },
-    "editor.renderWhitespace": "none",
+    "editor.renderWhitespace": "all",
     "editor.selectionHighlight": true,
     "editor.suggestOnTriggerCharacters": true,
     "editor.tabSize": 4,
