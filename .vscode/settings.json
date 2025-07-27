@@ -40,7 +40,6 @@
         "typescript": "typescriptreact"
     },
     "extensions.closeExtensionDetailsOnViewChange": true,
-    "files.eol": "\n",
     "git.autofetch": "all",
     "git.blame.editorDecoration.enabled": true,
     "git.confirmSync": false,
@@ -48,6 +47,8 @@
     "git.followTagsWhenSync": true,
     "git.postCommitCommand": "sync",
     "git.timeline.showUncommitted": true,
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "github.copilot.chat.languageContext.fix.typescript.enabled": false,
     "html.format.preserveNewLines": true,
     "javascript.suggest.enabled": true,
     "javascript.validate.enable": true,
