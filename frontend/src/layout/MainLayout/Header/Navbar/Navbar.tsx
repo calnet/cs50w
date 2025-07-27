@@ -1,30 +1,30 @@
 import { useContext, useState } from 'react';
 import { SidebarContext } from '../../../../contexts/SidebarContext';
 
-import { 
-    Avatar, 
-    Badge, 
-    Box, 
-    Button, 
-    IconButton, 
-    Stack, 
-    SvgIcon,
+import {
+    Avatar,
+    Badge,
+    Box,
+    Button,
+    Divider,
+    Fade,
+    IconButton,
     Menu,
     MenuItem,
-    Divider,
-    Typography,
+    Stack,
+    SvgIcon,
     Tooltip,
-    Fade
+    Typography
 } from '@mui/material';
 
-import { 
-    Menu as MenuIcon, 
-    NotificationsNone, 
-    Search,
+import {
     AccountCircle,
-    Settings,
     Logout,
-    Person
+    Menu as MenuIcon,
+    NotificationsNone,
+    Person,
+    Search,
+    Settings
 } from '@mui/icons-material';
 
 // ==============================|| NAVBAR LAYOUT ||============================== //
@@ -49,12 +49,12 @@ function Navbar() {
     const isMenuOpen = Boolean(anchorEl);
 
     return (
-        <Stack 
-            alignItems={'center'} 
-            direction={'row'} 
-            justifyContent={'space-between'} 
-            minHeight={64} 
-            px={2} 
+        <Stack
+            alignItems={'center'}
+            direction={'row'}
+            justifyContent={'space-between'}
+            minHeight={64}
+            px={2}
             spacing={2}
             sx={{
                 background: 'rgba(255, 255, 255, 0.95)',
@@ -70,8 +70,8 @@ function Navbar() {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleSidebarToggle}
-                        sx={{ 
-                            mr: 2, 
+                        sx={{
+                            mr: 2,
                             display: { md: 'none' },
                             transition: 'all 0.2s ease-in-out',
                             '&:hover': {
@@ -83,9 +83,9 @@ function Navbar() {
                         <MenuIcon />
                     </IconButton>
                 </Tooltip>
-                
+
                 <Tooltip title="Search">
-                    <IconButton 
+                    <IconButton
                         aria-label="Search"
                         sx={{
                             transition: 'all 0.2s ease-in-out',
@@ -102,7 +102,7 @@ function Navbar() {
 
             <Stack alignItems={'center'} direction={'row'} spacing={1}>
                 <Tooltip title="Language">
-                    <IconButton 
+                    <IconButton
                         aria-label="Language"
                         sx={{
                             transition: 'all 0.2s ease-in-out',
@@ -126,7 +126,7 @@ function Navbar() {
                 </Tooltip>
 
                 <Tooltip title={`${notificationCount} new notifications`}>
-                    <IconButton 
+                    <IconButton
                         aria-label="Notifications"
                         sx={{
                             transition: 'all 0.2s ease-in-out',
@@ -135,8 +135,8 @@ function Navbar() {
                             },
                         }}
                     >
-                        <Badge 
-                            badgeContent={notificationCount} 
+                        <Badge
+                            badgeContent={notificationCount}
                             color="error"
                             sx={{
                                 '& .MuiBadge-badge': {
@@ -155,7 +155,7 @@ function Navbar() {
                 </Tooltip>
 
                 <Tooltip title="Contacts">
-                    <IconButton 
+                    <IconButton
                         aria-label="Contacts"
                         sx={{
                             transition: 'all 0.2s ease-in-out',
@@ -197,14 +197,14 @@ function Navbar() {
                             },
                         }}
                     >
-                        <Avatar 
-                            src="/assets/avatars/avatar-anika-visser.png" 
-                            sx={{ 
-                                height: 36, 
+                        <Avatar
+                            src="/assets/avatars/avatar-anika-visser.png"
+                            sx={{
+                                height: 36,
                                 width: 36,
                                 border: '2px solid',
                                 borderColor: 'primary.main',
-                            }} 
+                            }}
                         />
                     </Button>
                 </Tooltip>
