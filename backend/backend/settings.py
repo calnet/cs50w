@@ -25,11 +25,7 @@ SECRET_KEY = "django-insecure-birwm$l)_+a$ba7*y_nv%)@q@o@2irw=2^v^jnl39c+5&38yt+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "192.168.1.71"
-]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.115"]
 
 
 # Application definition
@@ -41,10 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
     "corsheaders",
-
     "users",
     "banking",
     "customers",
@@ -144,7 +138,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Add the origin of your React app
     "http://127.0.0.1:5173",  # Add the origin of your React app
-    "http://192.168.1.71:5173",  # Add the origin of your React app
+    "http://192.168.1.115:5173",  # Add the origin of your React app
 ]
 
 LOGIN_URL = "/users/login/"
