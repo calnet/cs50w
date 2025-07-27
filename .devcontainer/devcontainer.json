@@ -34,6 +34,7 @@
                 "christian-kohler.path-intellisense",
                 "gruntfuggly.todo-tree",
                 "mhutchie.git-graph",
+                "medo64.render-crlf",
                 // API & Database
                 "humao.rest-client",
                 "qwtel.sqlite-viewer",
