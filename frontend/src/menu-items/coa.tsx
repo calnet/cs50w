@@ -1,6 +1,6 @@
 // assets
 import { TableChart } from '@mui/icons-material';
-import { MenuItemType } from '.';
+import { MenuItemType } from '../types/menu';
 
 // constant
 const icons = { TableChart };
@@ -10,6 +10,7 @@ const icons = { TableChart };
 const coaMenu: MenuItemType = {
     id: 'coa',
     title: 'Chart of Accounts',
+    hidden: false, // Set to true to hide this group
     type: 'group',
     children: [
         // {

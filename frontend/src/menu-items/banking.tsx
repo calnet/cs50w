@@ -1,6 +1,7 @@
 // assets
 import { ChecklistRtl, FormatListBulleted, Wallet } from '@mui/icons-material';
-import { MenuItemType } from '.';
+import { MenuItemType } from '../types/menu';
+
 
 // constant
 const icons = { ChecklistRtl, FormatListBulleted, Wallet };
@@ -10,6 +11,7 @@ const icons = { ChecklistRtl, FormatListBulleted, Wallet };
 const bankingMenu: MenuItemType = {
     id: 'banking',
     title: 'Banking',
+    hidden: false, // Set to true to hide this group
     type: 'group',
     children: [
         {

@@ -7,6 +7,7 @@ import Loadable from '../ui-component/Loadable';
 
 // dashboard routing
 const Dashboard = Loadable(lazy(() => import('../views/dashboard')));
+const CapstoneDashboard = Loadable(lazy(() => import('../views/dashboard/capstone-dashboard')));
 
 //utilities routing
 const Utilities = Loadable(lazy(() => import('../views/utilities/Utilities')));
@@ -58,18 +59,24 @@ const MainRoutes: RouteObject = {
                     path: '',
                     element: <Dashboard />,
                 },
+                {
+                    path: 'capstone-dashboard',
+                    element: <CapstoneDashboard />,
+                }
             ],
         },
         {
+            // Dashboard routing
             path: 'dashboard',
             children: [
                 {
                     path: '',
                     element: <Dashboard />,
-                },
+                }
             ],
         },
         {
+            // Utilities routing
             path: 'utilities',
             children: [
                 {

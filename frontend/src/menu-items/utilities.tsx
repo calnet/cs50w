@@ -1,6 +1,6 @@
 // assets
 import { Dashboard } from '@mui/icons-material';
-import { MenuItemType } from '.';
+import { MenuItemType } from '../types/menu';
 
 // constant
 const icons = { Dashboard };
@@ -10,6 +10,7 @@ const icons = { Dashboard };
 const utilitiesMenu: MenuItemType = {
     id: 'utilities',
     title: 'Utilities',
+    hidden: true, // Set to true to hide this group
     type: 'group',
     children: [
         {
@@ -61,7 +62,6 @@ const utilitiesMenu: MenuItemType = {
             breadcrumbs: true,
         },
     ],
-    hidden: true, // Set to true to hide this group
 };
 
 export default utilitiesMenu;

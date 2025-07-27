@@ -1,6 +1,6 @@
 // assets
 import { ChecklistRtl, People, Receipt, Wallet } from '@mui/icons-material';
-import { MenuItemType } from '.';
+import { MenuItemType } from '../types/menu';
 
 // constant
 const icons = { ChecklistRtl, People, Receipt, Wallet };
@@ -10,6 +10,7 @@ const icons = { ChecklistRtl, People, Receipt, Wallet };
 const suppliersMenu: MenuItemType = {
     id: 'suppliers',
     title: 'Suppliers',
+    hidden: false, // Set to true to hide this group
     type: 'group',
     children: [
         {

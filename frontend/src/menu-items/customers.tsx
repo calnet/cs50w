@@ -1,6 +1,6 @@
 // assets
 import { People, Receipt, Wallet } from '@mui/icons-material';
-import { MenuItemType } from '.';
+import { MenuItemType } from '../types/menu';
 
 // constant
 const icons = { People, Receipt, Wallet };
@@ -10,6 +10,7 @@ const icons = { People, Receipt, Wallet };
 const customersMenu: MenuItemType = {
     id: 'customers',
     title: 'Customers',
+    hidden: false, // Set to true to hide this group
     type: 'group',
     children: [
         {

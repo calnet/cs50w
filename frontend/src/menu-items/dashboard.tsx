@@ -1,6 +1,6 @@
 // assets
 import { Dashboard } from '@mui/icons-material';
-import { MenuItemType } from '.';
+import { MenuItemType } from '../types/menu';
 
 // constant
 const icons = { Dashboard };
@@ -9,6 +9,7 @@ const icons = { Dashboard };
 
 const dashboardMenu: MenuItemType = {
     id: 'dashboard',
+    hidden: false, // Set to true to hide the dashboard menu item by default
     type: 'group',
     children: [
         {
@@ -19,8 +20,15 @@ const dashboardMenu: MenuItemType = {
             icon: icons.Dashboard,
             breadcrumbs: false,
         },
+        {
+            id: 'capstone-dashboard',
+            title: 'Capstone Dashboard',
+            type: 'item',
+            url: '/capstone-dashboard',
+            icon: icons.Dashboard,
+            breadcrumbs: false,
+        },
     ],
-    hidden: true, // Set to true to hide the dashboard menu item by default
 };
 
 export default dashboardMenu;

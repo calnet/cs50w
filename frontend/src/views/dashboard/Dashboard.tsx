@@ -2,44 +2,41 @@ import {
     AccountBalance as BankIcon,
     Business as BusinessIcon,
     Calculate as CalculatorIcon,
+    CloudDone as CloudIcon,
     CreditCard as CreditCardIcon,
     Dashboard as DashboardIcon,
     ManageAccounts,
     Message as MessageIcon,
     People as PeopleIcon,
     PersonAdd as PersonAddIcon,
+    Security as SecurityIcon,
+    Speed as SpeedIcon,
     TableView as TableIcon,
     TrendingUp as TrendingUpIcon,
-    LocalShipping as TruckIcon,
-    Speed as SpeedIcon,
-    Security as SecurityIcon,
-    CloudDone as CloudIcon
+    LocalShipping as TruckIcon
 } from '@mui/icons-material';
 import {
     AppBar,
     Avatar,
     Box,
-    Button,
     Card,
-    CardActions,
     CardContent,
     Chip,
     Container,
-    Grid,
-    Paper,
-    Toolbar,
-    Typography,
-    useTheme,
     Fade,
+    Grid,
     Grow,
     LinearProgress,
-    IconButton,
-    Tooltip
+    Paper,
+    Toolbar,
+    Tooltip,
+    Typography,
+    useTheme
 } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const AccountingDashboard = () => {
+const Dashboard = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const [user] = useState({
@@ -179,38 +176,38 @@ const AccountingDashboard = () => {
 
     // Sample metrics for the accounting system
     const systemMetrics = [
-        { 
-            label: "Bank Accounts", 
-            value: "12", 
-            change: "+2", 
-            trend: "up", 
+        {
+            label: "Bank Accounts",
+            value: "12",
+            change: "+2",
+            trend: "up",
             icon: BankIcon,
             progress: 75,
             color: theme.palette.primary.main
         },
-        { 
-            label: "Active Customers", 
-            value: "247", 
-            change: "+18", 
-            trend: "up", 
+        {
+            label: "Active Customers",
+            value: "247",
+            change: "+18",
+            trend: "up",
             icon: PeopleIcon,
             progress: 82,
             color: theme.palette.secondary.main
         },
-        { 
-            label: "Active Suppliers", 
-            value: "89", 
-            change: "+5", 
-            trend: "up", 
+        {
+            label: "Active Suppliers",
+            value: "89",
+            change: "+5",
+            trend: "up",
             icon: TruckIcon,
             progress: 65,
             color: theme.palette.warning.main
         },
-        { 
-            label: "Nominal Codes", 
-            value: "156", 
-            change: "+8", 
-            trend: "up", 
+        {
+            label: "Nominal Codes",
+            value: "156",
+            change: "+8",
+            trend: "up",
             icon: CalculatorIcon,
             progress: 90,
             color: theme.palette.success.main
@@ -225,10 +222,10 @@ const AccountingDashboard = () => {
 
         return (
             <Grow in timeout={300 + index * 100}>
-                <Card 
-                    sx={{ 
-                        height: '100%', 
-                        display: 'flex', 
+                <Card
+                    sx={{
+                        height: '100%',
+                        display: 'flex',
                         flexDirection: 'column',
                         transition: 'all 0.3s ease-in-out',
                         cursor: 'pointer',
@@ -268,7 +265,7 @@ const AccountingDashboard = () => {
                             </Typography>
                         </Box>
                     </Box>
-                    
+
                     <CardContent sx={{ flexGrow: 1, p: 3 }}>
                         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                             {module.description}
@@ -285,7 +282,7 @@ const AccountingDashboard = () => {
                                             label={subView}
                                             size="small"
                                             variant="outlined"
-                                            sx={{ 
+                                            sx={{
                                                 fontSize: '0.7rem',
                                                 transition: 'all 0.2s ease-in-out',
                                                 '&:hover': {
@@ -320,23 +317,23 @@ const AccountingDashboard = () => {
 
         return (
             <Fade in timeout={500 + index * 100}>
-                <Card 
-                    sx={{ 
-                        textAlign: 'center', 
+                <Card
+                    sx={{
+                        textAlign: 'center',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease-in-out',
                         '&:hover': {
                             transform: 'scale(1.05)',
                             boxShadow: theme.shadows[8],
                         },
-                    }} 
+                    }}
                     onClick={handleClick}
                 >
                     <CardContent sx={{ p: 3 }}>
-                        <Avatar 
-                            sx={{ 
-                                bgcolor: action.color, 
-                                mx: 'auto', 
+                        <Avatar
+                            sx={{
+                                bgcolor: action.color,
+                                mx: 'auto',
                                 mb: 2,
                                 width: 56,
                                 height: 56,
@@ -361,8 +358,8 @@ const AccountingDashboard = () => {
         const IconComponent = metric.icon;
         return (
             <Grow in timeout={200 + index * 100}>
-                <Paper 
-                    sx={{ 
+                <Paper
+                    sx={{
                         p: 3,
                         background: `linear-gradient(135deg, ${metric.color}15, ${metric.color}05)`,
                         border: `1px solid ${metric.color}30`,
@@ -392,17 +389,17 @@ const AccountingDashboard = () => {
                             <IconComponent />
                         </Avatar>
                     </Box>
-                    <LinearProgress 
-                        variant="determinate" 
-                        value={metric.progress} 
-                        sx={{ 
-                            height: 6, 
+                    <LinearProgress
+                        variant="determinate"
+                        value={metric.progress}
+                        sx={{
+                            height: 6,
                             borderRadius: 3,
                             backgroundColor: `${metric.color}20`,
                             '& .MuiLinearProgress-bar': {
                                 backgroundColor: metric.color,
                             },
-                        }} 
+                        }}
                     />
                 </Paper>
             </Grow>
@@ -411,11 +408,11 @@ const AccountingDashboard = () => {
 
     if (loading) {
         return (
-            <Box sx={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
                 minHeight: '100vh',
                 background: `linear-gradient(135deg, ${theme.palette.primary.main}10, ${theme.palette.secondary.main}10)`,
             }}>
@@ -429,10 +426,10 @@ const AccountingDashboard = () => {
     return (
         <Box sx={{ flexGrow: 1, background: `linear-gradient(135deg, ${theme.palette.background.default}, ${theme.palette.grey[50]})` }}>
             {/* Enhanced Header */}
-            <AppBar 
-                position="static" 
-                elevation={0} 
-                sx={{ 
+            <AppBar
+                position="static"
+                elevation={0}
+                sx={{
                     background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
                     color: 'white'
                 }}
@@ -448,10 +445,10 @@ const AccountingDashboard = () => {
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <Tooltip title="System Status">
-                            <Chip 
-                                icon={<CloudIcon />} 
-                                label="Online" 
-                                color="success" 
+                            <Chip
+                                icon={<CloudIcon />}
+                                label="Online"
+                                color="success"
                                 variant="filled"
                                 sx={{ color: 'white' }}
                             />
@@ -605,4 +602,4 @@ const AccountingDashboard = () => {
     );
 };
 
-export default AccountingDashboard;
+export default Dashboard;

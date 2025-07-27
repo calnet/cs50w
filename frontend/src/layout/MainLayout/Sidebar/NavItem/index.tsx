@@ -10,7 +10,7 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 // type imports
 import PropTypes from 'prop-types';
-import { MenuItemType } from '../../../../menu-items';
+import { MenuItemType } from '../../../../types/menu';
 
 // project imports
 

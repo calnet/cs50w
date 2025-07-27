@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Divider, List, Typography, useTheme } from '@mui/material';
 
 // project imports
-import { MenuItemType } from '../../../../menu-items';
+import { MenuItemType } from '../../../../types/menu';
 import NavItem from '../NavItem';
 
 // prop types
