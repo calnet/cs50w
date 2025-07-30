@@ -18,7 +18,16 @@ const dashboardMenu: MenuItemType = {
             type: 'item',
             url: '/dashboard',
             icon: icons.Dashboard,
-            breadcrumbs: false,
+            breadcrumbs: true,
+        },
+        {
+            id: 'dashboard-v1',
+            title: 'Dashboard - Version 1',
+            tooltip: 'Version 1 of the dashboard',
+            type: 'item',
+            url: '/dashboard-v1',
+            icon: icons.Dashboard,
+            breadcrumbs: true,
         },
         {
             id: 'capstone-dashboard',
@@ -26,7 +35,7 @@ const dashboardMenu: MenuItemType = {
             type: 'item',
             url: '/capstone-dashboard',
             icon: icons.Dashboard,
-            breadcrumbs: false,
+            breadcrumbs: true,
         },
         {
             id: 'claude-dashboard',
@@ -34,7 +43,7 @@ const dashboardMenu: MenuItemType = {
             type: 'item',
             url: '/claude-dashboard',
             icon: icons.Dashboard,
-            breadcrumbs: false,
+            breadcrumbs: true,
         }
     ],
 };
