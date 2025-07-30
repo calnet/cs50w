@@ -1,33 +1,30 @@
-import { 
-    Paper, 
-    Box, 
-    Typography, 
-    Fade, 
-    Skeleton, 
-    Alert,
-    Chip,
-    IconButton,
-    Tooltip,
-    Stack
-} from '@mui/material';
-import { 
-    Refresh as RefreshIcon,
+import {
     Add as AddIcon,
-    FilterList as FilterIcon
+    Refresh as RefreshIcon
 } from '@mui/icons-material';
-import { 
-    DataGrid, 
-    GridRowParams, 
-    GridValidRowModel, 
+import {
+    Box,
+    Chip,
+    Fade,
+    IconButton,
+    Paper,
+    Skeleton,
+    Stack,
+    Tooltip,
+    Typography
+} from '@mui/material';
+import {
+    DataGrid,
+    GridColDef,
+    GridRowParams,
     GridToolbar,
-    GridActionsCellItem,
-    GridColDef
+    GridValidRowModel
 } from '@mui/x-data-grid';
 import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { CapstoneDataGridType } from '../types/ViewComponentType';
 import Loadable from '../ui-component/Loadable';
 import { formatDialogFormRow } from './formatDialogFormRow';
-import ErrorBoundary from '../components/ErrorBoundary';
 
 const BankingAccountListDialog = Loadable(lazy(() => import('../views/banking/BankingAccountListDialog')));
 const CoaCategoryDialog = Loadable(lazy(() => import('../views/coa/CoaCategoryDialog')));
@@ -37,13 +34,13 @@ const NominalTypeDialog = Loadable(lazy(() => import('../views/coa/NominalTypeDi
 const CustomerDialog = Loadable(lazy(() => import('../views/customers/CustomerDialog')));
 const SupplierDialog = Loadable(lazy(() => import('../views/suppliers/SupplierDialog')));
 
-function CapstoneDataGrid({ 
-    rows, 
-    columns, 
-    heading, 
-    dialog = '', 
-    url = '', 
-    handleDataChanged 
+function CapstoneDataGrid({
+    rows,
+    columns,
+    heading,
+    dialog = '',
+    url = '',
+    handleDataChanged
 }: CapstoneDataGridType) {
     const [dialogState, setDialogState] = useState(false);
     const [dialogFormRow, setDialogFormRow] = useState<GridValidRowModel | null>(null);
@@ -109,16 +106,16 @@ function CapstoneDataGrid({
     }, [columns]);
 
     const CustomToolbar = () => (
-        <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'space-between',
             p: 2,
             borderBottom: 1,
             borderColor: 'divider'
         }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Typography variant="h5" component="h2" sx={{ 
+                <Typography variant="h5" component="h2" sx={{
                     fontWeight: 600,
                     color: 'primary.main',
                     display: 'flex',
@@ -126,18 +123,18 @@ function CapstoneDataGrid({
                     gap: 1
                 }}>
                     {heading}
-                    <Chip 
-                        label={`${rows.length} records`} 
-                        size="small" 
-                        color="primary" 
+                    <Chip
+                        label={`${rows.length} records`}
+                        size="small"
+                        color="primary"
                         variant="outlined"
                     />
                 </Typography>
             </Box>
-            
+
             <Stack direction="row" spacing={1}>
                 <Tooltip title="Add New Record">
-                    <IconButton 
+                    <IconButton
                         onClick={handleAddNew}
                         color="primary"
                         sx={{
@@ -150,9 +147,9 @@ function CapstoneDataGrid({
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
-                
+
                 <Tooltip title="Refresh Data">
-                    <IconButton 
+                    <IconButton
                         onClick={handleRefresh}
                         disabled={loading}
                         sx={{
@@ -180,7 +177,7 @@ function CapstoneDataGrid({
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                         Get started by adding your first record
                     </Typography>
-                    <IconButton 
+                    <IconButton
                         onClick={handleAddNew}
                         color="primary"
                         size="large"
@@ -202,9 +199,9 @@ function CapstoneDataGrid({
 
     return (
         <Fade in timeout={300}>
-            <Paper 
+            <Paper
                 elevation={2}
-                sx={{ 
+                sx={{
                     overflow: 'hidden',
                     borderRadius: 2,
                     '& .data-grid-header': {
@@ -238,15 +235,15 @@ function CapstoneDataGrid({
                 }}
             >
                 <CustomToolbar />
-                
+
                 {loading ? (
                     <Box sx={{ p: 2 }}>
                         {[...Array(5)].map((_, index) => (
-                            <Skeleton 
-                                key={index} 
-                                variant="rectangular" 
-                                height={52} 
-                                sx={{ mb: 1, borderRadius: 1 }} 
+                            <Skeleton
+                                key={index}
+                                variant="rectangular"
+                                height={52}
+                                sx={{ mb: 1, borderRadius: 1 }}
                             />
                         ))}
                     </Box>
@@ -287,7 +284,7 @@ function CapstoneDataGrid({
                         />
                     </Box>
                 )}
-                
+
                 {DialogComponent && dialogState && formattedDialogFormRow && (
                     <ErrorBoundary>
                         <Suspense fallback={
