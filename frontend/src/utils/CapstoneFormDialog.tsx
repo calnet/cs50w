@@ -1,22 +1,22 @@
-import { 
-    Alert, 
-    Button, 
-    Dialog, 
-    DialogActions, 
-    DialogContent, 
-    DialogContentText, 
-    DialogTitle, 
-    TextField,
-    CircularProgress,
+import { Cancel as CancelIcon, Close as CloseIcon, Save as SaveIcon } from '@mui/icons-material';
+import {
+    Alert,
     Box,
-    Fade,
-    Slide,
-    IconButton,
-    Tooltip,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     Divider,
-    Stack
+    Fade,
+    IconButton,
+    Slide,
+    Stack,
+    TextField,
+    Tooltip
 } from '@mui/material';
-import { Close as CloseIcon, Save as SaveIcon, Cancel as CancelIcon } from '@mui/icons-material';
 import { TransitionProps } from '@mui/material/transitions';
 import { GridValidRowModel } from '@mui/x-data-grid';
 import axios from 'axios';
@@ -57,37 +57,37 @@ function CapstoneFormDialog({
     const handleSaveDialog = async () => {
         const errors = validateAllFields(fields, localSelectedRow || {});
         setFieldErrors(errors);
-        
+
         if (Object.values(errors).some(Boolean)) {
             setSaveError('Please fix the validation errors before saving');
             return;
         }
-        
+
         if (!localSelectedRow) {
             setSaveError('No data to save');
             return;
         }
-        
+
         if (!url) {
             setSaveError('No URL provided for saving data');
             return;
         }
-        
+
         setLoading(true);
         setSaveError(null);
-        
+
         try {
             const response = await axios.post(url, localSelectedRow);
             console.log('Record saved successfully: ', response.data);
             setSaveSuccess(true);
             setHasUnsavedChanges(false);
-            
+
             // Show success briefly then close
             setTimeout(() => {
                 handleCloseDialog();
                 handleDataChanged();
             }, 1000);
-            
+
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 const err = error.response?.data?.errors || error.message || 'Unknown error';
@@ -113,18 +113,18 @@ function CapstoneFormDialog({
                 newValue = parts[0] + '.' + parts.slice(1).join('');
             }
         }
-        
+
         const error = getFieldError(field, newValue);
         setFieldErrors((prev) => ({
             ...prev,
             [field.id]: error,
         }));
-        
+
         const updatedRow = {
             ...(localSelectedRow ?? {}),
             [field.id]: newValue,
         };
-        
+
         setLocalSelectedRow(updatedRow);
         setHasUnsavedChanges(true);
         setSaveError(null); // Clear save error when user makes changes
@@ -165,7 +165,7 @@ function CapstoneFormDialog({
             const confirmClose = window.confirm('You have unsaved changes. Are you sure you want to close?');
             if (!confirmClose) return;
         }
-        
+
         setLocalDialogState(false);
         handleClose();
     };
@@ -174,7 +174,7 @@ function CapstoneFormDialog({
         const value = localSelectedRow?.[field.id] ?? '';
         const helperId = `${field.id}-helper-text`;
         const hasError = Boolean(fieldErrors[field.id]);
-        
+
         return (
             <TextField
                 key={field.id}
@@ -250,16 +250,16 @@ function CapstoneFormDialog({
                 },
             }}
         >
-            <DialogTitle 
-                sx={{ 
-                    cursor: 'move', 
-                    display: 'flex', 
-                    alignItems: 'center', 
+            <DialogTitle
+                sx={{
+                    cursor: 'move',
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'space-between',
                     pb: 1,
                     background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
                     color: 'primary.contrastText',
-                }} 
+                }}
                 id="draggable-dialog-title"
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -291,7 +291,7 @@ function CapstoneFormDialog({
                     </IconButton>
                 </Tooltip>
             </DialogTitle>
-            
+
             <DialogContent sx={{ pt: 2 }}>
                 {contentText && (
                     <>
@@ -301,13 +301,13 @@ function CapstoneFormDialog({
                         <Divider sx={{ mb: 2 }} />
                     </>
                 )}
-                
+
                 <Fade in={saveSuccess}>
                     <Alert severity="success" sx={{ mb: 2 }} aria-live="polite">
                         Record saved successfully!
                     </Alert>
                 </Fade>
-                
+
                 {saveError && (
                     <Alert severity="error" sx={{ mb: 2 }} aria-live="polite">
                         {Array.isArray(saveError) ? (
@@ -329,14 +329,14 @@ function CapstoneFormDialog({
                         )}
                     </Alert>
                 )}
-                
+
                 {hasErrors && (
-                    <Alert 
-                        severity="error" 
-                        sx={{ mb: 2 }} 
-                        aria-live="assertive" 
-                        tabIndex={-1} 
-                        ref={errorSummaryRef} 
+                    <Alert
+                        severity="error"
+                        sx={{ mb: 2 }}
+                        aria-live="assertive"
+                        tabIndex={-1}
+                        ref={errorSummaryRef}
                         role="alert"
                     >
                         <strong>Please fix the following errors:</strong>
@@ -354,15 +354,15 @@ function CapstoneFormDialog({
                         </Box>
                     </Alert>
                 )}
-                
+
                 <Stack spacing={2} sx={{ mt: 2 }}>
                     {fields.map(renderField)}
                 </Stack>
             </DialogContent>
-            
+
             <DialogActions sx={{ px: 3, py: 2, gap: 1 }}>
-                <Button 
-                    onClick={handleCloseDialog} 
+                <Button
+                    onClick={handleCloseDialog}
                     disabled={loading}
                     startIcon={<CancelIcon />}
                     variant="outlined"
@@ -370,8 +370,8 @@ function CapstoneFormDialog({
                 >
                     Cancel
                 </Button>
-                <Button 
-                    onClick={handleSaveDialog} 
+                <Button
+                    onClick={handleSaveDialog}
                     disabled={!canSave}
                     startIcon={loading ? <CircularProgress size={16} /> : <SaveIcon />}
                     variant="contained"
