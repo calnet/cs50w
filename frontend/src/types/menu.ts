@@ -17,6 +17,7 @@ export type MenuItemType = {
     icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
     target?: string;
     title?: string;
+    tooltip?: string;
     type: 'group' | 'item' | 'collapse';
     url?: string | Partial<Path>;
 };

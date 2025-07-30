@@ -76,7 +76,7 @@ const NavItem = ({ item, level }: NavItemProps) => {
             <ListItemIcon sx={{ my: 'auto', minWidth: !item.icon ? 16 : 36 }}>{itemIcon}</ListItemIcon>
             <ListItemText
                 primary={
-                    <Typography variant="body1" color="inherit">
+                    <Typography variant="body1" title={item.tooltip ? item.tooltip : item.title} color="inherit">
                         {item.title}
                     </Typography>
                 }
