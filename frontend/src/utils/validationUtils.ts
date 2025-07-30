@@ -1,4 +1,4 @@
-import { FormFieldType } from "../types/FormField";
+import { FormFieldType } from '../types/FormField';
 
 const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
@@ -12,17 +12,17 @@ const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
 export function getFieldError(field: FormFieldType, value: string): string {
     // Trim whitespace for validation
     const trimmedValue = value.trim();
-    
+
     // Required field validation
     if (field.required && trimmedValue === '') {
         return `${field.label} is required`;
     }
-    
+
     // Skip other validations if field is empty and not required
     if (trimmedValue === '' && !field.required) {
         return '';
     }
-    
+
     // Type-specific validations
     switch (field.type) {
         case 'number':
@@ -33,20 +33,20 @@ export function getFieldError(field: FormFieldType, value: string): string {
                 return 'Number cannot be negative';
             }
             break;
-            
+
         case 'email':
             if (!EMAIL_REGEX.test(trimmedValue)) {
                 return 'Please enter a valid email address';
             }
             break;
-            
+
         case 'tel':
         case 'phone':
             if (!PHONE_REGEX.test(trimmedValue.replace(/[\s\-\(\)]/g, ''))) {
                 return 'Please enter a valid phone number';
             }
             break;
-            
+
         case 'text':
             if (trimmedValue.length < 2) {
                 return `${field.label} must be at least 2 characters long`;
@@ -55,7 +55,7 @@ export function getFieldError(field: FormFieldType, value: string): string {
                 return `${field.label} cannot exceed 255 characters`;
             }
             break;
-            
+
         case 'url':
             try {
                 new URL(trimmedValue);
@@ -64,7 +64,7 @@ export function getFieldError(field: FormFieldType, value: string): string {
             }
             break;
     }
-    
+
     // Field-specific validations based on field ID
     switch (field.id) {
         case 'account_reference':
@@ -72,19 +72,19 @@ export function getFieldError(field: FormFieldType, value: string): string {
                 return 'Account reference must be at least 3 characters';
             }
             break;
-            
+
         case 'nominal_code':
             if (trimmedValue.length !== 4) {
                 return 'Nominal code must be exactly 4 digits';
             }
             break;
-            
+
         case 'account_number':
             if (trimmedValue.length < 8) {
                 return 'Account number must be at least 8 digits';
             }
             break;
-            
+
         case 'account_sort_code':
             const sortCode = trimmedValue.replace(/[\s\-]/g, '');
             if (sortCode.length !== 6) {
@@ -92,7 +92,7 @@ export function getFieldError(field: FormFieldType, value: string): string {
             }
             break;
     }
-    
+
     return '';
 }
 
@@ -102,12 +102,9 @@ export function getFieldError(field: FormFieldType, value: string): string {
  * @param row - The data object to validate (defaults to empty object)
  * @returns Object of errors keyed by field id
  */
-export function validateAllFields(
-    fields: FormFieldType[],
-    row: Record<string, unknown> = {}
-): Record<string, string> {
+export function validateAllFields(fields: FormFieldType[], row: Record<string, unknown> = {}): Record<string, string> {
     const errors: Record<string, string> = {};
-    
+
     fields.forEach((field) => {
         const value = row && row[field.id] ? String(row[field.id]) : '';
         const error = getFieldError(field, value);
@@ -115,7 +112,7 @@ export function validateAllFields(
             errors[field.id] = error;
         }
     });
-    
+
     return errors;
 }
 
@@ -125,10 +122,7 @@ export function validateAllFields(
  * @param row - The data object to validate
  * @returns Boolean indicating if form is valid
  */
-export function isFormValid(
-    fields: FormFieldType[],
-    row: Record<string, unknown> = {}
-): boolean {
+export function isFormValid(fields: FormFieldType[], row: Record<string, unknown> = {}): boolean {
     const errors = validateAllFields(fields, row);
     return Object.keys(errors).length === 0;
 }
@@ -139,13 +133,10 @@ export function isFormValid(
  * @param row - The data object to validate
  * @returns Array of error messages with field labels
  */
-export function getValidationSummary(
-    fields: FormFieldType[],
-    row: Record<string, unknown> = {}
-): string[] {
+export function getValidationSummary(fields: FormFieldType[], row: Record<string, unknown> = {}): string[] {
     const errors = validateAllFields(fields, row);
     return Object.entries(errors).map(([fieldId, error]) => {
-        const field = fields.find(f => f.id === fieldId);
+        const field = fields.find((f) => f.id === fieldId);
         const label = field ? field.label : fieldId;
         return `${label}: ${error}`;
     });
