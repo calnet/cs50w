@@ -28,6 +28,14 @@ const dashboardMenu: MenuItemType = {
             icon: icons.Dashboard,
             breadcrumbs: false,
         },
+        {
+            id: 'claude-dashboard',
+            title: 'Claude Dashboard',
+            type: 'item',
+            url: '/claude-dashboard',
+            icon: icons.Dashboard,
+            breadcrumbs: false,
+        }
     ],
 };
 
