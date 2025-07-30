@@ -8,15 +8,15 @@ export interface MenuItems {
 
 export type MenuItemType = {
     id: string;
-    title?: string;
-    caption?: string;
-    hidden?: boolean;
-    type: 'group' | 'item' | 'collapse';
-    children?: MenuItemType[];
-    url?: string | Partial<Path>;
-    icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
     breadcrumbs?: boolean;
-    external?: boolean;
-    target?: string;
+    caption?: string;
+    children?: MenuItemType[];
     disabled?: boolean;
+    external?: boolean;
+    hidden?: boolean;
+    icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
+    target?: string;
+    title?: string;
+    type: 'group' | 'item' | 'collapse';
+    url?: string | Partial<Path>;
 };
