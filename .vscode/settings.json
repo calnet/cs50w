@@ -28,8 +28,8 @@
     "editor.foldingHighlight": true,
     "editor.formatOnSave": true,
     "editor.hover.enabled": true,
-    "editor.lightbulb.enabled": "on",
-    "editor.occurrencesHighlight": "singleFile",
+    "editor.lightbulb.enabled": "onCode",
+    "editor.occurrencesHighlight": "multiFile",
     "editor.parameterHints.enabled": true,
     "editor.quickSuggestions": {
         "comments": "on",
