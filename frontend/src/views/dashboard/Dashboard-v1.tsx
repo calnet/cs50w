@@ -437,7 +437,7 @@ const DashboardV1 = () => {
                 <Toolbar sx={{ py: 1 }}>
                     <Box sx={{ flexGrow: 1 }}>
                         <Typography variant="h4" component="h1" sx={{ fontWeight: 700, mb: 0.5 }}>
-                            Accounting System Dashboard
+                            Accounting System Dashboard V1.0
                         </Typography>
                         <Typography variant="body1" sx={{ opacity: 0.9 }}>
                             CS50 Capstone Project - Financial Management Platform

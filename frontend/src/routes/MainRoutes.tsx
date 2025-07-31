@@ -6,7 +6,6 @@ import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
 
 // dashboard routing
-const Dashboard = Loadable(lazy(() => import('../views/dashboard')));
 const CapstoneDashboard = Loadable(lazy(() => import('../views/dashboard/capstone-dashboard')));
 const ClaudeDashboard = Loadable(lazy(() => import('../views/dashboard/Dashboard-claude')));
 const DashboardV1 = Loadable(lazy(() => import('../views/dashboard/Dashboard-v1')));
@@ -59,7 +58,7 @@ const MainRoutes: RouteObject = {
             children: [
                 {
                     path: '',
-                    element: <Dashboard />,
+                    element: <DashboardV1 />, // Default route, can be changed to any dashboard or landing page
                 },
                 {
                     path: 'dashboard-v1',
@@ -72,16 +71,6 @@ const MainRoutes: RouteObject = {
                 {
                     path: 'claude-dashboard',
                     element: <ClaudeDashboard />,
-                }
-            ],
-        },
-        {
-            // Dashboard routing
-            path: 'dashboard',
-            children: [
-                {
-                    path: '',
-                    element: <Dashboard />,
                 }
             ],
         },

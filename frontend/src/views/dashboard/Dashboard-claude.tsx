@@ -19,8 +19,8 @@ import { useDashboardData } from './hooks/useDashboardData';
 
 const ClaudeDashboard = () => {
     const [user] = useState({
-        name: "Accounting User",
-        role: "Financial Manager",
+        name: "Default Accounting User",
+        role: "Default User Role",
         isAuthenticated: true
     });
 

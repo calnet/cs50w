@@ -21,7 +21,7 @@ const DashboardHeader = ({ user }: DashboardHeaderProps) => {
             <Toolbar>
                 <Box sx={{ flexGrow: 1 }}>
                     <Typography variant="h5" component="h1" sx={{ fontWeight: 'bold' }}>
-                        Accounting System Dashboard
+                        Accounting System Dashboard - Claude
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         CS50 Capstone Project - Financial Management Platform

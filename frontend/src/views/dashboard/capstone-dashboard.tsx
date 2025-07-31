@@ -351,7 +351,7 @@ const CapstoneDashboard = () => {
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }}>
                         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                            Accounting System Dashboard
+                            Accounting System Dashboard - Capstone
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             CS50 Capstone - Live Data Overview
