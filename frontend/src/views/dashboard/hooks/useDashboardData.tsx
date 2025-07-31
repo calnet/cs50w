@@ -11,12 +11,13 @@ import {
     LocalShipping as TruckIcon
 } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
+import { IDashboardCompoonentTypes, IModuleView, IQuickAction, ISystemMetric } from '../../../types/DashboardComponentTypes';
 
-export const useDashboardData = () => {
+export const useDashboardData = (): IDashboardCompoonentTypes => {
     const theme = useTheme();
 
     // Core business modules based on your actual views
-    const coreModules = [
+    const coreModules: IModuleView[] = [
         {
             name: "Banking",
             description: "Manage bank accounts and reconciliation",
@@ -71,7 +72,7 @@ export const useDashboardData = () => {
     ];
 
     // Utility and development views
-    const utilityViews = [
+    const utilityViews: IModuleView[] = [
         {
             name: "Utilities",
             description: "Table components and UI utilities",
@@ -100,7 +101,7 @@ export const useDashboardData = () => {
     ];
 
     // Quick action buttons for common tasks
-    const quickActions = [
+    const quickActions: IQuickAction[] = [
         {
             name: "Dashboard",
             description: "Main overview",
@@ -132,7 +133,7 @@ export const useDashboardData = () => {
     ];
 
     // Sample metrics for the accounting system
-    const systemMetrics = [
+    const systemMetrics: ISystemMetric[] = [
         { label: "Bank Accounts", value: "12", change: "+2", trend: "up", icon: BankIcon },
         { label: "Active Customers", value: "247", change: "+18", trend: "up", icon: PeopleIcon },
         { label: "Active Suppliers", value: "89", change: "+5", trend: "up", icon: TruckIcon },

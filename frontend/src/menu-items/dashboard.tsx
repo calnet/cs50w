@@ -1,13 +1,13 @@
 // assets
 import { Dashboard } from '@mui/icons-material';
-import { MenuItemType } from '../types/menu';
+import { MenuItem } from '../types/menu';
 
 // constant
 const icons = { Dashboard };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
-const dashboardMenu: MenuItemType = {
+const dashboardMenu: MenuItem = {
     id: 'dashboard',
     hidden: false, // Set to true to hide the dashboard menu item by default
     type: 'group',
@@ -19,6 +19,7 @@ const dashboardMenu: MenuItemType = {
             url: '/dashboard',
             icon: icons.Dashboard,
             breadcrumbs: true,
+            hidden: true, // Hide the default dashboard item
         },
         {
             id: 'dashboard-v1',
