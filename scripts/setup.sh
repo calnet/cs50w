@@ -8,10 +8,10 @@ echo "🚀 Starting Capstone development environment setup..."
 
 # Update package manager
 sudo apk update
-
+sleep 5
 # Install required packages
 sudo apk add --no-cache curl git sqlite sudo bash nodejs npm apt
-
+sleep 10
 # Ensure we're in the workspace directory
 cd /workspaces/capstone
 
@@ -29,13 +29,12 @@ fi
 
 # Install Python dependencies
 echo "🐍 Installing Python dependencies..."
+pip install --upgrade pip
+sleep 5
 
 if [ -f "requirements.txt" ]; then
-    pip install -q -r requirements.txt
-    echo "✅ Python dependencies installed successfully"
-elif [ -f "backend/requirements.txt" ]; then
-    pip install --quiet --upgrade pip
-    pip install -quiet -r backend/requirements.txt
+    pip install -r requirements.txt
+    sleep 5
     echo "✅ Python dependencies installed successfully"
 else
     echo "⚠️  No requirements.txt found, skipping pip install"
