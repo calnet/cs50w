@@ -4,6 +4,13 @@
     "image": "python:3.13.5-alpine",
     "name": "capstone-dev",
     "features": {
+        // "ghcr.io/devcontainers/features/node:1": {},
+        // "ghcr.io/devcontainers/features/python:1": {},
+        // "ghcr.io/devcontainers/features/github-cli:1": {
+        //     "version": "latest",
+        //     "installGitHubCli": true,
+        //     "installGitHubCliConfig": true
+        // },
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": false,
             "installOhMyZsh": false,
@@ -19,6 +26,7 @@
             "extensions": [
                 // Python & Django & Ruff
                 "ms-python.python",
+                "ms-python.vscode-pylance",
                 "batisteo.vscode-django",
                 "charliermarsh.ruff",
                 // JavaScript/Frontend/React
@@ -29,6 +37,7 @@
                 "ms-vscode.vscode-react-native",
                 "dsznajder.es7-react-js-snippets",
                 // Git & Development
+                "ms-python.autopep8",
                 "eamodio.gitlens",
                 "ms-vscode.vscode-json",
                 "christian-kohler.path-intellisense",
@@ -38,7 +47,11 @@
                 // API & Database
                 "humao.rest-client",
                 "qwtel.sqlite-viewer",
-                "GitHub.copilot-chat"
+                "alexcvzz.vscode-sqlite",
+                // AI Agents
+                "GitHub.copilot-chat",
+                "Anthropic.claude-code",
+                "AndrePimenta.claude-code-chat"
             ],
             "settings": {
                 "python.linting.enabled": true,
@@ -88,8 +101,8 @@
             "protocol": "http"
         }
     },
-    "postCreateCommand": "chmod +x setup.sh && sh setup.sh",
-    "postStartCommand": "sh start-servers.sh",
+    "postCreateCommand": "chmod +x scripts/setup.sh && sh scripts/setup.sh",
+    "postStartCommand": "chmod +x scripts/start-servers.sh && sh scripts/start-servers.sh",
     "remoteUser": "appuser",
-    "workspaceFolder": "/workspaces/capstone"
+    "workspaceFolder": "/workspaces/capstone/"
 }

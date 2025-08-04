@@ -36,7 +36,7 @@
         "strings": "on",
         "other": "on"
     },
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "none",
     "editor.selectionHighlight": true,
     "editor.suggestOnTriggerCharacters": true,
     "editor.tabSize": 4,
