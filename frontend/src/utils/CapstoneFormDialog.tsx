@@ -21,8 +21,8 @@ import { TransitionProps } from '@mui/material/transitions';
 import { GridValidRowModel } from '@mui/x-data-grid';
 import axios from 'axios';
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { FormDialogType } from '../types/FormDialogType';
-import type { FormFieldType } from '../types/FormField';
+import { FormDialog } from '../types/FormDialog';
+import type { FormField } from '../types/FormField';
 import PaperComponent from './PaperComponent';
 import { getFieldError, validateAllFields } from './validationUtils';
 
@@ -44,7 +44,7 @@ function CapstoneFormDialog({
     handleDataChanged,
     selectedRow,
     url,
-}: FormDialogType) {
+}: FormDialog) {
     const [localDialogState, setLocalDialogState] = useState(false);
     const [localSelectedRow, setLocalSelectedRow] = useState<GridValidRowModel | null>(selectedRow);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -103,7 +103,7 @@ function CapstoneFormDialog({
     };
 
     // Handle field value change
-    const handleFieldChange = (field: FormFieldType, newValue: string) => {
+    const handleFieldChange = (field: FormField, newValue: string) => {
         // Prevent special characters in number fields (allow only digits and decimal point)
         if (field.type === 'number') {
             newValue = newValue.replace(/[^\d.]/g, '');
@@ -131,7 +131,7 @@ function CapstoneFormDialog({
     };
 
     // Handle field blur
-    const handleFieldBlur = (field: FormFieldType) => {
+    const handleFieldBlur = (field: FormField) => {
         if (fieldErrors[field.id]) {
             setLocalSelectedRow((prev) => {
                 if (!prev) return prev;
@@ -170,7 +170,7 @@ function CapstoneFormDialog({
         handleClose();
     };
 
-    const renderField = (field: FormFieldType) => {
+    const renderField = (field: FormField) => {
         const value = localSelectedRow?.[field.id] ?? '';
         const helperId = `${field.id}-helper-text`;
         const hasError = Boolean(fieldErrors[field.id]);

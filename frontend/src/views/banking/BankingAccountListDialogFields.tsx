@@ -1,6 +1,6 @@
-import { FormFieldType } from '../../types/FormField';
+import { FormField } from '../../types/FormField';
 
-const BankingAccountListDialogFields: FormFieldType[] = [
+const BankingAccountListDialogFields: FormField[] = [
     // Account Details
     {
         autoFocus: true,

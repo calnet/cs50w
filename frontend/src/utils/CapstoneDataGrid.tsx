@@ -22,15 +22,15 @@ import {
 } from '@mui/x-data-grid';
 import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { CapstoneDataGridType } from '../types/ViewComponentType';
+import { CapstoneDataGrid } from '../types/ViewComponent';
 import Loadable from '../ui-component/Loadable';
 import { formatDialogFormRow } from './formatDialogFormRow';
 
 const BankingAccountListDialog = Loadable(lazy(() => import('../views/banking/BankingAccountListDialog')));
-const CoaCategoryDialog = Loadable(lazy(() => import('../views/coa/CoaCategoryDialog')));
-const CoaLayoutDialog = Loadable(lazy(() => import('../views/coa/CoaLayoutDialog')));
-const NominalCodeDialog = Loadable(lazy(() => import('../views/coa/NominalCodeDialog')));
-const NominalTypeDialog = Loadable(lazy(() => import('../views/coa/NominalTypeDialog')));
+const CoaCategoryDialog = Loadable(lazy(() => import('../views/ledgers/CoaCategoryDialog')));
+const CoaLayoutDialog = Loadable(lazy(() => import('../views/ledgers/CoaLayoutDialog')));
+const NominalCodeDialog = Loadable(lazy(() => import('../views/ledgers/NominalCodeDialog')));
+const NominalTypeDialog = Loadable(lazy(() => import('../views/ledgers/NominalTypeDialog')));
 const CustomerDialog = Loadable(lazy(() => import('../views/customers/CustomerDialog')));
 const SupplierDialog = Loadable(lazy(() => import('../views/suppliers/SupplierDialog')));
 
@@ -41,7 +41,7 @@ function CapstoneDataGrid({
     dialog = '',
     url = '',
     handleDataChanged
-}: CapstoneDataGridType) {
+}): CapstoneDataGrid {
     const [dialogState, setDialogState] = useState(false);
     const [dialogFormRow, setDialogFormRow] = useState<GridValidRowModel | null>(null);
     const [loading, setLoading] = useState(false);

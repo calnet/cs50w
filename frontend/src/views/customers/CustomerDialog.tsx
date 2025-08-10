@@ -1,8 +1,8 @@
-import { ViewComponentDialogType } from '../../types/ViewComponentDialogType';
+import { ViewComponentDialog } from '../../types/ViewComponentDialog';
 import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import CustomerDialogFields from './CustomerDialogFields';
 
-function CustomerDialog({ ...props }: ViewComponentDialogType) {
+function CustomerDialog({ ...props }: ViewComponentDialog) {
     const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
 
     return CapstoneFormDialog({

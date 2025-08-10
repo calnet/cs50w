@@ -1,11 +1,11 @@
 import { GridColDef } from '@mui/x-data-grid';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { apiService } from '../../services/api';
+import { BankAccount } from '../../types/accounting';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 import { formatTimestamp } from '../../utils/formatUtils';
 
-function createRecord({ ...props }: BankingAccountType) {
+function createRecord({ ...props }: BankAccount) {
     return {
         ...props,
     };
@@ -147,9 +147,9 @@ function BankingAccountList() {
         },
     ];
 
-    const rows: BankingAccountType[] = [];
+    const rows: BankAccount[] = [];
 
-    data.map((item: BankingAccountType) =>
+    data.map((item: BankAccount) =>
         rows.push(
             createRecord({
                 id: item.id,

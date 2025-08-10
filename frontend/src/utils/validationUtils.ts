@@ -1,4 +1,4 @@
-import { FormFieldType } from '../types/FormField';
+import { FormField } from '../types/FormField';
 
 const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
@@ -9,7 +9,7 @@ const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
  * @param value - The value to validate
  * @returns Error message or empty string
  */
-export function getFieldError(field: FormFieldType, value: string): string {
+export function getFieldError(field: FormField, value: string): string {
     // Trim whitespace for validation
     const trimmedValue = value.trim();
 
@@ -102,7 +102,7 @@ export function getFieldError(field: FormFieldType, value: string): string {
  * @param row - The data object to validate (defaults to empty object)
  * @returns Object of errors keyed by field id
  */
-export function validateAllFields(fields: FormFieldType[], row: Record<string, unknown> = {}): Record<string, string> {
+export function validateAllFields(fields: FormField[], row: Record<string, unknown> = {}): Record<string, string> {
     const errors: Record<string, string> = {};
 
     fields.forEach((field) => {
@@ -122,7 +122,7 @@ export function validateAllFields(fields: FormFieldType[], row: Record<string, u
  * @param row - The data object to validate
  * @returns Boolean indicating if form is valid
  */
-export function isFormValid(fields: FormFieldType[], row: Record<string, unknown> = {}): boolean {
+export function isFormValid(fields: FormField[], row: Record<string, unknown> = {}): boolean {
     const errors = validateAllFields(fields, row);
     return Object.keys(errors).length === 0;
 }
@@ -133,7 +133,7 @@ export function isFormValid(fields: FormFieldType[], row: Record<string, unknown
  * @param row - The data object to validate
  * @returns Array of error messages with field labels
  */
-export function getValidationSummary(fields: FormFieldType[], row: Record<string, unknown> = {}): string[] {
+export function getValidationSummary(fields: FormField[], row: Record<string, unknown> = {}): string[] {
     const errors = validateAllFields(fields, row);
     return Object.entries(errors).map(([fieldId, error]) => {
         const field = fields.find((f) => f.id === fieldId);

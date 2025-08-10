@@ -1,9 +1,9 @@
 import { GridColDef } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
+import { apiService } from '../../services/api';
 import { Customer } from '../../types/accounting';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 import { formatTimestamp } from '../../utils/formatUtils';
-import { apiService } from '../../services/api';
 
 function createRecord({ ...props }: Customer) {
     return {

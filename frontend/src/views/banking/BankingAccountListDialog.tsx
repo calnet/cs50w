@@ -1,8 +1,8 @@
-import { ViewComponentDialogType } from '../../types/ViewComponentDialogType';
+import { ViewComponentDialog } from '../../types/ViewComponentDialog';
 import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import BankingAccountListDialogFields from './BankingAccountListDialogFields';
 
-function BankingAccountListDialog({ ...props }: ViewComponentDialogType) {
+function BankingAccountListDialog({ ...props }: ViewComponentDialog) {
     const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
     return CapstoneFormDialog({
         formTitle: 'Bank Account Details',

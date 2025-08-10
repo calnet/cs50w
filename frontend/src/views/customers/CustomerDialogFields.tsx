@@ -1,6 +1,6 @@
-import { FormFieldType } from '../../types/FormField';
+import { FormField } from '../../types/FormField';
 
-const CustomerDialogFields: FormFieldType[] = [
+const CustomerDialogFields: FormField[] = [
     {
         autoFocus: true,
         disabled: true,
