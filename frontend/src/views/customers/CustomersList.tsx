@@ -1,11 +1,11 @@
 import { GridColDef } from '@mui/x-data-grid';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { CustomerType } from '../../types/ViewComponentType';
+import { Customer } from '../../types/accounting';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 import { formatTimestamp } from '../../utils/formatUtils';
+import { apiService } from '../../services/api';
 
-function createRecord({ ...props }: CustomerType) {
+function createRecord({ ...props }: Customer) {
     return {
         ...props,
     };
@@ -15,22 +15,39 @@ function CustomersList() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
     const [dataChanged, setDataChanged] = useState(false);
-
-    const hostname = window.location.hostname;
-
-    const url = `http://${hostname}:8000/api/customers/`;
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        axios
-            .get(url)
-            .then((response) => {
-                setData(response.data);
-                // console.log(response.data[0]);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, [url, dataChanged]);
+        autoLoginAndLoadData();
+    }, [dataChanged]);
+
+    const autoLoginAndLoadData = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            // Check if already have token
+            const existingToken = localStorage.getItem('access_token');
+            if (!existingToken) {
+                // Auto-login with demo credentials
+                const loginResponse = await apiService.auth.login('admin@example.com', 'admin123');
+                if (loginResponse.access) {
+                    localStorage.setItem('access_token', loginResponse.access);
+                    localStorage.setItem('refresh_token', loginResponse.refresh);
+                }
+            }
+
+            // Now load customer data
+            const response = await apiService.customers.getAll();
+            setData(response.results || response);
+        } catch (err: any) {
+            setError('Failed to load customers');
+            console.error('Error loading customers:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleDataChanged = () => {
         setDataChanged(!dataChanged);
@@ -101,9 +118,9 @@ function CustomersList() {
         },
     ];
 
-    const rows: CustomerType[] = [];
+    const rows: Customer[] = [];
 
-    data.map((item: CustomerType) =>
+    data.map((item: Customer) =>
         rows.push(
             createRecord({
                 id: item.id,

@@ -19,6 +19,7 @@ A comprehensive accounting application built with Django REST Framework backend 
 -   **Supplier Management**: Manage supplier relationships and accounts
 -   **Banking Integration**: Bank account management and reconciliation
 -   **Chart of Accounts**: Flexible account structure with nominal codes
+-   **Transaction Management**: Complete transaction processing system
 -   **Financial Reporting**: Basic reporting capabilities
 
 ### Technical Features
@@ -40,6 +41,7 @@ A comprehensive accounting application built with Django REST Framework backend 
 │ ├── suppliers/ # Supplier management
 │ ├── banking/ # Bank account handling
 │ ├── ledgers/ # Chart of accounts
+│ ├── transactions/ # Transaction management
 │ ├── management/ # Data management utilities
 │ └── backend/ # Django settings & configuration
 │
@@ -252,6 +254,14 @@ PUT    /api/suppliers/{id}/      # Update supplier
 DELETE /api/suppliers/{id}/      # Delete supplier
 ```
 
+#### Transactions
+
+```http
+GET    /api/transactions/        # List transactions
+POST   /api/transactions/        # Create transaction
+GET    /api/transactions/{id}/   # Get transaction
+PUT    /api/transactions/{id}/   # Update transaction
+DELETE /api/transactions/{id}/   # Delete transaction
 ```
 
 #### Chart of Accounts

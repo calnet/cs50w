@@ -11,6 +11,10 @@ const CapstoneDashboard = Loadable(lazy(() => import('../views/dashboard/capston
 const ClaudeDashboard = Loadable(lazy(() => import('../views/dashboard/Dashboard-claude')));
 const DashboardV1 = Loadable(lazy(() => import('../views/dashboard/Dashboard-v1')));
 
+// transaction routing
+const TransactionList = Loadable(lazy(() => import('../views/transactions/TransactionList')));
+const TransactionForm = Loadable(lazy(() => import('../views/transactions/TransactionForm')));
+
 //utilities routing
 const Utilities = Loadable(lazy(() => import('../views/utilities/Utilities')));
 const BasicTable = Loadable(lazy(() => import('../views/utilities/BasicTable')));
@@ -41,12 +45,12 @@ const SupplierInvoices = Loadable(lazy(() => import('../views/suppliers/Supplier
 const SupplierPurchaseOrders = Loadable(lazy(() => import('../views/suppliers/SupplierPurchaseOrders')));
 
 // chart of accounts page routing
-const Layouts = Loadable(lazy(() => import('../views/coa/Layouts')));
-const CoaLayout = Loadable(lazy(() => import('../views/coa/CoaLayout')));
-const CoaCategories = Loadable(lazy(() => import('../views/coa/CoaCategories')));
-const NominalTypes = Loadable(lazy(() => import('../views/coa/NominalTypes')));
-const NominalCodes = Loadable(lazy(() => import('../views/coa/NominalCodes')));
-const CoaControlAccounts = Loadable(lazy(() => import('../views/coa/CoaControlAccounts')));
+
+// reports page routing
+const ProfitLoss = Loadable(lazy(() => import('../views/reports/ProfitLoss')));
+const BalanceSheet = Loadable(lazy(() => import('../views/reports/BalanceSheet')));
+const AgedDebtors = Loadable(lazy(() => import('../views/reports/AgedDebtors')));
+const AgedCreditors = Loadable(lazy(() => import('../views/reports/AgedCreditors')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -77,6 +81,32 @@ const MainRoutes: RouteObject = {
                     path: 'claude-dashboard',
                     element: <ClaudeDashboard />,
                 }
+            ],
+        },
+        {
+            // Transactions routing
+            path: 'transactions',
+            children: [
+                {
+                    path: '',
+                    element: <TransactionList />,
+                },
+                {
+                    path: 'new',
+                    element: <TransactionForm />,
+                },
+                {
+                    path: 'new/:type',
+                    element: <TransactionForm />,
+                },
+                {
+                    path: ':id',
+                    element: <TransactionForm />,
+                },
+                {
+                    path: ':id/edit',
+                    element: <TransactionForm />,
+                },
             ],
         },
         {
@@ -227,6 +257,27 @@ const MainRoutes: RouteObject = {
                 {
                     path: 'control_accounts',
                     element: <CoaControlAccounts />,
+                },
+            ],
+        },
+        {
+            path: 'reports',
+            children: [
+                {
+                    path: 'profit-loss',
+                    element: <ProfitLoss />,
+                },
+                {
+                    path: 'balance-sheet',
+                    element: <BalanceSheet />,
+                },
+                {
+                    path: 'aged-debtors',
+                    element: <AgedDebtors />,
+                },
+                {
+                    path: 'aged-creditors',
+                    element: <AgedCreditors />,
                 },
             ],
         },
