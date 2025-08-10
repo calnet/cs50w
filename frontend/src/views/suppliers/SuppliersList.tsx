@@ -12,24 +12,41 @@ function createRecord({ ...props }: SupplierType) {
 }
 
 function SuppliersList() {
-    // const theme = useTheme();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<any[]>([]);
     const [dataChanged, setDataChanged] = useState(false);
-
-    const hostname = window.location.hostname;
-
-    const url = `http://${hostname}:8000/api/suppliers/`;
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        axios
-            .get(url)
-            .then((response) => {
-                setData(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, [url, dataChanged]);
+        autoLoginAndLoadData();
+    }, [dataChanged]);
+
+    const autoLoginAndLoadData = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            // Check if already have token
+            const existingToken = localStorage.getItem('access_token');
+            if (!existingToken) {
+                // Auto-login with demo credentials
+                const loginResponse = await apiService.auth.login('admin@example.com', 'admin123');
+                if (loginResponse.access) {
+                    localStorage.setItem('access_token', loginResponse.access);
+                    localStorage.setItem('refresh_token', loginResponse.refresh);
+                }
+            }
+
+            // Now load supplier data
+            const response = await apiService.suppliers.getAll();
+            setData(response.results || response);
+        } catch (err: any) {
+            setError('Failed to load suppliers');
+            console.error('Error loading suppliers:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleDataChanged = () => {
         setDataChanged(!dataChanged);

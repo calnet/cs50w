@@ -1,14 +1,13 @@
 import Routes from './routes';
+import { AuthProvider } from './contexts/AuthContext';
 
 // ==============================|| APP ||============================== //
 
 const App = () => {
-    // const customization = useSelector((state) => state.customization);
-
     return (
-        <>
+        <AuthProvider>
             <Routes />
-        </>
+        </AuthProvider>
     );
 };
 

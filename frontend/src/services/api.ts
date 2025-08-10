@@ -18,9 +18,11 @@ interface PaginatedResponse<T> extends ApiResponse<T[]> {
 
 // Create axios instance with base configuration
 const api = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' 
+    baseURL: import.meta.env.VITE_API_URL || (
+        import.meta.env.NODE_ENV === 'production' 
         ? 'https://your-api-domain.com/api' 
-        : `http://${window.location.hostname}:8000/api`,
+            : `http://${window.location.hostname}:8000/api`
+    ),
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

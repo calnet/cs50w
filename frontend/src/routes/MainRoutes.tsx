@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
 // project imports
+import PrivateRoute from '../components/auth/PrivateRoute';
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
 
@@ -51,7 +52,11 @@ const CoaControlAccounts = Loadable(lazy(() => import('../views/coa/CoaControlAc
 
 const MainRoutes: RouteObject = {
     path: '/',
-    element: <MainLayout />,
+    element: (
+        <PrivateRoute>
+            <MainLayout />
+        </PrivateRoute>
+    ),
     children: [
         {
             path: '',

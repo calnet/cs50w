@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SidebarContext } from '../../../../contexts/SidebarContext';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 import {
     Avatar,
@@ -31,6 +33,8 @@ import {
 
 function Navbar() {
     const { drawerOpen, setDrawerOpen } = useContext(SidebarContext);
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [notificationCount] = useState(3); // Mock notification count
 
@@ -46,7 +50,20 @@ function Navbar() {
         setAnchorEl(null);
     };
 
+    const handleLogout = () => {
+        handleProfileMenuClose();
+        logout();
+        navigate('/login');
+    };
+
     const isMenuOpen = Boolean(anchorEl);
+
+    // Get user display name
+    const userDisplayName = user ?
+        `${user.firstName || user.first_name || ''} ${user.lastName || user.last_name || ''}`.trim() || user.email :
+        'Guest User';
+
+    const userEmail = user?.email || 'guest@example.com';
 
     return (
         <Stack
@@ -241,10 +258,10 @@ function Navbar() {
                 >
                     <Box sx={{ px: 2, py: 1 }}>
                         <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                            Anika Visser
+                            {userDisplayName}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            anika.visser@example.com
+                            {userEmail}
                         </Typography>
                     </Box>
                     <Divider />
@@ -261,7 +278,7 @@ function Navbar() {
                         Settings
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={handleProfileMenuClose}>
+                    <MenuItem onClick={handleLogout}>
                         <Logout sx={{ mr: 2 }} />
                         Logout
                     </MenuItem>
