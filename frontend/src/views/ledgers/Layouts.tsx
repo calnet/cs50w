@@ -1,27 +1,24 @@
 import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { NominalCodeType } from '../../types/ViewComponentType';
+import { LayoutType } from '../../types/ledgers';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 import { formatTimestamp } from '../../utils/formatUtils';
 
-function createRecord({ ...props }: NominalCodeType) {
+function createRecord({ ...props }: LayoutType) {
     return {
         ...props,
     };
 }
 
-function NominalCodesList() {
+function Layouts() {
     // const theme = useTheme();
     const [data, setData] = useState([]);
     const [dataChanged, setDataChanged] = useState(false);
-    const { nominal_code } = useParams();
 
     const hostname = window.location.hostname;
 
-    // If nominal_code is present, fetch a specific nominal code; otherwise, fetch all nominal codes
-    const url = nominal_code ? `http://${hostname}:8000/api/nominal_codes/${nominal_code}` : `http://${hostname}:8000/api/nominal_codes/`;
+    const url = `http://${hostname}:8000/api/layouts/`;
 
     useEffect(() => {
         axios
@@ -49,34 +46,15 @@ function NominalCodesList() {
         },
         {
             field: 'layout_name',
-            headerName: 'Layout Name',
+            headerName: 'Coa Name',
             type: 'string',
             flex: 0.25,
         },
         {
-            field: 'nominal_code',
-            headerName: 'Nominal Code',
-            headerAlign: 'left',
-            align: 'left',
-            type: 'number',
-            flex: 0.25,
-            valueFormatter: (params) => {
-                return String(params.value).padStart(4, '0');
-            },
-        },
-        {
-            field: 'nominal_name',
-            headerName: 'Nominal Ledger Name',
+            field: 'description',
+            headerName: 'Description',
             type: 'string',
-            flex: 0.5,
-        },
-        {
-            field: 'type_name',
-            headerName: 'Nominal Type',
-            headerAlign: 'left',
-            align: 'left',
-            type: 'string',
-            flex: 0.5,
+            flex: 1,
         },
         {
             field: 'created_at',
@@ -94,16 +72,14 @@ function NominalCodesList() {
         },
     ];
 
-    const rows: NominalCodeType[] = [];
+    const rows: LayoutType[] = [];
 
-    data.map((item: NominalCodeType) =>
+    data.map((item: LayoutType) =>
         rows.push(
             createRecord({
                 id: item.id,
                 layout_name: item.layout_name,
-                nominal_code: item.nominal_code,
-                nominal_name: item.nominal_name,
-                type_name: item.type_name,
+                description: item.description,
                 created_at: item.created_at,
                 updated_at: item.updated_at,
             })
@@ -114,12 +90,12 @@ function NominalCodesList() {
         <CapstoneDataGrid
             rows={rows}
             columns={columns}
-            heading="Nominal Codes"
-            dialog="NominalCodeDialog"
+            heading="Layouts"
+            dialog="LayoutDialog"
             url={url}
             handleDataChanged={handleDataChanged}
         />
     );
 }
 
-export default NominalCodesList;
+export default Layouts;

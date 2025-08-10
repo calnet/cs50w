@@ -1,8 +1,8 @@
-import { ViewComponentDialogType } from '../../types/ViewComponentDialogType';
+import { ViewComponentDialog } from '../../types/ViewComponentDialog';
 import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import CoaCategoryDialogFields from './CoaCategoryDialogFields';
 
-function CoaCategoryDialog({ ...props }: ViewComponentDialogType) {
+function CoaCategoryDialog({ ...props }: ViewComponentDialog) {
     const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
     return CapstoneFormDialog({
         formTitle: 'Coa Category Details',

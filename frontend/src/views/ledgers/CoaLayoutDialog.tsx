@@ -1,8 +1,8 @@
-import { ViewComponentDialogType } from '../../types/ViewComponentDialogType';
+import { ViewComponentDialog } from '../../types/ViewComponentDialog';
 import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import { CoaLayoutDialogFields } from './CoaLayoutDialogFields';
 
-function CoaLayoutDialog({ ...props }: ViewComponentDialogType) {
+function CoaLayoutDialog({ ...props }: ViewComponentDialog) {
     const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
     return CapstoneFormDialog({
         formTitle: 'Coa Layout Details',

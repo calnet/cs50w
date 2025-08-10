@@ -1,7 +1,7 @@
-import { FormFieldType } from '../../types/FormField';
+import { FormField } from '../../types/FormField';
 
-export const NominalCodeDialogFields: FormFieldType[] = [
-    // Row 1: ID (25%) + Nominal Code (75%)
+export const CoaLayoutDialogFields: FormField[] = [
+    // Row 1: ID (25%) + Layout (25%) + Layout Name (50%)
     {
         autoFocus: true,
         disabled: true,
@@ -18,37 +18,11 @@ export const NominalCodeDialogFields: FormFieldType[] = [
         autoFocus: true,
         disabled: false,
         fullWidth: true,
-        id: 'nominal_code',
-        label: 'Nominal Code',
-        margin: 'dense',
-        required: true,
-        sx: { flexBasis: '75%', maxWidth: '75%' },
-        type: 'text',
-        variant: 'outlined',
-    },
-    // Row 2: Nominal Name (full width)
-    {
-        autoFocus: false,
-        disabled: false,
-        fullWidth: true,
-        id: 'nominal_name',
-        label: 'Nominal Name',
-        margin: 'dense',
-        required: true,
-        sx: {},
-        type: 'text',
-        variant: 'outlined',
-    },
-    // Row 3: Layout (select, 50%) + Layout Name (display, 50%)
-    {
-        autoFocus: false,
-        disabled: false,
-        fullWidth: true,
         id: 'layout',
         label: 'Layout',
         margin: 'dense',
         required: true,
-        sx: { flexBasis: '50%', maxWidth: '50%' },
+        sx: { flexBasis: '25%', maxWidth: '25%' },
         type: 'select',
         variant: 'outlined',
         options: [], // TODO: Populate with layout options
@@ -65,7 +39,7 @@ export const NominalCodeDialogFields: FormFieldType[] = [
         type: 'text',
         variant: 'outlined',
     },
-    // Row 4: Nominal Type (select, 50%) + Type Name (display, 50%)
+    // Row 2: Nominal Type (select) + Nominal Type Name (display)
     {
         autoFocus: false,
         disabled: false,
@@ -74,7 +48,7 @@ export const NominalCodeDialogFields: FormFieldType[] = [
         label: 'Nominal Type',
         margin: 'dense',
         required: true,
-        sx: { flexBasis: '50%', maxWidth: '50%' },
+        sx: { flexBasis: '25%', maxWidth: '25%' },
         type: 'select',
         variant: 'outlined',
         options: [], // TODO: Populate with nominal type options
@@ -83,15 +57,40 @@ export const NominalCodeDialogFields: FormFieldType[] = [
         autoFocus: false,
         disabled: true,
         fullWidth: true,
-        id: 'type_name',
+        id: 'nominal_type_name',
         label: 'Nominal Type Name',
         margin: 'dense',
         required: false,
-        sx: { flexBasis: '50%', maxWidth: '50%' },
+        sx: { flexBasis: '75%', maxWidth: '75%' },
         type: 'text',
         variant: 'outlined',
     },
-    // Row 5: Created/Updated (system fields)
+    // Row 3: Nominal Code Min/Max (50/50)
+    {
+        autoFocus: false,
+        disabled: false,
+        fullWidth: true,
+        id: 'nominal_code_min',
+        label: 'Nominal Code Min',
+        margin: 'dense',
+        required: true,
+        sx: { flexBasis: '50%', maxWidth: '50%' },
+        type: 'number',
+        variant: 'outlined',
+    },
+    {
+        autoFocus: false,
+        disabled: false,
+        fullWidth: true,
+        id: 'nominal_code_max',
+        label: 'Nominal Code Max',
+        margin: 'dense',
+        required: true,
+        sx: { flexBasis: '50%', maxWidth: '50%' },
+        type: 'number',
+        variant: 'outlined',
+    },
+    // Row 4: Created/Updated (system fields)
     {
         autoFocus: false,
         disabled: true,

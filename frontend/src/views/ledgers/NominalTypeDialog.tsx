@@ -1,8 +1,8 @@
-import { ViewComponentDialogType } from '../../types/ViewComponentDialogType';
+import { ViewComponentDialog } from '../../types/ViewComponentDialog';
 import CapstoneFormDialog from '../../utils/CapstoneFormDialog';
 import { NominalTypeDialogFields } from './NominalTypeDialogFields';
 
-function NominalTypeDialog({ ...props }: ViewComponentDialogType) {
+function NominalTypeDialog({ ...props }: ViewComponentDialog) {
     const { dialogState, handleClose, selectedRow, url, handleDataChanged } = props;
     return CapstoneFormDialog({
         formTitle: 'Nominal Type Details',

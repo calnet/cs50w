@@ -1,6 +1,6 @@
-import { FormFieldType } from '../../types/FormField';
+import { FormField } from '../../types/FormField';
 
-const CoaCategoryDialogFields: FormFieldType[] = [
+export const NominalTypeDialogFields: FormField[] = [
     {
         autoFocus: true,
         disabled: true,
@@ -17,11 +17,23 @@ const CoaCategoryDialogFields: FormFieldType[] = [
         autoFocus: true,
         disabled: false,
         fullWidth: true,
+        id: 'type_name',
+        label: 'Nominal Type',
+        margin: 'dense',
+        required: false,
+        sx: { flexBasis: '75%', maxWidth: '75%' },
+        type: 'text', // TODO: Change to dropdown and display list of nominal types
+        variant: 'outlined',
+    },
+    {
+        autoFocus: false,
+        disabled: false,
+        fullWidth: true,
         id: 'category_name',
         label: 'COA Category',
         margin: 'dense',
         required: false,
-        sx: { flexBasis: '75%', maxWidth: '75%' },
+        sx: {},
         type: 'text',
         variant: 'outlined',
     },
@@ -50,5 +62,3 @@ const CoaCategoryDialogFields: FormFieldType[] = [
         variant: 'outlined',
     },
 ];
-
-export default CoaCategoryDialogFields;

@@ -1,7 +1,7 @@
 import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { CoaLayoutType } from '../../types/ViewComponentType';
+import { CoaLayoutType } from '../../types/ledgers';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 import { formatTimestamp } from '../../utils/formatUtils';
 

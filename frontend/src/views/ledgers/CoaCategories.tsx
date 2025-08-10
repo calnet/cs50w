@@ -1,9 +1,9 @@
 import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { CoaCategoryType } from '../../types/ViewComponentType';
-import { formatTimestamp } from '../../utils/formatUtils';
+import { CoaCategoryType } from '../../types/ledgers';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
+import { formatTimestamp } from '../../utils/formatUtils';
 
 function createRecord({ ...props }: CoaCategoryType) {
     return {

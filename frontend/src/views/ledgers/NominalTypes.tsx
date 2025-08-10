@@ -2,11 +2,11 @@ import { GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { NominalTypeProps } from '../../types/ViewComponentType';
+import { NominalType } from '../../types/ledgers';
 import CapstoneDataGrid from '../../utils/CapstoneDataGrid';
 import { formatTimestamp } from '../../utils/formatUtils';
 
-function createRecord({ ...props }: NominalTypeProps) {
+function createRecord({ ...props }: NominalType) {
     return {
         ...props,
     };
@@ -77,9 +77,9 @@ function NominalTypesList() {
         },
     ];
 
-    const rows: NominalTypeProps[] = [];
+    const rows: NominalType[] = [];
 
-    data.map((item: NominalTypeProps) =>
+    data.map((item: NominalType) =>
         rows.push(
             createRecord({
                 id: item.id,
