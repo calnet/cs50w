@@ -13,6 +13,15 @@ const dashboardMenu: MenuItem = {
     type: 'group',
     children: [
         {
+            id: 'sage-dashboard',
+            title: 'Sage Dashboard',
+            tooltip: 'Main accounting dashboard with Sage-style interface',
+            type: 'item',
+            url: '/sage-dashboard',
+            icon: icons.Dashboard,
+            breadcrumbs: true,
+        },
+        {
             id: 'default',
             title: 'Dashboard',
             type: 'item',
