@@ -45,6 +45,12 @@ const SupplierInvoices = Loadable(lazy(() => import('../views/suppliers/Supplier
 const SupplierPurchaseOrders = Loadable(lazy(() => import('../views/suppliers/SupplierPurchaseOrders')));
 
 // chart of accounts page routing
+const Layouts = Loadable(lazy(() => import('../views/ledgers/Layouts')));
+const CoaLayout = Loadable(lazy(() => import('../views/ledgers/CoaLayout')));
+const CoaCategories = Loadable(lazy(() => import('../views/ledgers/CoaCategories')));
+const NominalTypes = Loadable(lazy(() => import('../views/ledgers/NominalTypes')));
+const NominalCodes = Loadable(lazy(() => import('../views/ledgers/NominalCodes')));
+const CoaControlAccounts = Loadable(lazy(() => import('../views/ledgers/CoaControlAccounts')));
 
 // reports page routing
 const ProfitLoss = Loadable(lazy(() => import('../views/reports/ProfitLoss')));
