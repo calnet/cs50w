@@ -83,6 +83,7 @@ A comprehensive accounting application built with Django REST Framework backend 
 -   **Vite**: Build tool and dev server
 -   **Axios**: HTTP client
 -   **React Router DOM**: Client-side routing
+-   **Formik & Yup**: Form handling and validation
 
 ### Development Tools
 

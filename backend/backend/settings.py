@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 from decouple import Csv, config
@@ -31,8 +32,13 @@ SECRET_KEY = config(
 DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS", default="localhost,127.0.0.1,192.168.1.115", cast=Csv()
+    "ALLOWED_HOSTS",
+    default="localhost,127.0.0.1,192.168.1.115,90.241.198.202",
+    cast=Csv(),
 )
+
+# ALLOWED_HOSTS = "localhost, 127.0.0.1, 192.168.1.115, 90.241.198.202"
+
 
 # Security settings for production
 if not DEBUG:
@@ -63,6 +69,7 @@ INSTALLED_APPS = [
     "customers",
     "ledgers",
     "suppliers",
+    "transactions",
 ]
 
 MIDDLEWARE = [
@@ -116,10 +123,9 @@ REST_FRAMEWORK = {
 }
 
 # JWT Settings
-from datetime import timedelta
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=3600),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
 }
@@ -186,11 +192,18 @@ AUTH_USER_MODEL = "users.CustomUser"
 # SECURITY WARNING: This disables the CORS feature, don't run with CORS_ALLOW_ALL_ORIGIN turned on in production!
 CORS_ALLOW_ALL_ORIGINS = False
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Add the origin of your React app
-    "http://127.0.0.1:5173",  # Add the origin of your React app
-    "http://192.168.1.115:5173",  # Add the origin of your React app
-]
+# CORS_ALLOWED_ORIGINS = [
+# "http://localhost:5173",  # Add the origin of your React app
+# "http://localhost:8000",  # Add the origin of your React app
+# "http://127.0.0.1:5173",  # Add the origin of your React app
+# "http://192.168.1.115:5173",  # Add the origin of your React app
+# ]
+
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS",
+    default="localhost:5173,127.0.0.1:5173,192.168.1.115:5173,'90.241.198.202:5173'",
+    cast=Csv(),
+)
 
 LOGIN_URL = "/users/login/"
 
