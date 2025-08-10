@@ -1,6 +1,6 @@
 import type { TextFieldProps } from '@mui/material/TextField';
 
-export interface FormFieldType {
+export interface FormField {
     autoFocus: boolean;
     disabled: boolean;
     fullWidth: boolean;

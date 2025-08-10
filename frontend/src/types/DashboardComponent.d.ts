@@ -1,7 +1,7 @@
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 
-export interface IDashboardDataType {
+export interface DashboardData {
     name: string;
     color: string;
     description: string;
@@ -11,13 +11,13 @@ export interface IDashboardDataType {
     url: string;
 }
 
-export interface IModuleView extends IDashboardDataType {
+export interface ModuleView extends DashboardData {
     hiddden?: boolean;
 }
 
-export interface IQuickAction extends IDashboardDataType {}
+export interface QuickAction extends DashboardData {}
 
-export interface ISystemMetric {
+export interface SystemMetric {
     change: string;
     icon: OverridableComponent<SvgIconTypeMap>;
     label: string;
@@ -25,9 +25,9 @@ export interface ISystemMetric {
     value: string;
 }
 
-export interface IDashboardCompoonentTypes {
-    systemMetrics: ISystemMetric[];
-    coreModules: IModuleView[];
-    quickActions: IQuickAction[];
-    utilityViews: IModuleView[];
+export interface DashboardComponent {
+    systemMetrics: SystemMetric[];
+    coreModules: ModuleView[];
+    quickActions: QuickAction[];
+    utilityViews: ModuleView[];
 }
