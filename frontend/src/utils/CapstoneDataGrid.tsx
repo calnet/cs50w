@@ -22,7 +22,7 @@ import {
 } from '@mui/x-data-grid';
 import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { CapstoneDataGrid } from '../types/ViewComponent';
+import { CapstoneDataGridProps } from '../types/ViewComponent';
 import Loadable from '../ui-component/Loadable';
 import { formatDialogFormRow } from './formatDialogFormRow';
 
@@ -41,7 +41,7 @@ function CapstoneDataGrid({
     dialog = '',
     url = '',
     handleDataChanged
-}): CapstoneDataGrid {
+}): CapstoneDataGridProps {
     const [dialogState, setDialogState] = useState(false);
     const [dialogFormRow, setDialogFormRow] = useState<GridValidRowModel | null>(null);
     const [loading, setLoading] = useState(false);

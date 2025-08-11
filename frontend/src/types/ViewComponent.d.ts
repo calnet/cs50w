@@ -16,7 +16,7 @@ import { GridColDef, GridRowModel } from '@mui/x-data-grid';
 //     updated_at: string;
 // };
 
-export interface CapstoneDataGrid {
+export interface CapstoneDataGridProps {
     rows: GridRowModel[];
     columns: GridColDef[];
     heading: string;
@@ -27,7 +27,7 @@ export interface CapstoneDataGrid {
 export interface ViewComponent {
     componentName: string;
     componentType: string;
-    componentData: CapstoneDataGrid;
+    componentData: CapstoneDataGridProps;
     dialogData: ViewComponentDialog;
 }
 
