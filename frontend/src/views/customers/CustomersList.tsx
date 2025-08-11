@@ -18,6 +18,8 @@ function CustomersList() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const url = "http://localhost:8000/api/customers/";
+
     useEffect(() => {
         autoLoginAndLoadData();
     }, [dataChanged]);
@@ -138,14 +140,22 @@ function CustomersList() {
     );
 
     return (
-        <CapstoneDataGrid
-            rows={rows}
-            columns={columns}
-            heading="Customers"
-            dialog="CustomerDialog"
-            url={url}
-            handleDataChanged={handleDataChanged}
-        />
+        <div style={{ margin: '20px' }}>
+            <h1 style={{ color: '#2E7D32' }}>Customers</h1>
+            {error && (
+                <div style={{ color: 'red', marginBottom: '20px' }}>
+                    {error}
+                </div>
+            )}
+            <CapstoneDataGrid
+                rows={rows}
+                columns={columns}
+                heading="Customers"
+                dialog="CustomerDialog"
+                url={url}
+                handleDataChanged={handleDataChanged}
+            />
+        </div>
     );
 }
 
