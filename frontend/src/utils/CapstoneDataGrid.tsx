@@ -41,7 +41,7 @@ function CapstoneDataGrid({
     dialog = '',
     url = '',
     handleDataChanged
-}): CapstoneDataGridProps {
+}: CapstoneDataGridProps): JSX.Element {
     const [dialogState, setDialogState] = useState(false);
     const [dialogFormRow, setDialogFormRow] = useState<GridValidRowModel | null>(null);
     const [loading, setLoading] = useState(false);
