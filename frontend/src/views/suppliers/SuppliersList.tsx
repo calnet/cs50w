@@ -17,6 +17,8 @@ function SuppliersList() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const url = "http://localhost:8000/api/suppliers/"
+
     useEffect(() => {
         autoLoginAndLoadData();
     }, [dataChanged]);
@@ -147,14 +149,14 @@ function SuppliersList() {
                     {error}
                 </div>
             )}
-        <CapstoneDataGrid
+            <CapstoneDataGrid
                 rows={data.map(createRecord)}
-            columns={columns}
-            heading="Suppliers"
-            dialog="SupplierDialog"
-            url={url}
-            handleDataChanged={handleDataChanged}
-        />
+                columns={columns}
+                heading="Suppliers"
+                dialog="SupplierDialog"
+                url={url}
+                handleDataChanged={handleDataChanged}
+            />
         </div>
     );
 }
