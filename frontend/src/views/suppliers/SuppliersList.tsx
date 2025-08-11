@@ -59,7 +59,7 @@ function SuppliersList() {
             headerAlign: 'left',
             align: 'left',
             type: 'number',
-            flex: 0.05,
+            flex: 1,
         },
         {
             field: 'account_reference',
@@ -74,9 +74,28 @@ function SuppliersList() {
             flex: 1,
         },
         {
+            field: 'account_status',
+            headerName: 'Status',
+            type: 'string',
+            flex: 1,
+        },
+        {
             field: 'balance',
             headerName: 'Balance',
             type: 'number',
+            flex: 1,
+            valueFormatter: (params) => {
+                const value = params.value;
+                return new Intl.NumberFormat('en-GB', {
+                    style: 'currency',
+                    currency: 'GBP',
+                }).format(value);
+            },
+        },
+        {
+            field: 'contact_name',
+            headerName: 'Contact Name',
+            type: 'string',
             flex: 1,
         },
         {
@@ -84,67 +103,59 @@ function SuppliersList() {
             headerName: 'Credit Limit',
             type: 'number',
             flex: 1,
-        },
-        {
-            field: 'contact_name',
-            headerName: 'Contact',
-            headerAlign: 'right',
-            align: 'right',
-            type: 'string',
-            flex: 1,
+            valueFormatter: (params) => {
+                const value = params.value;
+                return new Intl.NumberFormat('en-GB', {
+                    style: 'currency',
+                    currency: 'GBP',
+                }).format(value);
+            },
         },
         {
             field: 'telephone_number',
             headerName: 'Telephone',
-            headerAlign: 'right',
-            align: 'right',
             type: 'string',
             flex: 1,
         },
         {
             field: 'created_at',
             headerName: 'Created',
-            type: 'string',
-            flex: 0.25,
-            valueFormatter: (params) => formatTimestamp(params.value),
+            type: 'dateTime',
+            flex: 1,
+            valueFormatter: (params) => {
+                const value = params.value;
+                return formatTimestamp(value);
+            },
         },
         {
             field: 'updated_at',
             headerName: 'Updated',
-            type: 'string',
-            flex: 0.25,
-            valueFormatter: (params) => formatTimestamp(params.value),
+            type: 'dateTime',
+            flex: 1,
+            valueFormatter: (params) => {
+                const value = params.value;
+                return formatTimestamp(value);
+            },
         },
     ];
 
-    const rows: SupplierType[] = [];
-
-    data.map((item: SupplierType) =>
-        rows.push(
-            createRecord({
-                id: item.id,
-                account_reference: item.account_reference,
-                account_name: item.account_name,
-                account_status: item.account_status,
-                balance: item.balance,
-                contact_name: item.contact_name,
-                credit_limit: item.credit_limit,
-                telephone_number: item.telephone_number,
-                created_at: item.created_at,
-                updated_at: item.updated_at,
-            })
-        )
-    );
-
     return (
+        <div style={{ margin: '20px' }}>
+            <h1 style={{ color: '#2E7D32' }}>Suppliers</h1>
+            {error && (
+                <div style={{ color: 'red', marginBottom: '20px' }}>
+                    {error}
+                </div>
+            )}
         <CapstoneDataGrid
-            rows={rows}
+                rows={data.map(createRecord)}
             columns={columns}
             heading="Suppliers"
             dialog="SupplierDialog"
             url={url}
             handleDataChanged={handleDataChanged}
         />
+        </div>
     );
 }
 
