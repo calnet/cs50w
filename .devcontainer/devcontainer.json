@@ -101,8 +101,8 @@
             "protocol": "http"
         }
     },
-    "postCreateCommand": "chmod +x scripts/setup.sh && sh scripts/setup.sh",
-    "postStartCommand": "chmod +x scripts/start-servers.sh && sh scripts/start-servers.sh",
+    // "workspaceFolder": "/workspaces/capstone",
     "remoteUser": "appuser",
-    "workspaceFolder": "/workspaces/capstone/"
+    "postCreateCommand": "sudo chmod +x scripts/* && sh scripts/setup.sh",
+    "postStartCommand": "sh scripts/stop-servers.sh && sh scripts/start-servers.sh"
 }
