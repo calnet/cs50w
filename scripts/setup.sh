@@ -6,6 +6,11 @@
 # Capstone Project Setup Script
 echo "🚀 Starting Capstone development environment setup..."
 
+sudo rm -rf /workspaces/capstone/frontend/node_modules
+sudo chown -hR appuser:appuser /workspaces/capstone/frontend
+sudo chown -hR appuser:appuser /workspaces/capstone/backend
+sudo chown -h appuser:appuser /workspaces/capstone/*
+
 # Update package manager
 sudo apk update
 sleep 5
