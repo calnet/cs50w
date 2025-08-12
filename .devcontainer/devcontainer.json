@@ -39,6 +39,7 @@
                 // Git & Development
                 "ms-python.autopep8",
                 "eamodio.gitlens",
+                "ms-vscode-remote.remote-wsl-recommender",
                 "ms-vscode.vscode-json",
                 "christian-kohler.path-intellisense",
                 "gruntfuggly.todo-tree",
@@ -51,7 +52,7 @@
                 // AI Agents
                 "GitHub.copilot-chat",
                 "Anthropic.claude-code",
-                "AndrePimenta.claude-code-chat"
+                "AndrePimenta.claude-code-chat",
             ],
             "settings": {
                 "python.linting.enabled": true,
