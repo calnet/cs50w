@@ -47,6 +47,7 @@
         "typescript": "typescriptreact"
     },
     "extensions.closeExtensionDetailsOnViewChange": true,
+    "files.eol": "\n",
     "git.autofetch": "all",
     "git.blame.editorDecoration.enabled": true,
     "git.confirmSync": false,
