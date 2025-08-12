@@ -201,7 +201,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = config(
     "CORS_ALLOWED_ORIGINS",
-    default="localhost:5173,127.0.0.1:5173,192.168.1.115:5173,'90.241.198.202:5173'",
+    default="http://localhost:5173,http://127.0.0.1:5173,http://192.168.1.115:5173,http://90.241.198.202:5173",
     cast=Csv(),
 )
 
