@@ -6,12 +6,13 @@
 # Capstone Project Start Servers Script
 WORKSPACE="/workspaces/capstone"
 cd $WORKSPACE
-# Start Django server in background with nohup
-sh $WORKSPACE/scripts/start-backend.sh
 # Start Vite server in background with nohup
 sh $WORKSPACE/scripts/start-frontend.sh
-sleep 10
+sleep 5
+# Start Django server in background with nohup
+sh $WORKSPACE/scripts/start-backend.sh
 # Test servers
+sleep 5
 sh $WORKSPACE/scripts/test-servers.sh
 # Keep script running
 wait
