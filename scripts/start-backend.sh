@@ -45,4 +45,4 @@ fi
 
 cd $WORKSPACE
 # Keep script running
-# wait
+wait
