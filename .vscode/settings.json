@@ -63,7 +63,7 @@
     "prettier.printWidth": 105,
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.typeCheckingMode": "standard",
     "python.testing.pytestArgs": [
         "backend"
     ],
@@ -87,5 +87,4 @@
     "workbench.sideBar.location": "right",
     "workbench.secondarySideBar.defaultVisibility": "visible",
     "workbench.statusBar.visible": true,
-    "workspaceExplorer.workspaceStorageDirectory": "/Users/calnet/Documents/workspaceStorage",
 }
