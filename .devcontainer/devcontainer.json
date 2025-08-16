@@ -1,6 +1,6 @@
 {
     // VSCode Dev Container for React Project
-    // Claude v24
+    // Claude v0.1.0-beta
     "image": "python:3.13.5-alpine",
     "name": "capstone-dev",
     "features": {
