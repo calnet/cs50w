@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VSCode Dev Container for React Project
-# Claude v11
+# Claude v0.1.0-beta
 
 # Check who is running the script for start-servers.sh
 whoami
@@ -120,6 +120,3 @@ fi
 # echo "- Test Vite: curl http://localhost:5173"
 # echo "- Manual Django: cd backend && python -Xfrozen_modules=off manage.py runserver 0.0.0.0:8000"
 # echo "- Stop all servers: pkill -f 'runserver|vite'"
-
-# Keep script running
-# wait

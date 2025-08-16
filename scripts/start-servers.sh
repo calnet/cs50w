@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VSCode Dev Container for React Project
-# Claude v11
+# Claude v0.1.0-beta
 
 # Capstone Project Start Servers Script
 WORKSPACE="/workspaces/capstone"
@@ -14,5 +14,3 @@ sh $WORKSPACE/scripts/start-backend.sh
 # Test servers
 sleep 5
 sh $WORKSPACE/scripts/test-servers.sh
-# Keep script running
-wait

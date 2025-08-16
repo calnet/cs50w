@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VSCode Dev Container for React Project
-# Claude v19
+# Claude v0.1.0-beta
 
 # Capstone Project Setup Script
 echo "🚀 Starting Capstone development environment setup..."

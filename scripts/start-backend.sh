@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VSCode Dev Container for React Project
-# Claude v11
+# Claude v0.1.0-beta
 
 AUTOSTART=false
 LOGGING=false
@@ -44,5 +44,3 @@ fi
 # echo "- Manual Django: cd backend && python -Xfrozen_modules=off manage.py runserver 0.0.0.0:8000"
 
 cd $WORKSPACE
-# Keep script running
-wait

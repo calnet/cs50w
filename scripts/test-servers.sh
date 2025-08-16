@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VSCode Dev Container for React Project
-# Claude v11
+# Claude v0.1.0-beta
 
 # Check if processes are still running
 

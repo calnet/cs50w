@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VSCode Dev Container for React Project
-# Claude v11
+# Claude v0.1.0-beta
 # Capstone Project Stop Servers Script
 AUTOSTART=false
 LOGGING=true
