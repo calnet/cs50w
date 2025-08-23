@@ -8,7 +8,7 @@ WORKSPACE="/workspaces/capstone"
 cd $WORKSPACE
 # Start Vite server in background with nohup
 sh $WORKSPACE/scripts/start-frontend.sh
-sleep 5
+# sleep 5
 # Start Django server in background with nohup
 sh $WORKSPACE/scripts/start-backend.sh
 # Test servers
