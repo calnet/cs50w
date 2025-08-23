@@ -21,7 +21,7 @@ check_django_running() {
 if check_django_running; then
     echo "✅ Django server is running"
 else
-    if AUTORELOAD; then
+    if $AUTORELOAD; then
         echo "⚠️  Django server not running, attempting to restart..."
         sh $WORKSPACE/scripts/start-backend.sh
         sleep 5
@@ -55,7 +55,7 @@ check_vite_running() {
 if check_vite_running; then
     echo "✅ Vite server is running"
 else
-    if AUTORELOAD; then
+    if $AUTORELOAD; then
         echo "⚠️  Vite server not running, attempting to restart..."
         sh $WORKSPACE/scripts/start-frontend.sh
         sleep 5
@@ -67,7 +67,6 @@ else
     else
         echo "❌ Vite server not running"
     fi
-    echo "❌ Vite server not running"
     if $LOGGING; then
         echo "---------------------------------------"
         echo "          Vite logs"
@@ -77,7 +76,7 @@ else
     fi
 fi
 echo "------------------------------------------"
-if DEBUG; then
+if $DEBUG; then
     echo ""
     echo "---------------------------------------"
     echo "          Debug commands"
